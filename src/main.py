@@ -23,10 +23,10 @@ run_stats = {
 # Load environment variables
 load_dotenv()
 
-CANVAS_URL = os.getenv("CANVAS_URL")
-CANVAS_TOKEN = os.getenv("CANVAS_TOKEN")
+CANVAS_URL = os.getenv("CANVAS_API_URL")
+CANVAS_TOKEN = os.getenv("CANVAS_API_KEY")
 SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_ANON_KEY", os.getenv("SUPABASE_KEY"))
+SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_KEY", os.getenv("SUPABASE_KEY"))
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
@@ -308,8 +308,49 @@ def process_health_check(supabase, user_id: int):
 
 
 def main():
-    if not all([CANVAS_URL, CANVAS_TOKEN, SUPABASE_URL, SUPABASE_KEY, TELEGRAM_CHAT_ID]):
-        logger.error("Missing critical environment variables. Check .env")
+    print("--- Проверка переменных ---")
+    missing = []
+    
+    if CANVAS_URL:
+        print("CANVAS_API_URL — OK")
+    else:
+        print("CANVAS_API_URL — MISSING")
+        missing.append("CANVAS_API_URL")
+        
+    if CANVAS_TOKEN:
+        print("CANVAS_API_KEY — OK")
+    else:
+        print("CANVAS_API_KEY — MISSING")
+        missing.append("CANVAS_API_KEY")
+        
+    if SUPABASE_URL:
+        print("SUPABASE_URL — OK")
+    else:
+        print("SUPABASE_URL — MISSING")
+        missing.append("SUPABASE_URL")
+        
+    if SUPABASE_KEY:
+        print("SUPABASE_SERVICE_KEY — OK")
+    else:
+        print("SUPABASE_SERVICE_KEY — MISSING")
+        missing.append("SUPABASE_SERVICE_KEY")
+        
+    if TELEGRAM_BOT_TOKEN:
+        print("TELEGRAM_BOT_TOKEN — OK")
+    else:
+        print("TELEGRAM_BOT_TOKEN — MISSING")
+        missing.append("TELEGRAM_BOT_TOKEN")
+        
+    if TELEGRAM_CHAT_ID:
+        print("TELEGRAM_CHAT_ID — OK")
+    else:
+        print("TELEGRAM_CHAT_ID — MISSING")
+        missing.append("TELEGRAM_CHAT_ID")
+        
+    print("---------------------------")
+
+    if missing:
+        logger.error(f"Missing critical environment variables: {', '.join(missing)}")
         sys.exit(0)  # Exit gracefully for cron
 
     try:

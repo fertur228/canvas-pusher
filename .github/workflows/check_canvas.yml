@@ -24,10 +24,10 @@ jobs:
       
     - name: Run Canvas Scanner
       env:
-        CANVAS_URL: ${{ secrets.CANVAS_URL }}
-        CANVAS_TOKEN: ${{ secrets.CANVAS_TOKEN }}
+        CANVAS_API_URL: ${{ secrets.CANVAS_API_URL }}
+        CANVAS_API_KEY: ${{ secrets.CANVAS_API_KEY }}
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         PYTHONPATH: ${{ github.workspace }}
