@@ -64,7 +64,7 @@ def convert_utc_to_local(utc_str: str) -> str:
     Since pytz isn't strictly necessary with Python 3.9+ zoneinfo, we use basic offset roughly.
     Assuming +05:00 for Almaty/Tashkent."""
     if not utc_str:
-        return "Unknown"
+        return "Не установлен"
     try:
         utc_dt = datetime.fromisoformat(utc_str.replace("Z", "+00:00"))
         # Using fixed offset for Almaty/Tashkent (+5 UTC)
@@ -73,7 +73,7 @@ def convert_utc_to_local(utc_str: str) -> str:
         local_dt = utc_dt.astimezone(local_timezone)
         return local_dt.strftime("%d\\.%m\\.%Y %H:%M")
     except Exception:
-        return escape_markdown(utc_str)
+        return "Уточняйте в Canvas"
 
 def process_assignments(scanner: CanvasScanner, user_id: int):
     try:
@@ -108,12 +108,14 @@ def process_assignments(scanner: CanvasScanner, user_id: int):
             run_stats["changes"] += 1
             if diff.diff_type == DiffType.NEW:
                 msg = (f"📌 *{escape_markdown(live.get('name'))}*\n\n"
+                       f"📚 *Дисциплина:* {escape_markdown(live.get('course_name'))}\n"
                        f"📅 *Дедлайн:* {convert_utc_to_local(live.get('due_at'))}\n"
                        f"💯 *Вес:* {escape_markdown(str(live.get('points_possible')))} points")
                 send_telegram_message(msg)
                 
             elif diff.diff_type == DiffType.UPDATED:
                 msg = (f"📌 *Обновлено: {escape_markdown(live.get('name'))}*\n\n"
+                       f"📚 *Дисциплина:* {escape_markdown(live.get('course_name'))}\n"
                        f"📅 *Дедлайн:* {convert_utc_to_local(live.get('due_at'))}\n"
                        f"💯 *Вес:* {escape_markdown(str(live.get('points_possible')))} points")
                 send_telegram_message(msg)
@@ -127,6 +129,7 @@ def process_assignments(scanner: CanvasScanner, user_id: int):
             if reminder_type != last_reminder_type:
                 msg = (f"⚠️ *Напоминание {escape_markdown(reminder_type)}*\n\n"
                        f"📌 *{escape_markdown(live.get('name'))}*\n"
+                       f"📚 *Дисциплина:* {escape_markdown(live.get('course_name'))}\n"
                        f"📅 *Дедлайн:* {convert_utc_to_local(live.get('due_at'))}")
                 send_telegram_message(msg)
                 
@@ -178,7 +181,7 @@ def process_files(scanner: CanvasScanner, user_id: int):
             run_stats["changes"] += 1
             if diff.diff_type == DiffType.NEW:
                 msg = (f"📁 *Новый файл загружен* 📁\n\n"
-                       f"📚 *Курс ID:* {live.get('course_id')}\n"
+                       f"📚 *Дисциплина:* {escape_markdown(live.get('course_name'))}\n"
                        f"📄 *Файл:* {escape_markdown(live.get('display_name'))}\n"
                        f"🔗 [Скачать]({escape_markdown(live.get('url'))})")
                 send_telegram_message(msg)
@@ -236,6 +239,7 @@ def process_announcements(scanner: CanvasScanner, user_id: int):
                     clean_msg = clean_msg[:500] + "..."
                     
                 msg = (f"📢 *Новое Объявление* 📢\n\n"
+                       f"📚 *Дисциплина:* {escape_markdown(live.get('course_name'))}\n"
                        f"👤 *От:* {escape_markdown(live.get('author_name'))}\n"
                        f"📌 *Тема:* {escape_markdown(live.get('title'))}\n\n"
                        f"{escape_markdown(clean_msg)}")

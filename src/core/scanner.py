@@ -34,6 +34,7 @@ class CanvasScanner:
                     assignments_data.append({
                         "id": getattr(assignment, 'id', None),
                         "course_id": getattr(course, 'id', None),
+                        "course_name": getattr(course, 'name', 'Unknown Course'),
                         "name": getattr(assignment, 'name', 'Unknown'),
                         "due_at": getattr(assignment, 'due_at', None),
                         "points_possible": getattr(assignment, 'points_possible', None),
@@ -66,6 +67,7 @@ class CanvasScanner:
                     files_data.append({
                         "id": getattr(f, 'id', None),
                         "course_id": getattr(course, 'id', None),
+                        "course_name": getattr(course, 'name', 'Unknown Course'),
                         "display_name": getattr(f, 'display_name', 'Unknown'),
                         "url": getattr(f, 'url', None),
                         "created_at": getattr(f, 'created_at', None),
@@ -87,10 +89,12 @@ class CanvasScanner:
         except Exception:
             return []
             
+        course_map = {}
         course_ids = []
         for course in courses:
              if hasattr(course, "id"):
                  course_ids.append(f"course_{course.id}")
+                 course_map[f"course_{course.id}"] = getattr(course, 'name', 'Unknown Course')
 
         if not course_ids:
             return []
@@ -107,6 +111,7 @@ class CanvasScanner:
                 announcements_data.append({
                     "id": getattr(ann, 'id', None),
                     "context_code": getattr(ann, 'context_code', None), # e.g. "course_123"
+                    "course_name": course_map.get(getattr(ann, 'context_code', ''), 'Unknown Course'),
                     "title": getattr(ann, 'title', 'Unknown'),
                     "message": getattr(ann, 'message', ''),
                     "posted_at": getattr(ann, 'posted_at', None),
