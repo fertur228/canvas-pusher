@@ -13,15 +13,26 @@ def test_diff_new_object():
     assert result.changes == {}
 
 def test_diff_updated_assignment_score():
-    old_state = {"id": 123, "score": 10, "points_possible": 20}
-    new_state = {"id": 123, "score": 18, "points_possible": 20}
+    old_state = {"id": 123, "score": 10, "points_possible": 20, "due_at": "2024-01-01T00:00:00Z"}
+    new_state = {"id": 123, "score": 18, "points_possible": 20, "due_at": "2024-01-01T00:00:00Z"}
+    
+    result = diff_objects(old_state, new_state, "assignment")
+    
+    assert result is not None
+    assert result.diff_type == DiffType.UPDATED_GRADE
+    assert "score" in result.changes
+    assert result.changes["score"] == (10, 18)
+
+def test_diff_updated_assignment_due_date():
+    old_state = {"id": 123, "score": 10, "points_possible": 20, "due_at": "2024-01-01T00:00:00Z"}
+    new_state = {"id": 123, "score": 10, "points_possible": 20, "due_at": "2024-01-02T00:00:00Z"}
     
     result = diff_objects(old_state, new_state, "assignment")
     
     assert result is not None
     assert result.diff_type == DiffType.UPDATED
-    assert "score" in result.changes
-    assert result.changes["score"] == (10, 18)
+    assert "due_at" in result.changes
+    assert result.changes["due_at"] == ("2024-01-01T00:00:00Z", "2024-01-02T00:00:00Z")
 
 def test_diff_no_changes():
     old_state = {"id": 123, "score": 10}

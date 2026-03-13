@@ -15,7 +15,7 @@ class CanvasScanner:
         """
         assignments_data = []
         try:
-            courses = self.canvas_client.get_courses(enrollment_state="active")
+            courses = self.canvas_client.get_courses(enrollment_state="active", include=["total_scores"])
         except Exception:
             return []
 
@@ -23,6 +23,14 @@ class CanvasScanner:
             if not hasattr(course, "id"):
                 continue
             
+            course_score = None
+            if hasattr(course, "enrollments"):
+                for enr in course.enrollments:
+                    if isinstance(enr, dict) and enr.get("type") == "student":
+                        course_score = enr.get("computed_current_score")
+                        if course_score is not None:
+                            break
+                            
             try:
                 # include=['submission'] is much faster than individual API calls
                 assignments = course.get_assignments(include=['submission'])
@@ -35,6 +43,7 @@ class CanvasScanner:
                         "id": getattr(assignment, 'id', None),
                         "course_id": getattr(course, 'id', None),
                         "course_name": getattr(course, 'name', 'Unknown Course'),
+                        "course_score": course_score,
                         "name": getattr(assignment, 'name', 'Unknown'),
                         "due_at": getattr(assignment, 'due_at', None),
                         "points_possible": getattr(assignment, 'points_possible', None),

@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 class DiffType(Enum):
     NEW = "NEW"
     UPDATED = "UPDATED"
+    UPDATED_GRADE = "UPDATED_GRADE"
     REMINDER_DUE = "REMINDER_DUE"
 
 class DiffResult(BaseModel):
@@ -39,6 +40,8 @@ def diff_objects(old_state: Optional[Dict[str, Any]], new_state: Dict[str, Any],
             changes[key] = (old_val, new_val)
 
     if changes:
+        if object_type == "assignment" and "score" in changes:
+            return DiffResult(diff_type=DiffType.UPDATED_GRADE, object_type=object_type, changes=changes)
         return DiffResult(diff_type=DiffType.UPDATED, object_type=object_type, changes=changes)
 
     return None

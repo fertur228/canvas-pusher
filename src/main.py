@@ -106,18 +106,37 @@ def process_assignments(scanner: CanvasScanner, user_id: int):
         
         if diff:
             run_stats["changes"] += 1
+            
+            score = live.get("score")
+            points = live.get("points_possible")
+            course_score = live.get("course_score")
+            
+            score_str = f" \\| ⭐ *Оценка:* {escape_markdown(str(score))}" if score is not None else ""
+            course_score_str = f"\n📈 *Общая оценка:* {escape_markdown(str(course_score))}%" if course_score is not None else ""
+            
             if diff.diff_type == DiffType.NEW:
                 msg = (f"📌 *{escape_markdown(live.get('name'))}*\n\n"
                        f"📚 *Дисциплина:* {escape_markdown(live.get('course_name'))}\n"
                        f"📅 *Дедлайн:* {convert_utc_to_local(live.get('due_at'))}\n"
-                       f"💯 *Вес:* {escape_markdown(str(live.get('points_possible')))} points")
+                       f"💯 *Вес:* {escape_markdown(str(points))} points{score_str}"
+                       f"{course_score_str}")
                 send_telegram_message(msg)
                 
             elif diff.diff_type == DiffType.UPDATED:
                 msg = (f"📌 *Обновлено: {escape_markdown(live.get('name'))}*\n\n"
                        f"📚 *Дисциплина:* {escape_markdown(live.get('course_name'))}\n"
                        f"📅 *Дедлайн:* {convert_utc_to_local(live.get('due_at'))}\n"
-                       f"💯 *Вес:* {escape_markdown(str(live.get('points_possible')))} points")
+                       f"💯 *Вес:* {escape_markdown(str(points))} points{score_str}"
+                       f"{course_score_str}")
+                send_telegram_message(msg)
+                
+            elif diff.diff_type == DiffType.UPDATED_GRADE:
+                score_display = f"{score} / {points}" if points is not None else str(score)
+                msg = (f"🔔 *НОВАЯ ОЦЕНКА!* 🔔\n\n"
+                       f"📚 *Дисциплина:* {escape_markdown(live.get('course_name'))}\n"
+                       f"📝 *Задание:* {escape_markdown(live.get('name'))}\n"
+                       f"⭐ *Балл:* {escape_markdown(score_display)}"
+                       f"{course_score_str}")
                 send_telegram_message(msg)
 
         # Smart Reminders logic
