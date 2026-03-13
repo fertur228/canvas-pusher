@@ -144,6 +144,7 @@ def process_assignments(scanner: CanvasScanner, user_id: int):
                 scanner.supabase_client.table("canvas_state").upsert({
                     "user_id": user_id,
                     "course_id": live.get("course_id", 0),
+                    "course_name": live.get("course_name", "Unknown Course"),
                     "object_type": "assignment",
                     "object_id": assignment_id,
                     "state_data": live,
@@ -196,6 +197,7 @@ def process_files(scanner: CanvasScanner, user_id: int):
                 scanner.supabase_client.table("canvas_state").upsert({
                     "user_id": user_id,
                     "course_id": live.get("course_id", 0),
+                    "course_name": live.get("course_name", "Unknown Course"),
                     "object_type": "file",
                     "object_id": file_id,
                     "state_data": live
@@ -254,6 +256,7 @@ def process_announcements(scanner: CanvasScanner, user_id: int):
                 scanner.supabase_client.table("canvas_state").upsert({
                     "user_id": user_id,
                     "course_id": 0,
+                    "course_name": live.get("course_name", "Unknown Course"),
                     "object_type": "announcement",
                     "object_id": ann_id,
                     "state_data": live
