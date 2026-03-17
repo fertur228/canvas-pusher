@@ -2,16 +2,16 @@ import os
 import sys
 import httpx
 import logging
+import asyncio
 from datetime import datetime, timezone, timedelta
 from dotenv import load_dotenv
 
-from canvasapi import Canvas
 from supabase import create_client, Client
 
-from src.core.scanner import CanvasScanner
+from src.core.scanner import AsyncCanvasScanner
 from src.core.diff_engine import diff_objects, check_reminders, DiffType
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(message)s') # Keep it clean
 logger = logging.getLogger(__name__)
 
 # Basic in-memory stats for the current run
@@ -31,9 +31,8 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 def send_telegram_message(text: str):
-    """Sends a text message using MarkdownV2."""
+    """Sends a text message using HTML."""
     if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
-        logger.warning("Telegram credentials not provided. Skipping message.")
         return
 
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -56,31 +55,20 @@ def escape_html(text: str) -> str:
     return html.escape(str(text)) if text is not None else ""
 
 def convert_utc_to_local(utc_str: str) -> str:
-    """Converts a Canvas UTC timestamp to localized Almaty/Tashkent string.
-    Since pytz isn't strictly necessary with Python 3.9+ zoneinfo, we use basic offset roughly.
-    Assuming +05:00 for Almaty/Tashkent."""
+    """Converts a Canvas UTC timestamp to localized Almaty/Tashkent string."""
     if not utc_str:
         return "Не установлен"
     try:
         utc_dt = datetime.fromisoformat(utc_str.replace("Z", "+00:00"))
-        # Using fixed offset for Almaty/Tashkent (+5 UTC)
-        from datetime import timezone, timedelta
         local_timezone = timezone(timedelta(hours=5))
         local_dt = utc_dt.astimezone(local_timezone)
         return local_dt.strftime("%d.%m.%Y %H:%M")
     except Exception:
         return "Уточняйте в Canvas"
 
-def process_assignments(scanner: CanvasScanner, user_id: int):
+def process_assignments(supabase: Client, user_id: int, live_assignments: list):
     try:
-        live_assignments = scanner.fetch_all_assignments()
-    except Exception as e:
-        logger.error(f"Error fetching assignments: {e}")
-        return
-
-    # Fetch existing states
-    try:
-        response = scanner.supabase_client.table("canvas_state") \
+        response = supabase.table("canvas_state") \
             .select("*").eq("user_id", user_id).eq("object_type", "assignment").execute()
         saved_states = {item["object_id"]: item for item in response.data}
     except Exception as e:
@@ -98,7 +86,6 @@ def process_assignments(scanner: CanvasScanner, user_id: int):
         saved_record = saved_states.get(assignment_id)
         old_state = saved_record["state_data"] if saved_record else None
         
-        # Check standard state updates
         diff = diff_objects(old_state, live, "assignment")
         
         if diff:
@@ -136,10 +123,8 @@ def process_assignments(scanner: CanvasScanner, user_id: int):
                        f"{course_score_str}")
                 send_telegram_message(msg)
 
-        # Smart Reminders logic
         reminder_type = check_reminders(live, current_time)
         if reminder_type:
-            # Check if this reminder was already sent
             last_reminder_type = saved_record.get("last_reminder_type") if saved_record else None
             
             if reminder_type != last_reminder_type:
@@ -148,11 +133,8 @@ def process_assignments(scanner: CanvasScanner, user_id: int):
                        f"📚 <b>Дисциплина:</b> {escape_html(live.get('course_name'))}\n"
                        f"📅 <b>Дедлайн:</b> {convert_utc_to_local(live.get('due_at'))}")
                 send_telegram_message(msg)
-                
-                # We need to save the reminder_type state
                 live["_last_reminder_trigger"] = reminder_type
         
-        # Save state if changed or reminder sent or new
         needs_saving = diff is not None or (reminder_type and reminder_type != (saved_record.get("last_reminder_type") if saved_record else None))
         
         if needs_saving:
@@ -171,19 +153,13 @@ def process_assignments(scanner: CanvasScanner, user_id: int):
 
     if states_to_upsert:
         try:
-            scanner.supabase_client.table("canvas_state").upsert(states_to_upsert).execute()
+            supabase.table("canvas_state").upsert(states_to_upsert).execute()
         except Exception as e:
             logger.error(f"Failed to batch upsert state for assignments: {e}")
 
-def process_files(scanner: CanvasScanner, user_id: int):
+def process_files(supabase: Client, user_id: int, live_files: list):
     try:
-        live_files = scanner.fetch_all_files()
-    except Exception as e:
-        logger.error(f"Error fetching files: {e}")
-        return
-
-    try:
-        response = scanner.supabase_client.table("canvas_state") \
+        response = supabase.table("canvas_state") \
             .select("*").eq("user_id", user_id).eq("object_type", "file").execute()
         saved_states = {item["object_id"]: item for item in response.data}
     except Exception as e:
@@ -230,19 +206,13 @@ def process_files(scanner: CanvasScanner, user_id: int):
 
     if states_to_upsert:
         try:
-            scanner.supabase_client.table("canvas_state").upsert(states_to_upsert).execute()
+            supabase.table("canvas_state").upsert(states_to_upsert).execute()
         except Exception as e:
             logger.error(f"Failed to batch upsert state for files: {e}")
 
-def process_announcements(scanner: CanvasScanner, user_id: int):
+def process_announcements(supabase: Client, user_id: int, live_announcements: list):
     try:
-        live_announcements = scanner.fetch_all_announcements()
-    except Exception as e:
-        logger.error(f"Error fetching announcements: {e}")
-        return
-
-    try:
-        response = scanner.supabase_client.table("canvas_state") \
+        response = supabase.table("canvas_state") \
             .select("*").eq("user_id", user_id).eq("object_type", "announcement").execute()
         saved_states = {item["object_id"]: item for item in response.data}
     except Exception as e:
@@ -264,7 +234,6 @@ def process_announcements(scanner: CanvasScanner, user_id: int):
             run_stats["changes"] += 1
             if diff.diff_type == DiffType.NEW:
                 import re
-                # clean up HTML tags out of message
                 raw_message = live.get('message', '')
                 clean_msg = re.sub('<[^<]+>', '', raw_message).strip()
                 if len(clean_msg) > 500:
@@ -296,12 +265,11 @@ def process_announcements(scanner: CanvasScanner, user_id: int):
 
     if states_to_upsert:
         try:
-            scanner.supabase_client.table("canvas_state").upsert(states_to_upsert).execute()
+            supabase.table("canvas_state").upsert(states_to_upsert).execute()
         except Exception as e:
             logger.error(f"Failed to batch upsert state for announcements: {e}")
 
-def process_health_check(supabase, user_id: int):
-    # Check last health check timestamp
+def process_health_check(supabase: Client, user_id: int):
     try:
         response = supabase.table("health_checks").select("*").eq("user_id", user_id).order("created_at", desc=True).limit(1).execute()
         
@@ -312,18 +280,13 @@ def process_health_check(supabase, user_id: int):
             last_run_str = response.data[0].get("created_at")
             if last_run_str:
                 last_run = datetime.fromisoformat(last_run_str.replace("Z", "+00:00"))
-                if (datetime.now(timezone.utc) - last_run).total_seconds() > 168 * 3600: # 168 hours = 1 week
+                if (datetime.now(timezone.utc) - last_run).total_seconds() > 168 * 3600:
                     should_run = True
             else:
                 should_run = True
                 
         if should_run:
-            # Aggregate changes over the last 168 hours from health_checks to get actual week statistics
             week_ago = (datetime.now(timezone.utc) - timedelta(days=7)).isoformat()
-            
-            # Since we record 'errors' and 'changes' per run in health_checks (we'll save every run's stats but only notify weekly),
-            # let's modify the approach: We save run stats in a separate `run_logs` or just emit the weekly summary based on the delta.
-            # To keep to the user's specs without adding new tables, we can query `canvas_state` for updated_at > week_ago for [X]
             
             changes_res = supabase.table("canvas_state") \
                 .select("id", count="exact") \
@@ -344,57 +307,22 @@ def process_health_check(supabase, user_id: int):
                 "total_changes": total_week_changes,
                 "total_errors": run_stats["errors"]
             }).execute()
-            logger.info("Weekly health check sent.")
             
     except Exception as e:
         logger.error(f"Failed to process health check: {e}")
 
-
-def main():
-    print("--- Проверка переменных ---")
+async def async_main():
     missing = []
-    
-    if CANVAS_URL:
-        print("CANVAS_API_URL — OK")
-    else:
-        print("CANVAS_API_URL — MISSING")
-        missing.append("CANVAS_API_URL")
-        
-    if CANVAS_TOKEN:
-        print("CANVAS_API_KEY — OK")
-    else:
-        print("CANVAS_API_KEY — MISSING")
-        missing.append("CANVAS_API_KEY")
-        
-    if SUPABASE_URL:
-        print("SUPABASE_URL — OK")
-    else:
-        print("SUPABASE_URL — MISSING")
-        missing.append("SUPABASE_URL")
-        
-    if SUPABASE_KEY:
-        print("SUPABASE_SERVICE_KEY — OK")
-    else:
-        print("SUPABASE_SERVICE_KEY — MISSING")
-        missing.append("SUPABASE_SERVICE_KEY")
-        
-    if TELEGRAM_BOT_TOKEN:
-        print("TELEGRAM_BOT_TOKEN — OK")
-    else:
-        print("TELEGRAM_BOT_TOKEN — MISSING")
-        missing.append("TELEGRAM_BOT_TOKEN")
-        
-    if TELEGRAM_CHAT_ID:
-        print("TELEGRAM_CHAT_ID — OK")
-    else:
-        print("TELEGRAM_CHAT_ID — MISSING")
-        missing.append("TELEGRAM_CHAT_ID")
-        
-    print("---------------------------")
+    if not CANVAS_URL: missing.append("CANVAS_API_URL")
+    if not CANVAS_TOKEN: missing.append("CANVAS_API_KEY")
+    if not SUPABASE_URL: missing.append("SUPABASE_URL")
+    if not SUPABASE_KEY: missing.append("SUPABASE_SERVICE_KEY")
+    if not TELEGRAM_BOT_TOKEN: missing.append("TELEGRAM_BOT_TOKEN")
+    if not TELEGRAM_CHAT_ID: missing.append("TELEGRAM_CHAT_ID")
 
     if missing:
         logger.error(f"Missing critical environment variables: {', '.join(missing)}")
-        sys.exit(0)  # Exit gracefully for cron
+        sys.exit(0)
 
     try:
         user_id = int(TELEGRAM_CHAT_ID)
@@ -403,32 +331,32 @@ def main():
         sys.exit(0)
 
     try:
-        canvas = Canvas(CANVAS_URL, CANVAS_TOKEN)
-        # Verify connection
-        canvas.get_current_user()
-    except Exception as e:
-        logger.error(f"Canvas API connection failed: {e}")
-        sys.exit(0)
-
-    try:
         supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
     except Exception as e:
         logger.error(f"Supabase connection failed: {e}")
         sys.exit(0)
         
-    scanner = CanvasScanner(canvas, supabase)
+    start_time = datetime.now()
     
-    # Process assignments
-    process_assignments(scanner, user_id)
+    scanner = AsyncCanvasScanner(CANVAS_TOKEN, CANVAS_URL, supabase)
+    active_courses = await scanner.get_active_courses()
     
-    # Process files
-    process_files(scanner, user_id)
+    if not active_courses:
+        logger.info("No active courses found. Exiting.")
+        sys.exit(0)
+        
+    all_assignments, all_files, all_announcements = await scanner.scan_all(active_courses)
     
-    # Process announcements
-    process_announcements(scanner, user_id)
-    
-    # Process health check
+    process_assignments(supabase, user_id, all_assignments)
+    process_files(supabase, user_id, all_files)
+    process_announcements(supabase, user_id, all_announcements)
     process_health_check(supabase, user_id)
+    
+    duration = (datetime.now() - start_time).total_seconds()
+    logger.info(f"Run completed in {duration:.2f}s. Changes: {run_stats['changes']}, Errors: {run_stats['errors']}")
+
+def main():
+    asyncio.run(async_main())
 
 if __name__ == "__main__":
     main()

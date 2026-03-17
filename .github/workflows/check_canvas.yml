@@ -2,7 +2,7 @@ name: Canvas State Tracker
 
 on:
   schedule:
-    - cron: '*/20 * * * *' # Every 20 minutes
+    - cron: '*/5 * * * *' # Every 5 minutes
   workflow_dispatch: # Allows manual trigger
 
 jobs:

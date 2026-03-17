@@ -1,132 +1,145 @@
-from typing import List, Dict, Any
+import httpx
+import logging
+from typing import List, Dict, Any, Optional
+from datetime import datetime, timezone, timedelta
+import asyncio
 
-class CanvasScanner:
-    def __init__(self, canvas_client, supabase_client):
-        """
-        Initializes the scanner with a Canvas API client and Supabase client.
-        """
-        self.canvas_client = canvas_client
+logger = logging.getLogger(__name__)
+
+class AsyncCanvasScanner:
+    def __init__(self, token: str, base_url: str, supabase_client):
+        self.headers = {"Authorization": f"Bearer {token}"}
+        # canvasapi base url used to be https://url.com, we need /api/v1
+        self.base_url = f"{base_url.rstrip('/')}/api/v1"
         self.supabase_client = supabase_client
 
-    def fetch_all_assignments(self) -> List[Dict[str, Any]]:
-        """
-        Fetches all assignments across active courses for the current user.
-        Includes submission data to determine score and submission status.
-        """
-        assignments_data = []
-        try:
-            courses = self.canvas_client.get_courses(enrollment_state="active", include=["total_scores"])
-        except Exception:
+    async def get_active_courses(self) -> List[Dict[str, Any]]:
+        async with httpx.AsyncClient(timeout=15.0) as client:
+            url = f"{self.base_url}/users/self/courses"
+            params = {"enrollment_state": "active", "include[]": "total_scores", "per_page": 50}
+            response = await client.get(url, headers=self.headers, params=params)
+            if response.status_code == 200:
+                courses = response.json()
+                return [c for c in courses if 'id' in c]
+            else:
+                logger.error(f"Failed to fetch active courses: {response.text}")
             return []
 
-        for course in courses:
-            if not hasattr(course, "id"):
-                continue
-            
-            course_score = None
-            if hasattr(course, "enrollments"):
-                for enr in course.enrollments:
-                    if isinstance(enr, dict) and enr.get("type") == "student":
-                        course_score = enr.get("computed_current_score")
-                        if course_score is not None:
-                            break
-                            
-            try:
-                # include=['submission'] is much faster than individual API calls
-                assignments = course.get_assignments(include=['submission'])
-                for assignment in assignments:
-                    submission = getattr(assignment, 'submission', {})
-                    score = submission.get('score')
-                    submitted_at = submission.get('submitted_at')
+    async def fetch_course_assignments(self, client: httpx.AsyncClient, course: Dict[str, Any]) -> List[Dict[str, Any]]:
+        course_score = None
+        for enr in course.get("enrollments", []):
+            if enr.get("type") == "student":
+                course_score = enr.get("computed_current_score")
+                if course_score is not None:
+                    break
+        
+        url = f"{self.base_url}/courses/{course['id']}/assignments"
+        # We limit the data heavily to improve performance
+        params = {"include[]": "submission", "per_page": 50, "order_by": "due_at"}
+        
+        try:
+            response = await client.get(url, headers=self.headers, params=params)
+        except Exception as e:
+            logger.error(f"Failed HTTP assignment request for course {course.get('id')}: {e}")
+            return []
 
-                    assignments_data.append({
-                        "id": getattr(assignment, 'id', None),
-                        "course_id": getattr(course, 'id', None),
-                        "course_name": getattr(course, 'name', 'Unknown Course'),
-                        "course_score": course_score,
-                        "name": getattr(assignment, 'name', 'Unknown'),
-                        "due_at": getattr(assignment, 'due_at', None),
-                        "points_possible": getattr(assignment, 'points_possible', None),
-                        "score": score,
-                        "has_submitted": submitted_at is not None
-                    })
-            except Exception:
-                # E.g., course doesn"t allow fetching assignments or user forbidden
-                pass
+        assignments_data = []
+        if response.status_code == 200:
+            for assignment in response.json():
+                submission = assignment.get('submission', {})
+                score = submission.get('score')
+                submitted_at = submission.get('submitted_at')
                 
+                assignments_data.append({
+                    "id": assignment.get('id'),
+                    "course_id": course.get('id'),
+                    "course_name": course.get('name', 'Unknown Course'),
+                    "course_score": course_score,
+                    "name": assignment.get('name', 'Unknown'),
+                    "due_at": assignment.get('due_at'),
+                    "points_possible": assignment.get('points_possible'),
+                    "score": score,
+                    "has_submitted": submitted_at is not None
+                })
         return assignments_data
 
-    def fetch_all_files(self) -> List[Dict[str, Any]]:
-        """
-        Fetches all files across active courses for the current user.
-        """
-        files_data = []
+    async def fetch_course_files(self, client: httpx.AsyncClient, course: Dict[str, Any]) -> List[Dict[str, Any]]:
+        url = f"{self.base_url}/courses/{course['id']}/files"
+        # Sort by created_at desc to only get the newest files
+        params = {"sort": "created_at", "order": "desc", "per_page": 10}
+        
         try:
-            courses = self.canvas_client.get_courses(enrollment_state="active")
-        except Exception:
+            response = await client.get(url, headers=self.headers, params=params)
+        except Exception as e:
             return []
-
-        for course in courses:
-            if not hasattr(course, "id"):
-                continue
             
-            try:
-                files = course.get_files()
-                for f in files:
-                    files_data.append({
-                        "id": getattr(f, 'id', None),
-                        "course_id": getattr(course, 'id', None),
-                        "course_name": getattr(course, 'name', 'Unknown Course'),
-                        "display_name": getattr(f, 'display_name', 'Unknown'),
-                        "url": getattr(f, 'url', None),
-                        "created_at": getattr(f, 'created_at', None),
-                        "size": getattr(f, 'size', None)
-                    })
-            except Exception:
-                pass
-                
+        files_data = []
+        if response.status_code == 200:
+            for f in response.json():
+                files_data.append({
+                    "id": f.get('id'),
+                    "course_id": course.get('id'),
+                    "course_name": course.get('name', 'Unknown Course'),
+                    "display_name": f.get('display_name', 'Unknown'),
+                    "url": f.get('url'),
+                    "created_at": f.get('created_at'),
+                    "size": f.get('size')
+                })
         return files_data
 
-    def fetch_all_announcements(self) -> List[Dict[str, Any]]:
-        """
-        Fetches all announcements (discussion topics with is_announcement=True)
-        across active courses for the current user.
-        """
-        announcements_data = []
-        try:
-            courses = self.canvas_client.get_courses(enrollment_state="active")
-        except Exception:
-            return []
-            
-        course_map = {}
-        course_ids = []
-        for course in courses:
-             if hasattr(course, "id"):
-                 course_ids.append(f"course_{course.id}")
-                 course_map[f"course_{course.id}"] = getattr(course, 'name', 'Unknown Course')
-
+    async def fetch_all_announcements(self, client: httpx.AsyncClient, active_courses: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        course_map = {f"course_{c['id']}": c.get('name', 'Unknown Course') for c in active_courses}
+        course_ids = list(course_map.keys())
+        
         if not course_ids:
             return []
-
-        # Use the global announcements endpoint which requires context_codes
+            
+        url = f"{self.base_url}/announcements"
+        start_date = (datetime.now(timezone.utc) - timedelta(days=30)).isoformat()
+        
+        announcements_data = []
+        params = [("start_date", start_date)]
+        for cid in course_ids:
+            params.append(("context_codes[]", cid))
+            
         try:
-            from datetime import datetime, timedelta, timezone
-            start_date = (datetime.now(timezone.utc) - timedelta(days=30)).isoformat()
-            announcements = self.canvas_client.get_announcements(
-                context_codes=course_ids,
-                start_date=start_date
-            )
-            for ann in announcements:
+            response = await client.get(url, headers=self.headers, params=params)
+        except Exception as e:
+            return []
+            
+        if response.status_code == 200:
+            for ann in response.json():
                 announcements_data.append({
-                    "id": getattr(ann, 'id', None),
-                    "context_code": getattr(ann, 'context_code', None), # e.g. "course_123"
-                    "course_name": course_map.get(getattr(ann, 'context_code', ''), 'Unknown Course'),
-                    "title": getattr(ann, 'title', 'Unknown'),
-                    "message": getattr(ann, 'message', ''),
-                    "posted_at": getattr(ann, 'posted_at', None),
-                    "author_name": getattr(ann, 'user_name', 'System')
+                    "id": ann.get('id'),
+                    "context_code": ann.get('context_code'),
+                    "course_name": course_map.get(ann.get('context_code'), 'Unknown Course'),
+                    "title": ann.get('title', 'Unknown'),
+                    "message": ann.get('message', ''),
+                    "posted_at": ann.get('posted_at'),
+                    "author_name": ann.get('user_name', 'System')
                 })
-        except Exception:
-            pass
-
         return announcements_data
+        
+    async def scan_all(self, active_courses: List[Dict[str, Any]]) -> tuple:
+        """Executes all API requests completely in parallel returning aggregated chunks"""
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            assignments_tasks = [self.fetch_course_assignments(client, c) for c in active_courses]
+            files_tasks = [self.fetch_course_files(client, c) for c in active_courses]
+            announcements_task = self.fetch_all_announcements(client, active_courses)
+            
+            results = await asyncio.gather(*assignments_tasks, *files_tasks, announcements_task)
+            
+            num_courses = len(active_courses)
+            assignments_results = results[:num_courses]
+            files_results = results[num_courses:2*num_courses]
+            announcements_result = results[-1]
+            
+            all_assignments = []
+            for a in assignments_results:
+                all_assignments.extend(a)
+                
+            all_files = []
+            for f in files_results:
+                all_files.extend(f)
+                
+            return all_assignments, all_files, announcements_result
