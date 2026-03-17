@@ -10,6 +10,7 @@ from supabase import create_client, Client
 
 from src.core.scanner import AsyncCanvasScanner
 from src.core.diff_engine import diff_objects, check_reminders, DiffType
+from src.core.gpa_engine import calculate_gpa, get_grade_point
 
 logging.basicConfig(level=logging.INFO, format='%(message)s') # Keep it clean
 logger = logging.getLogger(__name__)
@@ -48,6 +49,122 @@ def send_telegram_message(text: str):
     except Exception as e:
         logger.error(f"Failed to send Telegram message: {e}")
         run_stats["errors"] += 1
+
+def send_welcome_message():
+    if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
+        return
+    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+    
+    keyboard = {
+        "inline_keyboard": [[
+            {"text": "📊 Мой GPA", "callback_data": "get_stats"}
+        ]]
+    }
+    
+    payload = {
+        "chat_id": TELEGRAM_CHAT_ID,
+        "text": "Привет! Я Canvas Pusher.\nЯ буду присылать обновления и напоминания о дедлайнах.\n\nНажми кнопку ниже или напиши /stats, чтобы узнать свой текущий GPA.",
+        "reply_markup": keyboard
+    }
+    try:
+        httpx.post(url, json=payload, timeout=10.0)
+    except Exception:
+        pass
+
+async def check_telegram_updates(user_id: int) -> bool:
+    """Checks for /stats command or callback query in the last 5 minutes."""
+    if not TELEGRAM_BOT_TOKEN:
+        return False
+        
+    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/getUpdates"
+    stats_requested = False
+    
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.get(url)
+            if response.status_code == 200:
+                updates = response.json().get("result", [])
+                current_time = datetime.now(timezone.utc).timestamp()
+                
+                for update in updates:
+                    message = update.get("message")
+                    callback = update.get("callback_query")
+                    
+                    if message and message.get("chat", {}).get("id") == user_id:
+                        msg_time = message.get("date", 0)
+                        if current_time - msg_time < 300: # 5 minutes
+                            text = message.get("text", "")
+                            if text == "/start":
+                                send_welcome_message()
+                            elif text == "/stats":
+                                stats_requested = True
+                                
+                    if callback and callback.get("message", {}).get("chat", {}).get("id") == user_id:
+                        msg_time = callback.get("message", {}).get("date", 0)
+                        if current_time - msg_time < 300: # 5 minutes
+                            data = callback.get("data", "")
+                            if data == "get_stats":
+                                stats_requested = True
+                                cb_id = callback.get("id")
+                                await client.get(f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/answerCallbackQuery", params={"callback_query_id": cb_id})
+                                
+    except Exception as e:
+        logger.error(f"Failed to fetch Telegram updates: {e}")
+
+    return stats_requested
+
+def save_course_grades(supabase: Client, user_id: int, active_courses: list):
+    grades_to_upsert = []
+    for course in active_courses:
+        course_score = None
+        for enr in course.get("enrollments", []):
+            if enr.get("type") == "student":
+                course_score = enr.get("computed_current_score")
+                break
+                
+        grades_to_upsert.append({
+            "user_id": user_id,
+            "course_id": course.get('id'),
+            "course_name": course.get('name', 'Unknown Course'),
+            "current_score": course_score
+        })
+        
+    if grades_to_upsert:
+        try:
+            supabase.table("course_grades").upsert(grades_to_upsert).execute()
+        except Exception as e:
+            logger.error(f"Failed to upsert course grades: {e}")
+
+def send_stats_report(supabase: Client, user_id: int):
+    try:
+        response = supabase.table("course_grades").select("*").eq("user_id", user_id).execute()
+        grades = response.data
+    except Exception as e:
+        logger.error(f"Failed to fetch course grades: {e}")
+        return
+
+    if not grades:
+        send_telegram_message("Не удалось найти текущие оценки. Подождите пару минут.")
+        return
+
+    course_scores = {}
+    html_lines = ["🎓 <b>Моя успеваемость</b>\n"]
+    
+    for grade in grades:
+        cname = grade.get("course_name")
+        score = grade.get("current_score") or 0.0
+        course_scores[cname] = float(score)
+        
+        if "Физическая культура" in cname:
+            html_lines.append(f"🏃‍♂️ <b>{escape_html(cname)}</b>: Зачет (4.0)")
+        else:
+            gp = get_grade_point(score)
+            html_lines.append(f"📘 <b>{escape_html(cname)}</b>: {score}% (GPA: {gp})")
+            
+    total_gpa = calculate_gpa(course_scores)
+    html_lines.append(f"\n🏆 <b>Итоговый GPA: {total_gpa} / 4.0</b>")
+    
+    send_telegram_message("\n".join(html_lines))
 
 def escape_html(text: str) -> str:
     """Escapes HTML reserved characters for Telegram HTML parse mode."""
@@ -338,6 +455,8 @@ async def async_main():
         
     start_time = datetime.now()
     
+    stats_requested = await check_telegram_updates(user_id)
+    
     scanner = AsyncCanvasScanner(CANVAS_TOKEN, CANVAS_URL, supabase)
     active_courses = await scanner.get_active_courses()
     
@@ -345,12 +464,17 @@ async def async_main():
         logger.info("No active courses found. Exiting.")
         sys.exit(0)
         
+    save_course_grades(supabase, user_id, active_courses)
+        
     all_assignments, all_files, all_announcements = await scanner.scan_all(active_courses)
     
     process_assignments(supabase, user_id, all_assignments)
     process_files(supabase, user_id, all_files)
     process_announcements(supabase, user_id, all_announcements)
     process_health_check(supabase, user_id)
+    
+    if stats_requested:
+        send_stats_report(supabase, user_id)
     
     duration = (datetime.now() - start_time).total_seconds()
     logger.info(f"Run completed in {duration:.2f}s. Changes: {run_stats['changes']}, Errors: {run_stats['errors']}")
