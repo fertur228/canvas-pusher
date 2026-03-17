@@ -31,7 +31,7 @@ SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_KEY", os.getenv("SUPABASE_KEY"))
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
-def send_telegram_message(text: str):
+def send_telegram_message(text: str, reply_markup: dict = None):
     """Sends a text message using HTML."""
     if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
         return
@@ -42,6 +42,9 @@ def send_telegram_message(text: str):
         "text": text,
         "parse_mode": "HTML"
     }
+    
+    if reply_markup is not None:
+        payload["reply_markup"] = reply_markup
     
     try:
         response = httpx.post(url, json=payload, timeout=10.0)
@@ -151,20 +154,37 @@ def send_stats_report(supabase: Client, user_id: int):
     html_lines = ["🎓 <b>Моя успеваемость</b>\n"]
     
     for grade in grades:
-        cname = grade.get("course_name")
-        score = grade.get("current_score") or 0.0
-        course_scores[cname] = float(score)
+        cname = grade.get("course_name", "Unknown Course")
+        score = grade.get("current_score")
+        score_val = float(score) if score is not None else 0.0
+        
+        if score_val == 0.0:
+            logger.info(f"Ignoring {cname}: Score is 0%")
+            html_lines.append(f"📘 <b>{escape_html(cname)}</b>: без оценки")
+            continue
+            
+        if "practic" in cname.lower():
+            logger.info(f"Ignoring {cname}: Contains 'Practic'")
+            continue
+
+        course_scores[cname] = score_val
         
         if "Физическая культура" in cname:
             html_lines.append(f"🏃‍♂️ <b>{escape_html(cname)}</b>: Зачет (4.0)")
         else:
-            gp = get_grade_point(score)
-            html_lines.append(f"📘 <b>{escape_html(cname)}</b>: {score}% (GPA: {gp})")
+            gp = get_grade_point(score_val)
+            html_lines.append(f"📘 <b>{escape_html(cname)}</b>: {score_val}% (GPA: {gp})")
             
     total_gpa = calculate_gpa(course_scores)
     html_lines.append(f"\n🏆 <b>Итоговый GPA: {total_gpa} / 4.0</b>")
     
-    send_telegram_message("\n".join(html_lines))
+    keyboard = {
+        "inline_keyboard": [[
+            {"text": "🔄 Обновить сейчас", "callback_data": "force_refresh"}
+        ]]
+    }
+    
+    send_telegram_message("\n".join(html_lines), reply_markup=keyboard)
 
 def escape_html(text: str) -> str:
     """Escapes HTML reserved characters for Telegram HTML parse mode."""
