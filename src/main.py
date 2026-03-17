@@ -40,7 +40,7 @@ def send_telegram_message(text: str):
     payload = {
         "chat_id": TELEGRAM_CHAT_ID,
         "text": text,
-        "parse_mode": "MarkdownV2"
+        "parse_mode": "HTML"
     }
     
     try:
@@ -50,14 +50,10 @@ def send_telegram_message(text: str):
         logger.error(f"Failed to send Telegram message: {e}")
         run_stats["errors"] += 1
 
-def escape_markdown(text: str) -> str:
-    """Escapes markdown v2 reserved characters."""
-    if not text:
-        return ""
-    reserved = ['_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!']
-    for char in reserved:
-        text = str(text).replace(char, f"\\{char}")
-    return text
+def escape_html(text: str) -> str:
+    """Escapes HTML reserved characters for Telegram HTML parse mode."""
+    import html
+    return html.escape(str(text)) if text is not None else ""
 
 def convert_utc_to_local(utc_str: str) -> str:
     """Converts a Canvas UTC timestamp to localized Almaty/Tashkent string.
@@ -71,7 +67,7 @@ def convert_utc_to_local(utc_str: str) -> str:
         from datetime import timezone, timedelta
         local_timezone = timezone(timedelta(hours=5))
         local_dt = utc_dt.astimezone(local_timezone)
-        return local_dt.strftime("%d\\.%m\\.%Y %H:%M")
+        return local_dt.strftime("%d.%m.%Y %H:%M")
     except Exception:
         return "Уточняйте в Canvas"
 
@@ -112,31 +108,31 @@ def process_assignments(scanner: CanvasScanner, user_id: int):
             points = live.get("points_possible")
             course_score = live.get("course_score")
             
-            score_str = f" \\| ⭐ *Оценка:* {escape_markdown(str(score))}" if score is not None else ""
-            course_score_str = f"\n📈 *Общая оценка:* {escape_markdown(str(course_score))}%" if course_score is not None else ""
+            score_str = f" | ⭐ <b>Оценка:</b> {escape_html(score)}" if score is not None else ""
+            course_score_str = f"\n📈 <b>Общая оценка:</b> {escape_html(course_score)}%" if course_score is not None else ""
             
             if diff.diff_type == DiffType.NEW:
-                msg = (f"📌 *{escape_markdown(live.get('name'))}*\n\n"
-                       f"📚 *Дисциплина:* {escape_markdown(live.get('course_name'))}\n"
-                       f"📅 *Дедлайн:* {convert_utc_to_local(live.get('due_at'))}\n"
-                       f"💯 *Вес:* {escape_markdown(str(points))} points{score_str}"
+                msg = (f"📌 <b>{escape_html(live.get('name'))}</b>\n\n"
+                       f"📚 <b>Дисциплина:</b> {escape_html(live.get('course_name'))}\n"
+                       f"📅 <b>Дедлайн:</b> {convert_utc_to_local(live.get('due_at'))}\n"
+                       f"💯 <b>Вес:</b> {escape_html(points)} points{score_str}"
                        f"{course_score_str}")
                 send_telegram_message(msg)
                 
             elif diff.diff_type == DiffType.UPDATED:
-                msg = (f"📌 *Обновлено: {escape_markdown(live.get('name'))}*\n\n"
-                       f"📚 *Дисциплина:* {escape_markdown(live.get('course_name'))}\n"
-                       f"📅 *Дедлайн:* {convert_utc_to_local(live.get('due_at'))}\n"
-                       f"💯 *Вес:* {escape_markdown(str(points))} points{score_str}"
+                msg = (f"📌 <b>Обновлено: {escape_html(live.get('name'))}</b>\n\n"
+                       f"📚 <b>Дисциплина:</b> {escape_html(live.get('course_name'))}\n"
+                       f"📅 <b>Дедлайн:</b> {convert_utc_to_local(live.get('due_at'))}\n"
+                       f"💯 <b>Вес:</b> {escape_html(points)} points{score_str}"
                        f"{course_score_str}")
                 send_telegram_message(msg)
                 
             elif diff.diff_type == DiffType.UPDATED_GRADE:
                 score_display = f"{score} / {points}" if points is not None else str(score)
-                msg = (f"🔔 *НОВАЯ ОЦЕНКА!* 🔔\n\n"
-                       f"📚 *Дисциплина:* {escape_markdown(live.get('course_name'))}\n"
-                       f"📝 *Задание:* {escape_markdown(live.get('name'))}\n"
-                       f"⭐ *Балл:* {escape_markdown(score_display)}"
+                msg = (f"🔔 <b>НОВАЯ ОЦЕНКА!</b> 🔔\n\n"
+                       f"📚 <b>Дисциплина:</b> {escape_html(live.get('course_name'))}\n"
+                       f"📝 <b>Задание:</b> {escape_html(live.get('name'))}\n"
+                       f"⭐ <b>Балл:</b> {escape_html(score_display)}"
                        f"{course_score_str}")
                 send_telegram_message(msg)
 
@@ -147,10 +143,10 @@ def process_assignments(scanner: CanvasScanner, user_id: int):
             last_reminder_type = saved_record.get("last_reminder_type") if saved_record else None
             
             if reminder_type != last_reminder_type:
-                msg = (f"⚠️ *Напоминание {escape_markdown(reminder_type)}*\n\n"
-                       f"📌 *{escape_markdown(live.get('name'))}*\n"
-                       f"📚 *Дисциплина:* {escape_markdown(live.get('course_name'))}\n"
-                       f"📅 *Дедлайн:* {convert_utc_to_local(live.get('due_at'))}")
+                msg = (f"⚠️ <b>Напоминание {escape_html(reminder_type)}</b>\n\n"
+                       f"📌 <b>{escape_html(live.get('name'))}</b>\n"
+                       f"📚 <b>Дисциплина:</b> {escape_html(live.get('course_name'))}\n"
+                       f"📅 <b>Дедлайн:</b> {convert_utc_to_local(live.get('due_at'))}")
                 send_telegram_message(msg)
                 
                 # We need to save the reminder_type state
@@ -208,16 +204,16 @@ def process_files(scanner: CanvasScanner, user_id: int):
         if diff:
             run_stats["changes"] += 1
             if diff.diff_type == DiffType.NEW:
-                msg = (f"📁 *Новый файл загружен* 📁\n\n"
-                       f"📚 *Дисциплина:* {escape_markdown(live.get('course_name'))}\n"
-                       f"📄 *Файл:* {escape_markdown(live.get('display_name'))}\n"
-                       f"🔗 [Скачать]({escape_markdown(live.get('url'))})")
+                msg = (f"📁 <b>Новый файл загружен</b> 📁\n\n"
+                       f"📚 <b>Дисциплина:</b> {escape_html(live.get('course_name'))}\n"
+                       f"📄 <b>Файл:</b> {escape_html(live.get('display_name'))}\n"
+                       f"🔗 <a href='{escape_html(live.get('url'))}'>Скачать</a>")
                 send_telegram_message(msg)
                 
             elif diff.diff_type == DiffType.UPDATED:
-                msg = (f"🔄 *Файл обновлен* 🔄\n\n"
-                       f"📄 *Файл:* {escape_markdown(live.get('display_name'))}\n"
-                       f"🔗 [Скачать]({escape_markdown(live.get('url'))})")
+                msg = (f"🔄 <b>Файл обновлен</b> 🔄\n\n"
+                       f"📄 <b>Файл:</b> {escape_html(live.get('display_name'))}\n"
+                       f"🔗 <a href='{escape_html(live.get('url'))}'>Скачать</a>")
                 send_telegram_message(msg)
 
             payload = {
@@ -274,16 +270,16 @@ def process_announcements(scanner: CanvasScanner, user_id: int):
                 if len(clean_msg) > 500:
                     clean_msg = clean_msg[:500] + "..."
                     
-                msg = (f"📢 *Новое Объявление* 📢\n\n"
-                       f"📚 *Дисциплина:* {escape_markdown(live.get('course_name'))}\n"
-                       f"👤 *От:* {escape_markdown(live.get('author_name'))}\n"
-                       f"📌 *Тема:* {escape_markdown(live.get('title'))}\n\n"
-                       f"{escape_markdown(clean_msg)}")
+                msg = (f"📢 <b>Новое Объявление</b> 📢\n\n"
+                       f"📚 <b>Дисциплина:</b> {escape_html(live.get('course_name'))}\n"
+                       f"👤 <b>От:</b> {escape_html(live.get('author_name'))}\n"
+                       f"📌 <b>Тема:</b> {escape_html(live.get('title'))}\n\n"
+                       f"{escape_html(clean_msg)}")
                 send_telegram_message(msg)
                 
             elif diff.diff_type == DiffType.UPDATED:
-                msg = (f"✏️ *Обновление Объявления* ✏️\n\n"
-                       f"📌 *Тема:* {escape_markdown(live.get('title'))}")
+                msg = (f"✏️ <b>Обновление Объявления</b> ✏️\n\n"
+                       f"📌 <b>Тема:</b> {escape_html(live.get('title'))}")
                 send_telegram_message(msg)
 
             payload = {
@@ -337,9 +333,9 @@ def process_health_check(supabase, user_id: int):
                 
             total_week_changes = changes_res.count if hasattr(changes_res, 'count') and changes_res.count is not None else len(changes_res.data)
             
-            msg = (f"🤖 *Health Check*\n\n"
-                   f"Бот работает стабильно\\.\n"
-                   f"За неделю отслежено {total_week_changes} изменений\\.\n"
+            msg = (f"🤖 <b>Health Check</b>\n\n"
+                   f"Бот работает стабильно.\n"
+                   f"За неделю отслежено {total_week_changes} изменений.\n"
                    f"Ошибок связи в текущей сессии: {run_stats['errors']}")
             send_telegram_message(msg)
             
