@@ -93,6 +93,7 @@ def process_assignments(scanner: CanvasScanner, user_id: int):
         
     current_time = datetime.now(timezone.utc)
 
+    states_to_upsert = []
     for live in live_assignments:
         assignment_id = live.get("id")
         if not assignment_id:
@@ -159,18 +160,24 @@ def process_assignments(scanner: CanvasScanner, user_id: int):
         needs_saving = diff is not None or (reminder_type and reminder_type != (saved_record.get("last_reminder_type") if saved_record else None))
         
         if needs_saving:
-            try:
-                scanner.supabase_client.table("canvas_state").upsert({
-                    "user_id": user_id,
-                    "course_id": live.get("course_id", 0),
-                    "course_name": live.get("course_name", "Unknown Course"),
-                    "object_type": "assignment",
-                    "object_id": assignment_id,
-                    "state_data": live,
-                    "last_reminder_type": reminder_type if reminder_type else (saved_record.get("last_reminder_type") if saved_record else None)
-                }).execute()
-            except Exception as e:
-                logger.error(f"Failed to upsert state for assignment {assignment_id}: {e}")
+            payload = {
+                "user_id": user_id,
+                "course_id": live.get("course_id", 0),
+                "course_name": live.get("course_name", "Unknown Course"),
+                "object_type": "assignment",
+                "object_id": assignment_id,
+                "state_data": live,
+                "last_reminder_type": reminder_type if reminder_type else (saved_record.get("last_reminder_type") if saved_record else None)
+            }
+            if saved_record and "id" in saved_record:
+                payload["id"] = saved_record["id"]
+            states_to_upsert.append(payload)
+
+    if states_to_upsert:
+        try:
+            scanner.supabase_client.table("canvas_state").upsert(states_to_upsert).execute()
+        except Exception as e:
+            logger.error(f"Failed to batch upsert state for assignments: {e}")
 
 def process_files(scanner: CanvasScanner, user_id: int):
     try:
@@ -187,6 +194,7 @@ def process_files(scanner: CanvasScanner, user_id: int):
         logger.error(f"Error fetching state from Supabase: {e}")
         return
 
+    states_to_upsert = []
     for live in live_files:
         file_id = live.get("id")
         if not file_id:
@@ -212,17 +220,23 @@ def process_files(scanner: CanvasScanner, user_id: int):
                        f"🔗 [Скачать]({escape_markdown(live.get('url'))})")
                 send_telegram_message(msg)
 
-            try:
-                scanner.supabase_client.table("canvas_state").upsert({
-                    "user_id": user_id,
-                    "course_id": live.get("course_id", 0),
-                    "course_name": live.get("course_name", "Unknown Course"),
-                    "object_type": "file",
-                    "object_id": file_id,
-                    "state_data": live
-                }).execute()
-            except Exception as e:
-                logger.error(f"Failed to upsert state for file {file_id}: {e}")
+            payload = {
+                "user_id": user_id,
+                "course_id": live.get("course_id", 0),
+                "course_name": live.get("course_name", "Unknown Course"),
+                "object_type": "file",
+                "object_id": file_id,
+                "state_data": live
+            }
+            if saved_record and "id" in saved_record:
+                payload["id"] = saved_record["id"]
+            states_to_upsert.append(payload)
+
+    if states_to_upsert:
+        try:
+            scanner.supabase_client.table("canvas_state").upsert(states_to_upsert).execute()
+        except Exception as e:
+            logger.error(f"Failed to batch upsert state for files: {e}")
 
 def process_announcements(scanner: CanvasScanner, user_id: int):
     try:
@@ -239,6 +253,7 @@ def process_announcements(scanner: CanvasScanner, user_id: int):
         logger.error(f"Error fetching state from Supabase: {e}")
         return
 
+    states_to_upsert = []
     for live in live_announcements:
         ann_id = live.get("id")
         if not ann_id:
@@ -271,17 +286,23 @@ def process_announcements(scanner: CanvasScanner, user_id: int):
                        f"📌 *Тема:* {escape_markdown(live.get('title'))}")
                 send_telegram_message(msg)
 
-            try:
-                scanner.supabase_client.table("canvas_state").upsert({
-                    "user_id": user_id,
-                    "course_id": 0,
-                    "course_name": live.get("course_name", "Unknown Course"),
-                    "object_type": "announcement",
-                    "object_id": ann_id,
-                    "state_data": live
-                }).execute()
-            except Exception as e:
-                logger.error(f"Failed to upsert state for announcement {ann_id}: {e}")
+            payload = {
+                "user_id": user_id,
+                "course_id": 0,
+                "course_name": live.get("course_name", "Unknown Course"),
+                "object_type": "announcement",
+                "object_id": ann_id,
+                "state_data": live
+            }
+            if saved_record and "id" in saved_record:
+                payload["id"] = saved_record["id"]
+            states_to_upsert.append(payload)
+
+    if states_to_upsert:
+        try:
+            scanner.supabase_client.table("canvas_state").upsert(states_to_upsert).execute()
+        except Exception as e:
+            logger.error(f"Failed to batch upsert state for announcements: {e}")
 
 def process_health_check(supabase, user_id: int):
     # Check last health check timestamp
