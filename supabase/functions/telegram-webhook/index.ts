@@ -127,6 +127,7 @@ async function handleStatsRequest(chatId: number) {
     // Filter 0% scores (unstarted or ungraded courses)
     if (score === 0.0) {
       console.log(`[App] Ignoring ${cname}: Score is 0%`);
+      htmlText += `📘 <b>${cname}</b>: без оценки\n`;
       continue;
     }
 
@@ -170,7 +171,10 @@ async function triggerGitHubWorkflow(chatId: number) {
       'Content-Type': 'application/json',
       'User-Agent': 'Supabase-Edge-Function'
     },
-    body: JSON.stringify({ ref: 'main' })
+    body: JSON.stringify({ 
+      ref: 'main', 
+      inputs: { chat_id: chatId.toString() } 
+    })
   });
 
   if (response.ok) {

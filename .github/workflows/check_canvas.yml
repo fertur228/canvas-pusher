@@ -4,6 +4,10 @@ on:
   schedule:
     - cron: '*/5 * * * *' # Every 5 minutes
   workflow_dispatch: # Allows manual trigger
+    inputs:
+      chat_id:
+        description: 'ID чата для авто-отчета'
+        required: false
 
 jobs:
   run-tracker:
@@ -29,6 +33,7 @@ jobs:
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
         SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_CHAT_ID: ${{ github.event.inputs.chat_id || secrets.TELEGRAM_CHAT_ID }}
+        IS_AUTO_REPORT: ${{ github.event.inputs.chat_id != '' && 'true' || 'false' }}
         PYTHONPATH: ${{ github.workspace }}
       run: python src/main.py

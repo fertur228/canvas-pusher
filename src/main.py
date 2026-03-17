@@ -473,7 +473,7 @@ async def async_main():
     process_announcements(supabase, user_id, all_announcements)
     process_health_check(supabase, user_id)
     
-    if stats_requested:
+    if stats_requested or os.getenv("IS_AUTO_REPORT") == "true":
         send_stats_report(supabase, user_id)
     
     duration = (datetime.now() - start_time).total_seconds()
