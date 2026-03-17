@@ -1,6 +1,27 @@
-.env
-.venv
-venv/
+# Node.js
+node_modules/
+dist/
+npm-debug.log*
+
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
 .pytest_cache/
 *.pyc
+
+# Security
+.env
+.env.*
+secret*
+
+# Supabase
+supabase/.temp/
+.supabase/
+
+# System files
+.DS_Store
+Thumbs.db
