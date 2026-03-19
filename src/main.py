@@ -93,7 +93,17 @@ async def check_telegram_updates(user_id: int) -> bool:
                     message = update.get("message")
                     callback = update.get("callback_query")
                     
-                    if message and message.get("chat", {}).get("id") == user_id:
+                    incoming_chat_id = None
+                    if message:
+                        incoming_chat_id = message.get("chat", {}).get("id")
+                    elif callback:
+                        incoming_chat_id = callback.get("message", {}).get("chat", {}).get("id")
+                        
+                    if incoming_chat_id is not None and str(incoming_chat_id) != str(user_id):
+                        logger.warning(f"[Auth] Unauthorized access attempt from ID: {incoming_chat_id}")
+                        continue
+
+                    if message:
                         msg_time = message.get("date", 0)
                         if current_time - msg_time < 300: # 5 minutes
                             text = message.get("text", "")
@@ -102,7 +112,7 @@ async def check_telegram_updates(user_id: int) -> bool:
                             elif text == "/stats":
                                 stats_requested = True
                                 
-                    if callback and callback.get("message", {}).get("chat", {}).get("id") == user_id:
+                    if callback:
                         msg_time = callback.get("message", {}).get("date", 0)
                         if current_time - msg_time < 300: # 5 minutes
                             data = callback.get("data", "")

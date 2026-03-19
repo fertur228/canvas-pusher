@@ -13,6 +13,7 @@ const SUPABASE_URL = Deno.env.get("SUPABASE_URL") || ""
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || ""
 const GITHUB_PAT = Deno.env.get("GITHUB_PAT") || ""
 const GITHUB_REPO = Deno.env.get("GITHUB_REPO") || "" 
+const TELEGRAM_CHAT_ID = Deno.env.get("TELEGRAM_CHAT_ID") || ""
 
 console.log("[Init] Edge Function Boot. Envs Check:", {
   hasTelegram: !!TELEGRAM_BOT_TOKEN,
@@ -209,6 +210,21 @@ serve(async (req) => {
     } catch(e) {
       console.error("[HTTP] Invalid JSON Payload!");
       return new Response('Bad Request', { status: 400, headers: corsHeaders });
+    }
+
+    let incomingChatId = null;
+    if (body.message && body.message.chat) {
+      incomingChatId = body.message.chat.id;
+    } else if (body.callback_query && body.callback_query.message && body.callback_query.message.chat) {
+      incomingChatId = body.callback_query.message.chat.id;
+    }
+
+    if (incomingChatId !== null && TELEGRAM_CHAT_ID) {
+      if (incomingChatId.toString() !== TELEGRAM_CHAT_ID) {
+        console.warn(`[Auth] Unauthorized access attempt from ID: ${incomingChatId}`);
+        await sendTelegramMessage(incomingChatId, "❌ Доступ запрещен. Это приватный бот.");
+        return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 403, headers: corsHeaders });
+      }
     }
     
     // 1. Text Messages (e.g. /stats)
