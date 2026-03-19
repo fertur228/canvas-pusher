@@ -31,14 +31,19 @@ SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_KEY", os.getenv("SUPABASE_KEY"))
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
-def send_telegram_message(text: str, reply_markup: dict = None):
+def send_telegram_message(text: str, reply_markup: dict = None, chat_id=None):
     """Sends a text message using HTML."""
     if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
+        return
+        
+    target_chat_id = chat_id if chat_id is not None else TELEGRAM_CHAT_ID
+    
+    if str(target_chat_id) != str(TELEGRAM_CHAT_ID):
         return
 
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload = {
-        "chat_id": TELEGRAM_CHAT_ID,
+        "chat_id": target_chat_id,
         "text": text,
         "parse_mode": "HTML"
     }
@@ -504,6 +509,8 @@ async def async_main():
     process_health_check(supabase, user_id)
     
     if stats_requested or os.getenv("IS_AUTO_REPORT") == "true":
+        if str(user_id) != str(os.getenv("TELEGRAM_CHAT_ID")):
+            return
         send_stats_report(supabase, user_id)
     
     duration = (datetime.now() - start_time).total_seconds()

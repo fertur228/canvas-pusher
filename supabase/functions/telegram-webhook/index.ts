@@ -219,11 +219,10 @@ serve(async (req) => {
       incomingChatId = body.callback_query.message.chat.id;
     }
 
-    if (incomingChatId !== null && TELEGRAM_CHAT_ID) {
+    if (incomingChatId !== null) {
       if (incomingChatId.toString() !== TELEGRAM_CHAT_ID) {
         console.warn(`[Auth] Unauthorized access attempt from ID: ${incomingChatId}`);
-        await sendTelegramMessage(incomingChatId, "❌ Доступ запрещен. Это приватный бот.");
-        return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 403, headers: corsHeaders });
+        return new Response("Forbidden", { status: 403, headers: corsHeaders });
       }
     }
     
