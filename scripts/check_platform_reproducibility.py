@@ -3,6 +3,7 @@ import argparse
 from datetime import datetime,timedelta,timezone
 import gzip
 import json
+import math
 from pathlib import Path
 import platform
 from src.flymind.neural import NeuralRunner
@@ -19,6 +20,7 @@ def compare(expected,actual,path='',report=None):
         if len(expected)!=len(actual):report['discrete_mismatches'].append(path+'.length');return report
         for i,(a,b) in enumerate(zip(expected,actual)):compare(a,b,f'{path}[{i}]',report)
     elif isinstance(expected,float) and isinstance(actual,(int,float)):
+        if not math.isfinite(actual):report['discrete_mismatches'].append(path+'.nonfinite');return report
         if expected!=actual:
             delta=abs(expected-actual);report['different_floats']+=1
             if delta>report['max_absolute_difference']:report['max_absolute_difference']=delta;report['max_difference_path']=path

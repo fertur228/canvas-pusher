@@ -1,0 +1,29 @@
+{
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "runs": [
+    {
+      "case": "weak",
+      "native_repeated_hash_equal": true,
+      "original_hash": "2be83a2ef8478f0f2408c7a22bc63a4b682d36c17450169f442af0cffcba2cdf",
+      "native_hash": "f1955f7b18a05b2883e6336867d1d02af2ea0c472fa719e37c4b97e2a005362c",
+      "spikes_exactly_equal": true,
+      "different_floats": 4405,
+      "max_absolute_difference": 2.5011104298755527e-12,
+      "max_difference_path": ".stimulus.drive_integral_mv_ms.LPLC2",
+      "discrete_mismatches": []
+    },
+    {
+      "case": "strong",
+      "native_repeated_hash_equal": true,
+      "original_hash": "85631a97acaa408cad52301c2ac459d94fc84be9014fda82896099219816eeba",
+      "native_hash": "cfce104d8f47aa95127e44da02427943f19fc00f99fac90087fa827c6c62dde9",
+      "spikes_exactly_equal": true,
+      "different_floats": 1005,
+      "max_absolute_difference": 3.637978807091713e-12,
+      "max_difference_path": ".stimulus.angular_velocity_deg_s[295]",
+      "discrete_mismatches": []
+    }
+  ],
+  "parameters_changed": false
+}

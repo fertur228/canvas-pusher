@@ -25,7 +25,20 @@ def test_real_fixed_engine_responses_match_previous_experiments_and_sources(monk
         assert result['readout']['population_spikes']==count
         assert result['readout']['gf_spikes']==gf
         expected=next(r for r in baseline['runs'] if r['case']==case)
-        assert result['activity_sha256']==expected['activity_sha256']
+        assert expected['spikes']==count
+        # Native x86 libm differs from ARM by <=3.64e-12 in the measured probe.
+        # A raw float hash is not a cross-platform numerical equivalence test.
+        # Keep exact discrete/parameter/spike assertions and verify every float.
+        from scripts.check_platform_reproducibility import compare
+        with gzip.open(ROOT/f'data/neural/runs/escape-resumed-20261014/{case}-1.json.gz','rt') as f:
+            reference=json.load(f)
+        assert raw['simulation']['parameters']==reference['simulation']['parameters']
+        assert raw['simulation']['spikes']==reference['simulation']['spikes']
+        delta=compare(reference['simulation'],raw['simulation'])
+        assert not delta['discrete_mismatches']
+        assert delta['max_absolute_difference']<=1e-10
+        repeated,_=NeuralRunner().run(encoding)  # Fresh process, not profile cache.
+        assert result['activity_sha256']==repeated['activity_sha256']
         assert result['source_code_sha256']==hashes
         assert b'SYNTHETIC SECRET' not in gzip.decompress(blob)
         assert not set(raw['simulation']['stimulus_ids'])&set(raw['simulation']['readout_ids'])

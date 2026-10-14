@@ -1,5 +1,6 @@
 """Shared Canvas scanner: bounded concurrency, complete pagination, sanitized failures."""
 import asyncio
+from collections import Counter
 from datetime import datetime, timedelta, timezone
 from urllib.parse import urljoin, urlparse
 import httpx
@@ -20,6 +21,9 @@ class AsyncCanvasScanner:
             self.base_url += '/api/v1'
         self.supabase_client = supabase_client
         self.failures = 0
+        self.request_count = 0
+        self.pagination_hops = 0
+        self.http_statuses = Counter()
 
     async def pages(self, client, url, params=None):
         result, visited = [], set()
@@ -31,7 +35,9 @@ class AsyncCanvasScanner:
             visited.add(url)
             for attempt in range(3):
                 try:
+                    self.request_count += 1
                     response = await client.get(url,headers=self.headers,params=params)
+                    self.http_statuses[response.status_code] += 1
                 except httpx.HTTPError:
                     if attempt==2:
                         raise ScanFailure('canvas_transport_failed') from None
@@ -47,7 +53,7 @@ class AsyncCanvasScanner:
                     await asyncio.sleep(min(60, max(1, retry_after)))
                     continue
                 if response.status_code!=200:
-                    raise ScanFailure('canvas_request_denied')
+                    raise ScanFailure(f'canvas_request_denied_{response.status_code}')
                 break
             try:
                 rows = response.json()
@@ -59,6 +65,7 @@ class AsyncCanvasScanner:
             next_url = response.links.get('next',{}).get('url')
             if not next_url:
                 return result
+            self.pagination_hops += 1
             url,params = urljoin(url,next_url),None
         raise ScanFailure('canvas_page_limit')
 
