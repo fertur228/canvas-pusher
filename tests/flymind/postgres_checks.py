@@ -12,7 +12,8 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--socket',required=True);p.add_argument('--port',type=int,default=55439);p.add_argument('--psql',default='psql')
     a=p.parse_args()
-    if not Path(a.socket).resolve().as_posix().startswith('/private/tmp/flymind-'):
+    dedicated_ci = os.getenv('GITHUB_ACTIONS') == 'true' and a.socket == '127.0.0.1' and a.port == 55439
+    if not dedicated_ci and not Path(a.socket).resolve().as_posix().startswith('/private/tmp/flymind-'):
         raise SystemExit('Only a dedicated /private/tmp/flymind-* test cluster is allowed')
     database=f'flymind_test_{os.getpid()}_{time.time_ns()}'
     assert re.fullmatch(r'flymind_test_[0-9_]+',database)

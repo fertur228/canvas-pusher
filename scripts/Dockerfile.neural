@@ -1,0 +1,10 @@
+FROM python:3.11.17-slim
+WORKDIR /app
+COPY requirements-neural.txt /tmp/requirements-neural.txt
+RUN pip install --no-cache-dir -r /tmp/requirements-neural.txt pydantic==2.12.3
+ENV OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=/app MPLCONFIGDIR=/tmp/matplotlib
+COPY src/neural /app/src/neural
+COPY src/flymind /app/src/flymind
+COPY data/neural/flywire_v783 /app/data/neural/flywire_v783
+USER 65534:65534
+ENTRYPOINT ["python", "-m", "src.flymind.evaluate"]
