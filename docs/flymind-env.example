@@ -1,4 +1,6 @@
 # Sample only. Put real credentials in local .env (ignored) or GitHub Secrets.
+# GitHub repository variable; gates the entire scheduled scanner including legacy mode.
+CANVAS_WORKER_ENABLED=false
 FLYMIND_ENABLED=false
 FLYMIND_NEURAL_ENABLED=true
 FLYMIND_ACCOUNT_ID=

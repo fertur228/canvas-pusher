@@ -21,6 +21,9 @@ jobs:
         env:
           FLYMIND_ENABLED: 'true'
           FLYMIND_ACCOUNT_ID: ${{ vars.FLYMIND_ACCOUNT_ID }}
+          DELIVERY_MODE: ${{ vars.DELIVERY_MODE || 'disabled' }}
+          FLYMIND_PRODUCTION_AUTHORIZED: ${{ vars.FLYMIND_PRODUCTION_AUTHORIZED || 'false' }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TEST_TELEGRAM_CHAT_ID: ${{ secrets.TEST_TELEGRAM_CHAT_ID }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}

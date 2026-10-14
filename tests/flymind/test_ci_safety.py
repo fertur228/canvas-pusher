@@ -16,3 +16,10 @@ def test_workflows_pin_actions_and_do_not_publish_private_artifacts():
     assert "FLYMIND_ENABLED || 'false'" in scanner and "DELIVERY_MODE || 'disabled'" in scanner
     assert "inputs.read_only == true || vars.CANVAS_WORKER_ENABLED == 'true'" in scanner
     assert 'pip install -r requirements-neural.lock' in scanner
+    maintenance=Path('.github/workflows/flymind-maintenance.yml').read_text()
+    assert "vars.FLYMIND_RETENTION_ENABLED == 'true'" in maintenance
+    assert 'default: false' in maintenance and '--days 30 --apply' in maintenance
+    for name in ('flymind-maintenance.yml','flymind-watchdog.yml'):
+        source=Path('.github/workflows',name).read_text()
+        assert 'TEST_TELEGRAM_CHAT_ID:' in source and 'DELIVERY_MODE:' in source
+        assert 'TELEGRAM_BOT_TOKEN' not in source and 'CANVAS_API_KEY' not in source
