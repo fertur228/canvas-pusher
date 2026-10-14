@@ -1,3 +1,5 @@
+> Historical phase report. Current release behavior and validation are in [FINAL_RELEASE_REPORT.md](FINAL_RELEASE_REPORT.md) and [DEPLOYMENT.md](DEPLOYMENT.md).
+
 # FlyMind Phase 3 — Canvas → Neural Engine → Telegram
 
 Интеграция реализована в `feat/flymind-neural-poc`, **выключена по умолчанию**.

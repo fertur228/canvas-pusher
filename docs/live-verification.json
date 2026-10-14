@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-14",
+  "canvas": {
+    "scope": "real GitHub Secrets, read-only API",
+    "status": "failed",
+    "http_status": 401,
+    "requests": 1,
+    "pagination_hops": 0,
+    "mutations": 0,
+    "telegram_messages": 0,
+    "run": "https://github.com/fertur228/canvas-pusher/actions/runs/38536417510"
+  },
+  "supabase": {
+    "real_local_auth_postgrest_storage": "verified",
+    "hosted_staging": "not_configured",
+    "production_modified": false
+  },
+  "telegram": {
+    "real_deliveries": 0,
+    "blocker": "TEST_TELEGRAM_CHAT_ID unavailable; primary chat never substituted"
+  },
+  "cloudflare": {
+    "deployed": false,
+    "blocker": "Existing OAuth expired; authenticated refresh failed in noninteractive environment"
+  },
+  "scheduler": {
+    "legacy_workflow_state": "disabled_inactivity",
+    "reactivated": false,
+    "main_merged": false
+  },
+  "historical_ci_log_audit": {
+    "status": "unavailable",
+    "http_status": 410
+  }
+}
