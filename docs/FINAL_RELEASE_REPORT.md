@@ -9,7 +9,7 @@ Production не активирован, облачный dashboard не разв
 
 Проверки выполнены на macOS ARM64, Docker Linux ARM64 и настоящем Ubuntu x86_64
 GitHub runner. Успешный полный CI:
-https://github.com/fertur228/canvas-pusher/actions/runs/38540415721.
+https://github.com/fertur228/canvas-pusher/actions/runs/38545771927.
 Настоящий Canvas GET завершился HTTP401:
 https://github.com/fertur228/canvas-pusher/actions/runs/38536417510.
 Это проверка реального сервиса с отрицательным результатом, а не успешная интеграция.
@@ -204,7 +204,13 @@ Master `CANVAS_WORKER_ENABLED=false`, FlyMind off, delivery disabled, shadow —
 Логические feature-коммиты: ee0d578 (исходная научная основа), 08a5dfd (backend/security),
 c6a1ca0 (Observatory), 8a25df8 (CI/tooling), 984ab7f/73e0384 (диагностика native
 воспроизводимости), 03e7939 (измерения/test-chat), a492921 (activation gates).
-Финальные documentation/operations commits и PR следует смотреть в журнале ветки.
+Operations commit: d02a15c; release documentation: ec6fd8a.
+PR: https://github.com/fertur228/canvas-pusher/pull/1 — открыт для review, не merged.
+Последующие коммиты только фиксируют handoff evidence; точный HEAD доступен в PR.
 Feature-ветка отправлена; force-push, merge main, production migration/deployment и
 сообщения в основной Telegram-чат не выполнялись. Внешние gates нельзя заменить
 успешными mock-тестами. Этот результат не является заявлением production readiness.
+
+Изолированные локальные тестовые Supabase/PostgreSQL остановлены после проверок,
+данные сохранены; чужие локальные проекты не останавливались. Финальный scan всех
+доступных Git commits и статического bundle не нашёл известных сигнатур секретов.

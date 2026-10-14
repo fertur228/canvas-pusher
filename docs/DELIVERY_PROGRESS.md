@@ -28,7 +28,7 @@ Initial baseline: 118 Python tests. Final full local suite: **137 passed**,
 Frontend:28 Vitest, TypeScript/build,4 local browser,
 2 private mocked-HTTP browser tests. Webhook:3 Deno tests. Ruff critical checks pass.
 
-Successful full Linux CI: https://github.com/fertur228/canvas-pusher/actions/runs/38540415721.
+Successful full Linux CI: https://github.com/fertur228/canvas-pusher/actions/runs/38545771927.
 Real local Supabase evidence: local-supabase-validation.json. Linux scientific and batch
 reports: neural-product-evaluation-linux-x86_64.json and neural-batch-validation-linux-x86_64.json.
 
@@ -50,3 +50,7 @@ assumption. Scientific parameters and reference exports were not changed.
 
 Historical CI logs returned410: content audit unavailable. No claim of completed live
 production RLS/log audit. No paid resources or production data modifications.
+
+PR opened: https://github.com/fertur228/canvas-pusher/pull/1. No merge/deploy.
+Local validation services stopped with backups retained; unrelated projects untouched.
+Final available-history and static-build known-secret-signature scans: zero findings.
