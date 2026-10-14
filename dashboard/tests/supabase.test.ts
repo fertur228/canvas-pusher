@@ -1,0 +1,21 @@
+import { readFileSync } from 'node:fs';
+import { createHash,webcrypto } from 'node:crypto';
+import { gunzipSync } from 'node:zlib';
+import { describe,it,expect,vi } from 'vitest';
+import { SupabaseExperimentRepository,fromEngineExport } from '../src/supabase';
+import type { PrivateExperimentRow,EngineExport } from '../src/supabase';
+import { validateGraph } from '../src/telemetry';
+vi.stubGlobal('crypto',webcrypto);
+const graph=validateGraph(JSON.parse(readFileSync(new URL('../public/data/graph.json',import.meta.url),'utf8')));
+const catalog=JSON.parse(readFileSync(new URL('../public/data/catalog.json',import.meta.url),'utf8'));
+const blob=readFileSync(new URL('../../data/neural/runs/escape-resumed-20261014/strong-1.json.gz',import.meta.url));
+const raw=JSON.parse(gunzipSync(blob).toString()) as EngineExport;
+const row:PrivateExperimentRow={account_id:'00000000-0000-0000-0000-000000000001',event_id:'a'.repeat(64),created_at:raw.created_at_utc,metadata:{status:'complete',encoding:{case:'strong'},telemetry_path:`00000000-0000-0000-0000-000000000001/${'a'.repeat(64)}/${'b'.repeat(64)}.json.gz`,telemetry_sha256:createHash('sha256').update(blob).digest('hex'),activity_sha256:raw.activity_sha256,source_code_sha256:{},readout:{classification:'elevated',biological_response_validated:false}}};
+const access=async()=>({url:'https://supabase.invalid',publishableKey:'sb_publishable_SYNTHETIC',accessToken:'SYNTHETIC_USER_JWT'});
+describe('private Supabase future data access',()=>{
+ it('adapts actual engine spikes and full GF traces losslessly',()=>{const e=fromEngineExport(raw,graph,catalog.graph.sha256,row);expect(e.spikes.length).toBe(834);expect(e.signals.size).toBe(6);for(const r of e.readout){const i=graph.neurons.findIndex(n=>n.root_id===r.root_id);expect([...e.signals.get(i)!.values]).toEqual(raw.simulation.traces.readout_voltage_mv[r.root_id]);}});
+ it('loads RLS-scoped metadata and compressed private telemetry with user JWT',async()=>{const requests:RequestInit[]=[];const repo=new SupabaseExperimentRepository(access,async(url,opts)=>{requests.push(opts!);return String(url).includes('/rest/')?Response.json([row]):new Response(blob);});expect(await repo.list()).toHaveLength(1);const e=await repo.load(row,graph,catalog.graph.sha256);expect(e.readout.map(r=>r.spike_times_ms.length)).toEqual([3,4]);expect(requests.every(r=>(r.headers as Record<string,string>).Authorization==='Bearer SYNTHETIC_USER_JWT')).toBe(true);expect(requests.every(r=>r.cache==='no-store')).toBe(true);});
+ it('does not load anything without credentials or with a service-role key',async()=>{const fetcher=vi.fn();const noAuth=new SupabaseExperimentRepository(async()=>({...await access(),accessToken:''}),fetcher);await expect(noAuth.list()).rejects.toThrow('session');const secret=new SupabaseExperimentRepository(async()=>({...await access(),publishableKey:'sb_secret_FORBIDDEN'}),fetcher);await expect(secret.list()).rejects.toThrow();expect(fetcher).not.toHaveBeenCalled();});
+ it('rejects corrupt assets and foreign graph provenance',async()=>{const repo=new SupabaseExperimentRepository(access,async()=>new Response('corrupt'));await expect(repo.load(row,graph,catalog.graph.sha256)).rejects.toThrow('checksum');expect(()=>fromEngineExport({...raw,manifest_sha256:'wrong'},graph,catalog.graph.sha256,row)).toThrow();});
+ it('does not fetch failed simulations or arbitrary storage paths',async()=>{const fetcher=vi.fn();const repo=new SupabaseExperimentRepository(access,fetcher);await expect(repo.load({...row,metadata:{...row.metadata,status:'failed'}},graph,catalog.graph.sha256)).rejects.toThrow();await expect(repo.load({...row,metadata:{...row.metadata,telemetry_path:'../other-user/data.json.gz'}},graph,catalog.graph.sha256)).rejects.toThrow();expect(fetcher).not.toHaveBeenCalled();});
+});
