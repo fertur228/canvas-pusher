@@ -69,6 +69,9 @@ def finalize_event(event,store,client,delivery,repo):
         _, prior=adapt(store.account_id,'report',{'id':request_id,'name':'Manual Canvas sync','message':'','report_type':'health'},Snapshot(),datetime.now(timezone.utc))
         Pipeline(store,delivery,None,None,neural_enabled=False).drain_notifications(only_report=prior[0].event_id)
         return {'status':'already_finalized'}
+    if not (row.get('summary') or {}).get('last_successful_check'):
+        health=client.table('flymind_health').select('last_snapshot_success').eq('account_id',store.account_id).execute().data
+        row={**row,'summary':{**(row.get('summary') or {}),'last_successful_check':health[0].get('last_snapshot_success') if health else None}}
     text=completion_text(row,r.get('conclusion'))
     _,events=adapt(store.account_id,'report',{'id':request_id,'name':'Manual Canvas sync','message':text,'report_type':'health'},Snapshot(),datetime.now(timezone.utc))
     done=store._rpc('flymind_manual_complete',{'p_id':request_id,'p_run':run_id,'p_conclusion':r.get('conclusion') or 'unknown','p_event':events[0].model_dump(mode='json')})

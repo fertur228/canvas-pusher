@@ -150,10 +150,11 @@ def test_failed_manual_workflow_queues_one_operational_report_not_academic_backl
     req='11111111-1111-1111-1111-111111111111'
     row={'id':req,'state':'running','workflow_ref':'feature','summary':{'sync_status':'failed','errors':1}}
     class Query:
+        def __init__(self,table):self.table=table
         def select(self,*a):return self
         def eq(self,*a):return self
-        def execute(self):return SimpleNamespace(data=[row])
-    client=SimpleNamespace(table=lambda _:Query());calls=[];drains=[]
+        def execute(self):return SimpleNamespace(data=[{'last_snapshot_success':'2026-10-14T18:30:00+00:00'}] if self.table=='flymind_health' else [row])
+    client=SimpleNamespace(table=Query);calls=[];drains=[]
     def rpc(name,args):
         calls.append((name,args));row['state']='failed';return True
     store=SimpleNamespace(account_id=ACCOUNT,_rpc=rpc)
@@ -167,6 +168,7 @@ def test_failed_manual_workflow_queues_one_operational_report_not_academic_backl
     assert len(calls)==1 and calls[0][0]=='flymind_manual_complete'
     assert len(drains)==2 and drains[0]==drains[1] and set(drains[0])=={'only_report'}
     assert 'ошибкой' in calls[0][1]['p_event']['payload']['message']
+    assert '23:30 Asia/Almaty' in calls[0][1]['p_event']['payload']['message']
 
 
 def test_huge_escaped_assignment_stays_within_telegram_limit():
