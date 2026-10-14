@@ -40,6 +40,8 @@ class Settings:
         e = os.environ if env is None else env
         if e.get('FLYMIND_ENABLED','').lower()!='true':
             return cls()
+        if e.get('DELIVERY_MODE')=='test' and e.get('TEST_TELEGRAM_CHAT_ID') and e.get('TEST_TELEGRAM_CHAT_ID')==e.get('TELEGRAM_CHAT_ID'):
+            raise ValueError('test_chat_must_differ_from_production')
         return cls(enabled=e.get('FLYMIND_ENABLED','').lower()=='true',neural_enabled=e.get('FLYMIND_NEURAL_ENABLED','true').lower()=='true',
                    account_id=e.get('FLYMIND_ACCOUNT_ID',''),chat_id=e.get('TEST_TELEGRAM_CHAT_ID','') if e.get('DELIVERY_MODE','disabled')=='test' else e.get('TELEGRAM_CHAT_ID',''),
                    supabase_url=e.get('SUPABASE_URL',''),supabase_key=e.get('SUPABASE_SERVICE_KEY','') or e.get('SUPABASE_KEY',''),

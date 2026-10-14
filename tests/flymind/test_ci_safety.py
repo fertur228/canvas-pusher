@@ -14,3 +14,5 @@ def test_workflows_pin_actions_and_do_not_publish_private_artifacts():
     scanner=Path('.github/workflows/check_canvas.yml').read_text()
     assert 'cancel-in-progress: false' in scanner
     assert "FLYMIND_ENABLED || 'false'" in scanner and "DELIVERY_MODE || 'disabled'" in scanner
+    assert "inputs.read_only == true || vars.CANVAS_WORKER_ENABLED == 'true'" in scanner
+    assert 'pip install -r requirements-neural.lock' in scanner

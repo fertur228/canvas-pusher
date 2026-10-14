@@ -5,6 +5,7 @@ import pytest
 
 from src.flymind import telegram_check
 from src.flymind.telegram import Delivery
+from src.flymind.worker import Settings
 
 
 def configure(monkeypatch, tmp_path):
@@ -12,6 +13,12 @@ def configure(monkeypatch, tmp_path):
     monkeypatch.setenv('TELEGRAM_BOT_TOKEN', 'synthetic-token')
     monkeypatch.setenv('TEST_TELEGRAM_CHAT_ID', '222')
     monkeypatch.setenv('TELEGRAM_CHAT_ID', '111')
+
+
+def test_scheduled_worker_rejects_primary_chat_as_test_target():
+    with pytest.raises(ValueError, match='test_chat_must_differ'):
+        Settings.from_env({'FLYMIND_ENABLED':'true','DELIVERY_MODE':'test',
+                           'TEST_TELEGRAM_CHAT_ID':'111','TELEGRAM_CHAT_ID':'111'})
 
 
 @pytest.mark.parametrize('missing', ['TELEGRAM_BOT_TOKEN', 'TEST_TELEGRAM_CHAT_ID', 'same_chat'])

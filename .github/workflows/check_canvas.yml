@@ -22,6 +22,8 @@ concurrency:
 
 jobs:
   run-tracker:
+    # Gate the legacy path too: FLYMIND_ENABLED=false alone returns to legacy delivery.
+    if: inputs.read_only == true || vars.CANVAS_WORKER_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     
@@ -42,7 +44,7 @@ jobs:
       id: neural_deps
       continue-on-error: true # A failed optional install must never block Canvas delivery.
       if: inputs.read_only != true && vars.FLYMIND_ENABLED == 'true' && vars.FLYMIND_NEURAL_ENABLED != 'false'
-      run: pip install -r requirements-neural.txt
+      run: pip install -r requirements-neural.lock
 
     - name: Controlled read-only Canvas validation
       if: inputs.read_only == true
