@@ -50,10 +50,17 @@ jobs:
           PLAYWRIGHT_CHROME_PATH: /usr/bin/google-chrome
       - name: Real Linux x86 neural controls and runtime
         run: python -m src.flymind.evaluate --output /tmp/flymind-linux-evaluation.json
+      - name: Multiple synthetic events with real neural children and captured Telegram
+        run: python -m src.flymind.demo --output /tmp/flymind-batch
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: synthetic-linux-scientific-evaluation
           path: /tmp/flymind-linux-evaluation.json
+          retention-days: 14
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: synthetic-linux-batch-validation
+          path: /tmp/flymind-batch/report.json
           retention-days: 14
 
   database:

@@ -1,0 +1,20 @@
+{
+  "measurements": {
+    "batch_wall_seconds": 24.79531095782295,
+    "parent_cpu_seconds": 0.015601000000000004,
+    "children_cpu_seconds": 24.400693,
+    "unique_telemetry_objects": 2,
+    "telemetry_bytes_on_disk": 293656
+  },
+  "synthetic_canvas_fixture": true,
+  "real_flywire_simulations": true,
+  "no_external_messages_sent": true,
+  "duplicate_poll_added_deliveries": 0,
+  "jobs": {
+    "edit.done": 4,
+    "send.done": 4,
+    "simulate.done": 4
+  },
+  "primary_messages": 4,
+  "scope": "macOS ARM64, synthetic Canvas/captured Telegram, actual neural child processes"
+}

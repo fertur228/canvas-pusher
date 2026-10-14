@@ -4,7 +4,6 @@ from datetime import datetime,timezone
 import json
 import os
 from pathlib import Path
-from .events import Snapshot,adapt
 from .pipeline import Pipeline
 from .store import SQLiteStore
 from .telegram import TelegramDelivery
@@ -22,8 +21,18 @@ def main():
     prior=store.db.execute('SELECT chat FROM test_target').fetchone()
     if prior and prior['chat']!=chat:raise SystemExit('State file is bound to another test chat')
     store.db.execute('INSERT OR IGNORE INTO test_target VALUES(?)',(chat,))
-    pipeline=Pipeline(store,TelegramDelivery(token,chat),None,None,neural_enabled=False)
+    class ControlledDelivery(TelegramDelivery):
+        def deliver(self,text,message_id=None):
+            if message_id is not None:text='FlyMind: controlled TEST chat edit verified. No academic data.'
+            return super().deliver(text,message_id)
+    pipeline=Pipeline(store,ControlledDelivery(token,chat),None,None,neural_enabled=False)
     pipeline.ingest('report',{'id':'controlled-test-v1','name':'SYNTHETIC test','message':'FlyMind: controlled TEST chat delivery. No academic data.','report_type':'health'},datetime(2026,10,14,tzinfo=timezone.utc))
     pipeline.drain_notifications()
-    print(json.dumps({'jobs':store.counts(),'scope':'explicit TEST_TELEGRAM_CHAT_ID only'}));store.close()
+    for row in store.db.execute("SELECT event_id FROM jobs WHERE stage='send' AND state='done'").fetchall():
+        store.db.execute("INSERT OR IGNORE INTO jobs(id,account_id,event_id,stage) VALUES(?,?,?,'edit')",(row['event_id']+':edit',store.account_id,row['event_id']))
+    pipeline.drain_notifications('edit')
+    counts=store.counts()
+    verified=counts=={'send.done':1,'edit.done':1}
+    print(json.dumps({'jobs':counts,'scope':'explicit TEST_TELEGRAM_CHAT_ID only','status':'verified' if verified else 'incomplete'}));store.close()
+    if not verified:raise SystemExit(2)
 if __name__=='__main__':main()
