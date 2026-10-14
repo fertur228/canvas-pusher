@@ -172,3 +172,11 @@ def test_failed_manual_workflow_queues_one_operational_report_not_academic_backl
 def test_huge_escaped_assignment_stays_within_telegram_limit():
     _,events=adapt(ACCOUNT,'assignment',{**LIVE,'name':'&'*1000,'course_name':'&'*1000,'html_url':'https://canvas.invalid/'+ '&'*700},Snapshot(),NOW)
     assert all(len(render(e))<4096 for e in events)
+
+
+@pytest.mark.parametrize('state,runs,allowed', [('active',[],False),('disabled_manually',[{'status':'in_progress'}],False),('disabled_inactivity',[{'status':'completed'}],True)])
+def test_rotation_requires_disabled_idle_scanner(state,runs,allowed):
+    def run(args,**kwargs):return SimpleNamespace(returncode=0,stdout=state if args[1]=='api' else json.dumps(runs))
+    if allowed:bot_setup.rotation_preflight('owner/repo',run)
+    else:
+        with pytest.raises(ValueError,match='disable_scanner'):bot_setup.rotation_preflight('owner/repo',run)

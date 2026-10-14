@@ -108,3 +108,30 @@ Deno.test('accepted dispatch remains pending; repeated button press does not dis
  await h(req({update_id:43,callback_query:{id:'cb',data:'check',from:{id:123},message:{chat:{id:123},message_id:1}}}));
  assert(dispatches===1&&texts[0].includes('ещё не завершена')&&texts[1].includes('Повторный запуск не создан'));
 });
+Deno.test('deadline callback edits a bounded cached page without simulation or workflow dispatch',async()=>{
+ let edited:any;let queried:any;
+ const request=(async(url:string|URL|Request,init?:RequestInit)=>{
+  const path=String(url);
+  if(path.includes('webhook_claim'))return Response.json(true);
+  if(path.includes('flymind_accounts'))return Response.json([{id:'account',canvas_origin:'https://canvas.invalid'}]);
+  if(path.includes('flymind_deadlines')){queried=JSON.parse(String(init?.body));return Response.json({synced_at:'2026-10-14T18:00:00Z',page:1,total:4,rows:[{name:'SYNTHETIC',has_submitted:false,due_at:null}]});}
+  if(path.includes('editMessageText')){edited=JSON.parse(String(init?.body));return Response.json({ok:true,result:{message_id:77}});}
+  if(path.includes('answerCallbackQuery'))return Response.json({ok:true,result:true});
+  if(path.includes('webhook_updates'))return new Response(null,{status:204});
+  throw new Error('unexpected network operation');
+ }) as typeof fetch;
+ await handler(config,request)(req({update_id:45,callback_query:{id:'cb',data:'deadlines:all:1',from:{id:123},message:{chat:{id:123},message_id:77}}}));
+ assert(queried.p_page===1&&queried.p_view==='all'&&edited.message_id===77&&edited.text.includes('Страница 2/2'));
+});
+Deno.test('Telegram rate-limit or lost acknowledgement never causes blind webhook resend',async()=>{
+ for(const status of [429,500]){let claimed=false,sends=0;
+  const request=(async(url:string|URL|Request)=>{
+   const path=String(url);if(path.includes('webhook_claim')){const fresh=!claimed;claimed=true;return Response.json(fresh);}
+   if(path.includes('flymind_accounts'))return Response.json([{id:'account'}]);
+   if(path.includes('sendMessage')){sends++;return Response.json({ok:false,error_code:status,parameters:{retry_after:30}},{status});}
+   throw new Error('unexpected');
+  }) as typeof fetch;
+  const h=handler(config,request),body={...update,message:{...update.message,text:'/menu'}};
+  assert((await h(req(body))).status===200);await h(req(body));assert(sends===1);
+ }
+});

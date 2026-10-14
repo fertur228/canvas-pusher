@@ -80,6 +80,15 @@ def configure(api,identity,webhook_url,secret,replace=False):
     return {'commands_configured':True,'webhook_url_verified':True,'secret_delivery_requires_test':True}
 
 
+def rotation_preflight(repo,run=subprocess.run):
+    import re
+    if not re.fullmatch(r'[\w.-]+/[\w.-]+',repo):raise ValueError('invalid_repository')
+    state=run(['gh','api',f'repos/{repo}/actions/workflows/check_canvas.yml','--jq','.state'],text=True,capture_output=True)
+    jobs=run(['gh','run','list','--repo',repo,'--workflow','check_canvas.yml','--limit','100','--json','status'],text=True,capture_output=True)
+    if state.returncode or jobs.returncode or not state.stdout.strip().startswith('disabled') or any(r['status']!='completed' for r in json.loads(jobs.stdout)):
+        raise ValueError('disable_scanner_and_wait_for_runs_before_rotation')
+
+
 def publish_github(repo,env,run=subprocess.run):
     import re
     if not re.fullmatch(r'[\w.-]+/[\w.-]+',repo):raise ValueError('invalid_repository')
@@ -121,6 +130,10 @@ def main():
             test_identity=dict(dotenv_values(a.test_identity)) if a.test_identity.exists() else {}
             test_chat=test_identity.get('TEST_TELEGRAM_CHAT_ID') or os.getenv('TEST_TELEGRAM_CHAT_ID')
             if not test_chat or test_chat==identity.get('TELEGRAM_CHAT_ID'):raise ValueError('separate_test_chat_required')
+            me=BotAPI(os.getenv('TELEGRAM_BOT_TOKEN')).call('getMe')
+            if str(me['id'])!=identity.get('TELEGRAM_BOT_ID') or not identity.get('TELEGRAM_USER_ID') or not identity.get('TELEGRAM_CHAT_ID'):raise ValueError('wrong_bot_for_identity')
+            if test_identity and (test_identity.get('TELEGRAM_BOT_ID')!=identity.get('TELEGRAM_BOT_ID') or test_identity.get('TELEGRAM_USER_ID')!=identity.get('TELEGRAM_USER_ID')):raise ValueError('test_identity_mismatch')
+            rotation_preflight(a.repo)
             print(json.dumps(publish_github(a.repo,{**os.environ,**identity,'TEST_TELEGRAM_CHAT_ID':test_chat})));return
         api=BotAPI(os.getenv('TELEGRAM_BOT_TOKEN'))
         if a.action=='discover':
@@ -139,6 +152,6 @@ def main():
             print(json.dumps({'staging_binding_verified':result is True,'historical_records_deleted':False}))
     except Exception as error:
         # Only fixed local validation labels, never third-party exception text or token URLs.
-        allowed={'webhook_active_stop_it_explicitly_before_polling','owner_start_not_received','different_webhook_requires_explicit_replacement','canvas_preflight_failed_no_secret_changes','explicit_apply_required','explicit_staging_target_required','wrong_bot_for_identity'}
+        allowed={'webhook_active_stop_it_explicitly_before_polling','owner_start_not_received','different_webhook_requires_explicit_replacement','canvas_preflight_failed_no_secret_changes','explicit_apply_required','explicit_staging_target_required','wrong_bot_for_identity','disable_scanner_and_wait_for_runs_before_rotation'}
         raise SystemExit(str(error) if str(error) in allowed else 'Setup failed; verify private local configuration without sharing credentials') from None
 if __name__=='__main__':main()

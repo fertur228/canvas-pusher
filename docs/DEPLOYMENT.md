@@ -19,7 +19,7 @@ actual neural exports and synthetic academic fixtures.
 ## Supabase isolated staging first
 
 1. Identify a separate free-tier staging project; do not reuse production implicitly.
-2. Review all six `supabase/migrations/20261014000{0..5}_*.sql`. Migration 0000 only
+2. Review all seven `supabase/migrations/20261014000{0..6}_*.sql`. Migration 0000 only
    creates missing legacy tables; 0002 restricts legacy grants without deleting data.
    Audit custom legacy policies/RPCs in the destination before applying.
 3. Apply via Supabase CLI migrations against the explicitly linked staging project.
@@ -126,3 +126,7 @@ legacy execution with empty repository variables.
 Retention is prepared in flymind-maintenance.yml: weekly 30-day cleanup only when
 FLYMIND_ENABLED and FLYMIND_RETENTION_ENABLED are true. Manual dispatch defaults to
 dry-run. Review candidates before enabling the flag; it was not enabled here.
+
+The Telegram product extension requires migration0006 and explicit bot/user binding.
+See TELEGRAM_ASSISTANT.md for private token entry, test-chat discovery, command/webhook
+configuration and the default-branch dependency of workflow_run completion.

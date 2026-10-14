@@ -73,3 +73,11 @@ It refuses a missing test chat or a test chat equal to TELEGRAM_CHAT_ID.
 The Telegram test CLI exits nonzero until both send and edit are confirmed. An
 ambiguous send remains quarantined across reruns; an exit code of zero is not emitted
 for a pending, refused or uncertain test. No actual test-chat credential is configured.
+
+## Telegram assistant extension
+
+Verified deadline snapshots use last_snapshot_success, distinct from successful fetch.
+Canvas401/403 or missing credentials block academic backlog release. A requested manual
+workflow failure has its own targeted operational outbox report; it never drains unrelated
+academic notifications. New bot rotation requires disabled idle workers and explicit
+account binding. See TELEGRAM_ASSISTANT.md for commands and recovery details.

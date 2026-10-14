@@ -119,7 +119,7 @@ DECLARE r public.flymind_manual_requests;
 BEGIN
  SELECT * INTO r FROM public.flymind_manual_requests WHERE account_id=p_account AND id=p_id AND (run_id=p_run OR run_id IS NULL) FOR UPDATE;
  IF NOT FOUND OR r.state NOT IN ('queued','dispatched','uncertain','running','expired') THEN RETURN false; END IF;
- IF p_event->>'account_id'<>p_account::text OR p_event->>'entity_type'<>'report' OR p_event->'payload'->>'id'<>r.id::text THEN RAISE EXCEPTION 'invalid_completion_event'; END IF;
+ IF p_event->>'account_id' IS DISTINCT FROM p_account::text OR p_event->>'entity_type' IS DISTINCT FROM 'report' OR p_event->'payload'->>'id' IS DISTINCT FROM r.id::text THEN RAISE EXCEPTION 'invalid_completion_event'; END IF;
  UPDATE public.flymind_manual_requests SET run_id=p_run,state=CASE WHEN p_conclusion='success' AND summary->>'sync_status'='verified' THEN 'completed' ELSE 'failed' END,finished_at=now() WHERE id=r.id;
  -- A bot replacement must not leak a delayed old-bot completion to the new recipient.
  IF NOT EXISTS(SELECT 1 FROM public.flymind_accounts WHERE id=p_account AND enabled AND telegram_bot_id=r.bot_id) THEN RETURN true; END IF;

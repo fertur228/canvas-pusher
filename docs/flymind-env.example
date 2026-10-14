@@ -32,3 +32,13 @@ VITE_DEPLOYMENT_LABEL=local
 TELEGRAM_WEBHOOK_SECRET=
 TELEGRAM_USER_ID=
 OBSERVATORY_URL=
+
+# Owner Telegram assistant; explicit deployment gates, disabled until configured
+TELEGRAM_BOT_ID=
+FLYMIND_MANUAL_SYNC_ENABLED=false
+FLYMIND_WORKFLOW_REF=main
+GITHUB_REPO=fertur228/canvas-pusher
+# Server-side Edge secret; requires Actions write + Contents/Variables read
+GITHUB_PAT=
+# Local bootstrap only; never used to authorize production automatically
+FLYMIND_TARGET_ENV=staging

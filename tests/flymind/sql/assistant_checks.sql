@@ -32,6 +32,13 @@ DO $$ DECLARE a uuid='00000000-0000-0000-0000-000000000001'; v jsonb; r jsonb; s
  PERFORM public.flymind_manual_prepare(a,id,'444','{"sync_status":"verified","errors":0}');
  IF (SELECT state FROM public.flymind_manual_requests WHERE run_id='444')<>'running' THEN RAISE EXCEPTION 'premature_completion'; END IF;
  e=jsonb_build_object('event_id',repeat('d',64),'account_id',a,'entity_type','report','kind','health_report','schema_version',1,'entity_key','0:'||id,'observed_at',now(),'revision',1,'priority',1,'payload',jsonb_build_object('id',id),'changes','{}'::jsonb);
+ BEGIN
+  PERFORM public.flymind_manual_complete(a,id,'444','success',e-'account_id');
+  RAISE EXCEPTION 'null_account_accepted';
+ EXCEPTION WHEN raise_exception THEN
+  IF SQLERRM<>'invalid_completion_event' THEN RAISE; END IF;
+ END;
+ IF (SELECT state FROM public.flymind_manual_requests WHERE run_id='444')<>'running' THEN RAISE EXCEPTION 'invalid_completion_mutated_request'; END IF;
  IF NOT public.flymind_manual_complete(a,id,'444','success',e) OR public.flymind_manual_complete(a,id,'444','success',e) THEN RAISE EXCEPTION 'completion_idempotency'; END IF;
  IF (SELECT count(*) FROM public.flymind_jobs WHERE event_id=repeat('d',64))<>1 THEN RAISE EXCEPTION 'completion_outbox'; END IF;
  IF public.flymind_claim_report(a,repeat('d',64)) IS NULL OR public.flymind_claim_report(a,repeat('d',64)) IS NOT NULL THEN RAISE EXCEPTION 'completion_claim_not_exclusive'; END IF;

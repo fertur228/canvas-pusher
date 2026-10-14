@@ -72,3 +72,23 @@ not a guarantee. Brian2/pyparsing deprecation warnings and a large lazy 3D chunk
 SHA-pinned older GitHub actions emit a Node20-runtime migration advisory while running
 successfully under the runner runtime. Updating those pins needs a separate regression
 check; no dependency versions were changed to tune scientific outputs.
+
+## Telegram assistant follow-up (2026-10-14)
+
+New webhook authorization requires exact secret/user/chat/account AND bot identity.
+Telegram update IDs are namespaced by numeric bot ID; replacing a bot preserves
+academic history and prevents accidental old-bot message edits. Menu visibility is
+not authorization. New deadline/manual RPCs are server-only; manual request history
+has owner SELECT RLS. Missing completion-event fields are rejected transactionally.
+
+Private bootstrap uses hidden terminal input, ignored exclusive0600 files, a random
+owner challenge, getMe identity checks and stdin for GitHub secrets. Discovery refuses
+an active webhook. Secret rotation requires a disabled idle scanner. These controls
+were tested with mocked Bot/GitHub APIs; no real bot was configured. Completion runs
+trusted default-branch code and never executes a triggering workflow artifact.
+
+Core outbox retains ambiguous-send handling and retry state. Immediate webhook menu
+responses deliberately are not automatically replayed after claim: a lost response
+or rate limit requires a new user command/reconciliation, not a potentially duplicate
+send. Canvas401/403 prevents releasing academic notification backlog. Operational
+manual-failure reports use a targeted outbox claim. No production secrets were rotated.

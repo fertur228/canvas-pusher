@@ -38,6 +38,13 @@ neural computation): `python -m src.flymind.demo --output /tmp/flymind-new-demo`
 Scientific evaluation: `python -m src.flymind.evaluate --output /tmp/flymind-evaluation.json`.
 Run each export into a new path to preserve reproducible originals.
 
+## Telegram assistant
+
+Persistent menu: /start, /menu, /deadlines, /check, /stats, /brain, /status.
+Deadlines use the last fully verified snapshot; manual refresh is tracked through
+actual GitHub workflow completion. Secure new-bot/token setup and hosted activation:
+[Telegram assistant guide](docs/TELEGRAM_ASSISTANT.md). Hosted activation is pending.
+
 ## Activation and evidence
 
 The scheduled worker master gate CANVAS_WORKER_ENABLED defaults off. FlyMind defaults

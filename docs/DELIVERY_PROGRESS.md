@@ -54,3 +54,30 @@ production RLS/log audit. No paid resources or production data modifications.
 PR opened: https://github.com/fertur228/canvas-pusher/pull/1. No merge/deploy.
 Local validation services stopped with backups retained; unrelated projects untouched.
 Final available-history and static-build known-secret-signature scans: zero findings.
+
+## Telegram product completion — 2026-10-14
+
+- [x] Persistent menu and all seven owner-only commands; cached deadlines, grades,
+      neural status and system health preserved.
+- [x] Additive migration0006: bot-scoped update IDs, verified snapshots, paginated
+      deadline RPC and locked manual-request lifecycle; owner RLS/privileged grants.
+- [x] Manual dispatch checks flags/branch/completion workflow; actual workflow_run
+      completion produces one persisted report, independently of academic backlog.
+- [x] Undated new assignments, points/title updates, Canvas effective override dates,
+      correct submission semantics, bounded escaped messages and safe Canvas links.
+- [x] New-bot discovery, separate test-group identity, commands/webhook setup and
+      private credential rotation tools. Disabled-idle scanner gate before secret updates.
+- [x] Final local Python154 passed (78.16s), Deno13 passed, real PostgreSQL16 checks
+      passed, Ruff critical checks passed. Frontend28 tests and TypeScript/build pass.
+- [x] Core commit b6f7e17 pushed; GitHub CI38571466375 passed: Python145 +6 optional
+      cache skips, Deno11, Vitest28, browser4 local +2 private HTTP-mock tests.
+      Additional local rotation/null-validation tests are in the follow-up commit.
+- [x] Credential/history signature scan: zero findings; authentic neural data/model untouched.
+- [ ] Real Canvas token rotation: actual read-only run38570459817 returned401. The
+      previously configured GitHub credential was still installed; replacement not available.
+- [ ] Hosted migration0006, owner/bot binding, real Bot API configuration and test-chat
+      delivery remain external activation gates. No production messages or deployment.
+- [ ] Completion handler must exist on default branch; feature branch remains unmerged.
+
+Detailed activation commands: TELEGRAM_ASSISTANT.md. Machine-readable evidence:
+telegram-assistant-validation.json. Existing production data have not been changed.
