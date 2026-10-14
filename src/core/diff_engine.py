@@ -27,7 +27,7 @@ def diff_objects(old_state: Optional[Dict[str, Any]], new_state: Dict[str, Any],
     # Define which keys to track based on object_type
     keys_to_track = []
     if object_type == "assignment":
-        keys_to_track = ["score", "points_possible", "due_at"]
+        keys_to_track = ["score", "points_possible", "due_at", "has_submitted"]
     elif object_type == "file":
         keys_to_track = ["url", "display_name"]
     elif object_type == "announcement":
@@ -64,18 +64,11 @@ def check_reminders(new_state: Dict[str, Any], current_time: datetime) -> Option
     except ValueError:
         return None
 
+    if due_at.tzinfo is None or current_time.tzinfo is None:
+        return None
     time_left = due_at - current_time
     hours_left = time_left.total_seconds() / 3600
 
-    if 48 <= hours_left < 49:
-        return "48h"
-    elif 24 <= hours_left < 25:
-        return "24h"
-    elif 12 <= hours_left < 13:
-        return "12h"
-    elif 3 <= hours_left < 4:
-        return "3h"
-    elif 1 <= hours_left < 2:
-        return "1h"
-
-    return None
+    if hours_left < 0:
+        return 'overdue'
+    return next((f'{hours}h' for hours in (1, 3, 12, 24, 48) if hours_left <= hours), None)

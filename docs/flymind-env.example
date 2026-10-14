@@ -1,0 +1,13 @@
+# Sample only. Put real credentials in local .env (ignored) or GitHub Secrets.
+FLYMIND_ENABLED=false
+FLYMIND_NEURAL_ENABLED=true
+FLYMIND_ACCOUNT_ID=
+FLYMIND_MAX_NEURAL=5
+CANVAS_API_URL=https://your-canvas.example
+CANVAS_API_KEY=
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_KEY=
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_CHAT_ID=
+# GitHub provides GITHUB_RUN_ID for idempotent workflow-dispatched GPA reports.
+IS_AUTO_REPORT=false

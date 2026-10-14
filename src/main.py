@@ -14,6 +14,8 @@ from src.core.gpa_engine import calculate_gpa, get_grade_point
 
 logging.basicConfig(level=logging.INFO, format='%(message)s') # Keep it clean
 logger = logging.getLogger(__name__)
+logging.getLogger('httpx').setLevel(logging.WARNING)
+logging.getLogger('httpcore').setLevel(logging.WARNING)
 
 # Basic in-memory stats for the current run
 run_stats = {
@@ -55,7 +57,7 @@ def send_telegram_message(text: str, reply_markup: dict = None, chat_id=None):
         response = httpx.post(url, json=payload, timeout=10.0)
         response.raise_for_status()
     except Exception as e:
-        logger.error(f"Failed to send Telegram message: {e}")
+        logger.error("Failed to send Telegram message: operation failed; private details omitted")
         run_stats["errors"] += 1
 
 def send_welcome_message():
@@ -105,7 +107,7 @@ async def check_telegram_updates(user_id: int) -> bool:
                         incoming_chat_id = callback.get("message", {}).get("chat", {}).get("id")
                         
                     if incoming_chat_id is not None and str(incoming_chat_id) != str(user_id):
-                        logger.warning(f"[Auth] Unauthorized access attempt from ID: {incoming_chat_id}")
+                        logger.warning("[Auth] Unauthorized request rejected")
                         continue
 
                     if message:
@@ -127,7 +129,7 @@ async def check_telegram_updates(user_id: int) -> bool:
                                 await client.get(f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/answerCallbackQuery", params={"callback_query_id": cb_id})
                                 
     except Exception as e:
-        logger.error(f"Failed to fetch Telegram updates: {e}")
+        logger.error("Failed to fetch Telegram updates: operation failed; private details omitted")
 
     return stats_requested
 
@@ -151,14 +153,14 @@ def save_course_grades(supabase: Client, user_id: int, active_courses: list):
         try:
             supabase.table("course_grades").upsert(grades_to_upsert).execute()
         except Exception as e:
-            logger.error(f"Failed to upsert course grades: {e}")
+            logger.error("Failed to upsert course grades: operation failed; private details omitted")
 
 def send_stats_report(supabase: Client, user_id: int):
     try:
         response = supabase.table("course_grades").select("*").eq("user_id", user_id).execute()
         grades = response.data
     except Exception as e:
-        logger.error(f"Failed to fetch course grades: {e}")
+        logger.error("Failed to fetch course grades: operation failed; private details omitted")
         return
 
     if not grades:
@@ -174,12 +176,12 @@ def send_stats_report(supabase: Client, user_id: int):
         score_val = float(score) if score is not None else 0.0
         
         if score_val == 0.0:
-            logger.info(f"Ignoring {cname}: Score is 0%")
+            logger.debug("Unscored/practice course excluded from GPA")
             html_lines.append(f"📘 <b>{escape_html(cname)}</b>: без оценки")
             continue
             
         if "practic" in cname.lower():
-            logger.info(f"Ignoring {cname}: Contains 'Practic'")
+            logger.debug("Unscored/practice course excluded from GPA")
             continue
 
         course_scores[cname] = score_val
@@ -224,7 +226,7 @@ def process_assignments(supabase: Client, user_id: int, live_assignments: list):
             .select("*").eq("user_id", user_id).eq("object_type", "assignment").execute()
         saved_states = {item["object_id"]: item for item in response.data}
     except Exception as e:
-        logger.error(f"Error fetching state from Supabase: {e}")
+        logger.error("Error fetching state from Supabase: operation failed; private details omitted")
         return
         
     current_time = datetime.now(timezone.utc)
@@ -307,7 +309,7 @@ def process_assignments(supabase: Client, user_id: int, live_assignments: list):
         try:
             supabase.table("canvas_state").upsert(states_to_upsert).execute()
         except Exception as e:
-            logger.error(f"Failed to batch upsert state for assignments: {e}")
+            logger.error("Failed to batch upsert state for assignments: operation failed; private details omitted")
 
 def process_files(supabase: Client, user_id: int, live_files: list):
     try:
@@ -315,7 +317,7 @@ def process_files(supabase: Client, user_id: int, live_files: list):
             .select("*").eq("user_id", user_id).eq("object_type", "file").execute()
         saved_states = {item["object_id"]: item for item in response.data}
     except Exception as e:
-        logger.error(f"Error fetching state from Supabase: {e}")
+        logger.error("Error fetching state from Supabase: operation failed; private details omitted")
         return
 
     states_to_upsert = []
@@ -360,7 +362,7 @@ def process_files(supabase: Client, user_id: int, live_files: list):
         try:
             supabase.table("canvas_state").upsert(states_to_upsert).execute()
         except Exception as e:
-            logger.error(f"Failed to batch upsert state for files: {e}")
+            logger.error("Failed to batch upsert state for files: operation failed; private details omitted")
 
 def process_announcements(supabase: Client, user_id: int, live_announcements: list):
     try:
@@ -368,7 +370,7 @@ def process_announcements(supabase: Client, user_id: int, live_announcements: li
             .select("*").eq("user_id", user_id).eq("object_type", "announcement").execute()
         saved_states = {item["object_id"]: item for item in response.data}
     except Exception as e:
-        logger.error(f"Error fetching state from Supabase: {e}")
+        logger.error("Error fetching state from Supabase: operation failed; private details omitted")
         return
 
     states_to_upsert = []
@@ -419,7 +421,7 @@ def process_announcements(supabase: Client, user_id: int, live_announcements: li
         try:
             supabase.table("canvas_state").upsert(states_to_upsert).execute()
         except Exception as e:
-            logger.error(f"Failed to batch upsert state for announcements: {e}")
+            logger.error("Failed to batch upsert state for announcements: operation failed; private details omitted")
 
 def process_health_check(supabase: Client, user_id: int):
     try:
@@ -461,9 +463,16 @@ def process_health_check(supabase: Client, user_id: int):
             }).execute()
             
     except Exception as e:
-        logger.error(f"Failed to process health check: {e}")
+        logger.error("Failed to process health check: operation failed; private details omitted")
 
 async def async_main():
+    # Off by default: preserve the existing production path without importing Brian2.
+    if os.getenv("FLYMIND_ENABLED", "").lower() == "true":
+        from src.flymind.worker import run_environment
+        code = await run_environment()
+        if code:
+            raise SystemExit(code)
+        return
     missing = []
     if not CANVAS_URL: missing.append("CANVAS_API_URL")
     if not CANVAS_TOKEN: missing.append("CANVAS_API_KEY")
@@ -474,19 +483,19 @@ async def async_main():
 
     if missing:
         logger.error(f"Missing critical environment variables: {', '.join(missing)}")
-        sys.exit(0)
+        sys.exit(2)
 
     try:
         user_id = int(TELEGRAM_CHAT_ID)
     except ValueError:
         logger.error("TELEGRAM_CHAT_ID must be a numeric ID.")
-        sys.exit(0)
+        sys.exit(2)
 
     try:
         supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
     except Exception as e:
-        logger.error(f"Supabase connection failed: {e}")
-        sys.exit(0)
+        logger.error("Supabase connection failed: operation failed; private details omitted")
+        sys.exit(2)
         
     start_time = datetime.now()
     
@@ -506,7 +515,9 @@ async def async_main():
     process_assignments(supabase, user_id, all_assignments)
     process_files(supabase, user_id, all_files)
     process_announcements(supabase, user_id, all_announcements)
-    process_health_check(supabase, user_id)
+    run_stats["errors"] += scanner.failures
+    if not run_stats["errors"]:
+        process_health_check(supabase, user_id)
     
     if stats_requested or os.getenv("IS_AUTO_REPORT") == "true":
         if str(user_id) != str(os.getenv("TELEGRAM_CHAT_ID")):
@@ -514,6 +525,8 @@ async def async_main():
         send_stats_report(supabase, user_id)
     
     duration = (datetime.now() - start_time).total_seconds()
+    if run_stats["errors"]:
+        raise SystemExit(2)
     logger.info(f"Run completed in {duration:.2f}s. Changes: {run_stats['changes']}, Errors: {run_stats['errors']}")
 
 def main():

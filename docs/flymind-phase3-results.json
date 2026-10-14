@@ -1,0 +1,178 @@
+{
+  "biological_response_validated": false,
+  "branch": "feat/flymind-neural-poc",
+  "feature_default": "disabled",
+  "limitations": [
+    "Telegram Bot API has no sendMessage idempotency key: uncertain sends are quarantined, not automatically retried",
+    "User auth UI/private-source switch is not connected in Observatory; the repository and lossless compressed loader are implemented",
+    "No live Canvas/Telegram/Supabase requests were used to validate production adapters; staging end-to-end check required",
+    "Two engineering stimulus profiles do not establish biologically validated urgency"
+  ],
+  "offline_demo": {
+    "duplicate_poll_added_deliveries": 0,
+    "jobs": {
+      "edit.done": 4,
+      "send.done": 4,
+      "simulate.done": 4
+    },
+    "primary_messages": 4,
+    "real_flywire_simulation": true,
+    "responses": [
+      {
+        "activity_sha256": "2be83a2ef8478f0f2408c7a22bc63a4b682d36c17450169f442af0cffcba2cdf",
+        "measurements": {
+          "cpu_seconds_load_import_simulation_export": 1.914038,
+          "process_lifetime_peak_rss_mib": 218.546875,
+          "rss_sample_interval_ms": 5,
+          "sampled_peak_rss_mib": 216.546875,
+          "wall_seconds_load_import_simulation_export": 12.280983082950115
+        },
+        "profile": "weak",
+        "readout": {
+          "active_neurons": 282,
+          "biological_response_validated": false,
+          "classification": "moderate",
+          "gf_first_latency_ms": [
+            751.1,
+            750.0
+          ],
+          "gf_peak_model_depolarization_mv": [
+            7.0398444265493225,
+            7.119108279948492
+          ],
+          "gf_spikes": [
+            2,
+            2
+          ],
+          "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset",
+          "population_spikes": 344,
+          "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+          "version": "experimental-urgency/v1"
+        }
+      },
+      {
+        "activity_sha256": "85631a97acaa408cad52301c2ac459d94fc84be9014fda82896099219816eeba",
+        "measurements": {
+          "cpu_seconds_load_import_simulation_export": 1.916255,
+          "process_lifetime_peak_rss_mib": 215.828125,
+          "rss_sample_interval_ms": 5,
+          "sampled_peak_rss_mib": 214.0625,
+          "wall_seconds_load_import_simulation_export": 12.79630275000818
+        },
+        "profile": "strong",
+        "readout": {
+          "active_neurons": 418,
+          "biological_response_validated": false,
+          "classification": "elevated",
+          "gf_first_latency_ms": [
+            179.8,
+            179.60000000000002
+          ],
+          "gf_peak_model_depolarization_mv": [
+            7.2097722178051455,
+            8.018707178063472
+          ],
+          "gf_spikes": [
+            3,
+            4
+          ],
+          "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset",
+          "population_spikes": 834,
+          "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+          "version": "experimental-urgency/v1"
+        }
+      },
+      {
+        "activity_sha256": "85631a97acaa408cad52301c2ac459d94fc84be9014fda82896099219816eeba",
+        "measurements": {
+          "cpu_seconds_load_import_simulation_export": 1.9332620000000003,
+          "process_lifetime_peak_rss_mib": 218.78125,
+          "rss_sample_interval_ms": 5,
+          "sampled_peak_rss_mib": 217.1875,
+          "wall_seconds_load_import_simulation_export": 12.782701208954677
+        },
+        "profile": "strong",
+        "readout": {
+          "active_neurons": 418,
+          "biological_response_validated": false,
+          "classification": "elevated",
+          "gf_first_latency_ms": [
+            179.8,
+            179.60000000000002
+          ],
+          "gf_peak_model_depolarization_mv": [
+            7.2097722178051455,
+            8.018707178063472
+          ],
+          "gf_spikes": [
+            3,
+            4
+          ],
+          "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset",
+          "population_spikes": 834,
+          "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+          "version": "experimental-urgency/v1"
+        }
+      },
+      {
+        "activity_sha256": "85631a97acaa408cad52301c2ac459d94fc84be9014fda82896099219816eeba",
+        "measurements": {
+          "cpu_seconds_load_import_simulation_export": 1.9141110000000001,
+          "process_lifetime_peak_rss_mib": 219.453125,
+          "rss_sample_interval_ms": 5,
+          "sampled_peak_rss_mib": 217.6875,
+          "wall_seconds_load_import_simulation_export": 12.559549249941483
+        },
+        "profile": "strong",
+        "readout": {
+          "active_neurons": 418,
+          "biological_response_validated": false,
+          "classification": "elevated",
+          "gf_first_latency_ms": [
+            179.8,
+            179.60000000000002
+          ],
+          "gf_peak_model_depolarization_mv": [
+            7.2097722178051455,
+            8.018707178063472
+          ],
+          "gf_spikes": [
+            3,
+            4
+          ],
+          "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset",
+          "population_spikes": 834,
+          "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+          "version": "experimental-urgency/v1"
+        }
+      }
+    ],
+    "synthetic_canvas_input": true,
+    "updated_existing_messages": 4
+  },
+  "production_resources_modified": false,
+  "real_telegram_messages_sent": 0,
+  "tests": {
+    "dashboard_browser_static": {
+      "passed": 4,
+      "wall_seconds": 9.6
+    },
+    "dashboard_build": {
+      "passed": true,
+      "warning": "Existing Three.js/R3F vendor chunk exceeds Vite 500kB advisory"
+    },
+    "dashboard_vitest": {
+      "passed": 25
+    },
+    "postgresql_checks": {
+      "passed": true,
+      "scope": "Dedicated local PostgreSQL 16, actual migrations/RPC/RLS, stand-in auth/storage schemas; not live Supabase APIs"
+    },
+    "python_full_suite": {
+      "passed": 118,
+      "wall_seconds": 50.78,
+      "warnings": 172
+    }
+  },
+  "verified_at_utc": "2026-10-13T22:29:27.707710+00:00"
+}
