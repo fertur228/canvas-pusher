@@ -1,10 +1,13 @@
 name: FlyMind controlled Canvas read
 on:
+  push:
+    branches: [feat/flymind-neural-poc]
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   canvas-read:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[canvas-read-check]')
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
