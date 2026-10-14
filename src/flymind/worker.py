@@ -11,6 +11,7 @@ from .pipeline import Pipeline
 from .scanner import ReliableCanvasScanner
 from .store import SupabaseStore, SupabaseTelemetryStorage
 from .telegram import TelegramDelivery
+from .events import entity_key
 
 logger = logging.getLogger(__name__)
 
@@ -94,17 +95,16 @@ async def run(settings: Settings, *, client_factory=None, scanner_factory=Reliab
         store.heartbeat('finish','degraded','bootstrap_required')
         return {'status':'bootstrap_required','jobs':store.counts()}
     delivery = TelegramDelivery(settings.telegram_token if settings.delivery_mode!='disabled' else '',settings.chat_id)
+    if delivery.ready and hasattr(delivery,'bot_id') and (not delivery.bot_id or not store._rpc('flymind_check_bot',{'p_bot':int(delivery.bot_id)})):
+        raise ValueError('telegram_bot_binding_required')
     pipeline = Pipeline(store,delivery,NeuralRunner(),SupabaseTelemetryStorage(client),neural_enabled=settings.neural_enabled, enrichment_enabled=settings.mode=='enrich', telemetry_enabled=settings.telemetry_enabled)
-    # Recover existing durable notifications even if Canvas is currently unavailable.
-    if not bootstrap:
-        pipeline.drain_notifications('send',limit=25)
     if not settings.canvas_url or not settings.canvas_token:
-        pipeline.drain_notifications('edit',limit=25)
         store.heartbeat('finish','failed','missing_canvas_credentials')
         return {'status':'missing_canvas_credentials','jobs':store.counts()}
     scanner = scanner_factory(settings.canvas_token,settings.canvas_url,client)
     errors,events = 0,0
     courses = []
+    sync_stamp = None
     try:
         courses = await scanner.get_active_courses()
         assignments,files,announcements = await scanner.scan_all(courses)
@@ -129,11 +129,19 @@ async def run(settings: Settings, *, client_factory=None, scanner_factory=Reliab
                 errors += 1
     except Exception:
         errors += 1  # Sanitized: no API URL/token/title/grade in logs.
+    if not errors:
+        try:
+            sync_stamp=store._rpc('flymind_sync_verified',{'p_keys':[entity_key(a,'assignment') for a in assignments]})
+        except Exception:
+            errors+=1
     if bootstrap:
         if not errors:
             store.runtime(initialize=True)
         store.heartbeat('finish','bootstrapped' if not errors else 'degraded','scan_or_persistence_failed' if errors else None)
         return {'status':'bootstrapped' if not errors else 'needs_attention','events':events,'errors':errors,'jobs':store.counts()}
+    if any(getattr(scanner,'http_statuses',{}).get(code,0) for code in (401,403)):
+        store.heartbeat('finish','failed','canvas_authentication_failed')
+        return {'status':'needs_attention','sync_status':'failed','errors':max(1,errors),'events':events,'jobs':store.counts(),'event_counts':dict(pipeline.event_counts)}
     from .reports import queue_reports
     if not errors:
         queue_reports(pipeline,courses,auto_report=settings.auto_report,run_id=settings.run_id)
@@ -142,7 +150,7 @@ async def run(settings: Settings, *, client_factory=None, scanner_factory=Reliab
     neural_problem = settings.neural_enabled and any(n for k,n in jobs.items() if k.startswith('simulate.') and k.endswith(('dead','pending')))
     healthy = not errors and delivery.ready and not delivery_problem and not neural_problem
     store.heartbeat('finish','healthy' if healthy else 'degraded',None if healthy else 'scan_delivery_or_neural_pending')
-    return {'status':'ok' if healthy else 'needs_attention','events':events,'errors':errors,'jobs':jobs}
+    return {'status':'ok' if healthy else 'needs_attention','events':events,'errors':errors,'jobs':jobs,'event_counts':dict(pipeline.event_counts),'sync_status':'verified' if sync_stamp else 'failed','last_successful_check':sync_stamp}
 
 
 async def run_environment():

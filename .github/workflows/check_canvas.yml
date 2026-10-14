@@ -1,4 +1,5 @@
 name: Canvas State Tracker
+run-name: FlyMind sync ${{ inputs.manual_request_id || github.run_id }}
 
 on:
   schedule:
@@ -9,6 +10,10 @@ on:
         description: 'Validate Canvas reads only; no database writes or Telegram'
         type: boolean
         default: false
+      manual_request_id:
+        description: 'Persisted owner request UUID; never bypasses activation gates'
+        type: string
+        required: false
       chat_id:
         description: 'ID чата для авто-отчета'
         required: false
@@ -53,9 +58,11 @@ jobs:
         CANVAS_API_KEY: ${{ secrets.CANVAS_API_KEY }}
       run: python -m src.flymind.live_check
 
-    - name: Run Canvas Scanner
+    - name: Run Canvas Scanner or tracked manual request
       if: inputs.read_only != true
       env:
+        CANVAS_WORKER_ENABLED: ${{ vars.CANVAS_WORKER_ENABLED || 'false' }}
+        MANUAL_REQUEST_ID: ${{ inputs.manual_request_id }}
         FLYMIND_ENABLED: ${{ vars.FLYMIND_ENABLED || 'false' }}
         FLYMIND_NEURAL_ENABLED: ${{ steps.neural_deps.outcome == 'failure' && 'false' || vars.FLYMIND_NEURAL_ENABLED || 'true' }}
         FLYMIND_ACCOUNT_ID: ${{ vars.FLYMIND_ACCOUNT_ID }}
@@ -73,4 +80,9 @@ jobs:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         IS_AUTO_REPORT: ${{ github.event.inputs.chat_id != '' && 'true' || 'false' }}
         PYTHONPATH: ${{ github.workspace }}
-      run: python src/main.py
+      run: |
+        if [ -n "$MANUAL_REQUEST_ID" ]; then
+          python -m src.flymind.manual_sync run
+        else
+          python src/main.py
+        fi

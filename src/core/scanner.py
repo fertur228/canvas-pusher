@@ -74,13 +74,24 @@ class AsyncCanvasScanner:
             rows = await self.pages(client,self.base_url+'/users/self/courses',{'enrollment_state':'active','include[]':'total_scores','per_page':50})
             return [c for c in rows if 'id' in c]
 
+    def safe_assignment_url(self, value):
+        if not isinstance(value,str) or len(value)>1000:return False
+        p,origin=urlparse(value),urlparse(self.base_url)
+        return p.scheme=='https' and p.netloc==origin.netloc and not p.username and not p.password
+
+    @staticmethod
+    def is_submitted(submission):
+        # A numeric score alone is NOT evidence of submission (e.g. missing work graded zero).
+        return bool(submission.get('submitted_at') or submission.get('workflow_state') in ('submitted','pending_review'))
+
     async def fetch_course_assignments(self,client,course):
-        rows = await self.pages(client,self.base_url+f"/courses/{course['id']}/assignments",{'include[]':'submission','per_page':50,'order_by':'due_at'})
+        rows = await self.pages(client,self.base_url+f"/courses/{course['id']}/assignments",{'include[]':'submission','per_page':50,'order_by':'due_at','override_assignment_dates':'true'})
         score = next((e.get('computed_current_score') for e in course.get('enrollments',[]) if e.get('type')=='student'),None)
         return [{'id':a['id'],'course_id':course['id'],'course_name':course.get('name','Unknown'), 'course_score':score,
                  'name':a.get('name','Unknown'),'due_at':a.get('due_at'),'points_possible':a.get('points_possible'),
-                 'score':(a.get('submission') or {}).get('score'),'has_submitted':bool((a.get('submission') or {}).get('submitted_at'))}
-                for a in rows if a.get('id')]
+                 'html_url':a.get('html_url') if self.safe_assignment_url(a.get('html_url')) else None,
+                 'score':(a.get('submission') or {}).get('score'),'has_submitted':self.is_submitted(a.get('submission') or {})}
+                for a in rows if a.get('id') and a.get('published') is not False]
 
     async def fetch_course_files(self,client,course):
         rows = await self.pages(client,self.base_url+f"/courses/{course['id']}/files",{'sort':'created_at','order':'desc','per_page':100})
@@ -94,7 +105,7 @@ class AsyncCanvasScanner:
         params = [('start_date',(datetime.now(timezone.utc)-timedelta(days=30)).isoformat())]+[('context_codes[]',k) for k in names]
         rows = await self.pages(client,self.base_url+'/announcements',params)
         return [{'id':a['id'],'context_code':a.get('context_code'),'course_name':names.get(a.get('context_code'),'Unknown'),
-                 'title':a.get('title'),'message':a.get('message'),'posted_at':a.get('posted_at'),'author_name':a.get('user_name')} for a in rows if a.get('id')]
+                 'title':a.get('title'),'message':a.get('message'),'posted_at':a.get('posted_at'),'author_name':a.get('user_name')} for a in rows if a.get('id') and a.get('published') is not False]
 
     async def scan_all(self, active_courses):
         async with httpx.AsyncClient(timeout=30,follow_redirects=False) as client:

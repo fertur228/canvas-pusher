@@ -23,3 +23,14 @@ def test_workflows_pin_actions_and_do_not_publish_private_artifacts():
         source=Path('.github/workflows',name).read_text()
         assert 'TEST_TELEGRAM_CHAT_ID:' in source and 'DELIVERY_MODE:' in source
         assert 'TELEGRAM_BOT_TOKEN' not in source and 'CANVAS_API_KEY' not in source
+
+
+def test_manual_workflow_cannot_fall_back_to_legacy_and_finalizer_is_trusted():
+    worker=Path('.github/workflows/check_canvas.yml').read_text()
+    assert 'MANUAL_REQUEST_ID:' in worker and 'src.flymind.manual_sync run' in worker
+    assert 'run-name: FlyMind sync' in worker
+    finalizer=Path('.github/workflows/flymind-manual-completion.yml').read_text()
+    assert 'workflow_run:' in finalizer and 'types: [completed]' in finalizer
+    assert 'ref: ${{ github.event.repository.default_branch }}' in finalizer
+    assert 'head_repository.full_name == github.repository' in finalizer
+    assert 'download-artifact' not in finalizer and 'CANVAS_API_KEY' not in finalizer

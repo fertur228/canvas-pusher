@@ -1,0 +1,37 @@
+name: FlyMind manual synchronization result
+on:
+  workflow_run:
+    workflows: ['Canvas State Tracker']
+    types: [completed]
+permissions:
+  contents: read
+concurrency:
+  group: flymind-manual-result-${{ github.event.workflow_run.id }}
+  cancel-in-progress: false
+jobs:
+  complete:
+    if: vars.CANVAS_WORKER_ENABLED == 'true' && vars.FLYMIND_ENABLED == 'true' && github.event.workflow_run.event == 'workflow_dispatch' && github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      # Trusted default-branch code ONLY; never download/execute a triggering run artifact.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.lock
+      - run: python -m src.flymind.manual_sync finalize
+        env:
+          CANVAS_WORKER_ENABLED: ${{ vars.CANVAS_WORKER_ENABLED || 'false' }}
+          FLYMIND_ENABLED: ${{ vars.FLYMIND_ENABLED || 'false' }}
+          FLYMIND_ACCOUNT_ID: ${{ vars.FLYMIND_ACCOUNT_ID }}
+          DELIVERY_MODE: ${{ vars.DELIVERY_MODE || 'disabled' }}
+          FLYMIND_PRODUCTION_AUTHORIZED: ${{ vars.FLYMIND_PRODUCTION_AUTHORIZED || 'false' }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TEST_TELEGRAM_CHAT_ID: ${{ secrets.TEST_TELEGRAM_CHAT_ID }}

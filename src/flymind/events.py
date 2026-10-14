@@ -67,7 +67,7 @@ class Snapshot(BaseModel):
 
 
 def normalize(live: dict, entity_type: str) -> dict:
-    keys = {'assignment': ('id', 'course_id', 'course_name', 'name', 'due_at', 'points_possible', 'score', 'course_score', 'has_submitted'),
+    keys = {'assignment': ('id', 'course_id', 'course_name', 'name', 'due_at', 'points_possible', 'score', 'course_score', 'has_submitted', 'html_url'),
             'file': ('id', 'course_id', 'course_name', 'display_name', 'url', 'created_at', 'size'),
             'announcement': ('id', 'context_code', 'course_name', 'title', 'message', 'posted_at', 'author_name'),
             'report': ('id','name','message','report_type')}[entity_type]
@@ -118,7 +118,7 @@ def adapt(account_id: str, entity_type: str, live: dict, old: Snapshot, now: dat
                 kinds.append(EventKind.GRADE)
             if 'has_submitted' in changes:
                 kinds.append(EventKind.SUBMISSION)
-            if 'points_possible' in changes:
+            if any(k in changes for k in ('points_possible','name')):
                 kinds.append(EventKind.UPDATED)
     elif entity_type=='report':
         if previous is None:

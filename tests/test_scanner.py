@@ -25,7 +25,7 @@ def test_scanner_fetch_course_assignments():
     client = MagicMock(get=AsyncMock(return_value=response))
     assignments = asyncio.run(scanner.fetch_course_assignments(client, course))
     assert assignments == [{"id": 1, "course_id": 101, "course_name": "Course", "course_score": 93,
-                            "name": "Assignment 1", "due_at": None, "points_possible": 100,
+                            "name": "Assignment 1", "due_at": None, "points_possible": 100, "html_url": None,
                             "score": 95, "has_submitted": True}]
     assert client.get.call_args.args == ("https://canvas.invalid/api/v1/courses/101/assignments",)
 

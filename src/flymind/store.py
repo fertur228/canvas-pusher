@@ -87,6 +87,7 @@ class SQLiteStore:
             return {'id':row['id'], 'stage':stage, 'token':token, 'attempts':row['attempts']+1,
                     'event':json.loads(row['event']), 'encoding':json.loads(row['encoding']) if row['encoding'] else None,
                     'neural':json.loads(experiment['data']) if experiment else None,
+                    'base_bot_id':json.loads(base['result']).get('bot_id') if base and base['result'] else None,
                     'message_id':json.loads(base['result']).get('message_id') if base and base['result'] else None}
 
     def finish(self, job, outcome, result, delay=0):
@@ -139,6 +140,9 @@ class SupabaseStore:
 
     def claim(self, stage):
         return self._rpc('flymind_claim', {'p_stage':stage})
+
+    def claim_report(self, event_id):
+        return self._rpc('flymind_claim_report', {'p_event':event_id})
 
     def finish(self, job,outcome,result,delay=0):
         return self._rpc('flymind_finish', {'p_id':job['id'],'p_token':job['token'],'p_outcome':outcome,'p_result':result,'p_delay':delay})

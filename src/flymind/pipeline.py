@@ -1,6 +1,7 @@
 """Atomic ingest, independent primary delivery, then bounded neural enrichment."""
 from datetime import datetime, timezone
 import time
+from collections import Counter
 from .events import CanvasEvent, Snapshot, adapt, entity_key
 from .presentation import render
 from .store import Conflict, Store
@@ -14,6 +15,7 @@ class Pipeline:
         self.telemetry_enabled = telemetry_enabled
         self.deadline = time.monotonic() + 600
         self._uploaded = {}
+        self.event_counts = Counter()
 
     def ingest(self, entity_type, live, now=None, bootstrap=False):
         now = now or datetime.now(timezone.utc)
@@ -26,19 +28,20 @@ class Pipeline:
             try:
                 committed = self.store.commit(entity_type,key,old.revision,snapshot,events)
                 if committed:
+                    self.event_counts.update(e.kind.value for e in events)
                     return len(events)
             except Conflict:
                 pass
         raise Conflict('snapshot_contention')
 
-    def drain_notifications(self, stage='send', limit=25):
+    def drain_notifications(self, stage='send', limit=25, only_report=None):
         if not self.delivery.ready:
             return 0  # No claims/attempts lost when credentials are missing.
         count = 0
         for _ in range(limit):
             if time.monotonic() > self.deadline:
                 break
-            job = self.store.claim(stage)
+            job = self.store.claim_report(only_report) if only_report else self.store.claim(stage)
             if not job:
                 break
             if stage == 'edit' and not self.enrichment_enabled:
@@ -47,6 +50,9 @@ class Pipeline:
             event = CanvasEvent.model_validate(job['event'])
             if stage=='edit' and not job['message_id']:
                 self.store.finish(job,'dead',{'error_code':'missing_base_message'})
+                continue
+            if stage=='edit' and getattr(self.delivery,'bot_id',None) and str(job.get('base_bot_id') or '')!=self.delivery.bot_id:
+                self.store.finish(job,'dead',{'error_code':'message_belongs_to_another_or_unknown_bot'})
                 continue
             text = render(event,job['neural'] if stage=='edit' else None)
             try:
@@ -61,7 +67,7 @@ class Pipeline:
             delay = max(result.retry_after,min(3600,30*2**min(job['attempts']-1,7)))
             # If this acknowledgement fails after Telegram accepted a send, the lease
             # will become ambiguous, never be automatically resent. Edits are safe to retry.
-            self.store.finish(job,outcome,{'message_id':result.message_id,'error_code':result.error_code},delay)
+            self.store.finish(job,outcome,{'message_id':result.message_id,'bot_id':getattr(self.delivery,'bot_id',None),'error_code':result.error_code},delay)
             count += 1
         return count
 

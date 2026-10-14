@@ -14,6 +14,7 @@ class Delivery:
 class TelegramDelivery:
     def __init__(self, token: str | None, chat_id: str | int, client=None):
         self.token, self.chat_id = token, str(chat_id)
+        self.bot_id = token.split(':',1)[0] if token and ':' in token and token.split(':',1)[0].isdigit() else None
         self.client = client or httpx.Client(timeout=10, follow_redirects=False)
 
     @property
@@ -26,6 +27,7 @@ class TelegramDelivery:
         edit = message_id is not None
         method = 'editMessageText' if edit else 'sendMessage'
         payload = {'chat_id': self.chat_id, 'text': text, 'parse_mode': 'HTML', 'link_preview_options': {'is_disabled': True}}
+        payload['reply_markup']={'inline_keyboard':[[{'text':'📅 Deadlines','callback_data':'deadlines:upcoming:0'},{'text':'⚙️ System Status','callback_data':'status'}]]}
         if edit:
             payload['message_id'] = message_id
         try:

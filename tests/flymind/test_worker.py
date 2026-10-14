@@ -14,6 +14,7 @@ class RPCClient:
         s=self.store
         if name=='flymind_runtime':data={'initialized':True}
         elif name=='flymind_heartbeat':data=True
+        elif name=='flymind_sync_verified':data=NOW.isoformat()
         elif name=='flymind_check_account':data=p['p_chat_id']==123
         elif name=='flymind_snapshot':data=s.load(p['p_kind'],p['p_key']).model_dump()
         elif name=='flymind_commit':data=s.commit(p['p_kind'],p['p_key'],p['p_expected'],Snapshot.model_validate(p['p_snapshot']),[CanvasEvent.model_validate(x['event']) for x in p['p_events']])
