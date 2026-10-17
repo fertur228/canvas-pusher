@@ -1,5 +1,14 @@
 # FlyMind — итоговый технический отчёт, 14 октября 2026
 
+## Текущее hosted-состояние — 2026-10-17
+
+Семь миграций реально применены, legacy hashes сохранены; новый защищённый webhook
+и Cloudflare Supabase-mode preview размещены. Реальные test-chat send/edit и
+FlyWire/Storage проверки прошли. Production и основной scheduler выключены;
+owner Auth/sign-in и manual completion на main ещё не проверены.
+Актуальные доказательства: [HOSTED_RELEASE_VERIFICATION.md](HOSTED_RELEASE_VERIFICATION.md).
+Нижележащие отчёты от предыдущих сессий являются историей, а не текущими blockers.
+
 ## Итог
 
 **LOCALLY COMPLETE, EXTERNAL ACCESS REQUIRED.** Реализован и проверен локальный

@@ -55,3 +55,16 @@ and may disable after60days of public-repository inactivity. Persisted reminder
 thresholds tolerate late execution, but cannot create an uptime guarantee. GitHub
 failure alerts and an optional independent Supabase Cron stale-heartbeat check
 reduce silent failures without introducing a paid always-on server.
+
+## Hosted measurements — 2026-10-17
+
+Official quota pages linked above rechecked on2026-10-17: Supabase Free500MB DB,
+1GBStorage,5GB egress+5GBcached; Pages Free500builds/month; standard public-repository
+GitHub runners remain free. No plan upgrade/billing activation was performed.
+Actual project DB12.82MB; two compressed neural objects293657bytes total. Preview
+build17files/3.82MB. The actual GitHub read-only job39043798824 took26seconds,
+including14Canvas requests; the full neural worker timing is measured separately.
+At96polls/day and14requests/poll, this dataset implies1344Canvas GETs/day before
+pagination/retries. At20events/day with147KB average current artifact,600events
+would add~88MB/month before dedup/retention. These are estimates, not an active
+production schedule. Current scheduler is disabled; retention remains opt-in.

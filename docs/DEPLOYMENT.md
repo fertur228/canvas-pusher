@@ -1,5 +1,20 @@
 # Deployment and activation
 
+## Текущее hosted-состояние — 2026-10-17
+
+Семь миграций реально применены, legacy hashes сохранены; новый защищённый webhook
+и Cloudflare Supabase-mode preview размещены. Реальные test-chat send/edit и
+FlyWire/Storage проверки прошли. Production и основной scheduler выключены;
+owner Auth/sign-in и manual completion на main ещё не проверены.
+Актуальные доказательства: [HOSTED_RELEASE_VERIFICATION.md](HOSTED_RELEASE_VERIFICATION.md).
+Нижележащие отчёты от предыдущих сессий являются историей, а не текущими blockers.
+
+**2026-10-17 preflight:** real local Canvas validation now succeeds. The linked
+Canvas-pusher database has a verified encrypted backup and a successful local
+seven-migration rehearsal. Hosted migration/activation is still pending approval.
+Read [SUPABASE_REMOTE_PREFLIGHT.md](SUPABASE_REMOTE_PREFLIGHT.md), including the
+confirmed legacy RLS/webhook risks, before following older handoff blockers below.
+
 No hosted FlyMind production resources have been activated by this implementation.
 Local isolated Supabase tests and browser mocks are distinct from a hosted staging
 or production deployment. Check FINAL_RELEASE_REPORT.md for latest evidence.

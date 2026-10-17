@@ -1,5 +1,9 @@
 # FlyMind
 
+Hosted preview: https://flymind-preview.flymind-observatory.pages.dev — private
+Supabase mode. Production notifications remain disabled pending owner Auth and
+rollout gates. [Verified hosted status](docs/HOSTED_RELEASE_VERIFICATION.md).
+
 Canvas LMS monitoring and durable Telegram notifications, with an experimental neural
 enrichment layer using the real adult Drosophila FlyWire connectome. The Neural
 Observatory replays recorded model activity locally or through authenticated Supabase.

@@ -1,0 +1,83 @@
+{
+  "synthetic_canvas_fixture": true,
+  "real_supabase": true,
+  "real_telegram_test_chat": true,
+  "real_flywire_simulation": true,
+  "production_chat_used": false,
+  "profiles": [
+    {
+      "case": "weak",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "gf_spikes": [
+          2,
+          2
+        ],
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset",
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "active_neurons": 282,
+        "classification": "moderate",
+        "population_spikes": 344,
+        "gf_first_latency_ms": [
+          751.1,
+          750.0
+        ],
+        "biological_response_validated": false,
+        "gf_peak_model_depolarization_mv": [
+          7.0398444265493225,
+          7.119108279948492
+        ]
+      },
+      "measurements": {
+        "sampled_peak_rss_mib": 215.609375,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 217.609375,
+        "cpu_seconds_load_import_simulation_export": 2.206925,
+        "wall_seconds_load_import_simulation_export": 14.754404834005982
+      },
+      "telemetry_sha256": "7bf2d3d1d428762ce956058ec43ba1f1a84623b006daaf53b895b2a9ebbb9fe2"
+    },
+    {
+      "case": "strong",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "gf_spikes": [
+          3,
+          4
+        ],
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset",
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "active_neurons": 418,
+        "classification": "elevated",
+        "population_spikes": 834,
+        "gf_first_latency_ms": [
+          179.8,
+          179.60000000000002
+        ],
+        "biological_response_validated": false,
+        "gf_peak_model_depolarization_mv": [
+          7.2097722178051455,
+          8.018707178063472
+        ]
+      },
+      "measurements": {
+        "sampled_peak_rss_mib": 216.921875,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 218.671875,
+        "cpu_seconds_load_import_simulation_export": 1.960852,
+        "wall_seconds_load_import_simulation_export": 13.048023666953668
+      },
+      "telemetry_sha256": "b541f279e6c23cbb9ba48d6d40fd5f7659c91debf27b7f9c0ab83cae579a5be5"
+    }
+  ],
+  "jobs": {
+    "edit.done": 2,
+    "send.done": 2,
+    "simulate.done": 2
+  },
+  "duplicate_scan_new_events": 0,
+  "real_message_ids_persisted": true,
+  "private_telemetry_hashes_match": true,
+  "test_enrichment_edits_verified": true,
+  "wall_seconds": 61.690148832974955
+}

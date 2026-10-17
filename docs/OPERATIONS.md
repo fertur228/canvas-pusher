@@ -81,3 +81,18 @@ Canvas401/403 or missing credentials block academic backlog release. A requested
 workflow failure has its own targeted operational outbox report; it never drains unrelated
 academic notifications. New bot rotation requires disabled idle workers and explicit
 account binding. See TELEGRAM_ASSISTANT.md for commands and recovery details.
+
+## Current hosted test operation (2026-10-17)
+
+See HOSTED_RELEASE_VERIFICATION.md for deployed targets and verified evidence.
+`FlyMind controlled hosted test chat` is a finite two-scan smoke test, without cron.
+It requires FLYMIND_TEST_CHAT_VALIDATION=true and FLYMIND_TEST_ACCOUNT_ID; validates
+that test chat differs from the primary chat and that server-side account/bot
+bindings match. Its output/artifact contains counts only. Disable the opt-in after
+validation. It does not replace main-branch manual completion or scheduled rollout.
+
+The authenticated owner has not been provisioned yet; don't report Auth login or
+private browser replay complete based only on SQL RLS tests/service-role downloads.
+Old webhook503 is intentional retirement, not a healthy newbot endpoint. Newbot
+endpoint rejects missing/wrong header/user/chat403; its /status reports actual
+staleness until further verified scans refresh heartbeat.

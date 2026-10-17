@@ -1,5 +1,23 @@
 # Security review — 2026-10-14
 
+## Текущее hosted-состояние — 2026-10-17
+
+Семь миграций реально применены, legacy hashes сохранены; новый защищённый webhook
+и Cloudflare Supabase-mode preview размещены. Реальные test-chat send/edit и
+FlyWire/Storage проверки прошли. Production и основной scheduler выключены;
+owner Auth/sign-in и manual completion на main ещё не проверены.
+Актуальные доказательства: [HOSTED_RELEASE_VERIFICATION.md](HOSTED_RELEASE_VERIFICATION.md).
+Нижележащие отчёты от предыдущих сессий являются историей, а не текущими blockers.
+
+**Hosted audit update — 2026-10-17:** MCP inspection of the confirmed Canvas-pusher
+project found RLS disabled and broad anon/authenticated grants on all three legacy
+academic tables. Hosted telegram-webhook v10 still lacks the new webhook secret-header
+and TELEGRAM_USER_ID checks. These deployed risks remain unresolved pending approval;
+local implementation of a mitigation is not hosted remediation. A full encrypted
+backup was successfully restored locally, and migrations0000–0006 plus four-owner
+RLS/Storage tests passed on the restored data. No hosted migration or function change
+was made. See [the current audit](SUPABASE_REMOTE_PREFLIGHT.md).
+
 Scope: local code, available Git history, dependencies, offline/browser tests,
 real isolated local Supabase APIs. This is not an audit of the live production
 project's unknown custom grants, logs, policies or secrets. No secret values are

@@ -1,5 +1,34 @@
 # FlyMind delivery progress — 2026-10-14
 
+## Текущее hosted-состояние — 2026-10-17
+
+Семь миграций реально применены, legacy hashes сохранены; новый защищённый webhook
+и Cloudflare Supabase-mode preview размещены. Реальные test-chat send/edit и
+FlyWire/Storage проверки прошли. Production и основной scheduler выключены;
+owner Auth/sign-in и manual completion на main ещё не проверены.
+Актуальные доказательства: [HOSTED_RELEASE_VERIFICATION.md](HOSTED_RELEASE_VERIFICATION.md).
+Нижележащие отчёты от предыдущих сессий являются историей, а не текущими blockers.
+
+## Remote preflight update — 2026-10-17
+
+- [x] MCP/CLI target independently confirmed: Canvas-pusher, irjasmzytjeohwfpdnrl.
+- [x] Actual legacy schema/grants/functions audited; 336/32/14 rows, four user IDs.
+- [x] Seven pending migrations confirmed by remote CLI dry-run; none applied remotely.
+- [x] Full encrypted database backup and password-free role export saved outside Git.
+- [x] Full local restore verified by all legacy row SHA-256 checksums.
+- [x] All seven migrations rehearsed against restored real schema/data; rows unchanged.
+- [x] Four-owner SQL RLS and private Storage isolation verified locally, fixtures rolled back.
+- [x] New local Canvas credential: 14 HTTP200, 6 courses, 20 assignments; read-only.
+- [x] Real bot getMe/identity/test-chat separation checks; no Telegram messages sent.
+- [x] Regression: 83 Python, 13 Deno, 28 Vitest; TypeScript/Vite build passed.
+- [ ] Owner approval for migration of the existing hosted database remains required.
+- [ ] Hosted legacy tables still have RLS disabled and broad anon/authenticated grants.
+- [ ] Hosted webhook v10 still lacks the new secret-header/actor protections.
+- [ ] Hosted Auth owner, FlyMind schema/telemetry, new webhook, test delivery and Cloudflare deployment remain pending.
+
+Details, backup scope and evidence: [SUPABASE_REMOTE_PREFLIGHT.md](SUPABASE_REMOTE_PREFLIGHT.md).
+The implementation milestones below are historical and do not imply hosted activation.
+
 Status: locally implemented and verified; **external access required** for activation.
 Branch feat/flymind-neural-poc. No production activation or main merge.
 
@@ -81,3 +110,22 @@ Final available-history and static-build known-secret-signature scans: zero find
 
 Detailed activation commands: TELEGRAM_ASSISTANT.md. Machine-readable evidence:
 telegram-assistant-validation.json. Existing production data have not been changed.
+
+## Hosted release checklist — 2026-10-17 (latest)
+
+- [x] Explicit owner deployment authorization; exact existing Canvas-pusher target verified.
+- [x] Encrypted backup/key verified; additional hosted settings/source archive encrypted.
+- [x] Exactly seven unchanged migrations applied and recorded remotely.
+- [x] Original legacy hashes preserved after migration and test bootstrap.
+- [x] Hosted RLS/Storage owner/foreign/anon SQL checks passed with fixture rollback.
+- [x] Old insecure webhook retired fail-closed503; isolated newbot webhook deployed.
+- [x] Newbot commands, real sends/edits, duplicate and negative authorization checks.
+- [x] Real Canvas silent bootstrap;20verified assignments and113snapshots.
+- [x] Two actual FlyWire runs uploaded privately;2primary+2enrichment deliveries.
+- [x] Supabase-mode Cloudflare preview deployed;HTTPS/auth gate verified in Chrome.
+- [x] Real read-only cloud Canvas run39043798824 succeeded.
+- [x] Full Python154 baseline plus new guard regression;Deno15;Vitest28.
+- [ ] Controlled two-scan cloud worker result pending new feature push.
+- [ ] Explicit owner email/Auth password setup, owner mapping and actual private browser replay.
+- [ ] Review/merge gates and real default-branch /check completion.
+- [ ] Scheduled primary-chat production rollout (intentionally disabled).
