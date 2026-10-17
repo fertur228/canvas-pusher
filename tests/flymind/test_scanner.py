@@ -74,3 +74,16 @@ def test_rate_limit_retry_after_is_bounded_and_honored(monkeypatch):
         async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
             return await ReliableCanvasScanner('secret','https://canvas.invalid',None).pages(client,'https://canvas.invalid/api/v1/courses')
     assert asyncio.run(run())==[] and delays==[4]
+
+
+def test_rate_budget_headers_are_sanitized_finite_aggregates():
+    scanner=ReliableCanvasScanner('secret','https://canvas.invalid',None)
+    async def run():
+        for headers in ({'x-request-cost':'2.5','x-rate-limit-remaining':'600'},
+                        {'x-request-cost':'3','x-rate-limit-remaining':'590'},
+                        {'x-request-cost':'nan','x-rate-limit-remaining':'-1'},
+                        {'x-request-cost':'invalid','x-rate-limit-remaining':'inf'}):
+            async with httpx.AsyncClient(transport=httpx.MockTransport(lambda req:httpx.Response(200,json=[],headers=headers))) as client:
+                await scanner.pages(client,'https://canvas.invalid/api/v1/courses')
+    asyncio.run(run())
+    assert scanner.rate_cost_total==5.5 and scanner.rate_remaining_min==590

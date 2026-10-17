@@ -9,6 +9,18 @@ owner Auth/sign-in и manual completion на main ещё не проверены
 Актуальные доказательства: [HOSTED_RELEASE_VERIFICATION.md](HOSTED_RELEASE_VERIFICATION.md).
 Нижележащие отчёты от предыдущих сессий являются историей, а не текущими blockers.
 
+## Deadline reliability update — 2026-10-17
+
+- [x] Immediate deduplicated creation alerts, silent bootstrap retained.
+- [x] Exactly24/12/6/3/1h; persisted skipped/covered threshold audit.
+- [x] Current-band coalescing, submitted/changed/expired queued reminder suppression.
+- [x] Emoji presentation without internal IDs/scientific debug in ordinary messages.
+- [x] Real Canvas read/rate-budget evidence; five-minute source cron with gates OFF.
+- [x] Local Python194 passed before final staging-scenario regression; Deno15,
+      Vitest28, TypeScript/build, browser4local+2private-mocked passed.
+- [ ] Final CI and hosted finite deadline exercise (record results below when complete).
+- [ ] Production remains disabled; no merge authorized by this notification task.
+
 ## Remote preflight update — 2026-10-17
 
 - [x] MCP/CLI target independently confirmed: Canvas-pusher, irjasmzytjeohwfpdnrl.

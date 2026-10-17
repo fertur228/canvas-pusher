@@ -22,7 +22,9 @@ jobs:
       - run: pip install -r requirements-neural.lock
       # Deliberately separate from the disabled recurring/legacy scanner. The
       # Python guard accepts only a distinct test group and its dedicated account.
-      - run: python -m src.flymind.hosted_validation --output /tmp/flymind-hosted-cloud.json
+      - run: |
+          python -m src.flymind.hosted_validation --output /tmp/flymind-hosted-cloud.json
+          python -m src.flymind.deadline_validation --output /tmp/flymind-deadline-cloud.json
         env:
           FLYMIND_TEST_CHAT_VALIDATION: ${{ vars.FLYMIND_TEST_CHAT_VALIDATION }}
           FLYMIND_TEST_ACCOUNT_ID: ${{ vars.FLYMIND_TEST_ACCOUNT_ID }}
@@ -45,5 +47,7 @@ jobs:
         if: always()
         with:
           name: hosted-cloud-counts-only
-          path: /tmp/flymind-hosted-cloud.json
+          path: |
+            /tmp/flymind-hosted-cloud.json
+            /tmp/flymind-deadline-cloud.json
           retention-days: 7

@@ -11,9 +11,9 @@ NOW=datetime(2026,10,14,tzinfo=timezone.utc)
 LIVE={'id':10,'course_id':20,'course_name':'SYNTHETIC course','name':'<SYNTHETIC task>', 'due_at':(NOW+timedelta(hours=2)).isoformat(),'points_possible':100,'score':None,'has_submitted':False}
 
 
-def test_creation_and_reminder_are_distinct_and_reproducible():
+def test_creation_covers_current_reminder_and_is_reproducible():
     snapshot,events=adapt(ACCOUNT,'assignment',LIVE,Snapshot(),NOW)
-    assert [e.kind for e in events]==[EventKind.CREATED,EventKind.REMINDER]
+    assert [e.kind for e in events]==[EventKind.CREATED]
     assert events==adapt(ACCOUNT,'assignment',LIVE,Snapshot(),NOW)[1]
     assert not adapt(ACCOUNT,'assignment',LIVE,snapshot,NOW+timedelta(minutes=10))[1]
     assert all(encode(e)['case']=='strong' for e in events)
@@ -22,8 +22,8 @@ def test_creation_and_reminder_are_distinct_and_reproducible():
 def test_simultaneous_deadline_and_grade_changes_are_not_collapsed():
     old=Snapshot(revision=4,state={**LIVE,'due_at':(NOW+timedelta(hours=72)).isoformat(),'score':90})
     _,events=adapt(ACCOUNT,'assignment',{**LIVE,'score':50},old,NOW)
-    assert [e.kind for e in events]==[EventKind.DEADLINE,EventKind.GRADE,EventKind.REMINDER]
-    assert len({e.event_id for e in events})==3
+    assert [e.kind for e in events]==[EventKind.DEADLINE,EventKind.GRADE]
+    assert len({e.event_id for e in events})==2
 
 
 def test_repeated_grade_transitions_get_new_revision_ids():
@@ -73,7 +73,7 @@ def test_file_events_are_delivered_but_not_sent_to_neural_engine():
 def test_presentation_does_not_downgrade_critical_and_escapes_private_html():
     _,events=adapt(ACCOUNT,'assignment',LIVE,Snapshot(),NOW)
     text=render(events[0],{'status':'complete','readout':{'classification':'minimal','gf_spikes':[0,0],'active_neurons':0}})
-    assert 'КРИТИЧЕСКАЯ' in text and 'минимальный' in text
+    assert 'Скоро дедлайн!' in text and 'минимальный' in text
     assert '&lt;SYNTHETIC task&gt;' in text and '<SYNTHETIC task>' not in text
     assert 'Биологически не валидировано' in text
 
@@ -101,7 +101,7 @@ def test_submission_transition_is_not_lost_and_stops_reminders():
     old=Snapshot(revision=1,state=LIVE)
     snapshot,events=adapt(ACCOUNT,'assignment',{**LIVE,'has_submitted':True},old,NOW)
     assert [e.kind for e in events]==[EventKind.SUBMISSION]
-    assert 'сдано' in render(events[0])
+    assert '✅ Сдано' in render(events[0])
     assert encode(events[0])['case']=='weak'
     assert not adapt(ACCOUNT,'assignment',snapshot.state,snapshot,NOW)[1]
 

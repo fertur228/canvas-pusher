@@ -42,7 +42,7 @@ def test_diff_no_changes():
     
     assert result is None
 
-def test_check_reminders_2_days():
+def test_no_obsolete_48_hour_reminder():
     now = datetime.now(timezone.utc)
     due_at = now + timedelta(days=2, hours=1) # slightly more than 2 days
     
@@ -56,7 +56,7 @@ def test_check_reminders_2_days():
     mock_now = due_at - timedelta(days=2)
     
     reminder_type = check_reminders(state, mock_now)
-    assert reminder_type == "48h"
+    assert reminder_type is None
 
 def test_check_reminders_already_submitted():
     now = datetime.now(timezone.utc)

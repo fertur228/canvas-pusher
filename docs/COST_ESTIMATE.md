@@ -1,4 +1,4 @@
-# Operating cost estimate — 2026-10-14
+# Operating cost estimate — updated 2026-10-17
 
 Target $0/month, not an uptime guarantee. Current official references:
 [Supabase billing](https://supabase.com/docs/guides/platform/billing-on-supabase),
@@ -15,7 +15,7 @@ limited project count. Quota exhaustion can put a database in read-only mode.
 Cloudflare Pages Free allows500 builds/month,20,000 files and25MiB/file; this
 static dashboard is far below those asset limits and needs no Pages Functions.
 
-## Assumptions, not fabricated usage metrics
+## Historical 15-minute estimate (superseded by measured five-minute assessment below)
 
 At15-minute polling:96 runs/day,2880/month. If each cold/warm Actions job occupies
 30–60seconds, budget48–96 runner minutes/day,1440–2880/month. At5-minute polling
@@ -26,7 +26,7 @@ paid overage to preserve this schedule. Actual Linux CI durations are recorded
 separately; container timings are not GitHub startup timings.
 
 For10 active courses, one page each assignments/files plus courses/announcements:
-~22 Canvas GETs/poll,2112/day; pagination/retries increase this. Concurrency8 and
+~22 Canvas GETs/poll,2112/day; pagination/retries increase this. Previously concurrency8; current concurrency2 and
 Retry-After handling bound pressure. No promise of a university-specific rate quota.
 
 Example20 relevant events/day:600/month. Artifacts ~55–163KB gzip using existing
@@ -77,3 +77,43 @@ public repository; it would exceed typical included private-repository minutes.
 Keep budget assumptions separate from uptime guarantees. Supabase per-snapshot RPC
 round trips dominate this small-circuit workload more than the4.47CPU-second neural
 child. Three current Storage objects use456075bytes; no paid infrastructure enabled.
+
+## Five-minute polling decision — 2026-10-17
+
+Repository visibility was verified PUBLIC through the GitHub API. Standard Ubuntu
+runners remain free for public repositories; larger runners are not selected.
+Change only feature-branch cron to `2-59/5 * * * *`: 288 runs/day, 8640/30-day month.
+Production master flags and the disabled-inactivity scheduler remain OFF.
+
+Measured read-only Canvas check after reducing concurrency from8 to2: 14 HTTP200,
+6 courses,20 assignments,91 files,2 announcements,29.996s wall time. Request-cost
+sum56.88694; minimum reported remaining quota592.09832; no429 or failed scopes.
+Canvas uses replenishing cost-based quotas, not a universal fixed requests/minute
+limit. These headers are a point-in-time measurement, not a reservation or SLA.
+We preserve bounded retries/Retry-After and fail closed on authentication errors.
+Source: [Instructure throttling](https://github.com/instructure/canvas-lms/blob/master/doc/api/throttling.md).
+Evidence: [deadline-canvas-preflight.json](deadline-canvas-preflight.json).
+
+At14requests/poll:4032GET/day,120960/month before pagination/retries. Using the
+previous real cloud durations plus lower request concurrency, allow60–120s per
+single job:288–576 runner min/day,8640–17280/month. This is feasible at$0 for this
+PUBLIC repository's standard runners, but not inside private GitHub Free's2000min.
+No paid overage enabled. One observed quota sample does not guarantee future load;
+return to15min if429 or sustained runs>5min appear.
+
+Concurrency remains one active scanner (`cancel-in-progress:false`) plus at most
+one pending run; later pending runs replace older ones. A slow scan is not killed
+for the next tick. The15min job timeout and10min application budget remain.
+No telemetry is uploaded on unchanged snapshots. Metadata reads increase3x;
+~113small snapshot responses/poll imply roughly0.5–2GB/month API payload depending
+on response sizes/headers, an estimate to verify against Supabase usage charts.
+Event/telemetry growth follows actual changes/reminders rather than poll count.
+
+Expected detection in an on-time healthy schedule:0–5min polling wait, plus runner
+queue/setup and roughly30s Canvas reading; allow about1–7min end-to-end as an
+estimate, not a measured scheduled-delivery SLA. GitHub can delay/drop runs for
+longer, only schedules the default branch, and may disable inactive public repos.
+This feature branch is NOT an active production schedule. Official references:
+[GitHub schedules](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule),
+[concurrency](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency),
+[billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions).

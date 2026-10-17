@@ -1,5 +1,6 @@
 """Shared Canvas scanner: bounded concurrency, complete pagination, sanitized failures."""
 import asyncio
+import math
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from urllib.parse import urljoin, urlparse
@@ -24,6 +25,8 @@ class AsyncCanvasScanner:
         self.request_count = 0
         self.pagination_hops = 0
         self.http_statuses = Counter()
+        self.rate_cost_total = 0.0
+        self.rate_remaining_min = None
 
     async def pages(self, client, url, params=None):
         result, visited = [], set()
@@ -38,6 +41,17 @@ class AsyncCanvasScanner:
                     self.request_count += 1
                     response = await client.get(url,headers=self.headers,params=params)
                     self.http_statuses[response.status_code] += 1
+                    for header in ('x-request-cost', 'x-rate-limit-remaining'):
+                        try:
+                            value = float(response.headers.get(header, ''))
+                        except ValueError:
+                            continue
+                        if not math.isfinite(value) or value < 0:
+                            continue
+                        if header == 'x-request-cost':
+                            self.rate_cost_total += value
+                        else:
+                            self.rate_remaining_min = value if self.rate_remaining_min is None else min(value, self.rate_remaining_min)
                 except httpx.HTTPError:
                     if attempt==2:
                         raise ScanFailure('canvas_transport_failed') from None
@@ -111,7 +125,8 @@ class AsyncCanvasScanner:
         async with httpx.AsyncClient(timeout=30,follow_redirects=False) as client:
             n=len(active_courses)
             tasks=[self.fetch_course_assignments(client,c) for c in active_courses]+[self.fetch_course_files(client,c) for c in active_courses]+[self.fetch_all_announcements(client,active_courses)]
-            semaphore = asyncio.Semaphore(8)
+            # Small bounded batches avoid Canvas's parallel-request preflight penalty.
+            semaphore = asyncio.Semaphore(2)
             async def bounded(task):
                 async with semaphore:
                     return await task

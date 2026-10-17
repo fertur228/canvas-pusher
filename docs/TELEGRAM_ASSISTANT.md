@@ -87,7 +87,7 @@ never mark it completed just because GitHub accepted dispatch.
 The unmerged feature branch cannot promise full on-demand operation. Until owner
 review/merge (or an isolated staging repo with this code on its default branch), the
 webhook returns an accurate configuration error. No legacy worker fallback is used.
-The 15-minute scheduled scanner remains guarded by CANVAS_WORKER_ENABLED.
+The 5-minute scheduled scanner remains guarded by CANVAS_WORKER_ENABLED.
 
 ## Bot replacement and private credentials
 
@@ -222,3 +222,47 @@ admin Auth, verifies password sign-in, then binds only the separately verified
 test account. It neither rotates an existing password nor changes production flags.
 The resulting `.env.flymind.owner` contains UUID/email, not the password.
 Open the actual preview and sign in to complete the remaining browser replay gate.
+
+
+## Mandatory notification contract — 2026-10-17
+
+The FlyMind outbox path (`FLYMIND_ENABLED=true`, explicit delivery gates) creates
+one assignment-created event immediately on discovery, even with no/far/near due
+ date or zero/unknown points. Initial `--bootstrap` stays silent. Primary sends are
+drained before neural work, including batches larger than25; up to1000 attempts
+and the10min worker budget bound a run. Outages/Telegram rate limits can postpone
+actual delivery, but never postpone event creation until a reminder threshold.
+
+Reminder thresholds are exactly24/12/6/3/1hours, future unsubmitted work only.
+The existing snapshot JSONB `reminders` array stores backward-compatible due:band
+consumption strings plus `deadline-version:v2:` and `reminder-audit:v2:` strings.
+Audit reasons: `queued` (outbox, not delivery), `skipped_late`,
+`covered_by_creation`, `covered_by_deadline_change`, `silent_bootstrap`,
+`submitted`, `expired`. Delivery truth stays in jobs/message IDs. This requires
+NO SQL migration and does not rewrite old academic data.
+
+A scan at4h for a newly discovered assignment sends creation only, consumes24/12/6,
+then3h and1h can fire later. A delayed scan from>24h to2h sends only3h and records
+24/12/6 skipped. Submitted/undated/expired work gets no new reminder. The overdue
+cached deadline view remains available; there is no additional overdue alert.
+A changed timestamp sends its own notification and covers the current band; later
+bands use a new deadline revision, including a genuine return to an old due date.
+Equivalent UTC/offset timestamp spellings do not reset this revision.
+
+Before every reminder send/retry, reload the snapshot and verify submission, due
+version and current band. Old queued bands are suppressed, never sent in a burst.
+If the database cannot verify the snapshot, retry without sending. No API can
+retract a send already in flight; global scanner concurrency serializes supported
+cloud runs, while CAS/outbox leases prevent duplicate commits/claims. Canvas
+changes become known only after the next successful fetch.
+
+Ordinary messages use🆕/⏰/📌/📚/📅/💯, escaped titles, Almaty time, remaining time,
+submission status and safe Canvas links. No event IDs, GF spike counts or pending
+simulation diagnostics. Optional enrichment retains an explicitly experimental,
+biologically unvalidated indicator. Neural failure never blocks the base message.
+
+Finite hosted test: `python -m src.flymind.deadline_validation --output /tmp/flymind-deadline-cloud.json`
+with the existing guarded test-chat environment. Stable synthetic IDs and a
+persisted checkpoint prevent repeat sends; do not delete those records to rerun.
+The controlled hosted workflow runs this exercise only behind
+`FLYMIND_TEST_CHAT_VALIDATION=true`; primary scheduler gates stay off.

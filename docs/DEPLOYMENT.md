@@ -68,7 +68,7 @@ FLYMIND_MODE=shadow; DELIVERY_MODE=disabled; FLYMIND_NEURAL_ENABLED=true;
 NEURAL_TELEMETRY_ENABLED=true; FLYMIND_MAX_NEURAL=5;
 FLYMIND_PRODUCTION_AUTHORIZED=false. The server validates account/chat/origin binding.
 
-The new 15-minute schedule executes only when the workflow is on the default branch.
+The new 5-minute schedule executes only when the workflow is on the default branch.
 Feature-branch CI and manual validation do not activate its cron. The owner has conditionally authorized merge after code/security/integration
 gates; PR1 currently remains open while owner Auth/replay is pending. GitHub schedules can
 be late/dropped and public repository schedules can disable after 60 days inactivity.

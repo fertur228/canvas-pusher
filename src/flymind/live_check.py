@@ -23,6 +23,7 @@ async def check():
         if type(row['has_submitted']) is not bool:raise ValueError('invalid_submission_status')
     return {'status':'verified' if not scanner.failures else 'partial_failure','real_canvas_read':True,
             'courses':len(courses),'assignments':len(assignments),'files':len(files),'announcements':len(announcements),
+            'rate_cost_total':scanner.rate_cost_total,'rate_remaining_min':scanner.rate_remaining_min,
             'failed_scopes':scanner.failures,'requests':scanner.request_count,'pagination_hops':scanner.pagination_hops,'http_status_counts':dict(scanner.http_statuses),'timezone_and_submission_schema_checked':True,'mutations':0,'telegram_messages':0}
 
 def main():

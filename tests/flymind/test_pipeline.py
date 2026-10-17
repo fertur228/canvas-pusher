@@ -29,7 +29,7 @@ def setup(tmp_path,runner=None):
     clock=[1000.0]
     store=SQLiteStore(tmp_path/'state.sqlite',ACCOUNT,clock=lambda:clock[0])
     delivery=FakeDelivery();runner=runner or FakeRunner()
-    pipeline=Pipeline(store,delivery,runner,LocalTelemetryStorage(tmp_path/'private'))
+    pipeline=Pipeline(store,delivery,runner,LocalTelemetryStorage(tmp_path/'private'),now=lambda:NOW)
     # Far from deadline to produce only one creation event.
     pipeline.ingest('assignment',{**LIVE,'due_at':(NOW+timedelta(days=5)).isoformat()},NOW)
     return store,delivery,runner,pipeline,clock
@@ -72,12 +72,12 @@ def test_simulation_failure_does_not_lose_critical_delivery(tmp_path):
     store,d,r,p,clock=setup(tmp_path,FakeRunner(fail=True))
     p.ingest('assignment',LIVE,NOW)
     p.drain_notifications()
-    assert any('КРИТИЧЕСКАЯ' in text for text,_ in d.calls)
+    assert any('Скоро дедлайн!' in text for text,_ in d.calls)
     for _ in range(3):p.drain_neural();clock[0]+=1000
     p.drain_notifications('edit')
     assert any('недоступна' in text for text,_ in d.calls)
     assert all('MUST NOT' not in (row['result'] or '') for row in store.db.execute('SELECT result FROM jobs'))
-    assert store.counts().get('send.done')==3
+    assert store.counts().get('send.done')==2
     store.close()
 
 

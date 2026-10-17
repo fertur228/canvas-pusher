@@ -2,23 +2,24 @@
 from datetime import datetime, timezone
 import time
 from collections import Counter
-from .events import CanvasEvent, Snapshot, adapt, entity_key
+from .events import CanvasEvent, EventKind, adapt, entity_key, reminder_band, reminder_identity, utc
 from .presentation import render
 from .store import Conflict, Store
 
 
 class Pipeline:
-    def __init__(self, store: Store, delivery, runner, storage, *, neural_enabled=True, enrichment_enabled=True, telemetry_enabled=True):
+    def __init__(self, store: Store, delivery, runner, storage, *, neural_enabled=True, enrichment_enabled=True, telemetry_enabled=True, now=None):
         self.store,self.delivery,self.runner,self.storage = store,delivery,runner,storage
         self.neural_enabled = neural_enabled
         self.enrichment_enabled = enrichment_enabled
         self.telemetry_enabled = telemetry_enabled
+        self.now = now or (lambda: datetime.now(timezone.utc))
         self.deadline = time.monotonic() + 600
         self._uploaded = {}
         self.event_counts = Counter()
 
     def ingest(self, entity_type, live, now=None, bootstrap=False):
-        now = now or datetime.now(timezone.utc)
+        now = now or self.now()
         key = entity_key(live,entity_type)
         for _ in range(3):
             old = self.store.load(entity_type,key)
@@ -34,10 +35,32 @@ class Pipeline:
                 pass
         raise Conflict('snapshot_contention')
 
-    def drain_notifications(self, stage='send', limit=25, only_report=None):
+    def obsolete_reminder(self, event):
+        if event.kind != EventKind.REMINDER:
+            return None
+        snapshot = self.store.load(event.entity_type, event.entity_key)
+        state = snapshot.state
+        if not state:
+            return 'snapshot_missing'
+        if state.get('has_submitted'):
+            return 'submitted'
+        due = state.get('due_at')
+        if not due or utc(due) != utc(event.payload['due_at']):
+            return 'deadline_changed'
+        if reminder_identity(event.account_id, event.entity_key, utc(due).isoformat(),
+                             event.reminder, snapshot.reminders) != event.event_id:
+            return 'deadline_version_changed'
+        if reminder_band(state, self.now()) != event.reminder:
+            return 'expired_or_superseded_threshold'
+        return None
+
+    def drain_notifications(self, stage='send', limit=None, only_report=None):
         if not self.delivery.ready:
             return 0  # No claims/attempts lost when credentials are missing.
         count = 0
+        # Drain primary discoveries in the discovering scan; a small edit budget
+        # must not postpone assignment alerts. Wall-time/backoff still bound work.
+        limit = (1000 if stage == 'send' else 25) if limit is None else limit
         for _ in range(limit):
             if time.monotonic() > self.deadline:
                 break
@@ -48,13 +71,27 @@ class Pipeline:
                 self.store.finish(job, 'done', {'suppressed': 'shadow_mode'})
                 continue
             event = CanvasEvent.model_validate(job['event'])
+            try:
+                obsolete = self.obsolete_reminder(event)
+            except Exception:
+                # No Telegram request was attempted. A DB outage must not send
+                # a reminder whose submission/deadline status we cannot verify.
+                self.store.finish(job, 'dead' if job['attempts'] >= 10 else 'retry',
+                                  {'error_code': 'reminder_verification_failed'}, 60)
+                continue
+            if obsolete:
+                self.store.finish(job, 'done', {'suppressed': obsolete})
+                continue
             if stage=='edit' and not job['message_id']:
+                if event.kind == EventKind.REMINDER and (job.get('neural') or {}).get('status') == 'suppressed':
+                    self.store.finish(job, 'done', {'suppressed': 'primary_reminder_not_delivered'})
+                    continue
                 self.store.finish(job,'dead',{'error_code':'missing_base_message'})
                 continue
             if stage=='edit' and getattr(self.delivery,'bot_id',None) and str(job.get('base_bot_id') or '')!=self.delivery.bot_id:
                 self.store.finish(job,'dead',{'error_code':'message_belongs_to_another_or_unknown_bot'})
                 continue
-            text = render(event,job['neural'] if stage=='edit' else None)
+            text = render(event,job['neural'] if stage=='edit' else None, now=self.now())
             try:
                 result = self.delivery.deliver(text,job['message_id'] if stage=='edit' else None)
             except Exception:
@@ -79,6 +116,10 @@ class Pipeline:
             job = self.store.claim('simulate')
             if not job:
                 break
+            if job['event']['kind'] == EventKind.REMINDER and not job['message_id']:
+                self.store.finish(job, 'done', {'status': 'suppressed', 'reason': 'primary_reminder_not_delivered',
+                                               'biological_response_validated': False})
+                continue
             if not self.neural_enabled:
                 self.store.finish(job,'dead',{'status':'disabled','biological_response_validated':False})
                 continue

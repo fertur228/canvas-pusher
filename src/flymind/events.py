@@ -91,13 +91,62 @@ def entity_key(live: dict, entity_type: str) -> str:
     return f"{course or 0}:{live['id']}"
 
 
+REMINDER_HOURS = (24, 12, 6, 3, 1)
+_VERSION = 'deadline-version:v2:'
+_AUDIT = 'reminder-audit:v2:'
+
+
 def reminder_band(state: dict, now: datetime) -> str | None:
     if state.get('has_submitted') or not state.get('due_at'):
         return None
     hours = (utc(state['due_at']) - utc(now)).total_seconds() / 3600
-    if hours < 0:
-        return 'overdue'
-    return next((f'{h}h' for h in (1, 3, 12, 24, 48) if hours <= h), None)
+    if hours <= 0:
+        return None
+    return next((f'{h}h' for h in reversed(REMINDER_HOURS) if hours <= h), None)
+
+
+def reminder_identity(account: str, key: str, due: str, band: str, marks: list[str]) -> str:
+    # Keep v1 IDs for existing deadlines; a genuinely changed deadline gets its
+    # own revision even if it later returns to a previously used timestamp.
+    identity = [account, 'assignment', key, EventKind.REMINDER.value, f'{due}:{band}']
+    version = next((s for s in marks if s.startswith(_VERSION)), None)
+    if version:
+        identity.append(version)
+    return hashlib.sha256(canonical(identity).encode()).hexdigest()
+
+
+def reminder_audit(marks: list[str]) -> list[dict]:
+    return [json.loads(s[len(_AUDIT):]) for s in marks if s.startswith(_AUDIT)]
+
+
+def consume_thresholds(state, old, now, *, created, deadline_changed, bootstrap):
+    """Consume every crossed threshold atomically with the snapshot/outbox.
+
+    Plain due:band marks remain backward compatible with v1. Additional strings
+    carry version/reason metadata in the existing JSONB array (no SQL migration).
+    'queued' means an outbox event, never an assertion that Telegram delivered it.
+    """
+    seen = [] if deadline_changed else list(old.reminders)
+    if created or deadline_changed:
+        seen.append(_VERSION + str(old.revision + 1))
+    due = state.get('due_at')
+    if not due:
+        return seen, None
+    hours = (utc(due) - now).total_seconds() / 3600
+    band = reminder_band(state, now)
+    reason = ('silent_bootstrap' if bootstrap else 'covered_by_creation' if created
+              else 'covered_by_deadline_change' if deadline_changed
+              else 'submitted' if state.get('has_submitted') else 'expired' if hours <= 0 else None)
+    # Also respect old snapshots which stored only the nearest consumed band.
+    consumed_nearer = any(f'{due}:{h}h' in seen for h in REMINDER_HOURS if band and h <= int(band[:-1]))
+    emit = band if reason is None and not consumed_nearer else None
+    for h in REMINDER_HOURS:
+        mark = f'{due}:{h}h'
+        if hours <= h and mark not in seen:
+            status = reason or ('queued' if emit == f'{h}h' else 'skipped_late')
+            seen.extend([mark, _AUDIT + canonical({'due_at': due, 'threshold': f'{h}h',
+                                                 'status': status, 'observed_at': now.isoformat()})])
+    return seen, emit
 
 
 def adapt(account_id: str, entity_type: str, live: dict, old: Snapshot, now: datetime,
@@ -127,16 +176,12 @@ def adapt(account_id: str, entity_type: str, live: dict, old: Snapshot, now: dat
         tracked = ('url', 'display_name') if entity_type == 'file' else ('message', 'title')
         if previous is None or any(k in changes for k in tracked):
             kinds.append(EventKind.FILE if entity_type == 'file' else EventKind.ANNOUNCEMENT)
-    seen = list(old.reminders)
-    if changes.get('due_at'):
-        seen = []
-    band = reminder_band(state, now) if entity_type == 'assignment' else None
-    mark = f"{state.get('due_at')}:{band}" if band else None
-    new_reminder = bool(mark and mark not in seen)
-    if new_reminder:
-        seen.append(mark)
+    seen, band = (consume_thresholds(state, old, now, created=previous is None,
+                  deadline_changed='due_at' in changes, bootstrap=bootstrap)
+                  if entity_type == 'assignment' else (list(old.reminders), None))
+    if band:
         kinds.append(EventKind.REMINDER)
-    updated = previous != state or new_reminder or previous is None
+    updated = previous != state or seen != old.reminders or previous is None
     revision = old.revision + int(updated)
     priority = 0 if entity_type=='report' else 1
     if entity_type == 'assignment' and state.get('due_at') and not state.get('has_submitted'):
@@ -144,9 +189,10 @@ def adapt(account_id: str, entity_type: str, live: dict, old: Snapshot, now: dat
         priority = 2 if hours <= 3 else 1
     events = []
     for kind in kinds if not bootstrap else []:
-        identity = [account_id, entity_type, key, kind.value,
-                    mark if kind == EventKind.REMINDER else revision]
-        events.append(CanvasEvent(event_id=hashlib.sha256(canonical(identity).encode()).hexdigest(),
+        identity = [account_id, entity_type, key, kind.value, revision]
+        digest = (reminder_identity(account_id, key, state['due_at'], band, seen) if kind == EventKind.REMINDER
+                  else hashlib.sha256(canonical(identity).encode()).hexdigest())
+        events.append(CanvasEvent(event_id=digest,
                                   account_id=account_id, entity_type=entity_type, entity_key=key,
                                   kind=kind, observed_at=now.isoformat(), revision=revision,
                                   priority=priority, payload=state, changes=changes,
