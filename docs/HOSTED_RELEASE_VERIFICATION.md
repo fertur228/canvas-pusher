@@ -1,5 +1,9 @@
 # FlyMind — фактическая hosted-проверка, 17 октября 2026
 
+> Новая проверка2026-10-18: [FINAL_LAUNCH_VERIFICATION.md](FINAL_LAUNCH_VERIFICATION.md).
+> Owner Auth теперь существует; новый Telegram UX deployed v6. Private browser
+> replay и guarded production rollout всё ещё не пройдены.
+
 > Дополнение2026-10-17: обязательные дедлайны24/12/6/3/1h и5-minute source cron
 > проверены в реальном test-chat workflow39049711232; новая миграция0007
 > audit-health применена, исходные7неизменны. Production остаётсяOFF.

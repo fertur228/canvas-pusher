@@ -15,6 +15,7 @@ test('requires sign-in, privately replays real activity, clears session on sign-
  requests++;const url=route.request().url();
  if(url.includes('/auth/v1/token'))return route.fulfill({json:{access_token:jwt,refresh_token:'SYNTHETIC',expires_in:3600,token_type:'bearer',user:{id:account,email:'owner@example.invalid',aud:'authenticated',role:'authenticated'}}});
  expect(route.request().headers().authorization).toBe(`Bearer ${jwt}`);
+ if(url.includes('/flymind_accounts'))return route.fulfill({json:[{id:account,telegram_chat_id:-100,enabled:true}]});
  if(url.includes('/flymind_experiments'))return route.fulfill({json:[row]});
  if(url.includes('/flymind_health'))return route.fulfill({json:[{last_attempt:new Date().toISOString(),status:'healthy',queue:{'send.done':1}}]});
  if(url.includes('/flymind_attempts'))return route.fulfill({json:[]});
@@ -35,4 +36,31 @@ test('unauthorized metadata does not expose experiments or silently switch to de
  await page.route('https://test.supabase.co/**',route=>route.request().url().includes('/auth/v1/token')?route.fulfill({json:{access_token:jwt,refresh_token:'SYNTHETIC',expires_in:3600,token_type:'bearer',user:{id:account,aud:'authenticated',role:'authenticated'}}}):route.fulfill({status:403,json:{message:'denied'}}));
  await page.goto('/');await page.getByLabel('Email').fill('other@example.invalid');await page.getByLabel('Password',{exact:true}).fill('SYNTHETIC');await page.getByRole('button',{name:'Sign in',exact:true}).click();
  await expect(page.getByRole('alert')).toContainText('Private metadata unavailable');await expect(page.getByTestId('total-spikes')).toHaveCount(0);
+});
+
+test('production health cannot be masked by test account; switching clears the loaded replay',async({page})=>{
+ const production='00000000-0000-0000-0000-000000000002';
+ const scopes:string[]=[];
+ await page.route('https://test.supabase.co/**',async route=>{
+  const url=new URL(route.request().url());
+  if(url.pathname.includes('/auth/v1/token'))return route.fulfill({json:{access_token:jwt,refresh_token:'SYNTHETIC',expires_in:3600,token_type:'bearer',user:{id:account,aud:'authenticated',role:'authenticated'}}});
+  if(url.pathname.includes('/flymind_accounts'))return route.fulfill({json:[{id:account,telegram_chat_id:-100,enabled:true},{id:production,telegram_chat_id:100,enabled:true}]});
+  const scope=url.searchParams.get('account_id');
+  if(url.pathname.includes('/rest/')){expect([`eq.${account}`,`eq.${production}`]).toContain(scope);scopes.push(scope!);}
+  if(url.pathname.includes('/flymind_experiments'))return route.fulfill({json:scope===`eq.${production}`?[]:[row]});
+  if(url.pathname.includes('/flymind_health'))return route.fulfill({json:[{last_attempt:new Date().toISOString(),status:scope===`eq.${production}`?'degraded':'healthy',queue:{}}]});
+  if(url.pathname.includes('/flymind_attempts'))return route.fulfill({json:[]});
+  if(url.pathname.includes('/flymind_events'))return route.fulfill({json:{event:{kind:'assignment_created',payload:{name:'SYNTHETIC TEST GROUP'},observed_at:new Date().toISOString()}}});
+  if(url.pathname.includes('/storage/'))return route.fulfill({body:blob,contentType:'application/gzip'});
+  return route.fulfill({status:204});
+ });
+ await page.goto('/');await page.getByLabel('Email').fill('owner@example.invalid');await page.getByLabel('Password',{exact:true}).fill('SYNTHETIC');await page.getByRole('button',{name:'Sign in',exact:true}).click();
+ await expect(page.getByLabel('Account',{exact:true})).toHaveValue(production);
+ await expect(page.getByText('degraded',{exact:true})).toBeVisible();await expect(page.getByRole('button',{name:/strong · elevated/})).toHaveCount(0);
+ await page.getByLabel('Account',{exact:true}).selectOption(account);
+ await page.getByRole('button',{name:/strong · elevated/}).click();await expect(page.getByTestId('total-spikes')).toHaveText('834');
+ await page.getByLabel('Account',{exact:true}).selectOption(production);
+ await expect(page.getByText('degraded',{exact:true})).toBeVisible();await expect(page.getByTestId('total-spikes')).toHaveCount(0);
+ await expect(page.getByText(/Trigger: assignment_created/)).toHaveCount(0);
+ expect(scopes).toContain(`eq.${account}`);expect(scopes).toContain(`eq.${production}`);
 });

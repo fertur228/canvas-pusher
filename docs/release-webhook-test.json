@@ -31,9 +31,10 @@
       "status": "claimed",
       "repeat_suppressed": true
     },
-    "deadlines:upcoming": "real_edit_completed",
-    "deadlines:overdue": "real_edit_completed",
-    "deadlines:all": "real_edit_completed"
+    "deadlines:upcoming:0": "real_edit_completed",
+    "deadlines:overdue:0": "real_edit_completed",
+    "deadlines:all:0": "real_edit_completed",
+    "deadlines:all:1": "real_edit_completed"
   },
   "release_ux": "three-inline-buttons-v4",
   "negative_identity_and_secret_checks": 4,

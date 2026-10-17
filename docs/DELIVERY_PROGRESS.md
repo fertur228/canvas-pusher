@@ -14,7 +14,10 @@
 - [ ] Actual owner browser sign-in/private replay (owner asked to sign in; password never requested).
 - [x] Python201 passed (172 dependency warnings); real Telegram client /start rendered3inline buttons.
 - [x] Hosted commands, three filters, repeated identical edit and4negative auth checks passed.
-- [ ] Final exact-head CI and private browser replay.
+- [x] Code268edd1 CI39065375940 passed (offline+database); Linux controls/batch included.
+- [x] Cloud39065422453: two real scans verified,112.11s,events0/errors0,duplicate sends0.
+- [x] Observatory account-scoped health/history/trigger;3private+4local browser tests.
+- [ ] Actual private owner browser replay remains pending; no merge/production activation.
 - [ ] Conditional merge, real /check completion on main, production bootstrap/activation and two scheduled cycles.
 
 ## Текущее hosted-состояние — 2026-10-17

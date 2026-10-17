@@ -1,3 +1,7 @@
+> Release UX18октября: [актуальная проверка](FINAL_LAUNCH_VERIFICATION.md).
+> Owner Auth уже настроен; пароль повторно создавать не нужно. Требуется вход
+> владельца в preview для настоящего private replay. Production остаётсяOFF.
+
 # Deployment and activation
 
 ## Текущее hosted-состояние — 2026-10-17
