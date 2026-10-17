@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-14",
+  "scope": "Telegram assistant completion; production remains disabled",
+  "local_python": {"passed": 154, "failed": 0, "warnings": 172, "seconds": 78.16},
+  "deno_webhook": {"passed": 13, "failed": 0, "transport": "mocked HTTP"},
+  "database": {"engine": "real isolated PostgreSQL 16", "migrations": "0000-0006", "result": "passed", "checks": ["legacy RLS/outbox/leases", "bot-scoped update IDs", "owner isolation", "verified snapshot publication", "deadline filters/sort/timezone/pagination", "manual request deduplication/cooldown", "workflow completion transaction", "malformed completion rejected without mutation"]},
+  "frontend": {"vitest_passed": 28, "typescript": "passed", "production_build": "passed", "warning": "large Three.js viewer chunk"},
+  "github_ci": {"tested_commit": "b6f7e17d9f32615145990d0f110d345678ced2b8", "url": "https://github.com/fertur228/canvas-pusher/actions/runs/38571466375", "result": "success", "linux_python_passed": 145, "optional_cache_skips": 6, "deno_passed_at_this_commit": 11, "public_browser_passed": 4, "private_browser_passed": 2, "private_browser_transport": "mocked HTTP"},
+  "real_canvas_read": {"url": "https://github.com/fertur228/canvas-pusher/actions/runs/38570459817", "result": "HTTP 401 using previously configured GitHub secret", "requests": 1, "mutations": 0, "telegram_messages": 0, "replacement_token_installed_by_agent": false},
+  "hosted_supabase_changes": false,
+  "real_bot_setup_or_delivery": false,
+  "production_enabled": false,
+  "scientific_parameters_or_reference_exports_changed": false,
+  "security_scan": {"known_credential_findings": 0, "history_findings": 0, "limitation": "signature scanning is not proof that all private information is absent"}
+}

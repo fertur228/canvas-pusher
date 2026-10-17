@@ -1,0 +1,44 @@
+# Sample only. Put real credentials in local .env (ignored) or GitHub Secrets.
+# GitHub repository variable; gates the entire scheduled scanner including legacy mode.
+CANVAS_WORKER_ENABLED=false
+FLYMIND_ENABLED=false
+FLYMIND_NEURAL_ENABLED=true
+FLYMIND_ACCOUNT_ID=
+FLYMIND_MAX_NEURAL=5
+CANVAS_API_URL=https://your-canvas.example
+CANVAS_API_KEY=
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_KEY=
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_CHAT_ID=
+# GitHub provides GITHUB_RUN_ID for idempotent workflow-dispatched GPA reports.
+IS_AUTO_REPORT=false
+
+# Activation gates (safe defaults)
+FLYMIND_MODE=shadow
+DELIVERY_MODE=disabled
+FLYMIND_PRODUCTION_AUTHORIZED=false
+TEST_TELEGRAM_CHAT_ID=
+NEURAL_TELEMETRY_ENABLED=true
+FLYMIND_RETENTION_ENABLED=false
+
+# Dashboard public build configuration; NEVER VITE_* service secrets
+VITE_OBSERVATORY_DATA_SOURCE=local
+VITE_SUPABASE_URL=
+VITE_SUPABASE_PUBLISHABLE_KEY=
+VITE_DEPLOYMENT_LABEL=local
+
+# Secured Edge webhook, server only
+TELEGRAM_WEBHOOK_SECRET=
+TELEGRAM_USER_ID=
+OBSERVATORY_URL=
+
+# Owner Telegram assistant; explicit deployment gates, disabled until configured
+TELEGRAM_BOT_ID=
+FLYMIND_MANUAL_SYNC_ENABLED=false
+FLYMIND_WORKFLOW_REF=main
+GITHUB_REPO=fertur228/canvas-pusher
+# Server-side Edge secret; requires Actions write + Contents/Variables read
+GITHUB_PAT=
+# Local bootstrap only; never used to authorize production automatically
+FLYMIND_TARGET_ENV=staging

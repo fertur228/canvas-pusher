@@ -1,0 +1,1501 @@
+root_id,cell_type,hemibrain_type,side,predicted_nt,predicted_nt_confidence,known_nt,known_nt_source,role
+720575940601712649,Li2,,right,GABA,0.81,,,partner
+720575940601867017,Tm5Y,,right,ACH,0.84,,,partner
+720575940603637438,,LC4,right,ACH,0.72,acetylcholine,"Davis et al., 2020",stimulus
+720575940603942828,PVLP112a,PVLP112,right,GABA,0.86,,,partner
+720575940603989420,,LPLC2,left,ACH,0.47,acetylcholine,"Davis et al., 2020",stimulus
+720575940604088288,,AVLP016,right,GLUT,0.44,,,partner
+720575940604201830,,,center,GABA,0.41,,,partner
+720575940604285356,CB3513,,right,GABA,0.79,,,partner
+720575940604437094,TmY3,,right,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940604609056,,LPLC4,right,ACH,0.77,,,partner
+720575940604747744,,,left,ACH,0.6,,,partner
+720575940604927968,TmY3,,left,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940604954289,,DNp04,left,ACH,0.82,,,partner
+720575940605214636,,,center,GABA,0.67,,,partner
+720575940605489632,CB3840,,right,GABA,0.73,,,partner
+720575940605598892,,LC4,left,ACH,0.55,acetylcholine,"Davis et al., 2020",stimulus
+720575940605664614,TmY3,,right,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940605823264,T2,,right,ACH,0.86,,,partner
+720575940605825666,,LPLC2,right,ACH,0.65,acetylcholine,"Davis et al., 2020",stimulus
+720575940605905282,Tm5Y,,right,ACH,0.9,,,partner
+720575940605937097,,AVLP202,left,GABA,0.62,,,partner
+720575940606126438,,LPLC2,left,ACH,0.66,acetylcholine,"Davis et al., 2020",stimulus
+720575940606141374,,Li13,right,GABA,0.86,,,partner
+720575940606217138,,LPLC2,right,ACH,0.45,acetylcholine,"Davis et al., 2020",stimulus
+720575940606218528,CB0563,,right,GABA,0.71,,,partner
+720575940606231072,TmY3,,left,ACH,0.83,acetylcholine,"Davis et al., 2020",partner
+720575940606421606,CB3824,,right,GABA,0.77,,,partner
+720575940606539454,CB3824,,right,,0.0,,,partner
+720575940606584766,MeLp1,5813068976,left,ACH,0.86,,,partner
+720575940606585190,CB3840,,left,GABA,0.74,,,partner
+720575940606608230,,,right,GABA,0.71,,,partner
+720575940606634528,,,left,ACH,0.91,,,partner
+720575940606742206,TmY3,,right,ACH,0.55,acetylcholine,"Davis et al., 2020",partner
+720575940606855554,,LPLC2,right,ACH,0.38,acetylcholine,"Davis et al., 2020",stimulus
+720575940606857602,CB3836,,right,ACH,0.93,,,partner
+720575940606896306,,,left,GLUT,0.77,,,partner
+720575940607042226,TmY3,,right,ACH,0.82,acetylcholine,"Davis et al., 2020",partner
+720575940607166421,TmY3,,right,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940607178114,TmY3,,left,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940607349001,TmY3,,right,ACH,0.78,acetylcholine,"Davis et al., 2020",partner
+720575940607467698,TmY3,,left,ACH,0.53,acetylcholine,"Davis et al., 2020",partner
+720575940607543730,TmY3,,left,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940607591625,CB3826,,left,GABA,0.63,,,partner
+720575940607683011,,LPLC2,right,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940607845250,,LPLC2,left,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940607854531,,LPLC2,left,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940607915698,LC14a1,LC14,left,ACH,0.78,,,partner
+720575940608055491,TmY3,,left,ACH,0.59,acetylcholine,"Davis et al., 2020",partner
+720575940608083780,CL323a,CL323,right,ACH,0.64,,,partner
+720575940608088259,,LPLC2,left,ACH,0.71,acetylcholine,"Davis et al., 2020",stimulus
+720575940608120587,PVLP122b,PVLP122,left,ACH,0.66,,,partner
+720575940608209220,TmY3,,right,ACH,0.78,acetylcholine,"Davis et al., 2020",partner
+720575940608252427,T2,,right,ACH,0.89,,,partner
+720575940608296457,TmY3,,right,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940608549845,Tm5Y,,left,ACH,0.73,,,partner
+720575940608597340,TmY3,,right,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940608619989,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940608661955,,LT51,right,GLUT,0.74,,,partner
+720575940608799499,TmY3,,left,ACH,0.48,acetylcholine,"Davis et al., 2020",partner
+720575940608826379,Tm5Y,,left,ACH,0.85,,,partner
+720575940608845124,,LPLC4,right,ACH,0.83,,,partner
+720575940608875531,,LPLC2,left,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940608909358,T2,,right,ACH,0.82,,,partner
+720575940609076693,CB1280,,right,ACH,0.76,,,partner
+720575940609180718,LC14a1,LC14,left,ACH,0.66,,,partner
+720575940609234130,LCe06,,right,ACH,0.8,,,partner
+720575940609245141,TmY3,,left,ACH,0.78,acetylcholine,"Davis et al., 2020",partner
+720575940609246165,TmY3,,left,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940609268491,CB1136,,left,ACH,0.55,,,partner
+720575940609342147,,,left,ACH,0.57,,,partner
+720575940609453763,Tm5Y,,left,ACH,0.9,,,partner
+720575940609488139,CB3826,,left,GABA,0.59,,,partner
+720575940609522382,CB2664,,right,ACH,0.87,,,partner
+720575940609569219,CB3836,,right,ACH,0.9,,,partner
+720575940609592674,,LPLC2,right,ACH,0.65,acetylcholine,"Davis et al., 2020",stimulus
+720575940609600523,,LT60,left,ACH,0.76,,,partner
+720575940609657097,TmY3,,right,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940609675785,,LPLC4,right,ACH,0.75,,,partner
+720575940609722121,CB3840,,left,GABA,0.75,,,partner
+720575940609736405,,,right,ACH,0.71,,,partner
+720575940609873016,T2,,right,ACH,0.84,,,partner
+720575940610063918,CB3707,,left,GABA,0.79,,,partner
+720575940610085700,TmY3,,left,ACH,0.64,acetylcholine,"Davis et al., 2020",partner
+720575940610116757,,LPLC2,right,ACH,0.61,acetylcholine,"Davis et al., 2020",stimulus
+720575940610226645,,LPLC2,left,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940610357858,CB3840,,right,GABA,0.78,,,partner
+720575940610494254,T2,,right,ACH,0.82,,,partner
+720575940610505006,DNp103,PVLP119,right,ACH,0.69,,,partner
+720575940610522009,,LC4,left,ACH,0.59,acetylcholine,"Davis et al., 2020",stimulus
+720575940610536290,,LPLC2,right,ACH,0.59,acetylcholine,"Davis et al., 2020",stimulus
+720575940610537540,TmY3,,left,ACH,0.54,acetylcholine,"Davis et al., 2020",partner
+720575940610558930,Tm5Y,,right,ACH,0.75,,,partner
+720575940610650414,TmY3,,right,ACH,0.8,acetylcholine,"Davis et al., 2020",partner
+720575940610681829,,LPLC2,right,ACH,0.67,acetylcholine,"Davis et al., 2020",stimulus
+720575940610734449,,LPLC4,right,ACH,0.76,,,partner
+720575940610739918,LT82a,"LT82a,LT82b",left,ACH,0.69,,,partner
+720575940610910328,TmY3,,left,ACH,0.45,acetylcholine,"Davis et al., 2020",partner
+720575940610953651,,LPLC2,right,ACH,0.4,acetylcholine,"Davis et al., 2020",stimulus
+720575940611074116,Tm5Y,,right,ACH,0.89,,,partner
+720575940611085274,,LT60,right,ACH,0.81,,,partner
+720575940611091012,CB3513,,left,GABA,0.74,,,partner
+720575940611134833,,LC4,left,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940611214034,TmY3,,right,ACH,0.59,acetylcholine,"Davis et al., 2020",partner
+720575940611216482,Tm5Y,,right,ACH,0.84,,,partner
+720575940611219298,TmY3,,left,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940611250898,,,left,ACH,0.86,,,partner
+720575940611264117,TmY3,,left,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940611334001,TmY3,,right,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940611345843,Tm5Y,,left,ACH,0.87,,,partner
+720575940611347123,,PVLP130,left,GABA,0.84,,,partner
+720575940611352234,,LPLC2,right,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940611372590,CB3824,,left,GABA,0.78,,,partner
+720575940611397166,MTe41,,left,GABA,0.83,,,partner
+720575940611414514,CB3835,,right,GABA,0.91,,,partner
+720575940611567638,,LPLC2,left,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940611588835,,SAD049,left,ACH,0.68,,,partner
+720575940611602552,PVLP122b,PVLP122,right,ACH,0.67,,,partner
+720575940611644529,,DNp06,right,ACH,0.63,,,partner
+720575940611694030,TmY3,,left,ACH,0.47,acetylcholine,"Davis et al., 2020",partner
+720575940611740569,,LPLC2,right,ACH,0.4,acetylcholine,"Davis et al., 2020",stimulus
+720575940611821334,,LPLC2,left,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940611862136,TmY3,,right,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940611907989,TmY3,,left,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940611924117,Tm5Y,,right,ACH,0.87,,,partner
+720575940611925141,,,right,ACH,0.9,,,partner
+720575940611929038,TmY3,,right,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940611947443,,,left,ACH,0.87,,,partner
+720575940611961878,,PVLP111,right,GABA,0.73,,,partner
+720575940611982489,TmY3,,right,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940612001489,,AMMC-A1,left,,0.0,,,partner
+720575940612045352,,LPLC2,right,ACH,0.7,acetylcholine,"Davis et al., 2020",stimulus
+720575940612093351,,LC4,right,ACH,0.72,acetylcholine,"Davis et al., 2020",stimulus
+720575940612096462,,LPLC2,left,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940612136561,TmY3,,left,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940612136874,TmY3,,right,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940612162417,TmY3,,right,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940612170865,Tm5Y,,left,ACH,0.86,,,partner
+720575940612203482,,DNp05,left,ACH,0.92,,,partner
+720575940612248469,T2,,right,ACH,0.77,,,partner
+720575940612254701,,LPLC2,right,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940612274394,Tm5Y,,right,ACH,0.82,,,partner
+720575940612323025,,LC4,right,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940612380723,,LC4,right,ACH,0.62,acetylcholine,"Davis et al., 2020",stimulus
+720575940612385138,TmY3,,right,ACH,0.5,acetylcholine,"Davis et al., 2020",partner
+720575940612393074,TmY3,,right,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940612462307,,LPLC2,right,ACH,0.45,acetylcholine,"Davis et al., 2020",stimulus
+720575940612469939,TmY3,,left,,0.0,acetylcholine,"Davis et al., 2020",partner
+720575940612498129,,LC4,right,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940612512498,TmY3,,right,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940612518055,,LC4,left,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940612560680,,LPLC2,left,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940612580977,,LC4,left,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940612598129,TmY3,,left,ACH,0.57,acetylcholine,"Davis et al., 2020",partner
+720575940612612094,,PVLP151,left,ACH,0.83,,,partner
+720575940612655539,TmY3,,left,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940612710883,CB0563,,left,GABA,0.78,,,partner
+720575940612721587,TmY3,,left,ACH,0.87,acetylcholine,"Davis et al., 2020",partner
+720575940612744362,Tm5Y,,left,ACH,0.85,,,partner
+720575940612752611,LT82a,"LT82a,LT82b",right,ACH,0.78,,,partner
+720575940612766691,,LPLC2,left,ACH,0.48,acetylcholine,"Davis et al., 2020",stimulus
+720575940612811121,TmY3,,right,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940612874536,,LPLC2,left,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940612880819,TmY3,,left,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940612937647,T2,,left,ACH,0.79,,,partner
+720575940612944382,,LPLC2,right,ACH,0.43,acetylcholine,"Davis et al., 2020",stimulus
+720575940612963570,cL09,,right,GABA,0.92,,,partner
+720575940612967702,,,left,ACH,0.56,,,partner
+720575940612968421,,LC4,right,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940612976497,cM05,,left,ACH,0.95,,,partner
+720575940612994929,,LPLC2,right,ACH,0.58,acetylcholine,"Davis et al., 2020",stimulus
+720575940613017493,,,right,GABA,0.67,,,partner
+720575940613025331,,PLP093,right,ACH,0.83,,,partner
+720575940613079026,,,left,ACH,0.72,,,partner
+720575940613099482,CB3826,,right,,0.0,,,partner
+720575940613143466,Tm5Y,,left,ACH,0.84,,,partner
+720575940613145258,,LPLC2,left,ACH,0.57,acetylcholine,"Davis et al., 2020",stimulus
+720575940613219474,,LPLC2,left,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940613221746,CB3836,,right,ACH,0.86,,,partner
+720575940613256863,,LC4,left,ACH,0.61,acetylcholine,"Davis et al., 2020",stimulus
+720575940613260959,,LC4,left,ACH,0.63,acetylcholine,"Davis et al., 2020",stimulus
+720575940613351018,LC14a1,LC14,left,ACH,0.59,,,partner
+720575940613390573,TmY3,,left,ACH,0.56,acetylcholine,"Davis et al., 2020",partner
+720575940613399781,CB3835,,left,GABA,0.86,,,partner
+720575940613425617,CB3857,,right,,0.0,,,partner
+720575940613431970,TmY3,,left,ACH,0.44,acetylcholine,"Davis et al., 2020",partner
+720575940613467042,TmY3,,right,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940613470947,,LPLC2,left,ACH,0.55,acetylcholine,"Davis et al., 2020",stimulus
+720575940613473698,Tm5Y,,left,ACH,0.8,,,partner
+720575940613491826,,LPLC4,left,ACH,0.8,,,partner
+720575940613497395,AN_GNG_SAD_3,,left,GABA,0.59,,,partner
+720575940613526937,,,right,GABA,0.61,,,partner
+720575940613527779,CB3826,,right,,0.0,,,partner
+720575940613532482,TmY3,,right,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940613587173,TmY3,,left,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940613609484,,LC4,right,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940613620246,,,right,GABA,0.63,,,partner
+720575940613638041,,LC4,right,ACH,0.57,acetylcholine,"Davis et al., 2020",stimulus
+720575940613643122,CB3820,,right,GLUT,0.64,,,partner
+720575940613643286,TmY3,,right,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940613752301,TmY3,,left,ACH,0.77,acetylcholine,"Davis et al., 2020",partner
+720575940613762285,Tm5Y,,right,ACH,0.89,,,partner
+720575940613763759,,LPLC2,left,ACH,0.68,acetylcholine,"Davis et al., 2020",stimulus
+720575940613787303,Li2,,right,GABA,0.81,,,partner
+720575940613804906,,LPLC2,right,ACH,0.55,acetylcholine,"Davis et al., 2020",stimulus
+720575940613812205,TmY3,,right,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940613821290,,LPLC2,right,ACH,0.61,acetylcholine,"Davis et al., 2020",stimulus
+720575940613834098,CB3840,,left,GABA,0.71,,,partner
+720575940613894034,Tm5Y,,left,ACH,0.81,,,partner
+720575940613926002,TmY3,,left,ACH,0.62,acetylcholine,"Davis et al., 2020",partner
+720575940613968099,TmY3,,left,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940613981992,TmY3,,left,ACH,0.78,acetylcholine,"Davis et al., 2020",partner
+720575940614035683,CB3824,,right,GABA,0.72,,,partner
+720575940614058719,,LPLC4,right,ACH,0.84,,,partner
+720575940614067167,,LPLC2,right,ACH,0.48,acetylcholine,"Davis et al., 2020",stimulus
+720575940614123695,T2,,left,ACH,0.78,,,partner
+720575940614148527,T2,,right,ACH,0.83,,,partner
+720575940614168518,Tm5Y,,right,ACH,0.74,,,partner
+720575940614174383,TmY3,,left,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940614198578,TmY3,,right,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940614207894,,AVLP442,right,ACH,0.82,,,partner
+720575940614224424,CB3826,,right,,0.0,,,partner
+720575940614298605,T2,,left,ACH,0.78,,,partner
+720575940614310802,CB2664,,left,ACH,0.83,,,partner
+720575940614311746,LTe18,,right,ACH,0.85,,,partner
+720575940614314415,CB3820,,left,GLUT,0.59,,,partner
+720575940614373279,,LPLC2,right,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940614416081,TmY3,,left,ACH,0.64,acetylcholine,"Davis et al., 2020",partner
+720575940614417831,TmY3,,right,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940614438609,TmY3,,left,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940614439842,TmY3,,left,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940614452433,Tm5Y,,left,ACH,0.8,,,partner
+720575940614457651,Tlp6,,right,GLUT,0.58,,,partner
+720575940614492397,,PVLP151,right,ACH,0.82,,,partner
+720575940614526974,,LPLC2,right,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940614572742,,LC4,left,ACH,0.53,acetylcholine,"Davis et al., 2020",stimulus
+720575940614582946,,LC4,right,ACH,0.7,acetylcholine,"Davis et al., 2020",stimulus
+720575940614590732,TmY3,,right,ACH,0.59,acetylcholine,"Davis et al., 2020",partner
+720575940614604083,Li2,,right,GABA,0.84,,,partner
+720575940614614495,LT61b,LT61,right,ACH,0.91,,,partner
+720575940614631079,,LPLC2,left,ACH,0.62,acetylcholine,"Davis et al., 2020",stimulus
+720575940614633867,CB1280,,right,ACH,0.89,,,partner
+720575940614673406,TmY3,,left,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940614676222,Tm5Y,,right,ACH,0.8,,,partner
+720575940614710509,cML01,,right,GLUT,0.74,,,partner
+720575940614711975,TmY3,,right,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940614724527,,,left,ACH,0.9,,,partner
+720575940614738444,,LPLC2,left,ACH,0.44,acetylcholine,"Davis et al., 2020",stimulus
+720575940614775238,,LC9,left,ACH,0.73,,,partner
+720575940614809030,TmY3,,left,ACH,0.49,acetylcholine,"Davis et al., 2020",partner
+720575940614914107,,LC4,left,ACH,0.58,acetylcholine,"Davis et al., 2020",stimulus
+720575940614941992,,AVLP479,right,GABA,0.72,,,partner
+720575940614982184,CB3820,,left,GLUT,0.72,,,partner
+720575940615020182,Tm5Y,,right,ACH,0.87,,,partner
+720575940615053580,,LC4,left,ACH,0.48,acetylcholine,"Davis et al., 2020",stimulus
+720575940615055989,,LPLC2,left,ACH,0.41,acetylcholine,"Davis et al., 2020",stimulus
+720575940615092019,DNpe042,CL262,left,ACH,0.73,,,partner
+720575940615092882,,,right,GABA,0.71,,,partner
+720575940615101359,CB3836,,left,ACH,0.91,,,partner
+720575940615104918,,,left,ACH,0.88,,,partner
+720575940615116731,,LPLC2,right,ACH,0.5,acetylcholine,"Davis et al., 2020",stimulus
+720575940615127227,,LC4,left,ACH,0.59,acetylcholine,"Davis et al., 2020",stimulus
+720575940615196778,TmY3,,left,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940615204458,TmY3,,right,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940615222678,Li2,,left,GABA,0.85,,,partner
+720575940615232217,,LC4,right,ACH,0.73,acetylcholine,"Davis et al., 2020",stimulus
+720575940615271377,CB3840,,right,GABA,0.73,,,partner
+720575940615288203,,LPLC2,right,ACH,0.42,acetylcholine,"Davis et al., 2020",stimulus
+720575940615293546,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940615295143,CB3835,,right,GABA,0.89,,,partner
+720575940615308394,Tm5Y,,left,ACH,0.85,,,partner
+720575940615310604,cL08,,right,GABA,0.91,,,partner
+720575940615317727,TmY3,,left,ACH,0.45,acetylcholine,"Davis et al., 2020",partner
+720575940615332502,,LPLC2,left,ACH,0.51,acetylcholine,"Davis et al., 2020",stimulus
+720575940615336554,TmY3,,left,ACH,0.56,acetylcholine,"Davis et al., 2020",partner
+720575940615343060,,AVLP202,right,GABA,0.64,,,partner
+720575940615391638,LT82a,"LT82a,LT82b",left,ACH,0.7,,,partner
+720575940615430623,Tm5Y,,left,ACH,0.85,,,partner
+720575940615462587,,LC4,left,ACH,0.53,acetylcholine,"Davis et al., 2020",stimulus
+720575940615518018,T2,,right,ACH,0.8,,,partner
+720575940615528678,,PVLP024,right,GABA,0.74,,,partner
+720575940615557682,CB3836,,right,ACH,0.81,,,partner
+720575940615575007,,LC4,left,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940615684242,,LT40,right,GABA,0.89,,,partner
+720575940615711711,T2,,left,ACH,0.78,,,partner
+720575940615723314,,PVLP076,right,ACH,0.91,,,partner
+720575940615733866,TmY3,,left,ACH,0.56,acetylcholine,"Davis et al., 2020",partner
+720575940615743650,LPi12,,left,GABA,0.84,,,partner
+720575940615748674,TmY3,,left,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940615764886,CB3836,,left,ACH,0.9,,,partner
+720575940615889211,TmY3,,left,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940615905373,,LPLC4,right,ACH,0.83,,,partner
+720575940615907723,,LPLC2,left,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940615920453,,LPLC2,right,ACH,0.65,acetylcholine,"Davis et al., 2020",stimulus
+720575940615953302,,LPLC2,left,ACH,0.5,acetylcholine,"Davis et al., 2020",stimulus
+720575940615966943,cM19,PVLP046,right,GABA,0.87,,,partner
+720575940615967377,,LPLC2,right,ACH,0.53,acetylcholine,"Davis et al., 2020",stimulus
+720575940616008854,,LPLC2,left,ACH,0.55,acetylcholine,"Davis et al., 2020",stimulus
+720575940616009740,TmY3,,right,ACH,0.8,acetylcholine,"Davis et al., 2020",partner
+720575940616047733,,,left,ACH,0.92,,,partner
+720575940616060063,CB3826,,left,GABA,0.59,,,partner
+720575940616066705,,LC4,right,ACH,0.61,acetylcholine,"Davis et al., 2020",stimulus
+720575940616083345,,LPLC2,left,ACH,0.62,acetylcholine,"Davis et al., 2020",stimulus
+720575940616116697,,LPLC2,right,ACH,0.42,acetylcholine,"Davis et al., 2020",stimulus
+720575940616119455,TmY3,,left,ACH,0.53,acetylcholine,"Davis et al., 2020",partner
+720575940616138123,LTe65,PS179,left,ACH,0.88,,,partner
+720575940616145501,TmY3,,left,ACH,0.86,acetylcholine,"Davis et al., 2020",partner
+720575940616166685,,LPLC2,right,ACH,0.43,acetylcholine,"Davis et al., 2020",stimulus
+720575940616313942,,AMMC-A1,left,ACH,0.4,,,partner
+720575940616332354,CB3824,,right,GABA,0.77,,,partner
+720575940616363549,TmY3,,right,ACH,0.59,acetylcholine,"Davis et al., 2020",partner
+720575940616377817,,LPLC2,left,ACH,0.5,acetylcholine,"Davis et al., 2020",stimulus
+720575940616491993,,LPLC2,right,ACH,0.75,acetylcholine,"Davis et al., 2020",stimulus
+720575940616501570,CB3826,,left,GABA,0.5,,,partner
+720575940616670016,PVLP112a,PVLP112,left,GABA,0.81,,,partner
+720575940616685457,TmY3,,right,ACH,0.58,acetylcholine,"Davis et al., 2020",partner
+720575940616687046,CB3840,,right,GABA,0.73,,,partner
+720575940616713355,,LC4,left,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940616727090,CB3840,,left,GABA,0.68,,,partner
+720575940616735489,,LPLC2,right,ACH,0.68,acetylcholine,"Davis et al., 2020",stimulus
+720575940616766325,Tm5Y,,left,ACH,0.77,,,partner
+720575940616852597,TmY3,,left,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940616884236,TmY3,,left,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940616887636,Tm5Y,,left,ACH,0.79,,,partner
+720575940616920918,TmY3,,right,ACH,0.82,acetylcholine,"Davis et al., 2020",partner
+720575940616996364,,,right,GABA,0.7,,,partner
+720575940617019442,,,right,GLUT,0.65,,,partner
+720575940617026260,,LC4,left,ACH,0.48,acetylcholine,"Davis et al., 2020",stimulus
+720575940617123814,,PVLP062,left,ACH,0.68,,,partner
+720575940617168501,Li2,,left,GABA,0.82,,,partner
+720575940617176321,,LC4,left,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940617194653,Li2,,left,GABA,0.85,,,partner
+720575940617202065,TmY3,,right,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940617245652,DNp55,WED180,right,ACH,0.91,,,partner
+720575940617249979,CB3836,,right,ACH,0.85,,,partner
+720575940617266722,,LC4,left,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940617284283,,LC9,left,ACH,0.71,,,partner
+720575940617289782,,LPLC2,left,ACH,0.51,acetylcholine,"Davis et al., 2020",stimulus
+720575940617294219,,LPLC2,left,ACH,0.55,acetylcholine,"Davis et al., 2020",stimulus
+720575940617337305,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940617348379,,LC4,right,ACH,0.58,acetylcholine,"Davis et al., 2020",stimulus
+720575940617400918,TmY3,,left,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940617413377,TmY3,,right,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940617422731,MeLp2,,right,,0.0,,,partner
+720575940617442561,,WED116,left,ACH,0.46,,,partner
+720575940617467485,,LC9,left,ACH,0.71,,,partner
+720575940617467712,,SAD049,left,ACH,0.75,,,partner
+720575940617468061,TmY3,,left,ACH,0.58,acetylcholine,"Davis et al., 2020",partner
+720575940617480094,,LPLC2,left,ACH,0.69,acetylcholine,"Davis et al., 2020",stimulus
+720575940617486552,,LC9,right,ACH,0.73,,,partner
+720575940617491417,CB3836,,left,ACH,0.9,,,partner
+720575940617564246,,SAD017,right,GABA,0.76,,,partner
+720575940617564817,Tm5Y,,right,ACH,0.78,,,partner
+720575940617575803,,CL038,left,GLUT,0.61,,,partner
+720575940617578196,Tm5Y,,right,ACH,0.88,,,partner
+720575940617619293,TmY3,,right,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940617636981,CB0766,,right,ACH,0.9,,,partner
+720575940617640285,Tm5Y,,left,ACH,0.83,,,partner
+720575940617641077,cM19,PVLP046,left,GABA,0.83,,,partner
+720575940617670100,TmY3,,right,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940617691137,T2,,right,ACH,0.82,,,partner
+720575940617695444,TmY3,,right,ACH,0.8,acetylcholine,"Davis et al., 2020",partner
+720575940617725268,TmY3,,right,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940617749332,Tm5Y,,right,ACH,0.8,,,partner
+720575940617792139,,,left,ACH,0.84,,,partner
+720575940617878869,,LC9,right,ACH,0.72,,,partner
+720575940617948445,CB3707,,left,GABA,0.85,,,partner
+720575940617954507,TmY3,,right,ACH,0.82,acetylcholine,"Davis et al., 2020",partner
+720575940617970635,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940617976523,TmY3,,right,ACH,0.85,acetylcholine,"Davis et al., 2020",partner
+720575940617978789,,LC9,left,ACH,0.69,,,partner
+720575940617997241,,LPLC2,left,,0.0,acetylcholine,"Davis et al., 2020",stimulus
+720575940618002644,,LC4,left,ACH,0.55,acetylcholine,"Davis et al., 2020",stimulus
+720575940618069563,CB3824,,right,GABA,0.73,,,partner
+720575940618116569,cL20,PS155,left,GABA,0.88,,,partner
+720575940618151169,Tm5Y,,left,ACH,0.88,,,partner
+720575940618157110,,CL066,right,GABA,0.67,,,partner
+720575940618169172,,,left,ACH,0.63,,,partner
+720575940618172509,,LPLC2,right,ACH,0.46,acetylcholine,"Davis et al., 2020",stimulus
+720575940618182178,Tm5Y,,right,ACH,0.87,,,partner
+720575940618190626,CB3826,,right,,0.0,,,partner
+720575940618193693,TmY3,,left,ACH,0.58,acetylcholine,"Davis et al., 2020",partner
+720575940618234704,,LC4,right,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940618234715,,LC4,right,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940618239161,TmY3,,left,ACH,0.79,acetylcholine,"Davis et al., 2020",partner
+720575940618243009,CB3707,,right,GABA,0.77,,,partner
+720575940618266459,,LC4,right,ACH,0.62,acetylcholine,"Davis et al., 2020",stimulus
+720575940618267227,,LC4,right,ACH,0.53,acetylcholine,"Davis et al., 2020",stimulus
+720575940618275520,,LC4,right,ACH,0.57,acetylcholine,"Davis et al., 2020",stimulus
+720575940618290973,TmY3,,right,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940618307046,,LPLC2,right,ACH,0.53,acetylcholine,"Davis et al., 2020",stimulus
+720575940618312606,,LC4,left,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940618314897,DNp70,CL305,right,ACH,0.76,,,partner
+720575940618334649,,LPLC4,right,ACH,0.78,,,partner
+720575940618340057,,PVLP093,left,GABA,0.91,,,partner
+720575940618444473,cL21,PVLP132,left,GABA,0.47,,,partner
+720575940618450496,,LPLC2,right,ACH,0.41,acetylcholine,"Davis et al., 2020",stimulus
+720575940618460480,TmY3,,left,ACH,0.88,acetylcholine,"Davis et al., 2020",partner
+720575940618460857,CB3824,,left,GABA,0.65,,,partner
+720575940618464084,TmY3,,left,ACH,0.8,acetylcholine,"Davis et al., 2020",partner
+720575940618508729,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940618522433,,AMMC-A1,right,,0.0,,,partner
+720575940618538641,,LPLC2,right,ACH,0.74,acetylcholine,"Davis et al., 2020",stimulus
+720575940618541995,,LC9,right,ACH,0.73,,,partner
+720575940618544285,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940618565957,TmY3,,right,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940618583877,TmY3,,right,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940618587170,CB3826,,left,GABA,0.57,,,partner
+720575940618592486,CB3831,,right,GABA,0.82,,,partner
+720575940618608177,,LPLC2,left,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940618637090,CB3826,,left,GABA,0.59,,,partner
+720575940618668198,CB2917,,right,ACH,0.64,,,partner
+720575940618676440,,LC4,left,ACH,0.58,acetylcholine,"Davis et al., 2020",stimulus
+720575940618678045,cLP03,,right,GABA,0.97,,,partner
+720575940618680733,TmY3,,right,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940618693204,Tm5Y,,right,ACH,0.8,,,partner
+720575940618709158,,LC4,right,ACH,0.59,acetylcholine,"Davis et al., 2020",stimulus
+720575940618711535,,LPLC2,right,ACH,0.57,acetylcholine,"Davis et al., 2020",stimulus
+720575940618723749,,LC4,left,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940618731284,CB2591,,left,ACH,0.6,,,partner
+720575940618756429,TmY3,,right,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940618769153,,PVLP069,left,ACH,0.78,,,partner
+720575940618780992,TmY3,,left,ACH,0.56,acetylcholine,"Davis et al., 2020",partner
+720575940618798109,CB3826,,left,GABA,0.6,,,partner
+720575940618807105,,LC4,left,ACH,0.53,acetylcholine,"Davis et al., 2020",stimulus
+720575940618851613,T2,,right,ACH,0.79,,,partner
+720575940618883073,TmY3,,left,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940618886710,,PVLP076,left,ACH,0.88,,,partner
+720575940618889630,CB3836,,left,ACH,0.88,,,partner
+720575940618902488,LT82b,"LT82a,LT82b",left,ACH,0.71,,,partner
+720575940618927892,,LPLC2,left,ACH,0.46,acetylcholine,"Davis et al., 2020",stimulus
+720575940618930459,,LC9,left,ACH,0.7,,,partner
+720575940618932763,,PVLP010,right,GLUT,0.55,,,partner
+720575940618939886,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940618940443,,,left,GABA,0.71,,,partner
+720575940618965553,CB0766,,left,ACH,0.86,,,partner
+720575940618987600,,PVLP120,left,ACH,0.92,,,partner
+720575940619038493,DNpe042,CL262,right,ACH,0.75,,,partner
+720575940619045243,TmY3,,left,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940619046469,LPT50,,left,GABA,0.92,,,partner
+720575940619058517,TmY3,,right,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940619100692,TmY3,,left,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940619159675,TmY3,,right,ACH,0.8,acetylcholine,"Davis et al., 2020",partner
+720575940619197318,,LPLC2,left,ACH,0.48,acetylcholine,"Davis et al., 2020",stimulus
+720575940619219776,,,right,GLUT,0.55,,,partner
+720575940619251182,LC14a1,LC14,right,ACH,0.75,,,partner
+720575940619263937,,LPLC2,left,ACH,0.69,acetylcholine,"Davis et al., 2020",stimulus
+720575940619381627,T2,,right,ACH,0.79,,,partner
+720575940619397542,,LC4,left,ACH,0.63,acetylcholine,"Davis et al., 2020",stimulus
+720575940619416187,TmY3,,right,ACH,0.77,acetylcholine,"Davis et al., 2020",partner
+720575940619435655,CB3201,,left,ACH,0.81,,,partner
+720575940619457088,CB3824,,left,GABA,0.67,,,partner
+720575940619492212,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940619513326,TmY3,,right,ACH,0.64,acetylcholine,"Davis et al., 2020",partner
+720575940619569835,,SAD014,right,GABA,0.75,,,partner
+720575940619592768,LC31b,LC31,left,ACH,0.82,,,partner
+720575940619601488,PVLP122b,PVLP122,right,ACH,0.66,,,partner
+720575940619627934,,LPLC2,right,ACH,0.5,acetylcholine,"Davis et al., 2020",stimulus
+720575940619654053,,DNp02,left,ACH,0.58,,,partner
+720575940619654149,,LPLC2,right,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940619675783,TmY3,,right,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940619681846,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940619693120,TmY3,,left,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940619695296,CB3831,,right,GABA,0.86,,,partner
+720575940619709972,,PVLP024,left,GABA,0.77,,,partner
+720575940619714462,CB3826,,right,GABA,0.46,,,partner
+720575940619719668,,LC9,right,ACH,0.78,,,partner
+720575940619731334,,LT51,left,GLUT,0.76,,,partner
+720575940619750822,,LPLC2,left,ACH,0.48,acetylcholine,"Davis et al., 2020",stimulus
+720575940619822784,,PVLP093,right,GABA,0.9,,,partner
+720575940619874950,Y3,,right,ACH,0.84,,,partner
+720575940619878961,VS1,VS,right,ACH,0.41,,,partner
+720575940619880571,CB3820,,left,GLUT,0.62,,,partner
+720575940619900993,,LPLC2,left,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940619944283,CB3824,,right,GABA,0.81,,,partner
+720575940619978944,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940619981494,,LPLC2,left,ACH,0.46,acetylcholine,"Davis et al., 2020",stimulus
+720575940619991862,LPi21,,left,GABA,0.86,,,partner
+720575940620001718,,LPLC2,right,ACH,0.38,acetylcholine,"Davis et al., 2020",stimulus
+720575940620008758,,,right,GABA,0.88,,,partner
+720575940620026673,Li2,,right,GABA,0.8,,,partner
+720575940620027733,TmY3,,left,ACH,0.64,acetylcholine,"Davis et al., 2020",partner
+720575940620039663,TmY3,,right,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940620054694,,DNp11,left,ACH,0.81,,,partner
+720575940620130128,TmY3,,left,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940620139678,,LPLC2,left,ACH,0.77,acetylcholine,"Davis et al., 2020",stimulus
+720575940620139736,,LPLC4,right,ACH,0.82,,,partner
+720575940620165541,,AVLP479,right,GABA,0.72,,,partner
+720575940620173737,,PVLP022,left,GABA,0.73,,,partner
+720575940620230997,Tm5Y,,left,ACH,0.87,,,partner
+720575940620264664,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940620303563,CB3826,,right,GABA,0.48,,,partner
+720575940620306904,,LPLC2,left,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940620314221,,LC4,right,ACH,0.45,acetylcholine,"Davis et al., 2020",stimulus
+720575940620314612,,LC4,right,ACH,0.53,acetylcholine,"Davis et al., 2020",stimulus
+720575940620320902,,PVLP017,right,GABA,0.73,,,partner
+720575940620348769,CB1136,,left,ACH,0.67,,,partner
+720575940620381575,CL323b,CL323,left,ACH,0.69,,,partner
+720575940620394223,TmY3,,right,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940620416681,TmY3,,right,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940620468718,,DNp02,right,ACH,0.78,,,partner
+720575940620522968,,,right,,0.0,,,partner
+720575940620535089,,,right,ACH,0.86,,,partner
+720575940620544239,LC14a1,LC14,left,ACH,0.75,,,partner
+720575940620575476,,LPLC2,right,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940620609739,,mALC5,left,GABA,0.95,,,partner
+720575940620651247,TmY3,,left,ACH,0.64,acetylcholine,"Davis et al., 2020",partner
+720575940620660615,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940620694406,T2,,left,ACH,0.82,,,partner
+720575940620707798,TmY3,,right,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940620723126,,AVLP479,left,GABA,0.72,,,partner
+720575940620731380,,LC4,right,ACH,0.53,acetylcholine,"Davis et al., 2020",stimulus
+720575940620783180,,LPLC2,right,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940620795728,,LC4,left,ACH,0.59,acetylcholine,"Davis et al., 2020",stimulus
+720575940620805973,TmY3,,right,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940620813989,LTe20,,left,ACH,0.88,,,partner
+720575940620821333,,LC9,left,ACH,0.71,,,partner
+720575940620827595,cM07,,right,GLUT,0.59,,,partner
+720575940620831323,TmY3,,right,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940620831868,TmY3,,right,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940620841455,TmY3,,left,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940620876679,TmY3,,right,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940620887834,,LPLC2,right,ACH,0.42,acetylcholine,"Davis et al., 2020",stimulus
+720575940620903551,,LC4,left,ACH,0.51,acetylcholine,"Davis et al., 2020",stimulus
+720575940620913493,LC14a1,LC14,left,ACH,0.64,,,partner
+720575940620925093,,,left,ACH,0.71,,,partner
+720575940620979622,CB3836,,right,ACH,0.91,,,partner
+720575940620980323,CB2664,,left,ACH,0.74,,,partner
+720575940620996265,Tm5Y,,right,ACH,0.89,,,partner
+720575940621000831,,PVLP062,right,ACH,0.73,,,partner
+720575940621006672,LC14a1,LC14,left,ACH,0.61,,,partner
+720575940621040148,TmY3,,right,ACH,0.8,acetylcholine,"Davis et al., 2020",partner
+720575940621052848,,,right,GABA,0.7,,,partner
+720575940621053376,TmY3,,left,ACH,0.52,acetylcholine,"Davis et al., 2020",partner
+720575940621067204,,PVLP021,left,GABA,0.78,,,partner
+720575940621072993,TmY3,,left,ACH,0.58,acetylcholine,"Davis et al., 2020",partner
+720575940621096583,LC14a1,LC14,right,ACH,0.57,,,partner
+720575940621103239,,Li16,left,GLUT,0.75,,,partner
+720575940621104628,,AVLP093,right,GABA,0.76,,,partner
+720575940621145821,,LC4,right,ACH,0.65,acetylcholine,"Davis et al., 2020",stimulus
+720575940621148948,cL20,PS155,right,GABA,0.87,,,partner
+720575940621225949,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940621247860,Tm5Y,,right,ACH,0.86,,,partner
+720575940621250013,TmY3,,right,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940621258198,LC14a1,LC14,left,ACH,0.7,,,partner
+720575940621329517,Tm5Y,,left,ACH,0.7,,,partner
+720575940621345006,CB3826,,right,GABA,0.46,,,partner
+720575940621353716,T2,,right,ACH,0.76,,,partner
+720575940621363265,TmY3,,left,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940621365236,,PVLP021,left,GABA,0.78,,,partner
+720575940621371045,,LT56,right,,0.0,,,partner
+720575940621401222,DNpe025,PVLP145,right,ACH,0.88,,,partner
+720575940621403782,,LT41,right,GABA,0.93,,,partner
+720575940621413473,Tm4,,left,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940621413541,CB3824,,left,GABA,0.73,,,partner
+720575940621415382,,LC9,right,ACH,0.78,,,partner
+720575940621422319,CB2712,,left,ACH,0.63,,,partner
+720575940621465520,TmY3,,right,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940621472176,TmY3,,left,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940621487280,Tm5Y,,right,ACH,0.85,,,partner
+720575940621522458,,LC4,right,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940621544943,CB3824,,right,GABA,0.71,,,partner
+720575940621546422,TmY3,,left,ACH,0.57,acetylcholine,"Davis et al., 2020",partner
+720575940621617542,CB3826,,left,GABA,0.59,,,partner
+720575940621622637,,,right,GLUT,0.88,,,partner
+720575940621634913,,LPLC2,right,ACH,0.53,acetylcholine,"Davis et al., 2020",stimulus
+720575940621680041,LC14a1,LC14,right,ACH,0.69,,,partner
+720575940621753579,,LC4,right,ACH,0.58,acetylcholine,"Davis et al., 2020",stimulus
+720575940621782911,CB3829,,right,GABA,0.76,,,partner
+720575940621786477,TmY3,,right,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940621788705,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940621805744,TmY3,,left,ACH,0.62,acetylcholine,"Davis et al., 2020",partner
+720575940621819227,CB3824,,right,GABA,0.74,,,partner
+720575940621869940,TmY3,,left,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940621914904,,LPLC2,left,ACH,0.44,acetylcholine,"Davis et al., 2020",stimulus
+720575940621921901,CB3835,,right,GABA,0.88,,,partner
+720575940621958132,TmY3,,left,ACH,0.59,acetylcholine,"Davis et al., 2020",partner
+720575940621998068,Tm5Y,,left,ACH,0.86,,,partner
+720575940622009284,,LPLC2,left,ACH,0.75,acetylcholine,"Davis et al., 2020",stimulus
+720575940622037139,LC14a1,LC14,right,ACH,0.51,,,partner
+720575940622082420,TmY3,,right,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940622108001,,LC4,left,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940622140481,LTe18,,left,ACH,0.86,,,partner
+720575940622156799,,LPLC2,left,ACH,0.42,acetylcholine,"Davis et al., 2020",stimulus
+720575940622162456,,LC9,left,ACH,0.7,,,partner
+720575940622174463,,LPLC2,right,ACH,0.62,acetylcholine,"Davis et al., 2020",stimulus
+720575940622209220,,Li13,right,GABA,0.9,,,partner
+720575940622231834,Tm5Y,,left,ACH,0.87,,,partner
+720575940622255017,,,right,ACH,0.95,,,partner
+720575940622311364,TmY3,,right,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940622312072,,LPLC2,left,ACH,0.55,acetylcholine,"Davis et al., 2020",stimulus
+720575940622315190,TmY3,,right,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940622324991,,PVLP141,left,ACH,0.75,,,partner
+720575940622326900,TmY3,,left,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940622330582,,LC4,right,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940622339113,,PVLP130,right,GABA,0.88,,,partner
+720575940622341354,,LC9,left,ACH,0.69,,,partner
+720575940622345215,,LC9,left,ACH,0.7,,,partner
+720575940622358399,CB3836,,left,ACH,0.9,,,partner
+720575940622366814,LC14a1,LC14,left,ACH,0.71,,,partner
+720575940622368477,LC14a1,LC14,right,ACH,0.71,,,partner
+720575940622425271,,LPLC2,left,ACH,0.51,acetylcholine,"Davis et al., 2020",stimulus
+720575940622490484,CB3826,,right,GABA,0.47,,,partner
+720575940622494028,T2,,right,ACH,0.81,,,partner
+720575940622501214,CB3836,,right,ACH,0.89,,,partner
+720575940622525168,CB3835,,left,GABA,0.87,,,partner
+720575940622531767,,LC4,left,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940622548468,TmY3,,right,ACH,0.82,acetylcholine,"Davis et al., 2020",partner
+720575940622559512,,AVLP094,right,GABA,0.68,,,partner
+720575940622565000,Li2,,left,GABA,0.84,,,partner
+720575940622596428,TmY3,,right,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940622615073,Tm5Y,,left,ACH,0.72,,,partner
+720575940622633036,TmY3,,left,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940622646749,,,left,ACH,0.59,,,partner
+720575940622673860,,DNp06,left,ACH,0.41,,,partner
+720575940622680088,,LPLC2,left,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940622680724,LC31b,LC31,right,ACH,0.88,,,partner
+720575940622681889,cM11,,left,ACH,0.69,,,partner
+720575940622682070,Tm5Y,,right,ACH,0.88,,,partner
+720575940622696319,CB3840,,right,GABA,0.77,,,partner
+720575940622696944,MeLp1,5813068976,right,ACH,0.85,,,partner
+720575940622749210,CB3824,,right,GABA,0.74,,,partner
+720575940622752511,Y3,,right,ACH,0.86,,,partner
+720575940622757078,TmY3,,left,ACH,0.52,acetylcholine,"Davis et al., 2020",partner
+720575940622769159,,LPLC2,right,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940622786380,,,left,GABA,0.71,,,partner
+720575940622823389,TmY3,,right,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940622838154,DNp01,Giant Fiber,left,,0.0,,,readout
+720575940622863715,,,right,ACH,0.92,,,partner
+720575940622868957,TmY3,,left,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940622885100,TmY3,,right,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940622932487,,PVLP111,left,GABA,0.81,,,partner
+720575940622939836,,LC4,left,ACH,0.64,acetylcholine,"Davis et al., 2020",stimulus
+720575940622945789,TmY3,,right,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940622964967,Li2,,right,GABA,0.85,,,partner
+720575940622965213,TmY3,,right,ACH,0.77,acetylcholine,"Davis et al., 2020",partner
+720575940622992205,,LPLC2,right,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940622996579,DNg40,5813056435,right,GLUT,0.53,,,partner
+720575940623003930,CB3826,,left,GABA,0.63,,,partner
+720575940623007100,cLP05,PS277,right,,0.0,,,partner
+720575940623013389,TmY3,,left,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940623016709,CB3820,,right,GLUT,0.73,,,partner
+720575940623047629,,LPLC2,right,ACH,0.41,acetylcholine,"Davis et al., 2020",stimulus
+720575940623086435,TmY3,,left,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940623091149,CB3864,,right,,0.0,,,partner
+720575940623104355,Tm5Y,,left,ACH,0.78,,,partner
+720575940623112375,TmY3,,left,ACH,0.56,acetylcholine,"Davis et al., 2020",partner
+720575940623124467,,LPLC4,right,ACH,0.81,,,partner
+720575940623217944,TmY3,,left,ACH,0.49,acetylcholine,"Davis et al., 2020",partner
+720575940623235533,T2,,left,ACH,0.76,,,partner
+720575940623262461,,LPLC2,left,ACH,0.4,acetylcholine,"Davis et al., 2020",stimulus
+720575940623276168,DNp35,PVLP136,right,ACH,0.78,,,partner
+720575940623277832,TmY3,,right,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940623279871,Tm4,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940623329160,TmY3,,left,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940623333770,,LPLC2,right,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940623350092,TmY3,,left,ACH,0.46,acetylcholine,"Davis et al., 2020",partner
+720575940623362698,,SAD014,right,GABA,0.5,,,partner
+720575940623429512,TmY3,,left,ACH,0.56,acetylcholine,"Davis et al., 2020",partner
+720575940623489791,TmY3,,left,ACH,0.59,acetylcholine,"Davis et al., 2020",partner
+720575940623504422,,,left,ACH,0.85,,,partner
+720575940623546549,,LT40,left,GABA,0.88,,,partner
+720575940623551684,,LPLC2,left,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940623560413,,,left,GLUT,0.64,,,partner
+720575940623579063,,PVLP137,right,ACH,0.89,,,partner
+720575940623591914,TmY3,,right,ACH,0.56,acetylcholine,"Davis et al., 2020",partner
+720575940623595619,CB3826,,left,GABA,0.59,,,partner
+720575940623605798,TmY3,,left,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940623608361,CB3824,,right,GABA,0.74,,,partner
+720575940623620902,TmY3,,left,ACH,0.88,acetylcholine,"Davis et al., 2020",partner
+720575940623652083,,LPLC2,left,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940623662788,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940623719304,TmY3,,right,ACH,0.77,acetylcholine,"Davis et al., 2020",partner
+720575940623748535,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940623757097,,,left,ACH,0.74,,,partner
+720575940623765197,TmY3,,left,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940623769783,,LPLC2,right,ACH,0.59,acetylcholine,"Davis et al., 2020",stimulus
+720575940623781127,DNp103,PVLP119,left,ACH,0.65,,,partner
+720575940623792275,TmY3,,left,ACH,0.62,acetylcholine,"Davis et al., 2020",partner
+720575940623804853,CB0414,,right,GABA,0.75,,,partner
+720575940623806157,,LPLC4,right,ACH,0.77,,,partner
+720575940623817572,CB2940,,right,ACH,0.84,,,partner
+720575940623827348,,LPLC2,left,ACH,0.42,acetylcholine,"Davis et al., 2020",stimulus
+720575940623839978,TmY3,,left,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940623840392,,SMP068,right,GLUT,0.78,,,partner
+720575940623860458,,PVLP111,left,GABA,0.81,,,partner
+720575940623870157,TmY3,,left,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940623875592,Li2,,left,GABA,0.8,,,partner
+720575940623916213,T2,,left,ACH,0.82,,,partner
+720575940623925774,,LPLC2,left,ACH,0.7,acetylcholine,"Davis et al., 2020",stimulus
+720575940623949706,TmY3,,right,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940623953900,,PVLP150,left,ACH,0.88,,,partner
+720575940623956459,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940623957173,,PVLP010,left,GLUT,0.54,,,partner
+720575940623973629,TmY3,,left,ACH,0.79,acetylcholine,"Davis et al., 2020",partner
+720575940623994367,,mALC3,right,GABA,0.93,,,partner
+720575940624014524,,LPLC2,right,ACH,0.58,acetylcholine,"Davis et al., 2020",stimulus
+720575940624016778,,LPLC2,right,ACH,0.71,acetylcholine,"Davis et al., 2020",stimulus
+720575940624017251,,LC4,left,ACH,0.5,acetylcholine,"Davis et al., 2020",stimulus
+720575940624017800,,,right,GABA,0.58,,,partner
+720575940624038438,CB3824,,left,GABA,0.76,,,partner
+720575940624044568,CB3826,,left,GABA,0.55,,,partner
+720575940624061111,TmY3,,left,ACH,0.57,acetylcholine,"Davis et al., 2020",partner
+720575940624087303,TmY3,,left,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940624097869,Tm5Y,,left,ACH,0.82,,,partner
+720575940624111763,,LC4,left,ACH,0.57,acetylcholine,"Davis et al., 2020",stimulus
+720575940624137735,TmY3,,right,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940624177847,,,left,ACH,0.88,,,partner
+720575940624181700,CB3840,,left,GABA,0.73,,,partner
+720575940624185129,CB3840,,left,GABA,0.7,,,partner
+720575940624196533,TmY3,,left,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940624205005,CB3826,,left,GABA,0.5,,,partner
+720575940624208824,,LPLC2,left,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940624244922,,LPLC2,right,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940624255123,TmY3,,left,ACH,0.48,acetylcholine,"Davis et al., 2020",partner
+720575940624257674,TmY3,,left,ACH,0.57,acetylcholine,"Davis et al., 2020",partner
+720575940624287210,TmY3,,left,ACH,0.48,acetylcholine,"Davis et al., 2020",partner
+720575940624299534,,PVLP111,right,GABA,0.8,,,partner
+720575940624303398,Tm5Y,,left,ACH,0.79,,,partner
+720575940624305917,TmY3,,left,ACH,0.59,acetylcholine,"Davis et al., 2020",partner
+720575940624313834,,mALC5,right,GABA,0.93,,,partner
+720575940624314185,TmY3,,left,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940624330254,,LC9,left,ACH,0.72,,,partner
+720575940624349993,DNp70,CL305,left,ACH,0.7,,,partner
+720575940624356755,CB3836,,right,ACH,0.91,,,partner
+720575940624358152,,AVLP396,left,ACH,0.76,,,partner
+720575940624359093,,LPLC2,left,ACH,0.39,acetylcholine,"Davis et al., 2020",stimulus
+720575940624400532,TmY3,,right,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940624401927,CB3826,,right,,0.0,,,partner
+720575940624417584,,LPLC2,left,ACH,0.48,acetylcholine,"Davis et al., 2020",stimulus
+720575940624483940,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940624531652,,LPLC2,left,ACH,0.5,acetylcholine,"Davis et al., 2020",stimulus
+720575940624531856,Tm5Y,,right,ACH,0.86,,,partner
+720575940624548595,TmY3,,left,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940624571116,CB0104,,right,GABA,0.74,,,partner
+720575940624588552,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940624591368,TmY3,,right,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940624611002,,LPLC2,right,ACH,0.43,acetylcholine,"Davis et al., 2020",stimulus
+720575940624666245,,SAD017,left,GABA,0.79,,,partner
+720575940624681450,,,right,ACH,0.89,,,partner
+720575940624694259,T2,,left,ACH,0.83,,,partner
+720575940624705294,,,right,,0.0,,,partner
+720575940624735463,,PVLP111,right,GABA,0.77,,,partner
+720575940624739051,,,left,ACH,0.72,,,partner
+720575940624755504,,LPLC2,left,ACH,0.48,acetylcholine,"Davis et al., 2020",stimulus
+720575940624790781,,LC4,right,ACH,0.63,acetylcholine,"Davis et al., 2020",stimulus
+720575940624795575,,,left,ACH,0.9,,,partner
+720575940624796659,TmY3,,right,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940624806217,CB3826,,right,GABA,0.46,,,partner
+720575940624818324,TmY3,,left,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940624855226,Tm5Y,,left,ACH,0.76,,,partner
+720575940624856762,,LC4,right,ACH,0.69,acetylcholine,"Davis et al., 2020",stimulus
+720575940624878937,TmY3,,left,ACH,0.64,acetylcholine,"Davis et al., 2020",partner
+720575940624903064,,LPLC2,right,ACH,0.43,acetylcholine,"Davis et al., 2020",stimulus
+720575940624903866,T2,,right,ACH,0.86,,,partner
+720575940624910887,AN_GNG_SAD_3,,right,GABA,0.66,,,partner
+720575940624919077,,LPLC2,right,ACH,0.47,acetylcholine,"Davis et al., 2020",stimulus
+720575940624923379,Tm5Y,,left,ACH,0.75,,,partner
+720575940624931530,,LPLC2,right,ACH,0.78,acetylcholine,"Davis et al., 2020",stimulus
+720575940624934069,CB3836,,left,ACH,0.89,,,partner
+720575940624944996,TmY3,,left,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940624964656,TmY3,,left,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940624996894,CB2591,,right,ACH,0.69,,,partner
+720575940625001735,,LPLC2,right,ACH,0.46,acetylcholine,"Davis et al., 2020",stimulus
+720575940625033196,CB3824,,right,GABA,0.71,,,partner
+720575940625038090,,LC4,left,ACH,0.51,acetylcholine,"Davis et al., 2020",stimulus
+720575940625062891,,Li13,left,GABA,0.86,,,partner
+720575940625088181,CB3826,,left,GABA,0.58,,,partner
+720575940625112307,TmY3,,left,ACH,0.44,acetylcholine,"Davis et al., 2020",partner
+720575940625154232,T2,,left,ACH,0.8,,,partner
+720575940625159882,TmY3,,right,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940625167655,TmY3,,left,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940625186078,TmY3,,right,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940625194558,CB3513,,right,GABA,0.76,,,partner
+720575940625216202,,LPLC2,left,ACH,0.38,acetylcholine,"Davis et al., 2020",stimulus
+720575940625216807,,,left,ACH,0.87,,,partner
+720575940625273929,TmY3,,left,ACH,0.62,acetylcholine,"Davis et al., 2020",partner
+720575940625288265,T2,,right,ACH,0.79,,,partner
+720575940625357547,,LT56,left,,0.0,,,partner
+720575940625395864,,LPLC4,right,ACH,0.77,,,partner
+720575940625449451,TmY3,,left,ACH,0.57,acetylcholine,"Davis et al., 2020",partner
+720575940625449708,TmY3,,left,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940625477721,,LPLC2,left,ACH,0.55,acetylcholine,"Davis et al., 2020",stimulus
+720575940625484425,TmY3,,right,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940625494349,TmY3,,right,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940625527275,CB3826,,left,,0.0,,,partner
+720575940625556668,,LPLC4,right,ACH,0.8,,,partner
+720575940625556813,TmY3,,left,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940625595662,TmY3,,left,ACH,0.78,acetylcholine,"Davis et al., 2020",partner
+720575940625597171,Tm5Y,,left,ACH,0.87,,,partner
+720575940625632656,T2,,right,ACH,0.82,,,partner
+720575940625634196,Tm5Y,,left,ACH,0.76,,,partner
+720575940625656980,,PVLP151,left,ACH,0.85,,,partner
+720575940625667216,TmY3,,left,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940625673196,DNp71,DNp09,left,ACH,0.92,,,partner
+720575940625691066,TmY3,,right,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940625695269,,LPLC2,left,ACH,0.46,acetylcholine,"Davis et al., 2020",stimulus
+720575940625697772,,LPLC2,left,ACH,0.51,acetylcholine,"Davis et al., 2020",stimulus
+720575940625700739,,LPLC2,left,ACH,0.42,acetylcholine,"Davis et al., 2020",stimulus
+720575940625703923,cLP05,PS277,left,GLUT,0.5,,,partner
+720575940625767143,TmY3,,left,ACH,0.77,acetylcholine,"Davis et al., 2020",partner
+720575940625778428,cM19,PVLP046,left,GABA,0.9,,,partner
+720575940625786004,Tm16,,left,ACH,0.86,,,partner
+720575940625786867,TmY3,,left,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940625835085,CB3836,,right,ACH,0.9,,,partner
+720575940625835278,,LPLC2,right,ACH,0.46,acetylcholine,"Davis et al., 2020",stimulus
+720575940625841351,,LC4,right,ACH,0.69,acetylcholine,"Davis et al., 2020",stimulus
+720575940625845447,,LC4,right,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940625849374,TmY3,,right,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940625887119,,,right,GABA,0.65,,,partner
+720575940625894799,,PVLP111,left,GABA,0.78,,,partner
+720575940625899292,,Li13,left,GABA,0.86,,,partner
+720575940625904414,,PVLP111,right,GABA,0.85,,,partner
+720575940625906702,,LC4,right,ACH,0.62,acetylcholine,"Davis et al., 2020",stimulus
+720575940625909391,TmY3,,right,ACH,0.57,acetylcholine,"Davis et al., 2020",partner
+720575940625932421,,LC4,right,ACH,0.58,acetylcholine,"Davis et al., 2020",stimulus
+720575940625934973,,LC4,left,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940625952755,,mALC2,right,GABA,0.88,,,partner
+720575940625964377,,,right,GABA,0.77,,,partner
+720575940625969166,TmY3,,left,ACH,0.62,acetylcholine,"Davis et al., 2020",partner
+720575940625980403,,,right,GABA,0.73,,,partner
+720575940625991043,,LC4,left,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940626005641,,LC9,left,ACH,0.68,,,partner
+720575940626009852,,DNp05,right,ACH,0.8,,,partner
+720575940626013958,CB2327,,right,GABA,0.68,,,partner
+720575940626034213,TmY3,,right,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940626046919,,AVLP429,right,ACH,0.84,,,partner
+720575940626088229,TmY3,,right,ACH,0.59,acetylcholine,"Davis et al., 2020",partner
+720575940626118693,TmY3,,left,ACH,0.8,acetylcholine,"Davis et al., 2020",partner
+720575940626161930,,LPLC2,right,ACH,0.47,acetylcholine,"Davis et al., 2020",stimulus
+720575940626201933,CB3824,,left,GABA,0.73,,,partner
+720575940626215635,TmY3,,left,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940626236041,,LPLC2,left,ACH,0.46,acetylcholine,"Davis et al., 2020",stimulus
+720575940626273491,TmY3,,left,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940626309562,LT61b,LT61,left,ACH,0.88,,,partner
+720575940626346302,TmY3,,left,ACH,0.53,acetylcholine,"Davis et al., 2020",partner
+720575940626375172,,LPLC2,left,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940626384200,,LPLC2,left,ACH,0.69,acetylcholine,"Davis et al., 2020",stimulus
+720575940626390549,LC14a1,LC14,right,ACH,0.71,,,partner
+720575940626414279,,LPLC2,left,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940626417445,TmY3,,left,ACH,0.49,acetylcholine,"Davis et al., 2020",partner
+720575940626430285,TmY3,,left,ACH,0.49,acetylcholine,"Davis et al., 2020",partner
+720575940626432812,TmY3,,right,ACH,0.64,acetylcholine,"Davis et al., 2020",partner
+720575940626447848,,LPLC2,right,ACH,0.44,acetylcholine,"Davis et al., 2020",stimulus
+720575940626553596,,LC4,right,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940626591875,PVLP122a,PVLP122,left,ACH,0.84,,,partner
+720575940626595120,T2,,right,ACH,0.8,,,partner
+720575940626605200,,LC4,left,ACH,0.59,acetylcholine,"Davis et al., 2020",stimulus
+720575940626613609,,LC9,right,ACH,0.72,,,partner
+720575940626617084,,LPLC2,left,ACH,0.55,acetylcholine,"Davis et al., 2020",stimulus
+720575940626626895,,LC4,left,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940626630693,LPT48_vCal3,,right,ACH,0.89,,,partner
+720575940626663953,,AVLP340,left,ACH,0.88,,,partner
+720575940626665756,TmY3,,left,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940626672412,TmY3,,left,ACH,0.52,acetylcholine,"Davis et al., 2020",partner
+720575940626735016,,LPLC2,right,ACH,0.72,acetylcholine,"Davis et al., 2020",stimulus
+720575940626741129,TmY3,,right,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940626745392,,LPLC2,right,ACH,0.62,acetylcholine,"Davis et al., 2020",stimulus
+720575940626818085,,PVLP141,right,ACH,0.76,,,partner
+720575940626837263,TmY3,,right,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940626858472,Tm5Y,,right,ACH,0.75,,,partner
+720575940626869946,CB3824,,left,GABA,0.74,,,partner
+720575940626873000,,LPLC2,right,ACH,0.51,acetylcholine,"Davis et al., 2020",stimulus
+720575940626885676,TmY3,,right,ACH,0.78,acetylcholine,"Davis et al., 2020",partner
+720575940626888041,TmY3,,right,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940626900755,TmY3,,right,ACH,0.64,acetylcholine,"Davis et al., 2020",partner
+720575940626901136,DNg40,5813056435,left,GLUT,0.52,,,partner
+720575940626905981,TmY3,,right,ACH,0.77,acetylcholine,"Davis et al., 2020",partner
+720575940626915216,TmY3,,right,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940626916936,,LC4,left,ACH,0.63,acetylcholine,"Davis et al., 2020",stimulus
+720575940626928456,TmY3,,left,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940626932552,TmY3,,right,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940626933292,TmY3,,right,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940626977947,,PVLP120,right,ACH,0.91,,,partner
+720575940627000613,TmY3,,right,ACH,0.79,acetylcholine,"Davis et al., 2020",partner
+720575940627010642,TmY3,,right,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940627016762,T2,,right,ACH,0.81,,,partner
+720575940627033672,,LPLC4,right,ACH,0.76,,,partner
+720575940627046955,TmY3,,right,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940627069712,LTe65,PS179,right,ACH,0.85,,,partner
+720575940627096957,CB0010,,right,GABA,0.61,,,partner
+720575940627111752,,PVLP019,right,GABA,0.87,,,partner
+720575940627115645,TmY3,,left,ACH,0.57,acetylcholine,"Davis et al., 2020",partner
+720575940627124234,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940627151050,LC14a1,LC14,left,ACH,0.73,,,partner
+720575940627167869,Tm5Y,,left,ACH,0.85,,,partner
+720575940627180413,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940627190556,LPi12,,right,GABA,0.88,,,partner
+720575940627201579,,,center,GABA,0.39,,,partner
+720575940627203087,T2,,right,ACH,0.72,,,partner
+720575940627206842,,AVLP500,right,ACH,0.86,,,partner
+720575940627212802,CB3836,,left,ACH,0.88,,,partner
+720575940627231976,TmY3,,left,ACH,0.62,acetylcholine,"Davis et al., 2020",partner
+720575940627249850,CB3820,,right,GLUT,0.69,,,partner
+720575940627252798,CB3824,,left,GABA,0.74,,,partner
+720575940627263375,CB3719,,left,ACH,0.84,,,partner
+720575940627276889,TmY3,,left,ACH,0.86,acetylcholine,"Davis et al., 2020",partner
+720575940627285641,Tm5Y,,left,ACH,0.9,,,partner
+720575940627296361,TmY3,,right,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940627310611,TmY3,,right,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940627311106,,SAD049,right,ACH,0.68,,,partner
+720575940627318031,TmY3,,right,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940627327625,CB3831,,left,GABA,0.84,,,partner
+720575940627338302,CB3836,,right,ACH,0.92,,,partner
+720575940627367230,,,right,ACH,0.84,,,partner
+720575940627368254,,LPLC2,left,ACH,0.43,acetylcholine,"Davis et al., 2020",stimulus
+720575940627420668,,SAD014,left,GABA,0.64,,,partner
+720575940627436933,CB3826,,right,,0.0,,,partner
+720575940627458447,Tm5Y,,left,ACH,0.8,,,partner
+720575940627469445,,,left,ACH,0.9,,,partner
+720575940627484242,TmY3,,left,ACH,0.64,acetylcholine,"Davis et al., 2020",partner
+720575940627487877,Tm5Y,,right,ACH,0.79,,,partner
+720575940627497244,,mALC2,left,GABA,0.89,,,partner
+720575940627498377,TmY3,,left,ACH,0.87,acetylcholine,"Davis et al., 2020",partner
+720575940627510440,TmY3,,right,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940627518483,TmY3,,right,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940627519107,,LC4,left,ACH,0.58,acetylcholine,"Davis et al., 2020",stimulus
+720575940627553923,,LPLC2,right,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940627600138,TmY3,,left,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940627630162,TmY3,,left,ACH,0.49,acetylcholine,"Davis et al., 2020",partner
+720575940627645514,,DNp03,left,ACH,0.71,,,partner
+720575940627660565,CB3864,,left,GLUT,0.59,,,partner
+720575940627685765,,LPLC2,left,ACH,0.65,acetylcholine,"Davis et al., 2020",stimulus
+720575940627693099,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940627704595,T2,,left,ACH,0.76,,,partner
+720575940627731352,CB3820,,left,GLUT,0.58,,,partner
+720575940627756937,CB3826,,right,GABA,0.44,,,partner
+720575940627758744,LC14a1,LC14,right,ACH,0.59,,,partner
+720575940627780953,TmY3,,right,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940627787550,TmY3,,left,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940627789650,,,right,GABA,0.51,,,partner
+720575940627795985,T2,,left,ACH,0.77,,,partner
+720575940627800728,cL08,,left,GABA,0.91,,,partner
+720575940627803914,CB3826,,left,GABA,0.65,,,partner
+720575940627841045,TmY3,,right,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940627854162,LC14a1,LC14,left,ACH,0.6,,,partner
+720575940627857920,TmY3,,right,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940627876495,TmY3,,left,,0.0,acetylcholine,"Davis et al., 2020",partner
+720575940627902078,,LPLC2,left,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940627902979,,LPLC2,right,ACH,0.48,acetylcholine,"Davis et al., 2020",stimulus
+720575940627921533,TmY3,,left,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940627946056,Tm5Y,,left,ACH,0.76,,,partner
+720575940627973636,TmY3,,left,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940628012548,TmY3,,left,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940628014852,T2,,left,ACH,0.77,,,partner
+720575940628039034,,LPLC2,right,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940628064260,,LC4,left,ACH,0.53,acetylcholine,"Davis et al., 2020",stimulus
+720575940628072573,TmY3,,left,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940628075018,TmY3,,left,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940628081541,,LC4,left,ACH,0.57,acetylcholine,"Davis et al., 2020",stimulus
+720575940628133513,CB3840,,right,GABA,0.74,,,partner
+720575940628137546,Tm5Y,,right,ACH,0.81,,,partner
+720575940628145257,,LPLC4,right,ACH,0.8,,,partner
+720575940628169219,,AVLP479,left,GABA,0.71,,,partner
+720575940628185743,CB3840,,left,GABA,0.66,,,partner
+720575940628197892,,LPLC2,right,ACH,0.45,acetylcholine,"Davis et al., 2020",stimulus
+720575940628215558,,CL038,right,GLUT,0.66,,,partner
+720575940628221096,Tm5Y,,left,ACH,0.82,,,partner
+720575940628251146,,,right,GABA,0.71,,,partner
+720575940628255621,,LPLC4,right,ACH,0.8,,,partner
+720575940628258577,,,left,GABA,0.61,,,partner
+720575940628307026,Am1,,right,GABA,0.87,,,partner
+720575940628320105,TmY3,,right,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940628326568,,,right,ACH,0.72,,,partner
+720575940628342282,CB3820,,right,GLUT,0.55,,,partner
+720575940628346186,Tm4,,right,ACH,0.81,acetylcholine,"Davis et al., 2020",partner
+720575940628395797,,LPLC2,left,ACH,0.48,acetylcholine,"Davis et al., 2020",stimulus
+720575940628401224,TmY3,,right,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940628419527,,LC4,right,ACH,0.62,acetylcholine,"Davis et al., 2020",stimulus
+720575940628436839,CB2327,,left,GABA,0.58,,,partner
+720575940628437291,DNp35,PVLP136,left,ACH,0.81,,,partner
+720575940628454522,,LC4,left,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940628462340,,LC4,left,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940628463468,LC31b,LC31,right,ACH,0.86,,,partner
+720575940628465738,Tm5Y,,left,ACH,0.81,,,partner
+720575940628499459,,Li13,left,GABA,0.87,,,partner
+720575940628508610,Tm5Y,,right,ACH,0.81,,,partner
+720575940628518400,,LC4,right,ACH,0.68,acetylcholine,"Davis et al., 2020",stimulus
+720575940628523113,,LPLC4,left,ACH,0.77,,,partner
+720575940628532623,CB3824,,left,GABA,0.79,,,partner
+720575940628552247,,LPLC2,left,ACH,0.73,acetylcholine,"Davis et al., 2020",stimulus
+720575940628565521,Tm5Y,,left,ACH,0.74,,,partner
+720575940628573839,TmY3,,left,ACH,0.58,acetylcholine,"Davis et al., 2020",partner
+720575940628579066,PVLP123c,PVLP123,right,ACH,0.69,,,partner
+720575940628582929,,,left,GLUT,0.54,,,partner
+720575940628599895,,LC4,right,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940628603842,,LPLC2,right,ACH,0.59,acetylcholine,"Davis et al., 2020",stimulus
+720575940628606713,,LC4,right,ACH,0.57,acetylcholine,"Davis et al., 2020",stimulus
+720575940628672250,TmY3,,left,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940628678991,,WED125,right,ACH,0.74,,,partner
+720575940628699560,,LC4,left,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940628710761,TmY3,,left,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940628736873,CB3826,,left,,0.0,,,partner
+720575940628757609,TmY3,,left,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940628778058,,LPLC2,right,ACH,0.61,acetylcholine,"Davis et al., 2020",stimulus
+720575940628783721,TmY3,,left,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940628793621,,PVLP017,left,GABA,0.71,,,partner
+720575940628810711,CB3829,,left,GABA,0.72,,,partner
+720575940628813077,,,right,GLUT,0.77,,,partner
+720575940628838199,TmY3,,right,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940628847164,,LPLC2,left,ACH,0.51,acetylcholine,"Davis et al., 2020",stimulus
+720575940628849668,,LPLC2,right,ACH,0.46,acetylcholine,"Davis et al., 2020",stimulus
+720575940628869391,cM19,PVLP046,left,GABA,0.84,,,partner
+720575940628886696,TmY3,,left,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940628891863,,LC4,right,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940628921303,,LPLC2,left,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940628947984,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940628976956,,LPLC2,left,ACH,0.51,acetylcholine,"Davis et al., 2020",stimulus
+720575940628982268,LC14a1,LC14,left,ACH,0.61,,,partner
+720575940628990214,,LPLC2,right,ACH,0.45,acetylcholine,"Davis et al., 2020",stimulus
+720575940629023797,TmY3,,left,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940629161468,CB3836,,right,ACH,0.89,,,partner
+720575940629179722,CB3824,,left,GABA,0.73,,,partner
+720575940629179900,,,left,GABA,0.69,,,partner
+720575940629192975,,PVLP021,right,GABA,0.78,,,partner
+720575940629234075,Tm5Y,,right,ACH,0.87,,,partner
+720575940629245903,,PVLP111,right,GABA,0.84,,,partner
+720575940629249783,,AVLP531,left,GABA,0.84,,,partner
+720575940629256779,,PVLP019,left,GABA,0.85,,,partner
+720575940629292785,,LPLC2,left,ACH,0.44,acetylcholine,"Davis et al., 2020",stimulus
+720575940629314174,TmY3,,right,ACH,0.79,acetylcholine,"Davis et al., 2020",partner
+720575940629318918,CB3826,,left,,0.0,,,partner
+720575940629344450,TmY3,,right,ACH,0.62,acetylcholine,"Davis et al., 2020",partner
+720575940629358321,,AVLP500,left,ACH,0.84,,,partner
+720575940629368015,,LPLC2,left,ACH,0.71,acetylcholine,"Davis et al., 2020",stimulus
+720575940629382150,,,right,GABA,0.91,,,partner
+720575940629384091,TmY3,,right,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940629384271,,LPLC2,right,ACH,0.53,acetylcholine,"Davis et al., 2020",stimulus
+720575940629414987,,PVLP111,left,GABA,0.7,,,partner
+720575940629465616,TmY3,,left,ACH,0.56,acetylcholine,"Davis et al., 2020",partner
+720575940629474307,LC14a1,LC14,right,ACH,0.73,,,partner
+720575940629488682,CB2712,,left,ACH,0.6,,,partner
+720575940629502224,LC14a1,LC14,right,ACH,0.56,,,partner
+720575940629513222,Am1,,left,GABA,0.85,,,partner
+720575940629517049,,LPLC4,right,ACH,0.82,,,partner
+720575940629525882,LTe65,PS179,right,ACH,0.86,,,partner
+720575940629564265,TmY3,,left,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940629580855,Li2,,left,GABA,0.81,,,partner
+720575940629602871,PVLP122b,PVLP122,left,ACH,0.68,,,partner
+720575940629614697,CB3824,,right,GABA,0.77,,,partner
+720575940629616215,TmY3,,right,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940629662423,TmY3,,right,ACH,0.78,acetylcholine,"Davis et al., 2020",partner
+720575940629687824,cM19,PVLP046,right,GABA,0.83,,,partner
+720575940629697018,TmY3,,left,ACH,0.83,acetylcholine,"Davis et al., 2020",partner
+720575940629701737,CB0010,,left,GABA,0.58,,,partner
+720575940629704210,LPT53,,right,GABA,0.93,,,partner
+720575940629714179,TmY3,,left,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940629730810,TmY3,,right,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940629752655,CB3824,,right,GABA,0.75,,,partner
+720575940629753807,,LC4,left,ACH,0.51,acetylcholine,"Davis et al., 2020",stimulus
+720575940629757036,,DNp04,right,ACH,0.86,,,partner
+720575940629777018,,DNp11,right,ACH,0.78,,,partner
+720575940629806710,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940629823531,Li2,,right,GABA,0.83,,,partner
+720575940629831323,CB3826,,left,GABA,0.61,,,partner
+720575940629853739,,,right,GLUT,0.55,,,partner
+720575940629863424,Li2,,left,GABA,0.82,,,partner
+720575940629900443,CB3836,,right,ACH,0.88,,,partner
+720575940629930319,TmY3,,right,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940629935810,,,right,ACH,0.96,,,partner
+720575940629961719,T2,,left,ACH,0.82,,,partner
+720575940629964591,,LC4,right,ACH,0.61,acetylcholine,"Davis et al., 2020",stimulus
+720575940629966648,TmY3,,right,ACH,0.83,acetylcholine,"Davis et al., 2020",partner
+720575940629967703,,LPLC2,right,ACH,0.45,acetylcholine,"Davis et al., 2020",stimulus
+720575940629970763,TmY3,,right,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940629977466,TmY3,,right,ACH,0.55,acetylcholine,"Davis et al., 2020",partner
+720575940629985910,CB3835,,left,GABA,0.88,,,partner
+720575940629991106,TmY3,,left,ACH,0.64,acetylcholine,"Davis et al., 2020",partner
+720575940630033914,Tm5Y,,left,ACH,0.69,,,partner
+720575940630115090,Tm5Y,,right,ACH,0.85,,,partner
+720575940630154660,,LC4,right,ACH,0.64,acetylcholine,"Davis et al., 2020",stimulus
+720575940630161143,TmY3,,right,ACH,0.8,acetylcholine,"Davis et al., 2020",partner
+720575940630182526,Li2,,left,GABA,0.82,,,partner
+720575940630203589,cM19,PVLP046,right,GABA,0.87,,,partner
+720575940630209603,,LPLC2,left,ACH,0.51,acetylcholine,"Davis et al., 2020",stimulus
+720575940630246364,,SAD014,right,GABA,0.67,,,partner
+720575940630248492,TmY3,,right,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940630258587,TmY3,,right,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940630265644,TmY3,,right,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940630305295,Tm5Y,,right,ACH,0.89,,,partner
+720575940630318533,,PVLP069,right,ACH,0.84,,,partner
+720575940630336300,TmY3,,left,ACH,0.62,acetylcholine,"Davis et al., 2020",partner
+720575940630342972,TmY3,,left,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940630370519,TmY3,,left,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940630385000,LTe65,PS273,left,ACH,0.85,,,partner
+720575940630482744,,,right,ACH,0.86,,,partner
+720575940630484495,,LC4,left,ACH,0.71,acetylcholine,"Davis et al., 2020",stimulus
+720575940630484930,CB3836,,left,ACH,0.83,,,partner
+720575940630508150,TmY3,,left,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940630522081,TmY3,,right,ACH,0.64,acetylcholine,"Davis et al., 2020",partner
+720575940630590846,,,right,GABA,0.56,,,partner
+720575940630592761,TmY3,,right,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940630644439,CB3840,,right,GABA,0.75,,,partner
+720575940630646799,,,right,GLUT,0.6,,,partner
+720575940630650936,,LPLC2,right,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940630668800,Tm5Y,,left,ACH,0.68,,,partner
+720575940630676844,TmY3,,left,ACH,0.58,acetylcholine,"Davis et al., 2020",partner
+720575940630719831,,LPLC2,right,ACH,0.73,acetylcholine,"Davis et al., 2020",stimulus
+720575940630731847,,LPLC2,left,ACH,0.78,acetylcholine,"Davis et al., 2020",stimulus
+720575940630733884,,PVLP015,right,GLUT,0.6,,,partner
+720575940630745148,,LPLC4,right,ACH,0.76,,,partner
+720575940630796343,Tm5Y,,right,ACH,0.81,,,partner
+720575940630810306,LPi12,,left,GABA,0.85,,,partner
+720575940630820474,CB3826,,right,,0.0,,,partner
+720575940630823286,TmY3,,right,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940630831185,,LPLC2,left,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940630851036,,LC4,left,ACH,0.59,acetylcholine,"Davis et al., 2020",stimulus
+720575940630882131,LC14a1,LC14,right,ACH,0.52,,,partner
+720575940630887163,TmY3,,right,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940630902267,TmY3,,left,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940630919468,CB3826,,right,GABA,0.48,,,partner
+720575940630966016,CB3835,,right,GABA,0.91,,,partner
+720575940630967343,CB3864,,left,GLUT,0.61,,,partner
+720575940630995516,TmY3,,right,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940630998339,,LC4,left,ACH,0.61,acetylcholine,"Davis et al., 2020",stimulus
+720575940631032657,,LC4,right,ACH,0.57,acetylcholine,"Davis et al., 2020",stimulus
+720575940631095158,,LPLC2,right,ACH,0.52,acetylcholine,"Davis et al., 2020",stimulus
+720575940631135247,CB3826,,right,,0.0,,,partner
+720575940631152581,Tm5Y,,left,ACH,0.62,,,partner
+720575940631155256,Tm5Y,,left,ACH,0.91,,,partner
+720575940631186885,TmY3,,left,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940631200327,,AMMC-A1,right,ACH,0.58,,,partner
+720575940631254060,CB3826,,left,GABA,0.46,,,partner
+720575940631312428,,LPLC2,right,ACH,0.57,acetylcholine,"Davis et al., 2020",stimulus
+720575940631329017,CB3836,,left,ACH,0.77,,,partner
+720575940631335528,,PS001,right,GABA,0.74,,,partner
+720575940631338271,,LC4,left,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940631338552,TmY3,,right,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940631374440,,PVLP027,right,GABA,0.53,,,partner
+720575940631380695,,LPLC2,left,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940631383400,,PLP029,left,GLUT,0.68,,,partner
+720575940631397549,,LPLC2,right,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940631411015,TmY3,,right,ACH,0.62,acetylcholine,"Davis et al., 2020",partner
+720575940631462927,TmY3,,left,ACH,0.57,acetylcholine,"Davis et al., 2020",partner
+720575940631474775,TmY3,,right,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940631501676,CB3824,,right,GABA,0.73,,,partner
+720575940631582751,,LPLC2,right,ACH,0.4,acetylcholine,"Davis et al., 2020",stimulus
+720575940631693610,,AMMC-A1,right,,0.0,,,partner
+720575940631700987,T2,,left,ACH,0.78,,,partner
+720575940631742405,,LPLC2,right,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940631779532,,PVLP027,left,GABA,0.65,,,partner
+720575940631792524,T2,,right,ACH,0.8,,,partner
+720575940631842360,,LHAD1g1,right,GABA,0.64,,,partner
+720575940631843748,TmY3,,right,ACH,0.77,acetylcholine,"Davis et al., 2020",partner
+720575940631882974,TmY3,,right,ACH,0.84,acetylcholine,"Davis et al., 2020",partner
+720575940631903819,CB3824,,right,GABA,0.74,,,partner
+720575940631963991,CB3826,,right,GABA,0.47,,,partner
+720575940632009167,,LPLC2,left,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940632080146,,LPLC2,left,ACH,0.5,acetylcholine,"Davis et al., 2020",stimulus
+720575940632117775,TmY3,,left,ACH,0.77,acetylcholine,"Davis et al., 2020",partner
+720575940632129848,,LPLC2,left,ACH,0.59,acetylcholine,"Davis et al., 2020",stimulus
+720575940632146513,TmY3,,left,ACH,0.59,acetylcholine,"Davis et al., 2020",partner
+720575940632186936,Tm5Y,,left,ACH,0.9,,,partner
+720575940632199528,CB3826,,right,,0.0,,,partner
+720575940632211629,TmY3,,right,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940632321867,CB3826,,left,GABA,0.6,,,partner
+720575940632327016,TmY3,,left,ACH,0.62,acetylcholine,"Davis et al., 2020",partner
+720575940632381536,,PVLP024,right,GABA,0.82,,,partner
+720575940632384910,Y3,,right,ACH,0.84,,,partner
+720575940632392735,T2,,right,ACH,0.88,,,partner
+720575940632404271,TmY3,,left,ACH,0.64,acetylcholine,"Davis et al., 2020",partner
+720575940632416142,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940632472850,DNpe056,PVLP146,right,ACH,0.91,,,partner
+720575940632475449,,LC4,right,ACH,0.67,acetylcholine,"Davis et al., 2020",stimulus
+720575940632484409,CB3826,,left,GABA,0.55,,,partner
+720575940632487566,TmY3,,right,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940632499757,DNp01,Giant Fiber,right,,0.0,,,readout
+720575940632504874,LPi12,,right,GABA,0.88,,,partner
+720575940632512226,,LPLC2,right,ACH,0.56,acetylcholine,"Davis et al., 2020",stimulus
+720575940632548665,,LPLC4,right,ACH,0.71,,,partner
+720575940632568801,TmY3,,right,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940632569145,Li2,,right,GABA,0.8,,,partner
+720575940632582760,T2,,right,ACH,0.84,,,partner
+720575940632602671,Tm5Y,,left,ACH,0.81,,,partner
+720575940632603873,,LC9,right,ACH,0.73,,,partner
+720575940632704799,T2,,left,ACH,0.81,,,partner
+720575940632711052,,LPLC2,right,ACH,0.58,acetylcholine,"Davis et al., 2020",stimulus
+720575940632715234,,LC4,right,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940632736825,,CL038,left,GLUT,0.51,,,partner
+720575940632760351,TmY3,,right,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940632769180,,LC4,left,ACH,0.61,acetylcholine,"Davis et al., 2020",stimulus
+720575940632775646,TmY3,,right,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940632776612,TmY3,,right,ACH,0.8,acetylcholine,"Davis et al., 2020",partner
+720575940632777124,,LPLC2,left,ACH,0.5,acetylcholine,"Davis et al., 2020",stimulus
+720575940632779932,,LPLC2,left,ACH,0.71,acetylcholine,"Davis et al., 2020",stimulus
+720575940632780063,CB3826,,right,,0.0,,,partner
+720575940632830568,,AVLP094,left,GABA,0.69,,,partner
+720575940632855889,TmY3,,right,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940632873811,TmY3,,left,ACH,0.51,acetylcholine,"Davis et al., 2020",partner
+720575940632912721,TmY3,,right,ACH,0.58,acetylcholine,"Davis et al., 2020",partner
+720575940632945177,,,center,GABA,0.49,,,partner
+720575940632949807,,LC9,left,ACH,0.68,,,partner
+720575940632969799,CB3836,,right,ACH,0.9,,,partner
+720575940633012767,TmY3,,left,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940633013355,,LC4,right,ACH,0.53,acetylcholine,"Davis et al., 2020",stimulus
+720575940633014317,TmY3,,left,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940633090526,TmY3,,right,ACH,0.82,acetylcholine,"Davis et al., 2020",partner
+720575940633090607,Li2,,right,GABA,0.87,,,partner
+720575940633095137,DNp71,DNp09,right,ACH,0.9,,,partner
+720575940633097517,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940633186530,PVLP123b,PVLP123,left,ACH,0.65,,,partner
+720575940633192751,CB3824,,right,GABA,0.74,,,partner
+720575940633201223,LC14a1,LC14,left,ACH,0.56,,,partner
+720575940633203783,,CL038,right,GLUT,0.72,,,partner
+720575940633214381,,,left,ACH,0.63,,,partner
+720575940633218863,,LC4,right,ACH,0.57,acetylcholine,"Davis et al., 2020",stimulus
+720575940633251027,TmY3,,right,ACH,0.85,acetylcholine,"Davis et al., 2020",partner
+720575940633305425,Tm5Y,,left,ACH,0.74,,,partner
+720575940633316895,CB3835,,left,GABA,0.89,,,partner
+720575940633327953,CB3826,,left,,0.0,,,partner
+720575940633334180,TmY3,,left,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940633350812,,AVLP531,right,GABA,0.78,,,partner
+720575940633351844,TmY3,,left,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940633383251,TmY3,,left,ACH,0.51,acetylcholine,"Davis et al., 2020",partner
+720575940633471583,LC14a1,LC14,right,ACH,0.66,,,partner
+720575940633480659,Tm5Y,,left,ACH,0.87,,,partner
+720575940633486509,CB3826,,right,,0.0,,,partner
+720575940633496974,Tm5Y,,right,ACH,0.79,,,partner
+720575940633498925,TmY3,,left,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940633514404,TmY3,,left,ACH,0.57,acetylcholine,"Davis et al., 2020",partner
+720575940633552685,,LPLC2,right,ACH,0.5,acetylcholine,"Davis et al., 2020",stimulus
+720575940633563278,T2,,right,ACH,0.85,,,partner
+720575940633580384,,LC4,left,,0.0,acetylcholine,"Davis et al., 2020",stimulus
+720575940633583059,CB3824,,left,GABA,0.77,,,partner
+720575940633588320,,LPLC2,right,ACH,0.55,acetylcholine,"Davis et al., 2020",stimulus
+720575940633660828,TmY3,,right,ACH,0.8,acetylcholine,"Davis et al., 2020",partner
+720575940633706148,CB3840,,right,GABA,0.77,,,partner
+720575940633706916,CB3840,,right,GABA,0.8,,,partner
+720575940633746515,,PVLP015,left,GLUT,0.7,,,partner
+720575940633786012,TmY3,,right,ACH,0.58,acetylcholine,"Davis et al., 2020",partner
+720575940633803674,Tm5Y,,right,ACH,0.8,,,partner
+720575940633812366,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940633834669,TmY3,,left,ACH,0.62,acetylcholine,"Davis et al., 2020",partner
+720575940633895137,T2,,right,ACH,0.85,,,partner
+720575940633895310,Tm5Y,,right,ACH,0.88,,,partner
+720575940633920654,TmY3,,right,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940634109154,,,right,GABA,0.66,,,partner
+720575940634146967,,LPLC2,right,ACH,0.41,acetylcholine,"Davis et al., 2020",stimulus
+720575940634230241,CB3826,,right,,0.0,,,partner
+720575940634255842,TmY3,,right,ACH,0.58,acetylcholine,"Davis et al., 2020",partner
+720575940634290913,cL09,,left,GABA,0.89,,,partner
+720575940634356587,LT82b,"LT82a,LT82b",right,ACH,0.81,,,partner
+720575940634442932,TmY3,,left,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940634458719,DNpe056,PVLP146,left,ACH,0.93,,,partner
+720575940634517856,,LC4,left,ACH,0.67,acetylcholine,"Davis et al., 2020",stimulus
+720575940634537370,TmY3,,right,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940634612194,LPi21,,right,GABA,0.86,,,partner
+720575940634646753,,AVLP258,left,ACH,0.87,,,partner
+720575940634676916,CB0766,,right,ACH,0.92,,,partner
+720575940634700980,,LPLC2,left,ACH,0.47,acetylcholine,"Davis et al., 2020",stimulus
+720575940634763877,LTe65,PS179,right,ACH,0.9,,,partner
+720575940634823449,,PVLP021,right,GABA,0.76,,,partner
+720575940634895514,LCe06,,left,ACH,0.79,,,partner
+720575940634948088,TmY3,,right,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940634961815,Tm5Y,,left,ACH,0.82,,,partner
+720575940635004271,,LPLC2,left,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940635014807,LC14a1,LC14,right,ACH,0.48,,,partner
+720575940635028591,,PVLP137,left,ACH,0.88,,,partner
+720575940635040357,,LPLC2,right,ACH,0.44,acetylcholine,"Davis et al., 2020",stimulus
+720575940635047672,PVLP122a,PVLP122,right,ACH,0.86,,,partner
+720575940635089945,cML01,,left,GLUT,0.68,,,partner
+720575940635119723,,LHAD1g1,left,GABA,0.73,,,partner
+720575940635156159,TmY3,,right,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940635212442,TmY3,,left,ACH,0.82,acetylcholine,"Davis et al., 2020",partner
+720575940635224943,,LC9,right,ACH,0.7,,,partner
+720575940635234478,,LPLC2,left,ACH,0.44,acetylcholine,"Davis et al., 2020",stimulus
+720575940635282910,CB1280,,left,ACH,0.81,,,partner
+720575940635307639,,LPLC2,left,ACH,0.51,acetylcholine,"Davis et al., 2020",stimulus
+720575940635312491,Tm5Y,,right,ACH,0.85,,,partner
+720575940635339406,TmY3,,right,ACH,0.78,acetylcholine,"Davis et al., 2020",partner
+720575940635367263,TmY3,,right,ACH,0.77,acetylcholine,"Davis et al., 2020",partner
+720575940635450463,CB3836,,right,ACH,0.9,,,partner
+720575940635516084,,LPLC2,left,ACH,0.48,acetylcholine,"Davis et al., 2020",stimulus
+720575940635572592,,LPLC2,right,ACH,0.53,acetylcholine,"Davis et al., 2020",stimulus
+720575940635600632,TmY3,,right,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940635703262,,LC9,right,ACH,0.73,,,partner
+720575940635715947,Tm5Y,,left,ACH,0.86,,,partner
+720575940635745690,TmY3,,left,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940635756407,TmY3,,left,ACH,0.58,acetylcholine,"Davis et al., 2020",partner
+720575940635781812,TmY3,,left,ACH,0.56,acetylcholine,"Davis et al., 2020",partner
+720575940635800511,CB3864,,left,GLUT,0.53,,,partner
+720575940635835967,,LC4,right,ACH,0.69,acetylcholine,"Davis et al., 2020",stimulus
+720575940635937690,CB3826,,left,GABA,0.61,,,partner
+720575940635960730,MeLp2,,left,GLUT,0.63,,,partner
+720575940635967886,,AVLP340,right,ACH,0.86,,,partner
+720575940635986522,,LC9,right,ACH,0.76,,,partner
+720575940636047608,CB3840,,right,GABA,0.76,,,partner
+720575940636075444,Y3,,right,ACH,0.81,,,partner
+720575940636114277,,,right,ACH,0.78,,,partner
+720575940636151871,,PVLP111,left,GABA,0.69,,,partner
+720575940636155384,TmY3,,right,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940636184171,Y3,,right,ACH,0.85,,,partner
+720575940636227695,,,left,ACH,0.8,,,partner
+720575940636280809,LCe07,,left,ACH,0.84,,,partner
+720575940636295019,,LPLC2,left,ACH,0.53,acetylcholine,"Davis et al., 2020",stimulus
+720575940636298347,TmY3,,left,ACH,0.58,acetylcholine,"Davis et al., 2020",partner
+720575940636340148,TmY3,,right,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940636344824,,LT34,right,GABA,0.85,,,partner
+720575940636471032,CB3824,,left,GABA,0.72,,,partner
+720575940636526191,Li2,,left,GABA,0.84,,,partner
+720575940636529520,,LPLC2,left,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940636539102,,LPLC2,right,ACH,0.47,acetylcholine,"Davis et al., 2020",stimulus
+720575940636617840,TmY3,,left,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940636700272,CB3707,,right,GABA,0.77,,,partner
+720575940636704357,,AVLP396,right,ACH,0.75,,,partner
+720575940636762479,CB3824,,right,GABA,0.74,,,partner
+720575940636778382,TmY3,,right,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940636802446,TmY3,,left,ACH,0.87,acetylcholine,"Davis et al., 2020",partner
+720575940636878682,,LPLC2,right,ACH,0.45,acetylcholine,"Davis et al., 2020",stimulus
+720575940636895333,,,right,ACH,0.9,,,partner
+720575940636941925,TmY3,,left,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940636950505,,LPLC2,right,ACH,0.42,acetylcholine,"Davis et al., 2020",stimulus
+720575940636957006,,LC4,right,ACH,0.67,acetylcholine,"Davis et al., 2020",stimulus
+720575940636999401,,LPLC2,right,ACH,0.46,acetylcholine,"Davis et al., 2020",stimulus
+720575940637088602,,LPLC2,right,ACH,0.42,acetylcholine,"Davis et al., 2020",stimulus
+720575940637102478,TmY3,,left,ACH,0.81,acetylcholine,"Davis et al., 2020",partner
+720575940637166181,TmY3,,left,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940637197710,,SAD049,right,ACH,0.75,,,partner
+720575940637226103,CB3826,,right,GLUT,0.57,,,partner
+720575940637231022,TmY3,,right,ACH,0.78,acetylcholine,"Davis et al., 2020",partner
+720575940637243310,TmY3,,right,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940637246554,,,left,ACH,0.9,,,partner
+720575940637317342,TmY3,,right,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940637336944,TmY3,,right,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940637417902,TmY3,,right,ACH,0.79,acetylcholine,"Davis et al., 2020",partner
+720575940637461349,CB3836,,left,ACH,0.93,,,partner
+720575940637471039,,SAD014,left,GABA,0.74,,,partner
+720575940637559155,TmY3,,left,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940637638889,T2,,right,ACH,0.86,,,partner
+720575940637663662,CB2664,,left,ACH,0.75,,,partner
+720575940637684958,TmY3,,left,ACH,0.64,acetylcholine,"Davis et al., 2020",partner
+720575940637702222,,LPLC2,right,ACH,0.6,acetylcholine,"Davis et al., 2020",stimulus
+720575940637737449,TmY3,,right,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940637743070,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940637761252,T2,,right,ACH,0.87,,,partner
+720575940637792880,CB3824,,right,GABA,0.82,,,partner
+720575940637799487,Y3,,right,ACH,0.88,,,partner
+720575940637952624,CB3824,,right,GABA,0.72,,,partner
+720575940637958709,,LPLC2,right,ACH,0.57,acetylcholine,"Davis et al., 2020",stimulus
+720575940638006500,TmY3,,left,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940638051696,,,left,GABA,0.71,,,partner
+720575940638071386,Tm5Y,,left,ACH,0.69,,,partner
+720575940638091610,TmY3,,left,ACH,0.52,acetylcholine,"Davis et al., 2020",partner
+720575940638201434,TmY3,,left,ACH,0.52,acetylcholine,"Davis et al., 2020",partner
+720575940638292964,Tm5Y,,left,ACH,0.85,,,partner
+720575940638314037,TmY3,,right,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940638456227,,LC4,left,ACH,0.55,acetylcholine,"Davis et al., 2020",stimulus
+720575940638466211,TmY3,,right,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940638496720,,LC4,left,ACH,0.63,acetylcholine,"Davis et al., 2020",stimulus
+720575940638603709,,PVLP022,right,GABA,0.78,,,partner
+720575940638626118,,LPLC2,left,ACH,0.59,acetylcholine,"Davis et al., 2020",stimulus
+720575940638642776,LC14a1,LC14,right,ACH,0.73,,,partner
+720575940638648922,,,right,GLUT,0.74,,,partner
+720575940638728792,TmY3,,right,ACH,0.56,acetylcholine,"Davis et al., 2020",partner
+720575940638835288,,LPLC2,left,ACH,0.46,acetylcholine,"Davis et al., 2020",stimulus
+720575940638857048,,LPLC2,right,ACH,0.48,acetylcholine,"Davis et al., 2020",stimulus
+720575940638900713,,PVLP011,right,GABA,0.86,,,partner
+720575940638910040,,PVLP151,right,ACH,0.81,,,partner
+720575940638922624,,LPLC2,right,ACH,0.42,acetylcholine,"Davis et al., 2020",stimulus
+720575940639055933,CB3840,,right,GABA,0.73,,,partner
+720575940639086399,CB3824,,left,GABA,0.78,,,partner
+720575940639109795,,LPLC2,left,ACH,0.55,acetylcholine,"Davis et al., 2020",stimulus
+720575940639128646,LC31c,LC31,right,ACH,0.83,,,partner
+720575940639165247,,mALC4,left,GABA,0.92,,,partner
+720575940639177449,,LPLC2,right,ACH,0.67,acetylcholine,"Davis et al., 2020",stimulus
+720575940639195881,TmY3,,right,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940639209956,,DCH,left,GABA,0.86,gaba,"Boergens et al., 2018",partner
+720575940639241279,CB2664,,right,ACH,0.76,,,partner
+720575940639285574,,,left,GABA,0.67,,,partner
+720575940639293043,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940639348302,TmY3,,left,ACH,0.62,acetylcholine,"Davis et al., 2020",partner
+720575940639459280,,LC9,left,ACH,0.7,,,partner
+720575940639508046,TmY3,,left,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940639577141,TmY3,,left,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940639584309,TmY3,,right,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940639610702,T2,,left,ACH,0.74,,,partner
+720575940639739299,TmY3,,right,ACH,0.75,acetylcholine,"Davis et al., 2020",partner
+720575940639811469,,,center,GABA,0.51,,,partner
+720575940639817947,,LC4,right,ACH,0.59,acetylcholine,"Davis et al., 2020",stimulus
+720575940639878352,,LPLC2,left,ACH,0.51,acetylcholine,"Davis et al., 2020",stimulus
+720575940639882611,TmY3,,right,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940639884451,Tm4,,left,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940639884878,,LPLC2,left,ACH,0.51,acetylcholine,"Davis et al., 2020",stimulus
+720575940639895003,,LPLC2,left,ACH,0.46,acetylcholine,"Davis et al., 2020",stimulus
+720575940639906467,,,left,ACH,0.92,,,partner
+720575940639938723,Tm5Y,,right,ACH,0.89,,,partner
+720575940639940029,TmY3,,left,ACH,0.59,acetylcholine,"Davis et al., 2020",partner
+720575940640053045,,mALC3,left,GABA,0.93,,,partner
+720575940640064573,LC14a1,LC14,left,ACH,0.71,,,partner
+720575940640090968,Y3,,left,ACH,0.82,,,partner
+720575940640175731,CB3824,,left,GABA,0.74,,,partner
+720575940640182360,TmY3,,right,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940640189312,TmY3,,right,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940640213070,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940640267608,TmY3,,right,ACH,0.93,acetylcholine,"Davis et al., 2020",partner
+720575940640270195,CB3826,,right,GABA,0.48,,,partner
+720575940640302389,,LPLC2,left,ACH,0.54,acetylcholine,"Davis et al., 2020",stimulus
+720575940640396533,TmY3,,right,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940640507763,,SAD021_a,right,GABA,0.59,,,partner
+720575940640510427,,LPLC2,right,ACH,0.66,acetylcholine,"Davis et al., 2020",stimulus
+720575940640597237,,SAD014,left,GABA,0.78,,,partner
+720575940640612480,,LC4,left,ACH,0.68,acetylcholine,"Davis et al., 2020",stimulus
+720575940640650301,CB3826,,right,GABA,0.48,,,partner
+720575940640755619,TmY3,,left,ACH,0.49,acetylcholine,"Davis et al., 2020",partner
+720575940640775120,Tm5Y,,left,ACH,0.81,,,partner
+720575940640834211,,PVLP011,left,GABA,0.85,,,partner
+720575940640857984,CB3826,,right,,0.0,,,partner
+720575940640868184,CB3824,,left,GABA,0.63,,,partner
+720575940640881616,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940640926627,CB3513,,left,GABA,0.72,,,partner
+720575940641015168,CB3826,,right,,0.0,,,partner
+720575940641027712,Y3,,right,ACH,0.85,,,partner
+720575940641096144,LC31c,LC31,left,ACH,0.82,,,partner
+720575940641213824,,LC4,right,ACH,0.64,acetylcholine,"Davis et al., 2020",stimulus
+720575940641216976,,LPLC4,left,ACH,0.82,,,partner
+720575940641400016,CB3836,,right,ACH,0.84,,,partner
+720575940641423824,T2,,right,ACH,0.73,,,partner
+720575940641455093,TmY3,,left,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940641464309,,SAD013,left,GABA,0.74,,,partner
+720575940641552347,,LPLC2,left,ACH,0.5,acetylcholine,"Davis et al., 2020",stimulus
+720575940641704656,,LPLC2,left,,0.0,acetylcholine,"Davis et al., 2020",stimulus
+720575940642221512,TmY3,,right,ACH,0.78,acetylcholine,"Davis et al., 2020",partner
+720575940642306779,TmY3,,right,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940642397128,,LPLC2,right,ACH,0.74,acetylcholine,"Davis et al., 2020",stimulus
+720575940642414837,,LPLC2,left,ACH,0.45,acetylcholine,"Davis et al., 2020",stimulus
+720575940642562189,TmY3,,left,ACH,0.58,acetylcholine,"Davis et al., 2020",partner
+720575940642846349,Tm5Y,,left,ACH,0.81,,,partner
+720575940643085216,TmY3,,right,ACH,0.65,acetylcholine,"Davis et al., 2020",partner
+720575940643439816,CB0414,,left,GABA,0.77,,,partner
+720575940643507144,TmY3,,right,ACH,0.78,acetylcholine,"Davis et al., 2020",partner
+720575940643654167,Y3,,right,ACH,0.82,,,partner
+720575940643664072,,,right,ACH,0.89,,,partner
+720575940643740964,,LPLC2,left,ACH,0.45,acetylcholine,"Davis et al., 2020",stimulus
+720575940643808023,TmY3,,right,ACH,0.68,acetylcholine,"Davis et al., 2020",partner
+720575940643895712,TmY3,,left,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940643956128,TmY3,,right,ACH,0.56,acetylcholine,"Davis et al., 2020",partner
+720575940644084384,TmY3,,right,ACH,0.61,acetylcholine,"Davis et al., 2020",partner
+720575940644095511,,LC9,left,ACH,0.59,,,partner
+720575940644139208,TmY3,,left,ACH,0.83,acetylcholine,"Davis et al., 2020",partner
+720575940644292631,T2,,right,ACH,0.83,,,partner
+720575940644839703,TmY3,,right,ACH,0.7,acetylcholine,"Davis et al., 2020",partner
+720575940644874788,,,left,ACH,0.89,,,partner
+720575940645180196,,LPLC2,right,ACH,0.55,acetylcholine,"Davis et al., 2020",stimulus
+720575940645193495,TmY3,,left,ACH,0.48,acetylcholine,"Davis et al., 2020",partner
+720575940645328436,,LPLC2,left,ACH,0.41,acetylcholine,"Davis et al., 2020",stimulus
+720575940645407268,,LPLC2,left,ACH,0.66,acetylcholine,"Davis et al., 2020",stimulus
+720575940645605230,Tm5Y,,right,ACH,0.85,,,partner
+720575940645697060,TmY3,,right,ACH,0.69,acetylcholine,"Davis et al., 2020",partner
+720575940645699124,,LPLC2,right,ACH,0.57,acetylcholine,"Davis et al., 2020",stimulus
+720575940645719406,TmY3,,right,ACH,0.71,acetylcholine,"Davis et al., 2020",partner
+720575940645739299,TmY3,,right,ACH,0.76,acetylcholine,"Davis et al., 2020",partner
+720575940645821316,,LC4,right,ACH,0.7,acetylcholine,"Davis et al., 2020",stimulus
+720575940645886243,TmY3,,right,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940645951255,Tm4,,left,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940646041396,,,left,ACH,0.64,,,partner
+720575940646058094,LC14a1,LC14,left,ACH,0.71,,,partner
+720575940646583331,Tm5Y,,right,ACH,0.91,,,partner
+720575940646616611,,,right,ACH,0.92,,,partner
+720575940646875444,TmY3,,left,ACH,0.66,acetylcholine,"Davis et al., 2020",partner
+720575940647117603,TmY3,,left,ACH,0.62,acetylcholine,"Davis et al., 2020",partner
+720575940647358243,,LPLC2,right,ACH,0.49,acetylcholine,"Davis et al., 2020",stimulus
+720575940647366452,T2,,right,ACH,0.7,,,partner
+720575940647369507,,LPLC2,left,ACH,0.45,acetylcholine,"Davis et al., 2020",stimulus
+720575940647589172,,LT41,left,GABA,0.92,,,partner
+720575940647621508,TmY3,,left,ACH,0.6,acetylcholine,"Davis et al., 2020",partner
+720575940647669636,TmY3,,left,ACH,0.67,acetylcholine,"Davis et al., 2020",partner
+720575940647676804,TmY3,,left,ACH,0.84,acetylcholine,"Davis et al., 2020",partner
+720575940647799940,TmY3,,right,ACH,0.86,acetylcholine,"Davis et al., 2020",partner
+720575940647966260,,PVLP024,left,GABA,0.74,,,partner
+720575940648395385,TmY3,,left,ACH,0.54,acetylcholine,"Davis et al., 2020",partner
+720575940648406660,TmY3,,left,ACH,0.74,acetylcholine,"Davis et al., 2020",partner
+720575940648418425,,LPLC2,left,ACH,0.47,acetylcholine,"Davis et al., 2020",stimulus
+720575940648486020,TmY3,,left,ACH,0.86,acetylcholine,"Davis et al., 2020",partner
+720575940648637060,CB3836,,right,ACH,0.84,,,partner
+720575940649187961,,,right,GLUT,0.73,,,partner
+720575940649229433,,LC4,left,ACH,0.61,acetylcholine,"Davis et al., 2020",stimulus
+720575940649891574,TmY3,,right,ACH,0.72,acetylcholine,"Davis et al., 2020",partner
+720575940649920633,Tm5Y,,left,ACH,0.87,,,partner
+720575940650925945,TmY3,,right,ACH,0.73,acetylcholine,"Davis et al., 2020",partner
+720575940651833078,CB2917,,left,ACH,0.6,,,partner
+720575940652611745,,LC4,right,ACH,0.68,acetylcholine,"Davis et al., 2020",stimulus
+720575940653213174,CB3824,,right,GABA,0.74,,,partner
+720575940653399030,CB3824,,left,GABA,0.69,,,partner
+720575940653456630,CB3836,,left,ACH,0.86,,,partner
+720575940653464822,TmY3,,left,ACH,0.49,acetylcholine,"Davis et al., 2020",partner
+720575940653666465,,LPLC2,left,ACH,0.46,acetylcholine,"Davis et al., 2020",stimulus
+720575940653703841,PVLP112b,PVLP112,right,GABA,0.84,,,partner
+720575940653742753,,LPLC2,right,ACH,0.48,acetylcholine,"Davis et al., 2020",stimulus
+720575940655125409,TmY3,,left,ACH,0.86,acetylcholine,"Davis et al., 2020",partner
+720575940655149729,TmY3,,left,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940655628705,,SMP068,left,GLUT,0.71,,,partner
+720575940655750305,,LPLC2,left,ACH,0.58,acetylcholine,"Davis et al., 2020",stimulus
+720575940655970721,CB3836,,left,ACH,0.87,,,partner
+720575940659599489,TmY3,,right,ACH,0.63,acetylcholine,"Davis et al., 2020",partner
+720575940659869313,TmY3,,right,ACH,0.81,acetylcholine,"Davis et al., 2020",partner
+720575940660264833,T2,,right,ACH,0.85,,,partner
+720575940660386177,TmY3,,left,ACH,0.62,acetylcholine,"Davis et al., 2020",partner
+720575940660918657,Tm5Y,,left,ACH,0.77,,,partner
+720575940661074561,CB3826,,right,,0.0,,,partner
+720575940661316993,,LPLC2,right,ACH,0.48,acetylcholine,"Davis et al., 2020",stimulus
+720575940661336193,TmY3,,left,ACH,0.62,acetylcholine,"Davis et al., 2020",partner

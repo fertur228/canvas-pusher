@@ -1,0 +1,51 @@
+{
+  "project_ref": "irjasmzytjeohwfpdnrl",
+  "project_name": "Canvas-pusher",
+  "captured_at": "2026-10-17T14:11:18.658256+00:00",
+  "verification_reference_at": "2026-10-17T14:13:05Z",
+  "scope": "Full successful pg_dump17 custom database archive from a read-only exported snapshot. Cluster roles exported separately without passwords. Verification hashes were read from a subsequent read-only snapshot and must match after restore. Excludes platform configuration, role passwords, Edge secrets, and Storage blob bytes. No Auth users, sessions, buckets or objects existed at inspection.",
+  "restored": true,
+  "restoration": {
+    "engine": "Supabase PostgreSQL 17.11.0.004 in isolated local container with network disabled",
+    "full_archive_restore": true,
+    "all_legacy_row_hashes_match": true
+  },
+  "local_migration_rehearsal": {
+    "all_seven_applied": true,
+    "legacy_rows_unchanged": true,
+    "public_tables_rls_enabled": true,
+    "anonymous_legacy_access_revoked": true,
+    "unmapped_authenticated_rows": 0,
+    "legacy_service_role_access_preserved": true,
+    "worker_rpc_denied_to_browser": true,
+    "four_owner_positive_and_cross_owner_rls": true,
+    "private_storage_owner_and_anonymous_rls": true,
+    "synthetic_owner_test_transaction_rolled_back": true
+  },
+  "migrations": {
+    "202610140000_legacy_baseline.sql": "527da3ff471059bf0fd20b3f314e2157f5a697b7a7ca64f11ccc31fe0f71eb8c",
+    "202610140001_flymind_integration.sql": "c69d46544bcab28bdb84d9994f485dbe064070da43fa3f6cd19be7997c176d80",
+    "202610140002_flymind_legacy_privacy.sql": "83b85937cb45a0b668f8d2038a3f1961c60dde995b96535d0f1826daf74c3379",
+    "202610140003_flymind_operations.sql": "82c1c5352544d85eaf2eaf508616d5ca071d95b3a2b956c22aeb027ced330c47",
+    "202610140004_flymind_retention.sql": "b83bbc91bf95f807c5ca4a68935d86b216624cd0e1f1d0e44980d0f632754480",
+    "202610140005_flymind_storage_limits.sql": "782dafdce674be5c4af8ff57abc4138a1c70bd90f1653863e8b16980c2c849df",
+    "202610140006_telegram_assistant.sql": "9b31f473796b5565aaaf3ca8fada1f80ec0472bd19d9765566a908491df8a8fd"
+  },
+  "row_counts": {
+    "canvas_state": 336,
+    "course_grades": 32,
+    "health_checks": 14
+  },
+  "encrypted_files": {
+    "database.dump": {
+      "plaintext_bytes": 377536,
+      "ciphertext_sha256": "77d3324ae316cbb3dd9228fe21f5039530e151fb34edd30f515f35ddc33fa280"
+    },
+    "roles.sql": {
+      "plaintext_bytes": 5773,
+      "ciphertext_sha256": "db0b497e779263a33fcda1a3265051d6627d8ccefeff0c2a9c8f4cbb2af167f4"
+    }
+  },
+  "remote_migrations_applied": false,
+  "remote_notifications_sent": 0
+}

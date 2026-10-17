@@ -1,0 +1,53 @@
+name: FlyMind controlled hosted test chat
+on:
+  push:
+    branches: [feat/flymind-neural-poc]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: canvas-state-tracker
+  cancel-in-progress: false
+jobs:
+  hosted-test:
+    if: vars.FLYMIND_TEST_CHAT_VALIDATION == 'true' && (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[flymind-test-chat]'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements-neural.lock
+      # Deliberately separate from the disabled recurring/legacy scanner. The
+      # Python guard accepts only a distinct test group and its dedicated account.
+      - run: |
+          python -m src.flymind.hosted_validation --output /tmp/flymind-hosted-cloud.json
+          python -m src.flymind.deadline_validation --output /tmp/flymind-deadline-cloud.json
+        env:
+          FLYMIND_TEST_CHAT_VALIDATION: ${{ vars.FLYMIND_TEST_CHAT_VALIDATION }}
+          FLYMIND_TEST_ACCOUNT_ID: ${{ vars.FLYMIND_TEST_ACCOUNT_ID }}
+          FLYMIND_ACCOUNT_ID: ${{ vars.FLYMIND_TEST_ACCOUNT_ID }}
+          FLYMIND_ENABLED: 'true'
+          FLYMIND_NEURAL_ENABLED: 'true'
+          FLYMIND_MODE: shadow
+          DELIVERY_MODE: test
+          FLYMIND_PRODUCTION_AUTHORIZED: 'false'
+          FLYMIND_MAX_NEURAL: '2'
+          NEURAL_TELEMETRY_ENABLED: 'true'
+          CANVAS_API_URL: ${{ secrets.CANVAS_API_URL }}
+          CANVAS_API_KEY: ${{ secrets.CANVAS_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TEST_TELEGRAM_CHAT_ID: ${{ secrets.TEST_TELEGRAM_CHAT_ID }}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: hosted-cloud-counts-only
+          path: |
+            /tmp/flymind-hosted-cloud.json
+            /tmp/flymind-deadline-cloud.json
+          retention-days: 7

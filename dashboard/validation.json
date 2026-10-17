@@ -1,0 +1,82 @@
+{
+  "biological_response_validated": false,
+  "branch": "feat/flymind-neural-poc",
+  "browser_snapshot": {
+    "draw_calls": 2,
+    "heap_bytes": 63148813,
+    "renderer": "Chrome SwiftShader (software WebGL; not a hardware FPS benchmark)",
+    "resource_bytes": 2042554
+  },
+  "checks": {
+    "playwright_dev": {
+      "passed": 4
+    },
+    "playwright_static_dist": {
+      "passed": 4
+    },
+    "python_export_source_integrity": {
+      "passed": 5
+    },
+    "simulation_source_sha256_unchanged": {
+      "engine.py": true,
+      "escape.py": true,
+      "experiment.py": true,
+      "models.py": true,
+      "stimulus.py": true
+    },
+    "typescript_and_vite_build": {
+      "passed": true,
+      "vite_build_seconds": 1.94,
+      "warnings": [
+        "Three.js/R3F vendor chunk 882.89 kB minified (238.57 kB gzip); exceeds Vite 500 kB advisory. Lazy viewer and separate chart chunks are in use."
+      ]
+    },
+    "vitest": {
+      "passed": 20
+    }
+  },
+  "data_assets": {
+    "bytes_excluding_catalog": 2040629,
+    "estimated_gzip_bytes_excluding_catalog": 325299,
+    "gzip_is_estimate_not_network_measurement": true
+  },
+  "experiments": [
+    {
+      "active_neurons": 0,
+      "gf_spikes": [
+        0,
+        0
+      ],
+      "id": "baseline",
+      "spikes": 0
+    },
+    {
+      "active_neurons": 282,
+      "gf_spikes": [
+        2,
+        2
+      ],
+      "id": "weak",
+      "spikes": 344
+    },
+    {
+      "active_neurons": 418,
+      "gf_spikes": [
+        3,
+        4
+      ],
+      "id": "strong",
+      "spikes": 834
+    }
+  ],
+  "spatial": {
+    "layout_modes": [
+      "non_anatomical_type_group",
+      "real_soma_4x4x40nm_voxels"
+    ],
+    "morphology_in_bundle": false,
+    "real_soma_count": 1497,
+    "total_neurons": 1500
+  },
+  "verified_at_utc": "2026-10-13T21:28:35.597764+00:00"
+}

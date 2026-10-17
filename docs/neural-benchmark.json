@@ -1,0 +1,269 @@
+{
+  "control_has_no_spikes": true,
+  "deterministic_activity": true,
+  "environment": {
+    "cpu_logical_count": 11,
+    "dependencies": {
+      "brian2": "2.9.0",
+      "jinja2": "3.1.6",
+      "numpy": "1.26.4",
+      "psutil": "7.2.2",
+      "pyparsing": "3.3.3",
+      "sympy": "1.14.0"
+    },
+    "machine": "arm64",
+    "numerical_thread_environment": {
+      "MKL_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.11.17"
+  },
+  "maximum_peak_rss_mib": 136.34375,
+  "median_cpu_seconds": 0.730246,
+  "median_wall_seconds_whole_subprocess": 0.952185541857034,
+  "method": "fresh Python process per run; numerical library threads limited to 1; no network; load/import/simulate/export included",
+  "repeats": 3,
+  "runs": [
+    {
+      "active_neurons": 340,
+      "activity_sha256": "df97223ea709cc4eca721ba82f64ff32eb6d94a6913c6334e9453bfecb057c46",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 0.794726,
+        "process_lifetime_peak_rss_mib": 136.34375,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 136.34375,
+        "wall_seconds_load_import_simulation_export": 0.9786939579062164
+      },
+      "output": "data/neural/runs/benchmark-final/stimulated-1.json.gz",
+      "readout": [
+        {
+          "latency_from_stimulus_ms": null,
+          "root_id": "720575940622838154",
+          "spike_times_ms": []
+        },
+        {
+          "latency_from_stimulus_ms": null,
+          "root_id": "720575940632499757",
+          "spike_times_ms": []
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 14417,
+        "inhibitory_rows": 7692,
+        "zero_effect_rows": 3097
+      },
+      "spikes": 988,
+      "telemetry_bytes": 36508,
+      "wall_seconds_whole_subprocess": 1.1974477081093937
+    },
+    {
+      "active_neurons": 340,
+      "activity_sha256": "df97223ea709cc4eca721ba82f64ff32eb6d94a6913c6334e9453bfecb057c46",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 0.730246,
+        "process_lifetime_peak_rss_mib": 135.65625,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 135.65625,
+        "wall_seconds_load_import_simulation_export": 0.7802761250641197
+      },
+      "output": "data/neural/runs/benchmark-final/stimulated-2.json.gz",
+      "readout": [
+        {
+          "latency_from_stimulus_ms": null,
+          "root_id": "720575940622838154",
+          "spike_times_ms": []
+        },
+        {
+          "latency_from_stimulus_ms": null,
+          "root_id": "720575940632499757",
+          "spike_times_ms": []
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 14417,
+        "inhibitory_rows": 7692,
+        "zero_effect_rows": 3097
+      },
+      "spikes": 988,
+      "telemetry_bytes": 36508,
+      "wall_seconds_whole_subprocess": 0.952185541857034
+    },
+    {
+      "active_neurons": 340,
+      "activity_sha256": "df97223ea709cc4eca721ba82f64ff32eb6d94a6913c6334e9453bfecb057c46",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 0.643528,
+        "process_lifetime_peak_rss_mib": 136.265625,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 136.265625,
+        "wall_seconds_load_import_simulation_export": 0.6503449159208685
+      },
+      "output": "data/neural/runs/benchmark-final/stimulated-3.json.gz",
+      "readout": [
+        {
+          "latency_from_stimulus_ms": null,
+          "root_id": "720575940622838154",
+          "spike_times_ms": []
+        },
+        {
+          "latency_from_stimulus_ms": null,
+          "root_id": "720575940632499757",
+          "spike_times_ms": []
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 14417,
+        "inhibitory_rows": 7692,
+        "zero_effect_rows": 3097
+      },
+      "spikes": 988,
+      "telemetry_bytes": 36506,
+      "wall_seconds_whole_subprocess": 0.7879063750151545
+    },
+    {
+      "active_neurons": 0,
+      "activity_sha256": "37f78d412a3f6912abb57f6efa2ad9c9883e5506dd94b63d7fc065b504b35e07",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 0.6110990000000001,
+        "process_lifetime_peak_rss_mib": 135.1875,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 135.1875,
+        "wall_seconds_load_import_simulation_export": 0.6184696659911424
+      },
+      "output": "data/neural/runs/benchmark-final/control.json.gz",
+      "readout": [
+        {
+          "latency_from_stimulus_ms": null,
+          "root_id": "720575940622838154",
+          "spike_times_ms": []
+        },
+        {
+          "latency_from_stimulus_ms": null,
+          "root_id": "720575940632499757",
+          "spike_times_ms": []
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 14417,
+        "inhibitory_rows": 7692,
+        "zero_effect_rows": 3097
+      },
+      "spikes": 0,
+      "telemetry_bytes": 20268,
+      "wall_seconds_whole_subprocess": 0.7438925839960575
+    }
+  ],
+  "schema_version": 1,
+  "simulated_duration_ms": 200
+}

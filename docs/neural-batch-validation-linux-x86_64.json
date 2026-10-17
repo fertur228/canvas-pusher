@@ -1,0 +1,22 @@
+{
+  "measurements": {
+    "batch_wall_seconds": 9.90046264099999,
+    "parent_cpu_seconds": 0.018473703000000008,
+    "children_cpu_seconds": 9.961005,
+    "unique_telemetry_objects": 2,
+    "telemetry_bytes_on_disk": 293646,
+    "child_process_peak_rss_mib": 188.6015625,
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39"
+  },
+  "synthetic_canvas_fixture": true,
+  "real_flywire_simulations": true,
+  "no_external_messages_sent": true,
+  "duplicate_poll_added_deliveries": 0,
+  "jobs": {
+    "edit.done": 4,
+    "send.done": 4,
+    "simulate.done": 4
+  },
+  "primary_messages": 4,
+  "ci_run": "https://github.com/fertur228/canvas-pusher/actions/runs/38540415721"
+}

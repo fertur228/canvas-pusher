@@ -1,0 +1,1018 @@
+{
+  "schema": "flymind.evaluation/v1",
+  "biological_response_validated": false,
+  "runs": [
+    {
+      "case": "weak",
+      "control": "real",
+      "shuffle": null,
+      "biological_response_validated": false,
+      "activity_sha256": "2be83a2ef8478f0f2408c7a22bc63a4b682d36c17450169f442af0cffcba2cdf",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "moderate",
+        "gf_spikes": [
+          2,
+          2
+        ],
+        "active_neurons": 282,
+        "population_spikes": 344,
+        "gf_first_latency_ms": [
+          751.1,
+          750.0
+        ],
+        "gf_peak_model_depolarization_mv": [
+          7.0398444265493225,
+          7.119108279948492
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.08191137481480837,
+        "import_and_control_seconds": 0.6086386670358479,
+        "simulation_wall_seconds": 0.9531898749992251,
+        "total_cpu_seconds": 1.534812,
+        "total_wall_seconds": 1.700276916846633,
+        "compressed_result_bytes": 151481,
+        "sampled_peak_rss_mib": 219.0,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 222.34375,
+        "simulation_and_result_serialization_cpu_seconds": 0.995013
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 1.9513672920875251
+    },
+    {
+      "case": "weak",
+      "control": "real",
+      "shuffle": null,
+      "biological_response_validated": false,
+      "activity_sha256": "2be83a2ef8478f0f2408c7a22bc63a4b682d36c17450169f442af0cffcba2cdf",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "moderate",
+        "gf_spikes": [
+          2,
+          2
+        ],
+        "active_neurons": 282,
+        "population_spikes": 344,
+        "gf_first_latency_ms": [
+          751.1,
+          750.0
+        ],
+        "gf_peak_model_depolarization_mv": [
+          7.0398444265493225,
+          7.119108279948492
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.07697579194791615,
+        "import_and_control_seconds": 0.42990724998526275,
+        "simulation_wall_seconds": 0.9200544580817223,
+        "total_cpu_seconds": 1.477251,
+        "total_wall_seconds": 1.482892791973427,
+        "compressed_result_bytes": 151481,
+        "sampled_peak_rss_mib": 219.65625,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 222.953125,
+        "simulation_and_result_serialization_cpu_seconds": 0.973534
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 1.7311998340301216
+    },
+    {
+      "case": "weak",
+      "control": "zero",
+      "shuffle": null,
+      "biological_response_validated": false,
+      "activity_sha256": "5c87b497a645b26e593d51073f7e01501341c034d27f5bbe4d98bdf42817a5d1",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "moderate",
+        "gf_spikes": [
+          0,
+          0
+        ],
+        "active_neurons": 210,
+        "population_spikes": 420,
+        "gf_first_latency_ms": [
+          null,
+          null
+        ],
+        "gf_peak_model_depolarization_mv": [
+          0.0,
+          0.0
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.07829687488265336,
+        "import_and_control_seconds": 0.40406766696833074,
+        "simulation_wall_seconds": 0.9203015409875661,
+        "total_cpu_seconds": 1.454897,
+        "total_wall_seconds": 1.458709041820839,
+        "compressed_result_bytes": 107243,
+        "sampled_peak_rss_mib": 218.5,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 221.828125,
+        "simulation_and_result_serialization_cpu_seconds": 0.9731770000000001
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 1.6894149170257151
+    },
+    {
+      "case": "weak",
+      "control": "zero",
+      "shuffle": null,
+      "biological_response_validated": false,
+      "activity_sha256": "5c87b497a645b26e593d51073f7e01501341c034d27f5bbe4d98bdf42817a5d1",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "moderate",
+        "gf_spikes": [
+          0,
+          0
+        ],
+        "active_neurons": 210,
+        "population_spikes": 420,
+        "gf_first_latency_ms": [
+          null,
+          null
+        ],
+        "gf_peak_model_depolarization_mv": [
+          0.0,
+          0.0
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.07769008306786418,
+        "import_and_control_seconds": 0.4292305000126362,
+        "simulation_wall_seconds": 0.9226171670015901,
+        "total_cpu_seconds": 1.479359,
+        "total_wall_seconds": 1.4843860410619527,
+        "compressed_result_bytes": 107243,
+        "sampled_peak_rss_mib": 218.96875,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 222.3125,
+        "simulation_and_result_serialization_cpu_seconds": 0.9749459999999999
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 1.7235002499073744
+    },
+    {
+      "case": "weak",
+      "control": "shuffled",
+      "shuffle": {
+        "seed": 783,
+        "accepted_swaps": 146873,
+        "changed_rows": 20485,
+        "preserves": "Per-neuron directed row degree and contact strength; edge count/weight/neuropil/NT strata",
+        "not_preserved": "Actual biological partner identity, morphology, pathways; this is a synthetic null model"
+      },
+      "biological_response_validated": false,
+      "activity_sha256": "cfbfd11f4dcec414cda24ca7d00957d4ab366eece96ed6540b68a6c04460bea7",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "moderate",
+        "gf_spikes": [
+          2,
+          2
+        ],
+        "active_neurons": 286,
+        "population_spikes": 329,
+        "gf_first_latency_ms": [
+          750.1,
+          749.8
+        ],
+        "gf_peak_model_depolarization_mv": [
+          7.181535131965028,
+          7.425733191529297
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.07683979184366763,
+        "import_and_control_seconds": 1.3334488330874592,
+        "simulation_wall_seconds": 0.9564561659935862,
+        "total_cpu_seconds": 2.4177400000000002,
+        "total_wall_seconds": 2.4232119999360293,
+        "compressed_result_bytes": 153732,
+        "sampled_peak_rss_mib": 219.328125,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 222.671875,
+        "simulation_and_result_serialization_cpu_seconds": 1.0100669999999998
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 2.6710900000762194
+    },
+    {
+      "case": "weak",
+      "control": "shuffled",
+      "shuffle": {
+        "seed": 784,
+        "accepted_swaps": 146577,
+        "changed_rows": 20486,
+        "preserves": "Per-neuron directed row degree and contact strength; edge count/weight/neuropil/NT strata",
+        "not_preserved": "Actual biological partner identity, morphology, pathways; this is a synthetic null model"
+      },
+      "biological_response_validated": false,
+      "activity_sha256": "06c71bda40bf9e88692799416d200926d0269a25da5e91987627900956cc8704",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "moderate",
+        "gf_spikes": [
+          2,
+          2
+        ],
+        "active_neurons": 280,
+        "population_spikes": 355,
+        "gf_first_latency_ms": [
+          750.3,
+          749.9
+        ],
+        "gf_peak_model_depolarization_mv": [
+          7.188030192924131,
+          7.348155485985721
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.07955987518653274,
+        "import_and_control_seconds": 1.3433851248119026,
+        "simulation_wall_seconds": 0.9421789171174169,
+        "total_cpu_seconds": 2.423245,
+        "total_wall_seconds": 2.4322716670576483,
+        "compressed_result_bytes": 154460,
+        "sampled_peak_rss_mib": 220.421875,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 224.15625,
+        "simulation_and_result_serialization_cpu_seconds": 1.0053469999999998
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 2.6857199580408633
+    },
+    {
+      "case": "weak",
+      "control": "shuffled",
+      "shuffle": {
+        "seed": 785,
+        "accepted_swaps": 146560,
+        "changed_rows": 20574,
+        "preserves": "Per-neuron directed row degree and contact strength; edge count/weight/neuropil/NT strata",
+        "not_preserved": "Actual biological partner identity, morphology, pathways; this is a synthetic null model"
+      },
+      "biological_response_validated": false,
+      "activity_sha256": "1260ec3b09867e1bce200f1edad17c59458a203805a0b462f5d665cba85a4fc5",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "moderate",
+        "gf_spikes": [
+          1,
+          3
+        ],
+        "active_neurons": 281,
+        "population_spikes": 349,
+        "gf_first_latency_ms": [
+          750.3,
+          749.8
+        ],
+        "gf_peak_model_depolarization_mv": [
+          7.188030192924131,
+          7.536399856082646
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.0779257919639349,
+        "import_and_control_seconds": 1.3371513329911977,
+        "simulation_wall_seconds": 0.9714674171991646,
+        "total_cpu_seconds": 2.4369870000000002,
+        "total_wall_seconds": 2.442791667068377,
+        "compressed_result_bytes": 154242,
+        "sampled_peak_rss_mib": 219.390625,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 222.703125,
+        "simulation_and_result_serialization_cpu_seconds": 1.0250559999999997
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 2.6879567918367684
+    },
+    {
+      "case": "strong",
+      "control": "real",
+      "shuffle": null,
+      "biological_response_validated": false,
+      "activity_sha256": "85631a97acaa408cad52301c2ac459d94fc84be9014fda82896099219816eeba",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "elevated",
+        "gf_spikes": [
+          3,
+          4
+        ],
+        "active_neurons": 418,
+        "population_spikes": 834,
+        "gf_first_latency_ms": [
+          179.8,
+          179.60000000000002
+        ],
+        "gf_peak_model_depolarization_mv": [
+          7.2097722178051455,
+          8.018707178063472
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.07651941594667733,
+        "import_and_control_seconds": 0.4263681669253856,
+        "simulation_wall_seconds": 0.9366132500581443,
+        "total_cpu_seconds": 1.496353,
+        "total_wall_seconds": 1.5031029579695314,
+        "compressed_result_bytes": 121396,
+        "sampled_peak_rss_mib": 219.984375,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 223.359375,
+        "simulation_and_result_serialization_cpu_seconds": 0.9969539999999999
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 1.783536875154823
+    },
+    {
+      "case": "strong",
+      "control": "real",
+      "shuffle": null,
+      "biological_response_validated": false,
+      "activity_sha256": "85631a97acaa408cad52301c2ac459d94fc84be9014fda82896099219816eeba",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "elevated",
+        "gf_spikes": [
+          3,
+          4
+        ],
+        "active_neurons": 418,
+        "population_spikes": 834,
+        "gf_first_latency_ms": [
+          179.8,
+          179.60000000000002
+        ],
+        "gf_peak_model_depolarization_mv": [
+          7.2097722178051455,
+          8.018707178063472
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.07994870794937015,
+        "import_and_control_seconds": 0.42066854191944003,
+        "simulation_wall_seconds": 0.9448989999946207,
+        "total_cpu_seconds": 1.501085,
+        "total_wall_seconds": 1.5039763329550624,
+        "compressed_result_bytes": 121396,
+        "sampled_peak_rss_mib": 219.015625,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 222.375,
+        "simulation_and_result_serialization_cpu_seconds": 1.0012210000000001
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 1.754297540988773
+    },
+    {
+      "case": "strong",
+      "control": "zero",
+      "shuffle": null,
+      "biological_response_validated": false,
+      "activity_sha256": "b308c201cef2cd59eab58b995a0bf05e023f68314801da7724d9ffa3837e9205",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "moderate",
+        "gf_spikes": [
+          0,
+          0
+        ],
+        "active_neurons": 314,
+        "population_spikes": 838,
+        "gf_first_latency_ms": [
+          null,
+          null
+        ],
+        "gf_peak_model_depolarization_mv": [
+          0.0,
+          0.0
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.09176204120740294,
+        "import_and_control_seconds": 0.4068928339984268,
+        "simulation_wall_seconds": 0.9374537079129368,
+        "total_cpu_seconds": 1.485184,
+        "total_wall_seconds": 1.4907360409852117,
+        "compressed_result_bytes": 63616,
+        "sampled_peak_rss_mib": 218.84375,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 222.21875,
+        "simulation_and_result_serialization_cpu_seconds": 0.9881350000000001
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 1.7204588749445975
+    },
+    {
+      "case": "strong",
+      "control": "zero",
+      "shuffle": null,
+      "biological_response_validated": false,
+      "activity_sha256": "b308c201cef2cd59eab58b995a0bf05e023f68314801da7724d9ffa3837e9205",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "moderate",
+        "gf_spikes": [
+          0,
+          0
+        ],
+        "active_neurons": 314,
+        "population_spikes": 838,
+        "gf_first_latency_ms": [
+          null,
+          null
+        ],
+        "gf_peak_model_depolarization_mv": [
+          0.0,
+          0.0
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.07929725013673306,
+        "import_and_control_seconds": 0.4288525420706719,
+        "simulation_wall_seconds": 0.928832417121157,
+        "total_cpu_seconds": 1.489636,
+        "total_wall_seconds": 1.4921999170910567,
+        "compressed_result_bytes": 63616,
+        "sampled_peak_rss_mib": 218.921875,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 222.28125,
+        "simulation_and_result_serialization_cpu_seconds": 0.9832169999999999
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 1.7479985419195145
+    },
+    {
+      "case": "strong",
+      "control": "shuffled",
+      "shuffle": {
+        "seed": 783,
+        "accepted_swaps": 146873,
+        "changed_rows": 20485,
+        "preserves": "Per-neuron directed row degree and contact strength; edge count/weight/neuropil/NT strata",
+        "not_preserved": "Actual biological partner identity, morphology, pathways; this is a synthetic null model"
+      },
+      "biological_response_validated": false,
+      "activity_sha256": "ece18457e7f43cdcdb5c2f69e449baf9b19d97eb1bf08b541e74dfb4a69b8ee2",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "moderate",
+        "gf_spikes": [
+          2,
+          3
+        ],
+        "active_neurons": 416,
+        "population_spikes": 827,
+        "gf_first_latency_ms": [
+          179.89999999999998,
+          179.60000000000002
+        ],
+        "gf_peak_model_depolarization_mv": [
+          7.712120545660277,
+          7.510281079721707
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.07911962503567338,
+        "import_and_control_seconds": 1.3304198328405619,
+        "simulation_wall_seconds": 0.9831227499525994,
+        "total_cpu_seconds": 2.447973,
+        "total_wall_seconds": 2.452098916983232,
+        "compressed_result_bytes": 125314,
+        "sampled_peak_rss_mib": 219.546875,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 223.0625,
+        "simulation_and_result_serialization_cpu_seconds": 1.0409680000000001
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 2.7024628329090774
+    },
+    {
+      "case": "strong",
+      "control": "shuffled",
+      "shuffle": {
+        "seed": 784,
+        "accepted_swaps": 146577,
+        "changed_rows": 20486,
+        "preserves": "Per-neuron directed row degree and contact strength; edge count/weight/neuropil/NT strata",
+        "not_preserved": "Actual biological partner identity, morphology, pathways; this is a synthetic null model"
+      },
+      "biological_response_validated": false,
+      "activity_sha256": "4b39421f96df21dace02340b8e1d9d21884f527eb356d3123055cbaacc87a01c",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "moderate",
+        "gf_spikes": [
+          3,
+          2
+        ],
+        "active_neurons": 416,
+        "population_spikes": 828,
+        "gf_first_latency_ms": [
+          179.89999999999998,
+          179.60000000000002
+        ],
+        "gf_peak_model_depolarization_mv": [
+          7.66091830024164,
+          7.721180256243457
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.0792583751026541,
+        "import_and_control_seconds": 1.3549783329945058,
+        "simulation_wall_seconds": 0.9607638749293983,
+        "total_cpu_seconds": 2.443671,
+        "total_wall_seconds": 2.4543037079274654,
+        "compressed_result_bytes": 125169,
+        "sampled_peak_rss_mib": 219.640625,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 223.015625,
+        "simulation_and_result_serialization_cpu_seconds": 1.0192029999999999
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 2.732512667076662
+    },
+    {
+      "case": "strong",
+      "control": "shuffled",
+      "shuffle": {
+        "seed": 785,
+        "accepted_swaps": 146560,
+        "changed_rows": 20574,
+        "preserves": "Per-neuron directed row degree and contact strength; edge count/weight/neuropil/NT strata",
+        "not_preserved": "Actual biological partner identity, morphology, pathways; this is a synthetic null model"
+      },
+      "biological_response_validated": false,
+      "activity_sha256": "09e5abe74dd2208725f821c67fff58fab411a23876f095c29de1079cbf7806e3",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "moderate",
+        "gf_spikes": [
+          2,
+          3
+        ],
+        "active_neurons": 416,
+        "population_spikes": 827,
+        "gf_first_latency_ms": [
+          179.89999999999998,
+          179.60000000000002
+        ],
+        "gf_peak_model_depolarization_mv": [
+          7.67613642235257,
+          7.4014091068669785
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.07810712489299476,
+        "import_and_control_seconds": 1.3195893331430852,
+        "simulation_wall_seconds": 0.9869755001273006,
+        "total_cpu_seconds": 2.4399420000000003,
+        "total_wall_seconds": 2.4436238328926265,
+        "compressed_result_bytes": 125504,
+        "sampled_peak_rss_mib": 219.703125,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 223.171875,
+        "simulation_and_result_serialization_cpu_seconds": 1.0437789999999998
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 2.699618084123358
+    },
+    {
+      "case": "baseline",
+      "control": "real",
+      "shuffle": null,
+      "biological_response_validated": false,
+      "activity_sha256": "5550f0afe0a6edaad16655cba5fefa21363dac8381017a21c1c7da359e72c449",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "minimal",
+        "gf_spikes": [
+          0,
+          0
+        ],
+        "active_neurons": 0,
+        "population_spikes": 0,
+        "gf_first_latency_ms": [
+          null,
+          null
+        ],
+        "gf_peak_model_depolarization_mv": [
+          0.0,
+          0.0
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.07856008317321539,
+        "import_and_control_seconds": 0.4462827919051051,
+        "simulation_wall_seconds": 0.9177416248712689,
+        "total_cpu_seconds": 1.502185,
+        "total_wall_seconds": 1.5074192080646753,
+        "compressed_result_bytes": 45541,
+        "sampled_peak_rss_mib": 218.9375,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 222.859375,
+        "simulation_and_result_serialization_cpu_seconds": 0.9798159999999999
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 1.7365377079695463
+    },
+    {
+      "case": "weak_fast",
+      "control": "real",
+      "shuffle": null,
+      "biological_response_validated": false,
+      "activity_sha256": "461e2ee6212636b8e23ea49da868ad6bbc5889b203e87c66beea0a6ea3b964cf",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "minimal",
+        "gf_spikes": [
+          0,
+          0
+        ],
+        "active_neurons": 0,
+        "population_spikes": 0,
+        "gf_first_latency_ms": [
+          null,
+          null
+        ],
+        "gf_peak_model_depolarization_mv": [
+          0.0,
+          0.0
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.07921433402225375,
+        "import_and_control_seconds": 0.41277924994938076,
+        "simulation_wall_seconds": 0.9298135829158127,
+        "total_cpu_seconds": 1.468232,
+        "total_wall_seconds": 1.4734527089167386,
+        "compressed_result_bytes": 72888,
+        "sampled_peak_rss_mib": 218.515625,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 221.703125,
+        "simulation_and_result_serialization_cpu_seconds": 0.978191
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 1.7057907090056688
+    },
+    {
+      "case": "strong_slow",
+      "control": "real",
+      "shuffle": null,
+      "biological_response_validated": false,
+      "activity_sha256": "0056a8305765a4df7fba9481b39feafcffcbf0ca64687077b956672f8109f924",
+      "readout": {
+        "version": "experimental-urgency/v1",
+        "classification": "moderate",
+        "gf_spikes": [
+          9,
+          13
+        ],
+        "active_neurons": 296,
+        "population_spikes": 2032,
+        "gf_first_latency_ms": [
+          677.8,
+          676.7
+        ],
+        "gf_peak_model_depolarization_mv": [
+          7.305927856239741,
+          7.571408406649695
+        ],
+        "biological_response_validated": false,
+        "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+        "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset"
+      },
+      "measurements": {
+        "dataset_load_seconds": 0.07853483385406435,
+        "import_and_control_seconds": 0.4277351249475032,
+        "simulation_wall_seconds": 0.974144957959652,
+        "total_cpu_seconds": 1.539933,
+        "total_wall_seconds": 1.5436412917915732,
+        "compressed_result_bytes": 156681,
+        "sampled_peak_rss_mib": 219.296875,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 223.0,
+        "simulation_and_result_serialization_cpu_seconds": 1.035207
+      },
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "process_wall_seconds": 1.7888420410454273
+    }
+  ],
+  "repeatability": {
+    "weak/real": true,
+    "weak/zero": true,
+    "strong/real": true,
+    "strong/zero": true
+  },
+  "source_manifest_sha256": "42e812ef6c9629ed15badfd5d11080f9606ce80718d5dc1bd3dc51b9b9bc9c18",
+  "evaluation": {
+    "synthetic": true,
+    "oracle": "Unsubmitted deadline <=3h, including overdue; engineered operational rule, not human-labelled ground truth",
+    "scenarios": [
+      {
+        "synthetic_scenario": 1,
+        "hours_remaining": null,
+        "submitted": false,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 2,
+        "hours_remaining": null,
+        "submitted": true,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 3,
+        "hours_remaining": 120,
+        "submitted": false,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 4,
+        "hours_remaining": 120,
+        "submitted": true,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 5,
+        "hours_remaining": 49,
+        "submitted": false,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 6,
+        "hours_remaining": 49,
+        "submitted": true,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 7,
+        "hours_remaining": 48,
+        "submitted": false,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 8,
+        "hours_remaining": 48,
+        "submitted": true,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 9,
+        "hours_remaining": 25,
+        "submitted": false,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 10,
+        "hours_remaining": 25,
+        "submitted": true,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 11,
+        "hours_remaining": 24,
+        "submitted": false,
+        "profile": "strong",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": true,
+        "neural_classification": "elevated"
+      },
+      {
+        "synthetic_scenario": 12,
+        "hours_remaining": 24,
+        "submitted": true,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 13,
+        "hours_remaining": 12,
+        "submitted": false,
+        "profile": "strong",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": true,
+        "neural_classification": "elevated"
+      },
+      {
+        "synthetic_scenario": 14,
+        "hours_remaining": 12,
+        "submitted": true,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 15,
+        "hours_remaining": 3,
+        "submitted": false,
+        "profile": "strong",
+        "engineering_critical_oracle": true,
+        "deterministic_critical": true,
+        "neural_elevated": true,
+        "neural_classification": "elevated"
+      },
+      {
+        "synthetic_scenario": 16,
+        "hours_remaining": 3,
+        "submitted": true,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 17,
+        "hours_remaining": 1,
+        "submitted": false,
+        "profile": "strong",
+        "engineering_critical_oracle": true,
+        "deterministic_critical": true,
+        "neural_elevated": true,
+        "neural_classification": "elevated"
+      },
+      {
+        "synthetic_scenario": 18,
+        "hours_remaining": 1,
+        "submitted": true,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 19,
+        "hours_remaining": 0,
+        "submitted": false,
+        "profile": "strong",
+        "engineering_critical_oracle": true,
+        "deterministic_critical": true,
+        "neural_elevated": true,
+        "neural_classification": "elevated"
+      },
+      {
+        "synthetic_scenario": 20,
+        "hours_remaining": 0,
+        "submitted": true,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      },
+      {
+        "synthetic_scenario": 21,
+        "hours_remaining": -1,
+        "submitted": false,
+        "profile": "strong",
+        "engineering_critical_oracle": true,
+        "deterministic_critical": true,
+        "neural_elevated": true,
+        "neural_classification": "elevated"
+      },
+      {
+        "synthetic_scenario": 22,
+        "hours_remaining": -1,
+        "submitted": true,
+        "profile": "weak",
+        "engineering_critical_oracle": false,
+        "deterministic_critical": false,
+        "neural_elevated": false,
+        "neural_classification": "moderate"
+      }
+    ],
+    "false_elevated_vs_rule": 2,
+    "missed_critical_vs_rule": 0,
+    "classification_differences": 2,
+    "conclusion": "No predictive advantage established: neural response is downstream of a two-profile engineered encoder. Preserve deterministic operational urgency; neural readout is experimental enrichment."
+  },
+  "batch_wall_seconds": 35.51537491683848,
+  "limits": [
+    "Synthetic scenarios, no measured user benefit or human urgency labels",
+    "Shuffled controls are not biological connectivity",
+    "Three seeds are descriptive controls, not a powered statistical study",
+    "Peak RSS is per fresh process; startup depends on environment"
+  ],
+  "measurement_note": "These first runs measured CPU through result serialization; the field is renamed to describe its actual scope. Subsequent native x86 runs use a CPU timestamp immediately after simulate(). No scientific responses changed."
+}

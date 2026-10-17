@@ -1,0 +1,4199 @@
+{
+  "benchmark_method": "fresh single-thread numerical-library processes; warm OS cache; load/import/simulate/export measured; derived analysis excluded from CPU/RSS timings",
+  "biological_response_validated": false,
+  "limitations": [
+    "Feature-to-drive gain is assumed, not fitted to recorded LC4/LPLC2 responses",
+    "Generic published LIF parameters are not GF-specific measurements",
+    "0.275 mV is a free g-increment weight, not a measured EPSP",
+    "Cell-type transmitter evidence does not establish receptor-level polarity",
+    "No retinal receptive-field geometry, gap junctions, VNC, behavioral or physiological validation"
+  ],
+  "primary_benchmarks": {
+    "baseline": {
+      "deterministic": true,
+      "median_cpu_seconds": 1.660832,
+      "median_wall_seconds_whole_subprocess": 2.05125791602768,
+      "peak_rss_mib": 215.875,
+      "repeats": 3
+    },
+    "strong": {
+      "deterministic": true,
+      "median_cpu_seconds": 1.660924,
+      "median_wall_seconds_whole_subprocess": 2.034534125123173,
+      "peak_rss_mib": 216.6875,
+      "repeats": 3
+    },
+    "weak": {
+      "deterministic": true,
+      "median_cpu_seconds": 1.641447,
+      "median_wall_seconds_whole_subprocess": 2.1232857909053564,
+      "peak_rss_mib": 217.078125,
+      "repeats": 3
+    }
+  },
+  "references": [
+    {
+      "url": "https://doi.org/10.1016/j.cub.2019.01.079",
+      "use": "LC4 velocity plus LPLC2 size contribution to GF, not drive calibration"
+    },
+    {
+      "url": "https://doi.org/10.1242/jeb.244790",
+      "use": "10-63 degree looms, r/v 10/20/40/80 ms; membrane response is a valid measurement"
+    },
+    {
+      "url": "https://doi.org/10.7554/eLife.50901",
+      "use": "cell-type transcriptomic transmitter annotations, not receptor measurements"
+    },
+    {
+      "url": "https://doi.org/10.1038/s41586-024-07763-9",
+      "use": "published generic LIF parameter assumptions; 0.275 mV is a free model weight"
+    },
+    {
+      "url": "https://github.com/philshiu/Drosophila_brain_model/blob/91bdd1e7dcf193f3e7ca5a8933497fcef63b7960/model.py",
+      "use": "exact g-decay equations and parameter semantics; our input protocol is different"
+    }
+  ],
+  "runs": [
+    {
+      "active_neurons": 340,
+      "activity_sha256": "c31bc1f13d98a0033bfc63cb4b4eb8903d7495a8f536a8f40732d3f66071637a",
+      "case": "legacy_raw",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 7.56,
+              "weighted_synapse_events": 987,
+              "zero_effect_synapse_events": 609
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 7.619999999999999,
+              "weighted_synapse_events": 915,
+              "zero_effect_synapse_events": 534
+            },
+            "other": {
+              "negative_increment_mv": 4.819999999999999,
+              "positive_increment_mv": 1.3599999999999999,
+              "weighted_synapse_events": 318,
+              "zero_effect_synapse_events": 9
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 9.239999999999998,
+              "weighted_synapse_events": 1284,
+              "zero_effect_synapse_events": 822
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.78,
+              "positive_increment_mv": 5.339999999999999,
+              "weighted_synapse_events": 1617,
+              "zero_effect_synapse_events": 1311
+            },
+            "other": {
+              "negative_increment_mv": 4.239999999999999,
+              "positive_increment_mv": 2.2800000000000002,
+              "weighted_synapse_events": 329,
+              "zero_effect_synapse_events": 3
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 0.920228,
+        "process_lifetime_peak_rss_mib": 160.3125,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 160.3125,
+        "wall_seconds_load_import_simulation_export": 1.053491957951337
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "edge_prediction",
+        "synaptic_model": "voltage_jump",
+        "weight_interpretation": "instantaneous v increment"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/legacy_raw-1.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 0,
+          "neurons": 2,
+          "spikes": 0
+        },
+        "LC4": {
+          "active_neurons": 104,
+          "neurons": 104,
+          "spikes": 312
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 630
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -64.99168195666036,
+          "latency_from_stimulus_ms": null,
+          "peak_depolarization_mv": 6.885089592397712,
+          "peak_time_ms": 51.6,
+          "peak_voltage_mv": -58.11491040760229,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": []
+        },
+        {
+          "final_voltage_mv": -64.99174778693761,
+          "latency_from_stimulus_ms": null,
+          "peak_depolarization_mv": 6.8011238268911995,
+          "peak_time_ms": 51.6,
+          "peak_voltage_mv": -58.1988761731088,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": []
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 14417,
+        "inhibitory_rows": 7692,
+        "zero_effect_rows": 3097
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 988,
+      "stimulus_summary": {
+        "drive_mv": 30.0,
+        "kind": "rectangular_current_injection",
+        "start_ms": 20.0,
+        "stop_ms": 80.0
+      },
+      "telemetry_bytes": 68755,
+      "wall_seconds_whole_subprocess": 1.3487444161437452
+    },
+    {
+      "active_neurons": 346,
+      "activity_sha256": "e776bb1b0593311a661e201774d773257f746a1992059b47bdd375ab04cc4471",
+      "case": "legacy_presynaptic",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 19.74000000000001,
+              "weighted_synapse_events": 987,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 18.300000000000008,
+              "weighted_synapse_events": 915,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 9.840000000000002,
+              "positive_increment_mv": 1.7200000000000002,
+              "weighted_synapse_events": 578,
+              "zero_effect_synapse_events": 0
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 25.680000000000007,
+              "weighted_synapse_events": 1284,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 32.34000000000001,
+              "weighted_synapse_events": 1617,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 4.299999999999999,
+              "positive_increment_mv": 3.5000000000000004,
+              "weighted_synapse_events": 390,
+              "zero_effect_synapse_events": 0
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 0.9175,
+        "process_lifetime_peak_rss_mib": 160.546875,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 160.546875,
+        "wall_seconds_load_import_simulation_export": 0.9538346249610186
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_conservative",
+        "synaptic_model": "voltage_jump",
+        "weight_interpretation": "instantaneous v increment"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/legacy_presynaptic-1.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 4
+        },
+        "LC4": {
+          "active_neurons": 104,
+          "neurons": 104,
+          "spikes": 312
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 630
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -64.98796498893762,
+          "latency_from_stimulus_ms": 31.5,
+          "peak_depolarization_mv": 16.33710248571972,
+          "peak_time_ms": 51.5,
+          "peak_voltage_mv": -48.66289751428028,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            51.5
+          ]
+        },
+        {
+          "final_voltage_mv": -65.0,
+          "latency_from_stimulus_ms": 14.899999999999999,
+          "peak_depolarization_mv": 19.2435413475865,
+          "peak_time_ms": 34.9,
+          "peak_voltage_mv": -45.7564586524135,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            34.9,
+            51.4,
+            67.5
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 7625,
+        "zero_effect_rows": 2133
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 1001,
+      "stimulus_summary": {
+        "drive_mv": 30.0,
+        "kind": "rectangular_current_injection",
+        "start_ms": 20.0,
+        "stop_ms": 80.0
+      },
+      "telemetry_bytes": 53583,
+      "wall_seconds_whole_subprocess": 1.2716185830067843
+    },
+    {
+      "active_neurons": 0,
+      "activity_sha256": "5550f0afe0a6edaad16655cba5fefa21363dac8381017a21c1c7da359e72c449",
+      "case": "baseline",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.660832,
+        "process_lifetime_peak_rss_mib": 215.6875,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 213.6875,
+        "wall_seconds_load_import_simulation_export": 1.6866339589469135
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/baseline-1.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 0,
+          "neurons": 2,
+          "spikes": 0
+        },
+        "LC4": {
+          "active_neurons": 0,
+          "neurons": 104,
+          "spikes": 0
+        },
+        "LPLC2": {
+          "active_neurons": 0,
+          "neurons": 210,
+          "spikes": 0
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": null,
+          "peak_depolarization_mv": 0.0,
+          "peak_time_ms": 0.0,
+          "peak_voltage_mv": -52.0,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": []
+        },
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": null,
+          "peak_depolarization_mv": 0.0,
+          "peak_time_ms": 0.0,
+          "peak_voltage_mv": -52.0,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": []
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 0,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 0.0,
+          "LPLC2": 0.0
+        },
+        "expansion_end_ms": 295.9640123126511,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 0,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 20.0,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 0.0,
+          "LPLC2": 0.0
+        }
+      },
+      "telemetry_bytes": 55025,
+      "wall_seconds_whole_subprocess": 2.0644588749855757
+    },
+    {
+      "active_neurons": 0,
+      "activity_sha256": "5550f0afe0a6edaad16655cba5fefa21363dac8381017a21c1c7da359e72c449",
+      "case": "baseline",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.665114,
+        "process_lifetime_peak_rss_mib": 215.875,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 213.875,
+        "wall_seconds_load_import_simulation_export": 1.698527208995074
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/baseline-2.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 0,
+          "neurons": 2,
+          "spikes": 0
+        },
+        "LC4": {
+          "active_neurons": 0,
+          "neurons": 104,
+          "spikes": 0
+        },
+        "LPLC2": {
+          "active_neurons": 0,
+          "neurons": 210,
+          "spikes": 0
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": null,
+          "peak_depolarization_mv": 0.0,
+          "peak_time_ms": 0.0,
+          "peak_voltage_mv": -52.0,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": []
+        },
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": null,
+          "peak_depolarization_mv": 0.0,
+          "peak_time_ms": 0.0,
+          "peak_voltage_mv": -52.0,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": []
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 0,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 0.0,
+          "LPLC2": 0.0
+        },
+        "expansion_end_ms": 295.9640123126511,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 0,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 20.0,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 0.0,
+          "LPLC2": 0.0
+        }
+      },
+      "telemetry_bytes": 55027,
+      "wall_seconds_whole_subprocess": 2.05125791602768
+    },
+    {
+      "active_neurons": 0,
+      "activity_sha256": "5550f0afe0a6edaad16655cba5fefa21363dac8381017a21c1c7da359e72c449",
+      "case": "baseline",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.614607,
+        "process_lifetime_peak_rss_mib": 215.6875,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 213.6875,
+        "wall_seconds_load_import_simulation_export": 1.6301947499159724
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/baseline-3.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 0,
+          "neurons": 2,
+          "spikes": 0
+        },
+        "LC4": {
+          "active_neurons": 0,
+          "neurons": 104,
+          "spikes": 0
+        },
+        "LPLC2": {
+          "active_neurons": 0,
+          "neurons": 210,
+          "spikes": 0
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": null,
+          "peak_depolarization_mv": 0.0,
+          "peak_time_ms": 0.0,
+          "peak_voltage_mv": -52.0,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": []
+        },
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": null,
+          "peak_depolarization_mv": 0.0,
+          "peak_time_ms": 0.0,
+          "peak_voltage_mv": -52.0,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": []
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 0,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 0.0,
+          "LPLC2": 0.0
+        },
+        "expansion_end_ms": 295.9640123126511,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 0,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 20.0,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 0.0,
+          "LPLC2": 0.0
+        }
+      },
+      "telemetry_bytes": 55025,
+      "wall_seconds_whole_subprocess": 1.96508491714485
+    },
+    {
+      "active_neurons": 282,
+      "activity_sha256": "2be83a2ef8478f0f2408c7a22bc63a4b682d36c17450169f442af0cffcba2cdf",
+      "case": "weak",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 95.15,
+              "weighted_synapse_events": 346,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 72.6,
+              "positive_increment_mv": 124.85000000000004,
+              "weighted_synapse_events": 718,
+              "zero_effect_synapse_events": 0
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 164.725,
+              "weighted_synapse_events": 599,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 89.92500000000003,
+              "positive_increment_mv": 210.10000000000005,
+              "weighted_synapse_events": 1091,
+              "zero_effect_synapse_events": 0
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.6375389999999999,
+        "process_lifetime_peak_rss_mib": 216.296875,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 214.296875,
+        "wall_seconds_load_import_simulation_export": 1.6542061660438776
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/weak-1.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 4
+        },
+        "LC4": {
+          "active_neurons": 0,
+          "neurons": 104,
+          "spikes": 0
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 254
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -51.99988226735086,
+          "latency_from_stimulus_ms": 751.1,
+          "peak_depolarization_mv": 7.0398444265493225,
+          "peak_time_ms": 851.1,
+          "peak_voltage_mv": -44.96015557345068,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            851.1,
+            866.3
+          ]
+        },
+        {
+          "final_voltage_mv": -51.99989246578927,
+          "latency_from_stimulus_ms": 750.0,
+          "peak_depolarization_mv": 7.119108279948492,
+          "peak_time_ms": 862.8,
+          "peak_voltage_mv": -44.88089172005151,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            850.0,
+            862.8
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 344,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 277.54807592142157,
+          "LPLC2": 1057.3554324315876
+        },
+        "expansion_end_ms": 883.8560492506044,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 0.35,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 80,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 2.033562915793402,
+          "LPLC2": 10.499923383416894
+        }
+      },
+      "telemetry_bytes": 162442,
+      "wall_seconds_whole_subprocess": 2.1232857909053564
+    },
+    {
+      "active_neurons": 282,
+      "activity_sha256": "2be83a2ef8478f0f2408c7a22bc63a4b682d36c17450169f442af0cffcba2cdf",
+      "case": "weak",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 95.15,
+              "weighted_synapse_events": 346,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 72.6,
+              "positive_increment_mv": 124.85000000000004,
+              "weighted_synapse_events": 718,
+              "zero_effect_synapse_events": 0
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 164.725,
+              "weighted_synapse_events": 599,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 89.92500000000003,
+              "positive_increment_mv": 210.10000000000005,
+              "weighted_synapse_events": 1091,
+              "zero_effect_synapse_events": 0
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.739341,
+        "process_lifetime_peak_rss_mib": 216.421875,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 214.421875,
+        "wall_seconds_load_import_simulation_export": 1.7905573330353945
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/weak-2.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 4
+        },
+        "LC4": {
+          "active_neurons": 0,
+          "neurons": 104,
+          "spikes": 0
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 254
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -51.99988226735086,
+          "latency_from_stimulus_ms": 751.1,
+          "peak_depolarization_mv": 7.0398444265493225,
+          "peak_time_ms": 851.1,
+          "peak_voltage_mv": -44.96015557345068,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            851.1,
+            866.3
+          ]
+        },
+        {
+          "final_voltage_mv": -51.99989246578927,
+          "latency_from_stimulus_ms": 750.0,
+          "peak_depolarization_mv": 7.119108279948492,
+          "peak_time_ms": 862.8,
+          "peak_voltage_mv": -44.88089172005151,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            850.0,
+            862.8
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 344,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 277.54807592142157,
+          "LPLC2": 1057.3554324315876
+        },
+        "expansion_end_ms": 883.8560492506044,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 0.35,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 80,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 2.033562915793402,
+          "LPLC2": 10.499923383416894
+        }
+      },
+      "telemetry_bytes": 162442,
+      "wall_seconds_whole_subprocess": 2.19548883382231
+    },
+    {
+      "active_neurons": 282,
+      "activity_sha256": "2be83a2ef8478f0f2408c7a22bc63a4b682d36c17450169f442af0cffcba2cdf",
+      "case": "weak",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 95.15,
+              "weighted_synapse_events": 346,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 72.6,
+              "positive_increment_mv": 124.85000000000004,
+              "weighted_synapse_events": 718,
+              "zero_effect_synapse_events": 0
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 164.725,
+              "weighted_synapse_events": 599,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 89.92500000000003,
+              "positive_increment_mv": 210.10000000000005,
+              "weighted_synapse_events": 1091,
+              "zero_effect_synapse_events": 0
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.641447,
+        "process_lifetime_peak_rss_mib": 217.078125,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 215.921875,
+        "wall_seconds_load_import_simulation_export": 1.667659167200327
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/weak-3.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 4
+        },
+        "LC4": {
+          "active_neurons": 0,
+          "neurons": 104,
+          "spikes": 0
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 254
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -51.99988226735086,
+          "latency_from_stimulus_ms": 751.1,
+          "peak_depolarization_mv": 7.0398444265493225,
+          "peak_time_ms": 851.1,
+          "peak_voltage_mv": -44.96015557345068,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            851.1,
+            866.3
+          ]
+        },
+        {
+          "final_voltage_mv": -51.99989246578927,
+          "latency_from_stimulus_ms": 750.0,
+          "peak_depolarization_mv": 7.119108279948492,
+          "peak_time_ms": 862.8,
+          "peak_voltage_mv": -44.88089172005151,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            850.0,
+            862.8
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 344,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 277.54807592142157,
+          "LPLC2": 1057.3554324315876
+        },
+        "expansion_end_ms": 883.8560492506044,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 0.35,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 80,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 2.033562915793402,
+          "LPLC2": 10.499923383416894
+        }
+      },
+      "telemetry_bytes": 162441,
+      "wall_seconds_whole_subprocess": 2.055548750096932
+    },
+    {
+      "active_neurons": 418,
+      "activity_sha256": "85631a97acaa408cad52301c2ac459d94fc84be9014fda82896099219816eeba",
+      "case": "strong",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 180.94999999999996,
+              "weighted_synapse_events": 658,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 167.75,
+              "weighted_synapse_events": 610,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 168.3,
+              "positive_increment_mv": 264.55000000000007,
+              "weighted_synapse_events": 1581,
+              "zero_effect_synapse_events": 7
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 235.4,
+              "weighted_synapse_events": 856,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 292.87500000000006,
+              "weighted_synapse_events": 1065,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 196.62500000000009,
+              "positive_increment_mv": 417.44999999999993,
+              "weighted_synapse_events": 2251,
+              "zero_effect_synapse_events": 18
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.6151250000000001,
+        "process_lifetime_peak_rss_mib": 216.59375,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 214.828125,
+        "wall_seconds_load_import_simulation_export": 1.6240448341704905
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/strong-1.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 7
+        },
+        "LC4": {
+          "active_neurons": 104,
+          "neurons": 104,
+          "spikes": 208
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 419
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": 179.8,
+          "peak_depolarization_mv": 7.2097722178051455,
+          "peak_time_ms": 291.8,
+          "peak_voltage_mv": -44.790227782194854,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            279.8,
+            291.8,
+            308.8
+          ]
+        },
+        {
+          "final_voltage_mv": -51.99999999999894,
+          "latency_from_stimulus_ms": 179.60000000000002,
+          "peak_depolarization_mv": 8.018707178063472,
+          "peak_time_ms": 279.6,
+          "peak_voltage_mv": -43.98129282193653,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            279.6,
+            291.3,
+            295.7,
+            310.3
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 834,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 784.5079462721201,
+          "LPLC2": 744.2295838947039
+        },
+        "expansion_end_ms": 295.9640123126511,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 1.0,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 20.0,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 22.483182836637656,
+          "LPLC2": 29.999781095476838
+        }
+      },
+      "telemetry_bytes": 131212,
+      "wall_seconds_whole_subprocess": 1.9625897088553756
+    },
+    {
+      "active_neurons": 418,
+      "activity_sha256": "85631a97acaa408cad52301c2ac459d94fc84be9014fda82896099219816eeba",
+      "case": "strong",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 180.94999999999996,
+              "weighted_synapse_events": 658,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 167.75,
+              "weighted_synapse_events": 610,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 168.3,
+              "positive_increment_mv": 264.55000000000007,
+              "weighted_synapse_events": 1581,
+              "zero_effect_synapse_events": 7
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 235.4,
+              "weighted_synapse_events": 856,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 292.87500000000006,
+              "weighted_synapse_events": 1065,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 196.62500000000009,
+              "positive_increment_mv": 417.44999999999993,
+              "weighted_synapse_events": 2251,
+              "zero_effect_synapse_events": 18
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.660924,
+        "process_lifetime_peak_rss_mib": 216.6875,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 214.921875,
+        "wall_seconds_load_import_simulation_export": 1.6836519159842283
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/strong-2.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 7
+        },
+        "LC4": {
+          "active_neurons": 104,
+          "neurons": 104,
+          "spikes": 208
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 419
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": 179.8,
+          "peak_depolarization_mv": 7.2097722178051455,
+          "peak_time_ms": 291.8,
+          "peak_voltage_mv": -44.790227782194854,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            279.8,
+            291.8,
+            308.8
+          ]
+        },
+        {
+          "final_voltage_mv": -51.99999999999894,
+          "latency_from_stimulus_ms": 179.60000000000002,
+          "peak_depolarization_mv": 8.018707178063472,
+          "peak_time_ms": 279.6,
+          "peak_voltage_mv": -43.98129282193653,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            279.6,
+            291.3,
+            295.7,
+            310.3
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 834,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 784.5079462721201,
+          "LPLC2": 744.2295838947039
+        },
+        "expansion_end_ms": 295.9640123126511,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 1.0,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 20.0,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 22.483182836637656,
+          "LPLC2": 29.999781095476838
+        }
+      },
+      "telemetry_bytes": 131212,
+      "wall_seconds_whole_subprocess": 2.034534125123173
+    },
+    {
+      "active_neurons": 418,
+      "activity_sha256": "85631a97acaa408cad52301c2ac459d94fc84be9014fda82896099219816eeba",
+      "case": "strong",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 180.94999999999996,
+              "weighted_synapse_events": 658,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 167.75,
+              "weighted_synapse_events": 610,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 168.3,
+              "positive_increment_mv": 264.55000000000007,
+              "weighted_synapse_events": 1581,
+              "zero_effect_synapse_events": 7
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 235.4,
+              "weighted_synapse_events": 856,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 292.87500000000006,
+              "weighted_synapse_events": 1065,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 196.62500000000009,
+              "positive_increment_mv": 417.44999999999993,
+              "weighted_synapse_events": 2251,
+              "zero_effect_synapse_events": 18
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.9731740000000002,
+        "process_lifetime_peak_rss_mib": 181.75,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 180.28125,
+        "wall_seconds_load_import_simulation_export": 2.0874601248651743
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/strong-3.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 7
+        },
+        "LC4": {
+          "active_neurons": 104,
+          "neurons": 104,
+          "spikes": 208
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 419
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": 179.8,
+          "peak_depolarization_mv": 7.2097722178051455,
+          "peak_time_ms": 291.8,
+          "peak_voltage_mv": -44.790227782194854,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            279.8,
+            291.8,
+            308.8
+          ]
+        },
+        {
+          "final_voltage_mv": -51.99999999999894,
+          "latency_from_stimulus_ms": 179.60000000000002,
+          "peak_depolarization_mv": 8.018707178063472,
+          "peak_time_ms": 279.6,
+          "peak_voltage_mv": -43.98129282193653,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            279.6,
+            291.3,
+            295.7,
+            310.3
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 834,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 784.5079462721201,
+          "LPLC2": 744.2295838947039
+        },
+        "expansion_end_ms": 295.9640123126511,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 1.0,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 20.0,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 22.483182836637656,
+          "LPLC2": 29.999781095476838
+        }
+      },
+      "telemetry_bytes": 131211,
+      "wall_seconds_whole_subprocess": 2.4805273751262575
+    },
+    {
+      "active_neurons": 0,
+      "activity_sha256": "461e2ee6212636b8e23ea49da868ad6bbc5889b203e87c66beea0a6ea3b964cf",
+      "case": "weak_fast",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.639605,
+        "process_lifetime_peak_rss_mib": 216.15625,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 214.15625,
+        "wall_seconds_load_import_simulation_export": 1.6740599588956684
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/weak_fast-1.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 0,
+          "neurons": 2,
+          "spikes": 0
+        },
+        "LC4": {
+          "active_neurons": 0,
+          "neurons": 104,
+          "spikes": 0
+        },
+        "LPLC2": {
+          "active_neurons": 0,
+          "neurons": 210,
+          "spikes": 0
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": null,
+          "peak_depolarization_mv": 0.0,
+          "peak_time_ms": 0.0,
+          "peak_voltage_mv": -52.0,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": []
+        },
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": null,
+          "peak_depolarization_mv": 0.0,
+          "peak_time_ms": 0.0,
+          "peak_voltage_mv": -52.0,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": []
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 0,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 274.57778119524204,
+          "LPLC2": 260.4803543631464
+        },
+        "expansion_end_ms": 295.9640123126511,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 0.35,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 20.0,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 7.869113992823181,
+          "LPLC2": 10.499923383416894
+        }
+      },
+      "telemetry_bytes": 83290,
+      "wall_seconds_whole_subprocess": 2.0174740001093596
+    },
+    {
+      "active_neurons": 296,
+      "activity_sha256": "0056a8305765a4df7fba9481b39feafcffcbf0ca64687077b956672f8109f924",
+      "case": "strong_slow",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 581.625,
+              "weighted_synapse_events": 2115,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 640.7500000000001,
+              "positive_increment_mv": 920.7000000000002,
+              "weighted_synapse_events": 5678,
+              "zero_effect_synapse_events": 0
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 1076.35,
+              "weighted_synapse_events": 3914,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 738.3750000000001,
+              "positive_increment_mv": 1423.1250000000005,
+              "weighted_synapse_events": 7860,
+              "zero_effect_synapse_events": 0
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.736831,
+        "process_lifetime_peak_rss_mib": 217.53125,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 216.125,
+        "wall_seconds_load_import_simulation_export": 1.7606938341632485
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/strong_slow-1.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 22
+        },
+        "LC4": {
+          "active_neurons": 0,
+          "neurons": 104,
+          "spikes": 0
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 1496
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -51.99962731951091,
+          "latency_from_stimulus_ms": 677.8,
+          "peak_depolarization_mv": 7.305927856239741,
+          "peak_time_ms": 839.7,
+          "peak_voltage_mv": -44.69407214376026,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            777.8,
+            793.0,
+            810.6,
+            827.1,
+            839.7,
+            857.4,
+            864.9,
+            873.6,
+            881.2
+          ]
+        },
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": 676.7,
+          "peak_depolarization_mv": 7.571408406649695,
+          "peak_time_ms": 863.0,
+          "peak_voltage_mv": -44.428591593350305,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            776.7,
+            789.5,
+            808.2,
+            823.0,
+            828.8,
+            839.5,
+            844.6,
+            851.5,
+            863.0,
+            872.0,
+            878.2,
+            883.8,
+            893.4
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 2032,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 792.9945026326329,
+          "LPLC2": 3021.0155212331074
+        },
+        "expansion_end_ms": 883.8560492506044,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 1.0,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 80,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 5.81017975940972,
+          "LPLC2": 29.999781095476838
+        }
+      },
+      "telemetry_bytes": 166972,
+      "wall_seconds_whole_subprocess": 2.1100980828050524
+    },
+    {
+      "active_neurons": 435,
+      "activity_sha256": "b08ec7895b574d5a50b8d6156dae02a20b6a51a6c0d9d02e647ff0c02b8ddf3a",
+      "case": "strong_conservative_nt",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 180.94999999999996,
+              "weighted_synapse_events": 658,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 167.75,
+              "weighted_synapse_events": 610,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 164.72500000000002,
+              "positive_increment_mv": 288.4750000000001,
+              "weighted_synapse_events": 1994,
+              "zero_effect_synapse_events": 346
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 235.4,
+              "weighted_synapse_events": 856,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 292.87500000000006,
+              "weighted_synapse_events": 1065,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 216.42500000000007,
+              "positive_increment_mv": 526.0749999999998,
+              "weighted_synapse_events": 3272,
+              "zero_effect_synapse_events": 572
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.61897,
+        "process_lifetime_peak_rss_mib": 216.953125,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 215.046875,
+        "wall_seconds_load_import_simulation_export": 1.6362392918672413
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_conservative",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/strong_conservative_nt-1.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 9
+        },
+        "LC4": {
+          "active_neurons": 104,
+          "neurons": 104,
+          "spikes": 208
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 419
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -52.00000000000032,
+          "latency_from_stimulus_ms": 179.8,
+          "peak_depolarization_mv": 7.291497268707424,
+          "peak_time_ms": 301.9,
+          "peak_voltage_mv": -44.708502731292576,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            279.8,
+            288.9,
+            294.2,
+            301.9
+          ]
+        },
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": 179.60000000000002,
+          "peak_depolarization_mv": 8.018707178063472,
+          "peak_time_ms": 279.6,
+          "peak_voltage_mv": -43.98129282193653,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            279.6,
+            289.9,
+            293.9,
+            302.7,
+            311.3
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 7625,
+        "zero_effect_rows": 2133
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 876,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 784.5079462721201,
+          "LPLC2": 744.2295838947039
+        },
+        "expansion_end_ms": 295.9640123126511,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 1.0,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 20.0,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 22.483182836637656,
+          "LPLC2": 29.999781095476838
+        }
+      },
+      "telemetry_bytes": 133156,
+      "wall_seconds_whole_subprocess": 1.9992120419628918
+    },
+    {
+      "active_neurons": 426,
+      "activity_sha256": "6ce539d08482e1589c45424e059be8f51adfc1918f13f99ae746c7579cee840b",
+      "case": "strong_raw_edge_nt",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 69.30000000000001,
+              "weighted_synapse_events": 658,
+              "zero_effect_synapse_events": 406
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 69.85000000000001,
+              "weighted_synapse_events": 610,
+              "zero_effect_synapse_events": 356
+            },
+            "other": {
+              "negative_increment_mv": 197.725,
+              "positive_increment_mv": 230.175,
+              "weighted_synapse_events": 1811,
+              "zero_effect_synapse_events": 255
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 84.69999999999999,
+              "weighted_synapse_events": 856,
+              "zero_effect_synapse_events": 548
+            },
+            "LPLC2": {
+              "negative_increment_mv": 3.575,
+              "positive_increment_mv": 48.949999999999996,
+              "weighted_synapse_events": 1065,
+              "zero_effect_synapse_events": 874
+            },
+            "other": {
+              "negative_increment_mv": 189.20000000000007,
+              "positive_increment_mv": 489.22499999999997,
+              "weighted_synapse_events": 3096,
+              "zero_effect_synapse_events": 629
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.662838,
+        "process_lifetime_peak_rss_mib": 217.71875,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 215.953125,
+        "wall_seconds_load_import_simulation_export": 1.6902387090958655
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "edge_prediction",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/strong_raw_edge_nt-1.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 8
+        },
+        "LC4": {
+          "active_neurons": 104,
+          "neurons": 104,
+          "spikes": 208
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 417
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -52.00000000000032,
+          "latency_from_stimulus_ms": 182.7,
+          "peak_depolarization_mv": 7.131016201799653,
+          "peak_time_ms": 294.1,
+          "peak_voltage_mv": -44.86898379820035,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            282.7,
+            294.1,
+            302.8
+          ]
+        },
+        {
+          "final_voltage_mv": -51.99999999999894,
+          "latency_from_stimulus_ms": 183.10000000000002,
+          "peak_depolarization_mv": 7.1781482632157605,
+          "peak_time_ms": 303.3,
+          "peak_voltage_mv": -44.82185173678424,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            283.1,
+            290.1,
+            295.8,
+            303.3,
+            311.7
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 14417,
+        "inhibitory_rows": 7692,
+        "zero_effect_rows": 3097
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 850,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 784.5079462721201,
+          "LPLC2": 744.2295838947039
+        },
+        "expansion_end_ms": 295.9640123126511,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 1.0,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 20.0,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 22.483182836637656,
+          "LPLC2": 29.999781095476838
+        }
+      },
+      "telemetry_bytes": 168578,
+      "wall_seconds_whole_subprocess": 2.03693070798181
+    },
+    {
+      "active_neurons": 314,
+      "activity_sha256": "b308c201cef2cd59eab58b995a0bf05e023f68314801da7724d9ffa3837e9205",
+      "case": "strong_zero_synapses",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 658,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 915,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 856,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 1617,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.6564009999999998,
+        "process_lifetime_peak_rss_mib": 216.5,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 214.59375,
+        "wall_seconds_load_import_simulation_export": 1.6717311670072377
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/strong_zero_synapses-1.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 0,
+          "neurons": 2,
+          "spikes": 0
+        },
+        "LC4": {
+          "active_neurons": 104,
+          "neurons": 104,
+          "spikes": 208
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 630
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": null,
+          "peak_depolarization_mv": 0.0,
+          "peak_time_ms": 0.0,
+          "peak_voltage_mv": -52.0,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": []
+        },
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": null,
+          "peak_depolarization_mv": 0.0,
+          "peak_time_ms": 0.0,
+          "peak_voltage_mv": -52.0,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": []
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 838,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 784.5079462721201,
+          "LPLC2": 744.2295838947039
+        },
+        "expansion_end_ms": 295.9640123126511,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 1.0,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 20.0,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 22.483182836637656,
+          "LPLC2": 29.999781095476838
+        }
+      },
+      "telemetry_bytes": 73802,
+      "wall_seconds_whole_subprocess": 2.0197912079747766
+    },
+    {
+      "active_neurons": 150,
+      "activity_sha256": "bcb91444cf4f2643d45548cc4d5dbf109eaecdff2f7b564d884f23657c28f6c1",
+      "case": "strong_lc4_only",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 180.94999999999996,
+              "weighted_synapse_events": 658,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 92.12500000000001,
+              "positive_increment_mv": 47.02499999999999,
+              "weighted_synapse_events": 513,
+              "zero_effect_synapse_events": 7
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 235.4,
+              "weighted_synapse_events": 856,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 110.275,
+              "positive_increment_mv": 70.675,
+              "weighted_synapse_events": 676,
+              "zero_effect_synapse_events": 18
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.6180539999999999,
+        "process_lifetime_peak_rss_mib": 216.65625,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 214.65625,
+        "wall_seconds_load_import_simulation_export": 1.6362607080955058
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/strong_lc4_only-1.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 4
+        },
+        "LC4": {
+          "active_neurons": 104,
+          "neurons": 104,
+          "spikes": 208
+        },
+        "LPLC2": {
+          "active_neurons": 0,
+          "neurons": 210,
+          "spikes": 0
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": 180.60000000000002,
+          "peak_depolarization_mv": 7.080157419238198,
+          "peak_time_ms": 298.0,
+          "peak_voltage_mv": -44.9198425807618,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            280.6,
+            298.0
+          ]
+        },
+        {
+          "final_voltage_mv": -52.00000000000032,
+          "latency_from_stimulus_ms": 180.10000000000002,
+          "peak_depolarization_mv": 7.333701255544206,
+          "peak_time_ms": 280.1,
+          "peak_voltage_mv": -44.666298744455794,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            280.1,
+            295.7
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 286,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 784.5079462721201,
+          "LPLC2": 0.0
+        },
+        "expansion_end_ms": 295.9640123126511,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 1.0,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 20.0,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 22.483182836637656,
+          "LPLC2": 0.0
+        }
+      },
+      "telemetry_bytes": 113684,
+      "wall_seconds_whole_subprocess": 1.9795537500176579
+    },
+    {
+      "active_neurons": 288,
+      "activity_sha256": "983eed0b2c0152d26cfb9caa07e4ff71c1511f6c604a71c5117773514c93602d",
+      "case": "strong_lplc2_only",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 167.75,
+              "weighted_synapse_events": 610,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 139.425,
+              "positive_increment_mv": 229.90000000000006,
+              "weighted_synapse_events": 1343,
+              "zero_effect_synapse_events": 0
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 292.87500000000006,
+              "weighted_synapse_events": 1065,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 164.72500000000002,
+              "positive_increment_mv": 381.70000000000016,
+              "weighted_synapse_events": 1987,
+              "zero_effect_synapse_events": 0
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.652193,
+        "process_lifetime_peak_rss_mib": 216.734375,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 214.796875,
+        "wall_seconds_load_import_simulation_export": 1.6688009169884026
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/strong_lplc2_only-1.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 6
+        },
+        "LC4": {
+          "active_neurons": 0,
+          "neurons": 104,
+          "spikes": 0
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 419
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -51.99999999999894,
+          "latency_from_stimulus_ms": 181.39999999999998,
+          "peak_depolarization_mv": 7.084876008717082,
+          "peak_time_ms": 294.4,
+          "peak_voltage_mv": -44.91512399128292,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            281.4,
+            294.4,
+            311.6
+          ]
+        },
+        {
+          "final_voltage_mv": -51.99999999999894,
+          "latency_from_stimulus_ms": 180.3,
+          "peak_depolarization_mv": 7.444724050963913,
+          "peak_time_ms": 292.9,
+          "peak_voltage_mv": -44.55527594903609,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            280.3,
+            292.9,
+            309.7
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 564,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 0.0,
+          "LPLC2": 744.2295838947039
+        },
+        "expansion_end_ms": 295.9640123126511,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 1.0,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 20.0,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 0.0,
+          "LPLC2": 29.999781095476838
+        }
+      },
+      "telemetry_bytes": 159771,
+      "wall_seconds_whole_subprocess": 1.995173875009641
+    },
+    {
+      "active_neurons": 418,
+      "activity_sha256": "7c5a3de8adf5bb204531a038d4746471dfa0518b81ebc4ecb3922616c1e682b8",
+      "case": "strong_fine_dt",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 180.94999999999996,
+              "weighted_synapse_events": 658,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 167.75,
+              "weighted_synapse_events": 610,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 168.3,
+              "positive_increment_mv": 264.55000000000007,
+              "weighted_synapse_events": 1581,
+              "zero_effect_synapse_events": 7
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 235.4,
+              "weighted_synapse_events": 856,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 292.87500000000006,
+              "weighted_synapse_events": 1065,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 196.62500000000009,
+              "positive_increment_mv": 417.44999999999993,
+              "weighted_synapse_events": 2251,
+              "zero_effect_synapse_events": 18
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 2.440026,
+        "process_lifetime_peak_rss_mib": 218.546875,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 217.15625,
+        "wall_seconds_load_import_simulation_export": 2.45200404105708
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/strong_fine_dt-1.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 7
+        },
+        "LC4": {
+          "active_neurons": 104,
+          "neurons": 104,
+          "spikes": 208
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 419
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -51.99999999999733,
+          "latency_from_stimulus_ms": 179.85000000000002,
+          "peak_depolarization_mv": 7.192873052392272,
+          "peak_time_ms": 279.85,
+          "peak_voltage_mv": -44.80712694760773,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.05,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            279.85,
+            291.6,
+            307.0
+          ]
+        },
+        {
+          "final_voltage_mv": -51.99999999999733,
+          "latency_from_stimulus_ms": 179.55,
+          "peak_depolarization_mv": 7.219717801514996,
+          "peak_time_ms": 279.55,
+          "peak_voltage_mv": -44.780282198485004,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.05,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            279.55,
+            291.15,
+            295.4,
+            310.15
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 833,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 784.5079462721201,
+          "LPLC2": 744.2295838947039
+        },
+        "expansion_end_ms": 295.9640123126511,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 1.0,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 20.0,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 22.483182836637656,
+          "LPLC2": 29.999781095476838
+        }
+      },
+      "telemetry_bytes": 254424,
+      "wall_seconds_whole_subprocess": 2.810631750151515
+    },
+    {
+      "active_neurons": 282,
+      "activity_sha256": "0e5f4f24d9e93317f4977fc549e5c9fd7d2f0ccd0cb34a5ac06c8371866fe432",
+      "case": "weak_fine_dt",
+      "counts": {
+        "connection_rows": 25206,
+        "directed_pairs": 17186,
+        "neurons": 1500,
+        "synapses": 276399,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 95.15,
+              "weighted_synapse_events": 346,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 72.6,
+              "positive_increment_mv": 124.85000000000004,
+              "weighted_synapse_events": 718,
+              "zero_effect_synapse_events": 0
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 164.725,
+              "weighted_synapse_events": 599,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 89.92500000000003,
+              "positive_increment_mv": 210.10000000000005,
+              "weighted_synapse_events": 1091,
+              "zero_effect_synapse_events": 0
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 2.435663,
+        "process_lifetime_peak_rss_mib": 217.96875,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 215.96875,
+        "wall_seconds_load_import_simulation_export": 2.4886520840227604
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/weak_fine_dt-1.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 4
+        },
+        "LC4": {
+          "active_neurons": 0,
+          "neurons": 104,
+          "spikes": 0
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 254
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -51.99988260673005,
+          "latency_from_stimulus_ms": 751.15,
+          "peak_depolarization_mv": 7.039844426549223,
+          "peak_time_ms": 851.15,
+          "peak_voltage_mv": -44.96015557345078,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.05,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            851.15,
+            866.3
+          ]
+        },
+        {
+          "final_voltage_mv": -51.99989262255317,
+          "latency_from_stimulus_ms": 750.05,
+          "peak_depolarization_mv": 7.165123968597676,
+          "peak_time_ms": 862.8,
+          "peak_voltage_mv": -44.834876031402324,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.05,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            850.05,
+            862.8
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 15448,
+        "inhibitory_rows": 9218,
+        "zero_effect_rows": 540
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 344,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 277.54807592142157,
+          "LPLC2": 1057.3554324315876
+        },
+        "expansion_end_ms": 883.8560492506044,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 0.35,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 80,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 2.033562915793402,
+          "LPLC2": 10.499923383416894
+        }
+      },
+      "telemetry_bytes": 224867,
+      "wall_seconds_whole_subprocess": 2.8988875411450863
+    },
+    {
+      "active_neurons": 340,
+      "activity_sha256": "fb65d9196366998ce7fce269f77dc19bcfba5181036191dc1a1a64da6471f0f2",
+      "case": "boundary_legacy_raw",
+      "counts": {
+        "connection_rows": 32009,
+        "directed_pairs": 19773,
+        "neurons": 1660,
+        "synapses": 321594,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 7.56,
+              "weighted_synapse_events": 987,
+              "zero_effect_synapse_events": 609
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 7.619999999999999,
+              "weighted_synapse_events": 915,
+              "zero_effect_synapse_events": 534
+            },
+            "other": {
+              "negative_increment_mv": 4.819999999999999,
+              "positive_increment_mv": 1.3599999999999999,
+              "weighted_synapse_events": 318,
+              "zero_effect_synapse_events": 9
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 9.239999999999998,
+              "weighted_synapse_events": 1284,
+              "zero_effect_synapse_events": 822
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.78,
+              "positive_increment_mv": 5.339999999999999,
+              "weighted_synapse_events": 1617,
+              "zero_effect_synapse_events": 1311
+            },
+            "other": {
+              "negative_increment_mv": 4.239999999999999,
+              "positive_increment_mv": 2.2800000000000002,
+              "weighted_synapse_events": 329,
+              "zero_effect_synapse_events": 3
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 0.893855,
+        "process_lifetime_peak_rss_mib": 164.53125,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 164.53125,
+        "wall_seconds_load_import_simulation_export": 0.9082612080965191
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "edge_prediction",
+        "synaptic_model": "voltage_jump",
+        "weight_interpretation": "instantaneous v increment"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/boundary_legacy_raw.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 0,
+          "neurons": 2,
+          "spikes": 0
+        },
+        "LC4": {
+          "active_neurons": 104,
+          "neurons": 104,
+          "spikes": 312
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 630
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -64.99168195666036,
+          "latency_from_stimulus_ms": null,
+          "peak_depolarization_mv": 6.885089592397712,
+          "peak_time_ms": 51.6,
+          "peak_voltage_mv": -58.11491040760229,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": []
+        },
+        {
+          "final_voltage_mv": -64.99174778693761,
+          "latency_from_stimulus_ms": null,
+          "peak_depolarization_mv": 6.8011238268911995,
+          "peak_time_ms": 51.6,
+          "peak_voltage_mv": -58.1988761731088,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": []
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 17120,
+        "inhibitory_rows": 10683,
+        "zero_effect_rows": 4206
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 988,
+      "stimulus_summary": {
+        "drive_mv": 30.0,
+        "kind": "rectangular_current_injection",
+        "start_ms": 20.0,
+        "stop_ms": 80.0
+      },
+      "telemetry_bytes": 70744,
+      "wall_seconds_whole_subprocess": 1.2111123751383275
+    },
+    {
+      "active_neurons": 285,
+      "activity_sha256": "ba1f0f23fe51d41816ad76b071d7027f52ec25d4af7b5130ad0aa7a320ead759",
+      "case": "boundary_weak",
+      "counts": {
+        "connection_rows": 32009,
+        "directed_pairs": 19773,
+        "neurons": 1660,
+        "synapses": 321594,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 95.15,
+              "weighted_synapse_events": 346,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 72.6,
+              "positive_increment_mv": 129.25000000000006,
+              "weighted_synapse_events": 734,
+              "zero_effect_synapse_events": 0
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 0.0,
+              "weighted_synapse_events": 0,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 164.725,
+              "weighted_synapse_events": 599,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 92.95000000000003,
+              "positive_increment_mv": 210.10000000000005,
+              "weighted_synapse_events": 1102,
+              "zero_effect_synapse_events": 0
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.683844,
+        "process_lifetime_peak_rss_mib": 225.8125,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 223.84375,
+        "wall_seconds_load_import_simulation_export": 1.6971036670729518
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/boundary_weak.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 4
+        },
+        "LC4": {
+          "active_neurons": 0,
+          "neurons": 104,
+          "spikes": 0
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 254
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -51.99988245907664,
+          "latency_from_stimulus_ms": 751.1,
+          "peak_depolarization_mv": 7.103847442156102,
+          "peak_time_ms": 865.7,
+          "peak_voltage_mv": -44.8961525578439,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            851.1,
+            865.7
+          ]
+        },
+        {
+          "final_voltage_mv": -51.99989652241688,
+          "latency_from_stimulus_ms": 750.0,
+          "peak_depolarization_mv": 7.260941547825411,
+          "peak_time_ms": 862.9,
+          "peak_voltage_mv": -44.73905845217459,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            850.0,
+            862.9
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 18250,
+        "inhibitory_rows": 13147,
+        "zero_effect_rows": 612
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 347,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 277.54807592142157,
+          "LPLC2": 1057.3554324315876
+        },
+        "expansion_end_ms": 883.8560492506044,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 0.35,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 80,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 2.033562915793402,
+          "LPLC2": 10.499923383416894
+        }
+      },
+      "telemetry_bytes": 165069,
+      "wall_seconds_whole_subprocess": 2.0396872921846807
+    },
+    {
+      "active_neurons": 422,
+      "activity_sha256": "56c85bc5c4c9759e0bb08e2362b795deab53ca6fbbfe5d554aaa5a4d23f9e056",
+      "case": "boundary_strong",
+      "counts": {
+        "connection_rows": 32009,
+        "directed_pairs": 19773,
+        "neurons": 1660,
+        "synapses": 321594,
+        "weak_components": 1
+      },
+      "environment": {
+        "cpu_logical_count": 11,
+        "dependencies": {
+          "brian2": "2.9.0",
+          "jinja2": "3.1.6",
+          "numpy": "1.26.4",
+          "psutil": "7.2.2",
+          "pyparsing": "3.3.3",
+          "sympy": "1.14.0"
+        },
+        "machine": "arm64",
+        "numerical_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "platform": "macOS-26.5.1-arm64-arm-64bit",
+        "python": "3.11.17"
+      },
+      "incoming_drive": {
+        "interpretation": "Available arrivals before refractory losses and decay; not biological EPSP sums or actual membrane depolarization",
+        "targets": {
+          "720575940622838154": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 180.94999999999996,
+              "weighted_synapse_events": 658,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 167.75,
+              "weighted_synapse_events": 610,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 168.3,
+              "positive_increment_mv": 285.72499999999997,
+              "weighted_synapse_events": 1658,
+              "zero_effect_synapse_events": 7
+            }
+          },
+          "720575940632499757": {
+            "LC4": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 235.4,
+              "weighted_synapse_events": 856,
+              "zero_effect_synapse_events": 0
+            },
+            "LPLC2": {
+              "negative_increment_mv": 0.0,
+              "positive_increment_mv": 292.87500000000006,
+              "weighted_synapse_events": 1065,
+              "zero_effect_synapse_events": 0
+            },
+            "other": {
+              "negative_increment_mv": 201.0250000000001,
+              "positive_increment_mv": 388.0249999999998,
+              "weighted_synapse_events": 2160,
+              "zero_effect_synapse_events": 18
+            }
+          }
+        }
+      },
+      "measurements": {
+        "cpu_seconds_load_import_simulation_export": 1.63245,
+        "process_lifetime_peak_rss_mib": 226.046875,
+        "rss_sample_interval_ms": 5,
+        "sampled_peak_rss_mib": 224.1875,
+        "wall_seconds_load_import_simulation_export": 1.6372987921349704
+      },
+      "model": {
+        "biological_response_validated": false,
+        "nt_policy": "presynaptic_shiu",
+        "synaptic_model": "exponential_current",
+        "weight_interpretation": "increment to decaying g, not EPSP peak"
+      },
+      "no_gf_direct_stimulation": true,
+      "output": "data/neural/runs/escape-resumed-20261014/boundary_strong.json.gz",
+      "population_activity": {
+        "DNp01": {
+          "active_neurons": 2,
+          "neurons": 2,
+          "spikes": 7
+        },
+        "LC4": {
+          "active_neurons": 104,
+          "neurons": 104,
+          "spikes": 208
+        },
+        "LPLC2": {
+          "active_neurons": 210,
+          "neurons": 210,
+          "spikes": 419
+        }
+      },
+      "readout": [
+        {
+          "final_voltage_mv": -51.99999999999894,
+          "latency_from_stimulus_ms": 179.8,
+          "peak_depolarization_mv": 7.254283393732365,
+          "peak_time_ms": 291.6,
+          "peak_voltage_mv": -44.745716606267635,
+          "root_id": "720575940622838154",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            279.8,
+            291.6,
+            309.6
+          ]
+        },
+        {
+          "final_voltage_mv": -52.0,
+          "latency_from_stimulus_ms": 179.60000000000002,
+          "peak_depolarization_mv": 8.018707178063472,
+          "peak_time_ms": 279.6,
+          "peak_voltage_mv": -43.98129282193653,
+          "root_id": "720575940632499757",
+          "sample_ms": 0.1,
+          "sampling_phase": "before_thresholds",
+          "spike_times_ms": [
+            279.6,
+            291.4,
+            295.9,
+            313.6
+          ]
+        }
+      ],
+      "signs": {
+        "excitatory_rows": 18250,
+        "inhibitory_rows": 13147,
+        "zero_effect_rows": 612
+      },
+      "source_code_sha256": {
+        "engine.py": "753875b1b00b77f5ed2e97fa0d781e8bb4fef6865f987612bd4d2ad38f8a2254",
+        "escape.py": "b72b283243e8af17c5e447d88ed1268aa169950dce1c4994c93504b09b741d1a",
+        "experiment.py": "fb9049abf22ade2645681425a19dc509cd546e41338c5ae8251b8f53c45c9df8",
+        "models.py": "278d80f046d80aadf7ef5c64f2f36c43a13ece3515737acaecb4ef4a8cfd477e",
+        "stimulus.py": "a9b109fb0788a75a0f2c4d72afd3e692c4a3f1e411e82f7c1514cd0feace92c7"
+      },
+      "spikes": 838,
+      "stimulus_summary": {
+        "drive_integral_mv_ms": {
+          "LC4": 784.5079462721201,
+          "LPLC2": 744.2295838947039
+        },
+        "expansion_end_ms": 295.9640123126511,
+        "kind": "looming_feature_drive_proxy",
+        "parameters": {
+          "contrast": 1.0,
+          "drive_scale_mv": 30.0,
+          "enabled_types": [
+            "LC4",
+            "LPLC2"
+          ],
+          "final_angle_deg": 63.0,
+          "initial_angle_deg": 10.0,
+          "radius_over_speed_ms": 20.0,
+          "sample_ms": 1.0,
+          "side": "both",
+          "size_preference_deg": 60.0,
+          "size_width_deg": 15.0,
+          "start_ms": 100.0,
+          "velocity_reference_deg_s": 2000.0
+        },
+        "peak_drive_mv": {
+          "LC4": 22.483182836637656,
+          "LPLC2": 29.999781095476838
+        }
+      },
+      "telemetry_bytes": 134770,
+      "wall_seconds_whole_subprocess": 1.9921172498725355
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,39 +1,88 @@
 name: Canvas State Tracker
+run-name: FlyMind sync ${{ inputs.manual_request_id || github.run_id }}
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # Every 5 minutes
+    - cron: '2-59/5 * * * *' # Best-effort 5 minutes, away from :00; activation gate remains closed
   workflow_dispatch: # Allows manual trigger
     inputs:
+      read_only:
+        description: 'Validate Canvas reads only; no database writes or Telegram'
+        type: boolean
+        default: false
+      manual_request_id:
+        description: 'Persisted owner request UUID; never bypasses activation gates'
+        type: string
+        required: false
       chat_id:
         description: 'ID чата для авто-отчета'
         required: false
 
+permissions:
+  contents: read
+
+concurrency:
+  group: canvas-state-tracker
+  cancel-in-progress: false
+
 jobs:
   run-tracker:
+    # Gate the legacy path too: FLYMIND_ENABLED=false alone returns to legacy delivery.
+    if: inputs.read_only == true || vars.CANVAS_WORKER_ENABLED == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
       with:
         python-version: '3.11'
         cache: 'pip'
         
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: pip install -r requirements.lock
       
-    - name: Run Canvas Scanner
+    - name: Install optional neural dependencies
+      id: neural_deps
+      continue-on-error: true # A failed optional install must never block Canvas delivery.
+      if: inputs.read_only != true && vars.FLYMIND_ENABLED == 'true' && vars.FLYMIND_NEURAL_ENABLED != 'false'
+      run: pip install -r requirements-neural.lock
+
+    - name: Controlled read-only Canvas validation
+      if: inputs.read_only == true
       env:
+        CANVAS_API_URL: ${{ secrets.CANVAS_API_URL }}
+        CANVAS_API_KEY: ${{ secrets.CANVAS_API_KEY }}
+      run: python -m src.flymind.live_check
+
+    - name: Run Canvas Scanner or tracked manual request
+      if: inputs.read_only != true
+      env:
+        CANVAS_WORKER_ENABLED: ${{ vars.CANVAS_WORKER_ENABLED || 'false' }}
+        MANUAL_REQUEST_ID: ${{ inputs.manual_request_id }}
+        FLYMIND_ENABLED: ${{ vars.FLYMIND_ENABLED || 'false' }}
+        FLYMIND_NEURAL_ENABLED: ${{ steps.neural_deps.outcome == 'failure' && 'false' || vars.FLYMIND_NEURAL_ENABLED || 'true' }}
+        FLYMIND_ACCOUNT_ID: ${{ vars.FLYMIND_ACCOUNT_ID }}
+        FLYMIND_MODE: ${{ vars.FLYMIND_MODE || 'shadow' }}
+        DELIVERY_MODE: ${{ vars.DELIVERY_MODE || 'disabled' }}
+        FLYMIND_PRODUCTION_AUTHORIZED: ${{ vars.FLYMIND_PRODUCTION_AUTHORIZED || 'false' }}
+        NEURAL_TELEMETRY_ENABLED: ${{ vars.NEURAL_TELEMETRY_ENABLED || 'true' }}
+        TEST_TELEGRAM_CHAT_ID: ${{ secrets.TEST_TELEGRAM_CHAT_ID }}
+        FLYMIND_MAX_NEURAL: ${{ vars.FLYMIND_MAX_NEURAL || '5' }}
         CANVAS_API_URL: ${{ secrets.CANVAS_API_URL }}
         CANVAS_API_KEY: ${{ secrets.CANVAS_API_KEY }}
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
         SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ github.event.inputs.chat_id || secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         IS_AUTO_REPORT: ${{ github.event.inputs.chat_id != '' && 'true' || 'false' }}
         PYTHONPATH: ${{ github.workspace }}
-      run: python src/main.py
+      run: |
+        if [ -n "$MANUAL_REQUEST_ID" ]; then
+          python -m src.flymind.manual_sync run
+        else
+          python src/main.py
+        fi

@@ -1,0 +1,31 @@
+{
+  "activity_sha256": "85631a97acaa408cad52301c2ac459d94fc84be9014fda82896099219816eeba",
+  "cpu_system_seconds": 0.19,
+  "cpu_user_seconds": 1.89,
+  "environment": {
+    "cpu_logical_count": 11,
+    "dependencies": {
+      "brian2": "2.9.0",
+      "jinja2": "3.1.6",
+      "numpy": "1.26.4",
+      "psutil": "7.2.2",
+      "pyparsing": "3.3.3",
+      "sympy": "1.14.0"
+    },
+    "machine": "arm64",
+    "numerical_thread_environment": {
+      "MKL_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.11.17"
+  },
+  "maximum_rss_bytes": 229720064,
+  "maximum_rss_mib": 219.078125,
+  "method": "/usr/bin/time -l; complete CLI including derived metrics and stdout serialization; one fresh process; numerical library threads=1",
+  "peak_memory_footprint_bytes": 209765000,
+  "source_telemetry": "data/neural/runs/escape-validation-final/external-benchmark-verified.json.gz",
+  "wall_seconds": 2.35
+}

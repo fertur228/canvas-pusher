@@ -1,0 +1,20 @@
+{
+  "status": "verified",
+  "real_canvas_read": true,
+  "courses": 6,
+  "assignments": 20,
+  "files": 91,
+  "announcements": 2,
+  "rate_cost_total": 56.88693645286494,
+  "rate_remaining_min": 592.0983229175436,
+  "failed_scopes": 0,
+  "requests": 14,
+  "pagination_hops": 0,
+  "http_status_counts": {
+    "200": 14
+  },
+  "timezone_and_submission_schema_checked": true,
+  "mutations": 0,
+  "telegram_messages": 0,
+  "wall_seconds": 29.995626874966547
+}

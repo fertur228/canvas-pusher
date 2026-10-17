@@ -1,0 +1,6 @@
+# Scientific source bytes are checksum-pinned. Preserve the source CSV CRLF format.
+data/neural/flywire_v783/*.csv -text whitespace=cr-at-eol
+# Immutable generated matplotlib SVG output uses trailing path-command spaces.
+docs/neural-escape-figures/*.svg -whitespace
+*.gz binary
+*.bin binary
