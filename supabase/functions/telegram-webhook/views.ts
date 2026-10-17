@@ -1,7 +1,7 @@
 /** Pure, bounded Telegram views. Stored model data and cached academic data stay distinct. */
 export const escape = (x: unknown) => String(x ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
-export const menu = {keyboard:[[{text:'📅 Дедлайны'},{text:'🔄 Проверить Canvas'}],[{text:'📊 Мои оценки'},{text:'🧠 Мозг мухи'}],[{text:'⚙️ Статус системы'}]],resize_keyboard:true,is_persistent:true};
-export const labels:Record<string,string>={upcoming:'Предстоящие',overdue:'Просроченные',today:'Сегодня',week:'7 дней',month:'30 дней',all:'Все несданные',undated:'Без дедлайна'};
+export const menu = {inline_keyboard:[[{text:'📅 Дедлайны',callback_data:'deadlines:upcoming:0'},{text:'📊 Успеваемость',callback_data:'get_stats'}],[{text:'🔄 Обновить сейчас',callback_data:'check'}]]};
+export const labels:Record<string,string>={upcoming:'📅 Ближайшие',overdue:'⚠️ Просроченные',today:'Сегодня',week:'7 дней',month:'30 дней',all:'📋 Все',undated:'Без дедлайна'};
 export function command(text:string):string {
  const aliases:Record<string,string>={'📅 Дедлайны':'/deadlines','🔄 Проверить Canvas':'/check','📊 Мои оценки':'/stats','🧠 Мозг мухи':'/brain','⚙️ Статус системы':'/status','📅 Deadlines':'/deadlines','🔄 Check Canvas Now':'/check','📊 My Grades':'/stats','🧠 Fly Brain':'/brain','⚙️ System Status':'/status'};
  return aliases[text]??text.trim().split(/\s+/)[0].split('@')[0].toLowerCase();
@@ -18,8 +18,8 @@ export function remaining(value:unknown,now:number):string {
 }
 export function deadlineView(data:any,view:string,origin:string,now=Date.now()) {
  const page=Number(data.page)||0,total=Number(data.total)||0;
- const keyboard:any[][]=[['upcoming','overdue','today'].map(k=>({text:labels[k],callback_data:`deadlines:${k}:0`})),['week','month','all','undated'].map(k=>({text:labels[k],callback_data:`deadlines:${k}:0`}))];
- let text=`📅 <b>${escape(labels[view])}</b>\nПоследняя успешная синхронизация: ${localDate(data.synced_at)}\n`;
+ const keyboard:any[][]=[['upcoming','overdue','all'].map(k=>({text:labels[k],callback_data:`deadlines:${k}:0`}))];
+ let text=`<b>${escape(labels[view])}</b>\nПоследняя успешная синхронизация: ${localDate(data.synced_at)}\n`;
  if(!data.synced_at)text+='Ещё не синхронизировано. Список заданий пока недоступен.';
  else {
   if(data.stale)text+='⚠️ Снимок старше 30 минут; данные могут быть устаревшими.\n';
@@ -34,6 +34,6 @@ export function deadlineView(data:any,view:string,origin:string,now=Date.now()) 
   text+=`\nСтраница ${page+1}/${Math.max(1,Math.ceil(total/3))} · Заданий: ${total}`;
  }
  const nav=[];if(page>0)nav.push({text:'←',callback_data:`deadlines:${view}:${page-1}`});if((page+1)*3<total)nav.push({text:'→',callback_data:`deadlines:${view}:${page+1}`});if(nav.length)keyboard.push(nav);
- keyboard.push([{text:'🔄 Проверить Canvas',callback_data:'check'},{text:'Меню',callback_data:'menu'}]);
+ keyboard.push([{text:'🔄 Обновить сейчас',callback_data:'check'},{text:'Меню',callback_data:'menu'}]);
  return {text,keyboard:{inline_keyboard:keyboard}};
 }

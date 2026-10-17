@@ -20,7 +20,10 @@ export function handler(config: Config, request: typeof fetch = fetch) {
   };
   const telegram=async(method:string,payload:unknown) => {
     const response=await request(`https://api.telegram.org/bot${config.bot}/${method}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(10000)});
-    const result=await response.json();if(!response.ok||result.ok!==true)throw new Error('telegram_outcome_uncertain');return result;
+    const result=await response.json();
+    // Repeated filter presses can legitimately render the identical page.
+    if(method==='editMessageText'&&response.status===400&&String(result.description).startsWith('Bad Request: message is not modified'))return {ok:true};
+    if(!response.ok||result.ok!==true)throw new Error('telegram_outcome_uncertain');return result;
   };
   const send=(text:string,keyboard?:unknown)=>telegram('sendMessage',{chat_id:config.chat,text,parse_mode:'HTML',reply_markup:keyboard});
   return async(req:Request):Promise<Response> => {
@@ -48,15 +51,25 @@ export function handler(config: Config, request: typeof fetch = fetch) {
       const account=accounts[0];
       const callback=body.callback_query?.data;
       if(body.callback_query){try{await telegram('answerCallbackQuery',{callback_query_id:body.callback_query.id});}catch{/* Independent of command execution. */}}
+      const edit=(text:string,keyboard:unknown,id=message?.message_id)=>telegram('editMessageText',{chat_id:config.chat,message_id:id,text,parse_mode:'HTML',reply_markup:keyboard,link_preview_options:{is_disabled:true}});
       if(command==='/start'||command==='/menu'||callback==='menu') {
-        await send('FlyMind · Главное меню\nВыберите действие. Нейронный сигнал — экспериментальное дополнение к обычным уведомлениям.',menu);
+        const text='👋 <b>FlyMind</b>\nЗадания, оценки и обновления Canvas.';
+        if(callback&&message?.message_id)await edit(text,menu);
+        else {
+          // Telegram cannot edit a message sent with ReplyKeyboardRemove.
+          // Remove the old keyboard, send the inline menu, then clean up only
+          // our just-created transition message. Lost replies are never retried.
+          const removed=await send('⌨️ Меню теперь под сообщением.',{remove_keyboard:true});
+          await send(text,menu);
+          try {await telegram('deleteMessage',{chat_id:config.chat,message_id:removed.result.message_id});}catch{/* Menu still works if cleanup is unavailable. */}
+        }
       } else if(command==='/deadlines'||String(callback??'').startsWith('deadlines:')) {
         const match=/^deadlines:(upcoming|overdue|today|week|month|all|undated):(\d{1,5})$/.exec(callback??'');
         if(callback&&!match)throw new Error('invalid_deadline_view');
         const view=match?.[1]??'upcoming',page=Number(match?.[2]??0);
         const data=await api('rpc/flymind_deadlines',{p_account:account.id,p_view:view,p_page:page});
         const rendered=deadlineView(data,view,account.canvas_origin);
-        if(callback&&message?.message_id)await telegram('editMessageText',{chat_id:config.chat,message_id:message.message_id,text:rendered.text,parse_mode:'HTML',reply_markup:rendered.keyboard,link_preview_options:{is_disabled:true}});
+        if(callback&&message?.message_id)await edit(rendered.text,rendered.keyboard);
         else await send(rendered.text,rendered.keyboard);
       } else if(command==='/status'||callback==='status') {
         const health=(await api(`flymind_health?account_id=eq.${account.id}&limit=1`))[0];
@@ -73,7 +86,11 @@ export function handler(config: Config, request: typeof fetch = fetch) {
         }
         // Cap each message without cutting an HTML entity or tag.
         const pages:string[]=[];let page='';for(const line of lines){if(page.length+line.length>3000){pages.push(page);page='';}page+=line+'\n';}pages.push(page+`\nОценочный GPA: ${credits?(points/credits).toFixed(2):'—'} / 4.0\nНе официальный транскрипт: предполагается 5 кредитов на курс, 2 для физкультуры.`);
-        for(const text of pages)await send(text,{inline_keyboard:[[{text:'🔄 Обновить сейчас',callback_data:'force_refresh'}],[{text:'🧠 Neural Observatory',callback_data:'brain'}]]});
+        const keyboard={inline_keyboard:[[{text:'🔄 Обновить сейчас',callback_data:'check'},{text:'Меню',callback_data:'menu'}]]};
+        for(const [i,text] of pages.entries()) {
+          if(i===0&&callback&&message?.message_id)await edit(text,keyboard);
+          else await send(text,keyboard);
+        }
       } else if(command==='/brain'||callback==='brain') {
         const rows=accounts.length?await api(`flymind_experiments?select=created_at,metadata&account_id=eq.${accounts[0].id}&order=created_at.desc&limit=1`):[];
         const row=rows[0],r=row?.metadata?.readout;

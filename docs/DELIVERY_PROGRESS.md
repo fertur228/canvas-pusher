@@ -1,4 +1,21 @@
-# FlyMind delivery progress — 2026-10-14
+# FlyMind delivery progress
+
+## Final release verification — 2026-10-18 (in progress)
+
+- [x] Current feature branch/PR1 verified; original head ec5f42c, CI green, gates OFF.
+- [x] Owner Auth now exists and matches private owner evidence + test account.
+- [x] All8 migrations present; original336/32/14row hashes unchanged; encrypted backup verified.
+- [x] Hosted SQL owner/foreign/anonymous/Storage/RPC isolation repeated with rollback.
+- [x] Three inline menu buttons and three visible deadline filters implemented.
+- [x] Real Telegram exposed ReplyKeyboardRemove edit limitation; corrected with temporary-message cleanup.
+- [x] Corrected FlyMind webhook v6 deployed to test group; legacy webhook unchanged.
+- [x] Real Canvas preflight14HTTP200,6courses,20assignments,91files,2announcements.
+- [x] Deno17, Vitest28, TypeScript/build, browser4local+2private HTTP-mock, localPG17 passed.
+- [ ] Actual owner browser sign-in/private replay (owner asked to sign in; password never requested).
+- [x] Python201 passed (172 dependency warnings); real Telegram client /start rendered3inline buttons.
+- [x] Hosted commands, three filters, repeated identical edit and4negative auth checks passed.
+- [ ] Final exact-head CI and private browser replay.
+- [ ] Conditional merge, real /check completion on main, production bootstrap/activation and two scheduled cycles.
 
 ## Текущее hosted-состояние — 2026-10-17
 

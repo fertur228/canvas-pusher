@@ -37,9 +37,9 @@ Deno.test('academic HTML escaped; acknowledgement persisted',async()=>{
  assert(sent.includes('&lt;private&amp;course&gt;')&&!sent.includes('<private&course>')&&ack);
 });
 
-Deno.test('start/menu commands and persistent buttons preserve separate grades action',async()=>{
+Deno.test('start/menu removes the old reply keyboard then sends the three-button menu and cleans up only its transition message',async()=>{
  const texts=['/start','/start@new_bot','/menu','📊 My Grades','🧠 Fly Brain','⚙️ System Status','📅 Deadlines','📊 Мои оценки','🧠 Мозг мухи','⚙️ Статус системы','📅 Дедлайны'];
- for(const text of texts){let sent:any,grades=0,neural=0;
+ for(const text of texts){let sent:any,removed:any,deleted:any,grades=0,neural=0;
   const request=(async(url:string|URL|Request,init?:RequestInit)=>{
    const path=String(url);
    if(path.includes('webhook_claim'))return Response.json(true);
@@ -48,12 +48,13 @@ Deno.test('start/menu commands and persistent buttons preserve separate grades a
    if(path.includes('flymind_experiments')){neural++;return Response.json([]);}
    if(path.includes('flymind_health')||path.includes('flymind_manual_requests'))return Response.json([]);
    if(path.includes('flymind_deadlines'))return Response.json({synced_at:null,rows:[]});
-   if(path.includes('sendMessage')){sent=JSON.parse(String(init?.body));return Response.json({ok:true,result:{message_id:3}});}
+   if(path.includes('sendMessage')){sent=JSON.parse(String(init?.body));if(sent.reply_markup?.remove_keyboard)removed=sent;return Response.json({ok:true,result:{message_id:3}});}
+   if(path.includes('deleteMessage')){deleted=JSON.parse(String(init?.body));return Response.json({ok:true});}
    if(path.includes('webhook_updates'))return new Response(null,{status:204});
    throw new Error(path);
   }) as typeof fetch;
   assert((await handler(config,request)(req({...update,message:{...update.message,text}}))).status===200);
-  if(text.startsWith('/start')||text==='/menu'){assert(sent.reply_markup.is_persistent&&grades===0&&neural===0);assert(sent.reply_markup.keyboard[0][0].text==='📅 Дедлайны');}
+  if(text.startsWith('/start')||text==='/menu'){assert(removed.reply_markup.remove_keyboard===true&&grades===0&&neural===0);assert(deleted.message_id===3&&sent.reply_markup.inline_keyboard.flat().length===3);assert(!sent.text.includes('Нейрон'));}
   if(text==='📅 Deadlines'||text==='📅 Дедлайны')assert(sent.text.includes('Ещё не синхронизировано')&&neural===0);
  }
 });
@@ -64,12 +65,13 @@ Deno.test('bot update identity and acknowledgement are bot scoped',async()=>{
   if(path.includes('webhook_claim')){const key=payload.p_bot+':'+payload.p_update;const fresh=!seen.has(key);seen.add(key);return Response.json(fresh);}
   if(path.includes('flymind_accounts'))return Response.json([{id:'account'}]);
   if(path.includes('sendMessage')){sends++;return Response.json({ok:true,result:{message_id:1}});}
+  if(path.includes('editMessageText'))return Response.json({ok:true,result:{message_id:1}});
   if(path.includes('webhook_updates')){ack.push(path);return new Response(null,{status:204});}
   throw new Error(path);
  }) as typeof fetch;
  const body={...update,message:{...update.message,text:'/menu'}};
  await handler(config,request)(req(body));await handler(config,request)(req(body));await handler({...config,bot:'102:synthetic'},request)(req(body));
- assert(sends===2&&ack[0].includes('bot_id=eq.101')&&ack[1].includes('bot_id=eq.102'));
+ assert(sends===4&&ack[0].includes('bot_id=eq.101')&&ack[1].includes('bot_id=eq.102'));
 });
 Deno.test('database outage is retryable before claim and never fabricates an empty list',async()=>{
  let sends=0;const request=(async(url:string|URL|Request)=>{if(String(url).includes('sendMessage'))sends++;return new Response(null,{status:503});}) as typeof fetch;
@@ -152,4 +154,23 @@ Deno.test('zero is a recorded grade; missing grades excluded; physical grade nev
  await handler(config,request)(req({...update,message:{...update.message,text:'/stats'}}));
  assert(sent.includes('zero: 0% (GPA 0)')&&sent.includes('unknown: без оценки'));
  assert(sent.includes('Физическая культура: 50% (GPA 1)')&&sent.includes('0.29 / 4.0')&&sent.includes('Не официальный'));
+});
+
+Deno.test('unchanged callback view is acknowledged; menu and grades navigation edit rather than send',async()=>{
+ for(const data of ['menu','get_stats','deadlines:all:0']) {
+  let ack=false,edits=0;
+  const request=(async(url:string|URL|Request)=>{
+   const path=String(url);
+   if(path.includes('webhook_claim'))return Response.json(true);
+   if(path.includes('flymind_accounts'))return Response.json([{id:'account',canvas_origin:'https://canvas.invalid'}]);
+   if(path.includes('course_grades'))return Response.json([]);
+   if(path.includes('flymind_deadlines'))return Response.json({rows:[],synced_at:null});
+   if(path.includes('answerCallbackQuery'))return Response.json({ok:true});
+   if(path.includes('editMessageText')){edits++;return Response.json({ok:false,description:'Bad Request: message is not modified: specified new message content and reply markup are exactly the same'},{status:400});}
+   if(path.includes('webhook_updates')){ack=true;return new Response(null,{status:204});}
+   throw new Error('Unexpected IO (including extra sendMessage)');
+  }) as typeof fetch;
+  await handler(config,request)(req({update_id:91,callback_query:{id:'cb',data,from:{id:123},message:{chat:{id:123},message_id:77}}}));
+  assert(ack&&edits===1);
+ }
 });

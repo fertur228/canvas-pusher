@@ -41,7 +41,7 @@ def test_primary_delivery_precedes_neural_and_enrichment_edits_same_message(tmp_
     assert len(d.calls)==1 and r.calls==0
     p.drain_neural();p.drain_notifications('edit')
     assert len(d.calls)==2 and d.calls[0][1] is None and d.calls[1][1]==1
-    assert 'Экспериментальный нейронный сигнал' in d.calls[1][0]
+    assert d.calls[1][0] == d.calls[0][0]  # science remains private, same academic content
     assert store.counts()=={'send.done':1,'simulate.done':1,'edit.done':1}
     store.close()
 
@@ -72,10 +72,11 @@ def test_simulation_failure_does_not_lose_critical_delivery(tmp_path):
     store,d,r,p,clock=setup(tmp_path,FakeRunner(fail=True))
     p.ingest('assignment',LIVE,NOW)
     p.drain_notifications()
-    assert any('Скоро дедлайн!' in text for text,_ in d.calls)
+    assert any('ДЕДЛАЙН ИЗМЕНЁН!' in text for text,_ in d.calls)
     for _ in range(3):p.drain_neural();clock[0]+=1000
     p.drain_notifications('edit')
-    assert any('недоступна' in text for text,_ in d.calls)
+    assert all('нейрон' not in text.lower() and 'недоступна' not in text for text,_ in d.calls)
+    assert store.counts().get('simulate.dead') == 2
     assert all('MUST NOT' not in (row['result'] or '') for row in store.db.execute('SELECT result FROM jobs'))
     assert store.counts().get('send.done')==2
     store.close()
@@ -164,7 +165,9 @@ def test_neural_disabled_keeps_primary_delivery_and_marks_unavailable(tmp_path):
     p.run_pending()
     assert sum(mid is None for _,mid in d.calls)==1 and r.calls==0
     assert store.counts()['send.done']==1
-    assert any(mid==1 and 'недоступна' in text for text,mid in d.calls)
+    assert any(mid==1 and text == d.calls[0][0] for text,mid in d.calls)
+    result=json.loads(store.db.execute("SELECT result FROM jobs WHERE stage='simulate'").fetchone()[0])
+    assert result['status']=='disabled' and result['biological_response_validated'] is False
     store.close()
 
 

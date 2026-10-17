@@ -1,4 +1,4 @@
-import {deadlineView,localDate,command} from './views.ts';
+import {deadlineView,localDate,command,menu} from './views.ts';
 function assert(x:unknown){if(!x)throw new Error('assertion failed');}
 Deno.test('Almaty timezone crosses UTC date; overdue and missing dates are explicit',()=>{
  assert(localDate('2026-10-14T20:00:00Z').includes('15.10.2026'));
@@ -18,4 +18,15 @@ Deno.test('unsafe URLs rejected and menu aliases resolve exactly',()=>{
  const result=deadlineView({synced_at:'2026-10-14T18:00:00Z',total:1,rows:[{name:'Task',html_url:'https://evil.invalid/steal'}]},'undated','https://canvas.invalid');
  assert(!result.text.includes('href='));
  assert(command('🔄 Check Canvas Now')==='/check'&&command('/deadlines@bot')==='/deadlines');
+});
+
+Deno.test('approved menu has exactly three inline actions; deadline filters expose only three views',()=>{
+ assert(JSON.stringify(menu.inline_keyboard.map(row=>row.map(b=>b.text)))===JSON.stringify([['📅 Дедлайны','📊 Успеваемость'],['🔄 Обновить сейчас']]));
+ assert(menu.inline_keyboard.flat().every(b=>!['brain','status'].includes(b.callback_data)));
+ for(const view of ['upcoming','overdue','all','today','week','month','undated']) {
+  const rendered=deadlineView({rows:[],total:0,synced_at:null},view,'https://canvas.invalid');
+  const filters=rendered.keyboard.inline_keyboard.flat().filter(b=>b.callback_data.startsWith('deadlines:'));
+  assert(JSON.stringify(filters.map(b=>b.text))===JSON.stringify(['📅 Ближайшие','⚠️ Просроченные','📋 Все']));
+  assert(!JSON.stringify(rendered.keyboard).includes('is_persistent'));
+ }
 });

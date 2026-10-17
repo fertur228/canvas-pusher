@@ -21,7 +21,7 @@ def test_new_undated_assignment_title_points_link_and_repeated_scan():
     snap,events=adapt(ACCOUNT,'assignment',live,Snapshot(),NOW)
     assert [e.kind for e in events]==[EventKind.CREATED]
     assert not snap.state['has_submitted']
-    text=render(events[0]);assert 'не установлен' in text and 'не сдано' in text and 'Открыть задание' in text and '&amp;' in text
+    text=render(events[0]);assert 'не установлен' in text and 'НОВОЕ ЗАДАНИЕ!' in text and '💯 Баллы: 100.0' in text and 'Открыть задание' in text and '&amp;' in text
     assert not adapt(ACCOUNT,'assignment',live,snap,NOW+timedelta(minutes=20))[1]
     assert not adapt(ACCOUNT,'assignment',live,Snapshot(),NOW,bootstrap=True)[1]
     assert adapt(ACCOUNT,'assignment',{**live,'name':'Changed'},snap,NOW)[1][0].kind==EventKind.UPDATED

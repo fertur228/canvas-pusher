@@ -180,7 +180,7 @@ def test_pending_old_thresholds_coalesce_at_delivery_and_no_post_deadline_send(t
         now[0] = NOW+timedelta(hours=hour)
         p.ingest('assignment', task(48))
     p.drain_notifications()
-    assert len(d.calls) == 1 and '3 ч 0 мин' in d.calls[0][0]
+    assert len(d.calls) == 1 and 'ДЕДЛАЙН ЧЕРЕЗ 3 ЧАСА!' in d.calls[0][0]
     now[0] = NOW+timedelta(hours=47)
     p.ingest('assignment', task(48))
     now[0] = NOW+timedelta(hours=48)
@@ -240,7 +240,7 @@ def test_overlapping_scans_retry_cas_without_duplicate_creation_or_threshold(tmp
 def test_ordinary_message_has_actionable_fields_without_internal_or_scientific_debug():
     _, events = evolve(task(4, html_url='https://canvas.narxoz.kz/courses/20/assignments/10'), Snapshot())
     text = render(events[0])
-    for value in ('🆕', '📌', '📚', '📅', '💯', '09:00 Asia/Almaty', '4 ч 0 мин', 'Ещё не сдано', 'Открыть задание в Canvas', '&lt;SYNTHETIC task&gt;'):
+    for value in ('НОВОЕ ЗАДАНИЕ!', '📌', '📝', '📚', '📅', '💯', '09:00 Asia/Almaty', '4 ч 0 мин', 'Открыть задание в Canvas', '&lt;SYNTHETIC task&gt;'):
         assert value in text
     for value in ('GF', 'Событие:', events[0].event_id[:12], 'Нейрон', 'нейрон', 'правила'):
         assert value not in text

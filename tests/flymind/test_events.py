@@ -73,9 +73,10 @@ def test_file_events_are_delivered_but_not_sent_to_neural_engine():
 def test_presentation_does_not_downgrade_critical_and_escapes_private_html():
     _,events=adapt(ACCOUNT,'assignment',LIVE,Snapshot(),NOW)
     text=render(events[0],{'status':'complete','readout':{'classification':'minimal','gf_spikes':[0,0],'active_neurons':0}})
-    assert 'Скоро дедлайн!' in text and 'минимальный' in text
+    assert 'Осталось: <b>2 ч 0 мин</b>' in text and 'НОВОЕ ЗАДАНИЕ!' in text
+    assert text == render(events[0])  # zero neural activity cannot downgrade the academic alert
     assert '&lt;SYNTHETIC task&gt;' in text and '<SYNTHETIC task>' not in text
-    assert 'Биологически не валидировано' in text
+    assert 'Биологически' not in text and 'минимальный' not in text
 
 
 def test_readout_thresholds_are_explicit_engineering_rules():

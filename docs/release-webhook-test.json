@@ -1,0 +1,41 @@
+{
+  "transport": "controlled HTTP updates, real deployed function and Telegram Bot API",
+  "telegram_client_buttons_tested": false,
+  "primary_chat_used": false,
+  "commands": {
+    "/start": {
+      "status": "done",
+      "repeat_suppressed": true
+    },
+    "/menu": {
+      "status": "done",
+      "repeat_suppressed": true
+    },
+    "/deadlines": {
+      "status": "done",
+      "repeat_suppressed": true
+    },
+    "/stats": {
+      "status": "done",
+      "repeat_suppressed": true
+    },
+    "/status": {
+      "status": "done",
+      "repeat_suppressed": true
+    },
+    "/brain": {
+      "status": "done",
+      "repeat_suppressed": true
+    },
+    "/check": {
+      "status": "claimed",
+      "repeat_suppressed": true
+    },
+    "deadlines:upcoming": "real_edit_completed",
+    "deadlines:overdue": "real_edit_completed",
+    "deadlines:all": "real_edit_completed"
+  },
+  "release_ux": "three-inline-buttons-v4",
+  "negative_identity_and_secret_checks": 4,
+  "manual_dispatch_disabled_accurately": true
+}

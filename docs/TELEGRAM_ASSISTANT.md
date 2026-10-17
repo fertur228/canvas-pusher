@@ -20,21 +20,33 @@ This is implemented code, not a claim of hosted activation. New bot commands/web
 have NOT been applied to a real bot. Production remains disabled; no real Telegram
 messages were sent. The renewed Canvas token must be installed privately by the owner.
 
-## Commands and navigation
+## Commands and navigation (release UX, 2026-10-18)
 
-| Command | Persistent reply button | Result |
-| --- | --- | --- |
-| /start, /menu | Menu navigation | Main menu; does not implicitly send grades |
-| /deadlines | 📅 Deadlines | Last verified cached assignment snapshot |
-| /check | 🔄 Check Canvas Now | Authenticated, gated tracked GitHub dispatch |
-| /stats | 📊 My Grades | Existing grade/GPA view |
-| /brain | 🧠 Fly Brain | Saved experimental neural status/Observatory link |
-| /status | ⚙️ System Status | Heartbeat, successful snapshots, queues, manual request state |
+`/start` and `/menu` show exactly three inline buttons: row 1 **📅 Дедлайны** /
+**📊 Успеваемость**, row 2 **🔄 Обновить сейчас**. There is no persistent reply
+keyboard. `/brain` and `/status` remain commands. Old Russian/English button texts
+remain accepted for clients with historical messages.
 
-The official Bot API `setMyCommands` and `setChatMenuButton` are invoked by the
-local configuration tool; the persistent ReplyKeyboardMarkup is sent on /start.
-Every command and callback requires webhook secret, exact Telegram user, chat,
-enabled account and matching bot identity. Menu visibility is not authorization.
+Telegram does not permit editing a message sent with ReplyKeyboardRemove. On
+/start or /menu the handler sends a temporary removal message, sends the inline
+menu, then deletes only that just-created temporary message. Cleanup failure does
+not retry sends. A callback to Menu edits the existing message directly.
+
+Deadline filters expose only **📅 Ближайшие**, **⚠️ Просроченные**, **📋 Все**.
+The existing seven RPC views remain compatible internally. Filters, page arrows,
+Menu and first grades page use editMessageText. Telegram's exact 400
+`message is not modified` response is a successful no-op, not a failed update.
+
+Official commands: /start, /menu, /deadlines, /check, /stats, /brain, /status.
+Every command/callback still requires the secret header, exact bot/user/chat,
+and an enabled account. Menu visibility never grants access.
+
+Ordinary academic alerts use concise Russian headings and real due dates/points.
+A late reminder displays the current rounded-up hours remaining, not the old
+threshold label. Zero scores remain zero; missing scores remain unavailable.
+Neural details, uncertainty and model disclaimers live in /brain and Observatory;
+normal notifications are identical whether the neural model succeeds or fails.
+No model parameters, event identities or reminder thresholds changed for this UX.
 
 ## Verified deadlines
 
@@ -259,10 +271,10 @@ retract a send already in flight; global scanner concurrency serializes supporte
 cloud runs, while CAS/outbox leases prevent duplicate commits/claims. Canvas
 changes become known only after the next successful fetch.
 
-Ordinary messages use🆕/⏰/📌/📚/📅/💯, escaped titles, Almaty time, remaining time,
-submission status and safe Canvas links. No event IDs, GF spike counts or pending
-simulation diagnostics. Optional enrichment retains an explicitly experimental,
-biologically unvalidated indicator. Neural failure never blocks the base message.
+Ordinary messages use📌/⏰/🔔/📝/📚/📅/💯, escaped titles, Almaty time, remaining time,
+recorded grades and safe Canvas links. No event IDs, GF spike counts or pending
+simulation diagnostics. Scientific details remain in /brain and Observatory.
+Neural failure never blocks the base message.
 
 Finite hosted test: `python -m src.flymind.deadline_validation --output /tmp/flymind-deadline-cloud.json`
 with the existing guarded test-chat environment. Stable synthetic IDs and a

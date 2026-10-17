@@ -27,12 +27,15 @@ FOR r IN SELECT * FROM flymind_rls_expected LOOP
  RESET ROLE;
 END LOOP;
 END $$;
-DO $$ DECLARE uid uuid=gen_random_uuid(); n bigint; expected_n bigint; expected_experiments bigint; BEGIN
- INSERT INTO auth.users(id) VALUES(uid);
- -- Only the currently owner-unmapped TEST account. Nothing persists.
- UPDATE public.flymind_accounts SET owner_id=uid WHERE owner_id IS NULL AND telegram_chat_id<0;
- SELECT count(*) INTO expected_n FROM storage.objects WHERE bucket_id='flymind-private';
- SELECT count(*) INTO expected_experiments FROM public.flymind_experiments;
+DO $$ DECLARE uid uuid; aid uuid; n bigint; expected_n bigint; expected_experiments bigint; BEGIN
+ -- Use the VERIFIED existing test binding. Never reassign a real owner for tests.
+ SELECT owner_id,id INTO uid,aid FROM public.flymind_accounts
+ WHERE telegram_chat_id<0 AND canvas_origin='https://canvas.narxoz.kz' AND owner_id IS NOT NULL LIMIT 1;
+ IF uid IS NULL THEN RAISE EXCEPTION 'verified_test_owner_required'; END IF;
+ SELECT count(*) INTO expected_n FROM storage.objects WHERE bucket_id='flymind-private'
+ AND split_part(name,'/',1) IN (SELECT id::text FROM public.flymind_accounts WHERE owner_id=uid);
+ SELECT count(*) INTO expected_experiments FROM public.flymind_experiments
+ WHERE account_id IN (SELECT id FROM public.flymind_accounts WHERE owner_id=uid);
  PERFORM set_config('request.jwt.claim.sub',uid::text,true);
  SET LOCAL ROLE authenticated;
  SELECT count(*) INTO n FROM storage.objects WHERE bucket_id='flymind-private';

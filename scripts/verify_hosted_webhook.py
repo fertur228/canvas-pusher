@@ -40,7 +40,7 @@ def run():
     if str(bot.call('getMe')['id']) != test['TELEGRAM_BOT_ID']:
         raise ValueError('wrong_bot')
     db = create_client(hosted['SUPABASE_URL'], hosted['SUPABASE_SERVICE_KEY'])
-    fixture_path = ROOT / 'secret-flymind-release/webhook-probe.json'
+    fixture_path = ROOT / 'secret-flymind-release/webhook-probe-menu-v4.json'
     if not fixture_path.exists():
         # Telegram update IDs are far below this reserved, safe-integer test range.
         fixture = {'first_update': 2**50 + secrets.randbelow(2**40)}
@@ -67,16 +67,16 @@ def run():
     if 'message_id' not in fixture:
         fixture['message_id'] = bot.call('sendMessage', {'chat_id': test['TELEGRAM_CHAT_ID'], 'text': 'ТЕСТ FLYMIND: проверка переключения сохранённых дедлайнов.'})['message_id']
         fixture_path.write_text(json.dumps(fixture)); fixture_path.chmod(0o600)
-    for index, view in enumerate(['upcoming', 'overdue', 'today', 'week', 'month', 'all', 'undated'], start=20):
+    for index, (view,page) in enumerate([('upcoming',0),('overdue',0),('all',0),('all',0),('all',1)], start=20):
         payload = {'update_id': fixture['first_update']+index,
-                   'callback_query': {'id': 'synthetic-callback-'+str(index), 'data': f'deadlines:{view}:0',
+                   'callback_query': {'id': 'synthetic-callback-'+str(index), 'data': f'deadlines:{view}:{page}',
                                       'from': {'id': int(test['TELEGRAM_USER_ID'])},
                                       'message': {'chat': {'id': int(test['TELEGRAM_CHAT_ID'])}, 'message_id': fixture['message_id']}}}
         response = client.post(url, headers=headers, json=payload)
         assert response.status_code == 200
         row = db.table('flymind_webhook_updates').select('status').eq('bot_id', test['TELEGRAM_BOT_ID']).eq('update_id', payload['update_id']).single().execute().data
         assert row['status'] == 'done'
-        results['deadlines:'+view] = 'real_edit_completed'
+        results[f'deadlines:{view}:{page}'] = 'real_edit_completed'
     invalid = body(100, '/deadlines')
     assert client.post(url, json=invalid).status_code == 403
     assert client.post(url, headers={'X-Telegram-Bot-Api-Secret-Token':'invalid-test'}, json=invalid).status_code == 403
@@ -90,9 +90,9 @@ def run():
     assert not requests
     report = {'transport':'controlled HTTP updates, real deployed function and Telegram Bot API',
               'telegram_client_buttons_tested':False, 'primary_chat_used':False,
-              'commands':results, 'negative_identity_and_secret_checks':4,
+              'commands':results, 'release_ux':'three-inline-buttons-v4', 'negative_identity_and_secret_checks':4,
               'manual_dispatch_disabled_accurately':True}
-    (ROOT / 'docs/hosted-webhook-test.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+    (ROOT / 'docs/release-webhook-test.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps(report,ensure_ascii=False))
 
 
