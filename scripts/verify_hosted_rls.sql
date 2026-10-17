@@ -27,16 +27,17 @@ FOR r IN SELECT * FROM flymind_rls_expected LOOP
  RESET ROLE;
 END LOOP;
 END $$;
-DO $$ DECLARE uid uuid=gen_random_uuid(); n bigint; expected_n bigint; BEGIN
+DO $$ DECLARE uid uuid=gen_random_uuid(); n bigint; expected_n bigint; expected_experiments bigint; BEGIN
  INSERT INTO auth.users(id) VALUES(uid);
  -- Only the currently owner-unmapped TEST account. Nothing persists.
  UPDATE public.flymind_accounts SET owner_id=uid WHERE owner_id IS NULL AND telegram_chat_id<0;
  SELECT count(*) INTO expected_n FROM storage.objects WHERE bucket_id='flymind-private';
+ SELECT count(*) INTO expected_experiments FROM public.flymind_experiments;
  PERFORM set_config('request.jwt.claim.sub',uid::text,true);
  SET LOCAL ROLE authenticated;
  SELECT count(*) INTO n FROM storage.objects WHERE bucket_id='flymind-private';
- IF n<>expected_n OR n<>2 THEN RAISE EXCEPTION 'test_storage_owner_scope'; END IF;
- IF (SELECT count(*) FROM public.flymind_experiments)<>2 THEN RAISE EXCEPTION 'test_experiment_owner_scope'; END IF;
+ IF n<>expected_n OR n=0 THEN RAISE EXCEPTION 'test_storage_owner_scope'; END IF;
+ IF (SELECT count(*) FROM public.flymind_experiments)<>expected_experiments OR expected_experiments=0 THEN RAISE EXCEPTION 'test_experiment_owner_scope'; END IF;
  BEGIN PERFORM public.flymind_claim(gen_random_uuid(),'send'); RAISE EXCEPTION 'worker_rpc_browser_leak'; EXCEPTION WHEN insufficient_privilege THEN NULL; END;
  RESET ROLE;
  PERFORM set_config('request.jwt.claim.sub',gen_random_uuid()::text,true);

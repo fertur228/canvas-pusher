@@ -34,7 +34,8 @@ Auth/account изменения завершены ROLLBACK. Это **SQL role t
 человека через Supabase Auth.
 
 Bucket `flymind-private`: public=false, только application/gzip, максимум4MiB.
-Фактически 2 compressed objects, суммарно293657bytes. БД около12.82MB (включая
+После локального E2E было2 compressed objects/293657bytes; после облачного
+нейронного теста —3objects/456075bytes. БД около12.82MB (включая
 платформенные схемы; размер меняется). Телеметрия скачана и проверена по SHA-256.
 
 ## Backup
@@ -134,10 +135,28 @@ safety gate: включать его до reviewed merge нельзя.
 https://github.com/fertur228/canvas-pusher/actions/runs/39043798824
 26s job, фактические Canvas14×200/6курсов/20заданий. Он не зависит от localhost.
 
-Добавлен отдельный конечный `FlyMind controlled hosted test chat` workflow:
-без cron, только явный opt-in, фиксированный test/shadow режим, отдельный
-FLYMIND_TEST_ACCOUNT_ID, запрет production chat/authorization. Это подготовка
-облачного повторного full-worker теста без включения legacy scheduler.
+Отдельный конечный `FlyMind controlled hosted test chat` workflow успешно выполнен
+дважды: [39044400161](https://github.com/fertur228/canvas-pusher/actions/runs/39044400161)
+и [39044657067](https://github.com/fertur228/canvas-pusher/actions/runs/39044657067).
+Каждый делает2реальных scans. Оба passed,errors0,repeat-created-events0; send.done
+не вырос от повторного scan. В первом облаке отправлен1health-report, во втором
+обработан заранее явно помеченный synthetic event: реальная test-chat доставка,
+Brian2 и private Storage. Никаких новых университетских заданий не фабриковалось.
+
+Latest verified snapshot:2026-10-17T15:23:40.814147Z (20:23:40 Asia/Almaty).
+Последние jobs:send.done4,simulate.done3,edit.done3; из edit.done2 действительно
+отредактировали сообщения,1 подавлен shadow-mode. Полные job durations98s/154s,
+двойные worker runs73.17s/128.47s. Linux neural child:4.467sCPU,5.237s wall,
+189.879MiB lifetime peak RSS,162418bytes gzip; GF2/2,344spikes,282active neurons.
+[Cloud counts](hosted-cloud-validation.json), [Linux neural](hosted-linux-neural-test.json).
+
+Этот workflow без cron, только opt-in, отдельный FLYMIND_TEST_ACCOUNT_ID,
+жёсткий test/shadow и запрет primary recipient. Он не включает legacy scheduler.
+После завершения проверок его opt-in снова выключается.
+
+Три реальные скачанные Storage artifacts прошли lossless frontend adapter test:
+проверены hashes, все spikes и GF voltage arrays. Это проверка адаптера на реальных
+байтах; её нельзя назвать owner-authenticated browser replay.
 
 `/check` требует completion workflow на main. PR1 не merged; истинный
 workflow_dispatch → workflow_run completion остаётся закрытым rollout gate.
@@ -162,7 +181,23 @@ workflow_dispatch → workflow_run completion остаётся закрытым 
 ## Дальнейший обязательный человеческий шаг
 
 Указать свой email для private Observatory. Пароль/токены не отправлять в чат.
-Затем владелец задаёт пароль самостоятельно в защищённой процедуре Supabase Auth
-(Create user для явно указанного owner); агент связывает точный Auth UUID с
-подтверждённой Telegram identity и проверяет actual login/private replay.
-Без этого production не активируется. Новые Canvas/Telegram токены не нужны.
+Вместо передачи email в чат можно выполнить самому в терминале:
+
+```sh
+cd /Users/almazbukayev/canvas-pusher
+PYTHONPATH=. .venv/neural/bin/python -m src.flymind.owner_setup
+```
+
+Введите свой email и выбранный пароль (скрытый ввод дважды). Скрипт использует
+уже сохранённые private credentials, сверяет bot/test-owner/project, создаёт
+администратором указанную identity либо проверяет её существующий пароль,
+не меняет чужие пароли/ownership, связывает только test account, проверяет
+реальный Auth login и owner RLS. Пароль не сохраняет; UUID/email сохраняет в
+игнорируемый0600 `.env.flymind.owner`. `email_confirm=True` — административное
+подтверждение явно указанной owner identity, не проверка доставки email.
+Сам helper ещё НЕ выполнялся с реальным владельцем; протестированы его guardrails.
+
+После этого откройте preview и войдите; сообщите, что шаг завершён, без пароля.
+Тогда останется выполнить private browser replay, gated merge и /check completion
+на main, затем controlled primary rollout. Без этих проверок production не
+активируется. Новые Canvas/Telegram токены не нужны.

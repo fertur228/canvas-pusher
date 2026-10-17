@@ -68,3 +68,12 @@ At96polls/day and14requests/poll, this dataset implies1344Canvas GETs/day before
 pagination/retries. At20events/day with147KB average current artifact,600events
 would add~88MB/month before dedup/retention. These are estimates, not an active
 production schedule. Current scheduler is disabled; retention remains opt-in.
+
+The real full hosted tests each did two scans:98s/154s whole GitHub job,73.17s/
+128.47s worker portion, with one actual neural child in the second job. A cautious
+single scheduled job estimate is60–100s including setup:96–160runner min/day,
+2880–4800min/month at15min intervals. This remains $0 for standard runners in this
+public repository; it would exceed typical included private-repository minutes.
+Keep budget assumptions separate from uptime guarantees. Supabase per-snapshot RPC
+round trips dominate this small-circuit workload more than the4.47CPU-second neural
+child. Three current Storage objects use456075bytes; no paid infrastructure enabled.

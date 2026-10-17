@@ -9,15 +9,10 @@ owner Auth/sign-in и manual completion на main ещё не проверены
 Актуальные доказательства: [HOSTED_RELEASE_VERIFICATION.md](HOSTED_RELEASE_VERIFICATION.md).
 Нижележащие отчёты от предыдущих сессий являются историей, а не текущими blockers.
 
-**2026-10-17 preflight:** real local Canvas validation now succeeds. The linked
-Canvas-pusher database has a verified encrypted backup and a successful local
-seven-migration rehearsal. Hosted migration/activation is still pending approval.
-Read [SUPABASE_REMOTE_PREFLIGHT.md](SUPABASE_REMOTE_PREFLIGHT.md), including the
-confirmed legacy RLS/webhook risks, before following older handoff blockers below.
-
-No hosted FlyMind production resources have been activated by this implementation.
-Local isolated Supabase tests and browser mocks are distinct from a hosted staging
-or production deployment. Check FINAL_RELEASE_REPORT.md for latest evidence.
+The existing Canvas-pusher project is the authorized target, ref
+`irjasmzytjeohwfpdnrl` (ap-northeast-2). Do not create another Supabase project or
+touch Network Media. Hosted test resources are deployed; recurring production
+notifications are not active. See the current evidence linked above.
 
 ## Local setup
 
@@ -31,24 +26,27 @@ Browser checks: `npm --prefix dashboard run test:e2e` and `test:e2e:private`.
 On Linux install Chrome or set PLAYWRIGHT_CHROME_PATH. Private E2E uses mocked HTTP,
 actual neural exports and synthetic academic fixtures.
 
-## Supabase isolated staging first
+## Supabase existing-project rollout
 
-1. Identify a separate free-tier staging project; do not reuse production implicitly.
-2. Review all seven `supabase/migrations/20261014000{0..6}_*.sql`. Migration 0000 only
-   creates missing legacy tables; 0002 restricts legacy grants without deleting data.
-   Audit custom legacy policies/RPCs in the destination before applying.
-3. Apply via Supabase CLI migrations against the explicitly linked staging project.
-   Never use `db reset` against remote data. Back up first through existing project tools.
-4. Create the single owner's Auth user through the administrator dashboard; disable
-   public signup. Configure the exact static Observatory origin in Auth URL settings.
-   Password sign-in uses no redirect; no callback tokens are accepted in URLs.
-5. Insert `flymind_accounts` with UUID, owner_id=auth.users.id, exact Canvas origin,
-   separate test chat ID and enabled=true. No client-supplied chat ID authorizes data.
-6. Store server credentials only as GitHub Secrets. Browser receives project URL and
-   publishable/anon key only. Verify owner/other-user/anonymous Storage and table access.
-7. Run the worker explicitly with `FLYMIND_ENABLED=true`, `DELIVERY_MODE=disabled`
-   and `python -m src.flymind.worker --bootstrap`. Confirm bootstrapped/zero events.
-   Failed/partial bootstrap does not unlock normal processing.
+1. Confirm CLI/MCP project ref `irjasmzytjeohwfpdnrl` and migration history. The
+   seven reviewed migrations0000–0006 are already applied. Never reset or replay
+   seed/import operations over existing records. Original336/32/14row hashes were
+   preserved; six additional test grades remain scoped to the test chat.
+2. Preserve the encrypted verified backup and its separate key. The additional
+   pre-release configuration/source archive is encrypted too; secrets and later
+   Storage objects are separate from that snapshot. See ROLLBACK.md.
+3. Owner runs `PYTHONPATH=. .venv/neural/bin/python -m src.flymind.owner_setup`
+   in their own terminal to enter email/chosen password privately. It binds the
+   already verified test account only. Public signup is disabled; the preview
+   uses password sign-in without URL tokens and keeps sessions only in memory.
+4. Validate actual owner sign-in/private replay at the deployed preview. Hosted
+   SQL owner/foreign/anonymous tests and anonymous HTTP denial already passed,
+   but are not substitutes for this owner session test.
+5. Test account silent bootstrap already succeeded:113snapshots/20assignments,
+   zero historical events. Production account must be bound separately to the
+   verified private chat and silently bootstrapped before any delivery activation.
+6. Keep server secrets in GitHub/Supabase secret stores. Browser gets project URL
+   and publishable/anon key only. No client-supplied chat ID authorizes records.
 
 The real local API test is `PYTHONPATH=. python tests/flymind/local_supabase_check.py
 --status /private/tmp/flymind-supabase-staging/status.json --output /tmp/result.json`.
@@ -71,20 +69,31 @@ NEURAL_TELEMETRY_ENABLED=true; FLYMIND_MAX_NEURAL=5;
 FLYMIND_PRODUCTION_AUTHORIZED=false. The server validates account/chat/origin binding.
 
 The new 15-minute schedule executes only when the workflow is on the default branch.
-Feature-branch CI and manual validation do not activate its cron. The owner must
-review/merge the PR; no main merge is performed autonomously. GitHub schedules can
+Feature-branch CI and manual validation do not activate its cron. The owner has conditionally authorized merge after code/security/integration
+gates; PR1 currently remains open while owner Auth/replay is pending. GitHub schedules can
 be late/dropped and public repository schedules can disable after 60 days inactivity.
 
 ## Telegram webhook
 
-Deploy only to the identified staging project first. Configure TELEGRAM_WEBHOOK_SECRET,
-TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, TELEGRAM_USER_ID (mandatory for group chats),
-SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY; optional GITHUB_PAT with narrowly scoped
-Actions workflow permission, GITHUB_REPO, FLYMIND_WORKFLOW_REF, OBSERVATORY_URL.
-Configure Telegram setWebhook with the **same secret_token** using a secure local
-script; never paste token-bearing URLs into public logs. Telegram cannot supply
-Supabase JWT, so deploy webhook with JWT verification disabled only after its own
-secret validation is configured. No wildcard CORS is needed.
+The new isolated `flymind-telegram-webhook` is deployed in the SAME existing
+project. Its bot secrets are FLYMIND_TELEGRAM_BOT_TOKEN,
+FLYMIND_TELEGRAM_WEBHOOK_SECRET,FLYMIND_TELEGRAM_BOT_ID,
+FLYMIND_TELEGRAM_CHAT_ID,FLYMIND_TELEGRAM_USER_ID. It uses automatically injected
+SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY. Never overwrite the legacy shared bot
+keys just to configure the new function. FLYMIND_OBSERVATORY_URL points to the
+actual preview; FLYMIND_MANUAL_SYNC_ENABLED=false until workflow gates pass.
+
+FLYMIND_GITHUB_PAT may provide a narrowly scoped dispatch credential; otherwise
+the existing server-side GITHUB_PAT is reused in place. Its dispatch rights have
+not yet been validated through a successful /check. Do not copy a broader local
+CLI OAuth token into Edge secrets as a silent substitute.
+
+Telegram setWebhook and commands are already configured for the verified test
+group. Gateway JWT verification is disabled because Telegram cannot send it;
+the application validates exact secret header/bot/user/chat. The old
+telegram-webhook has been replaced with the secure handler but deliberately lacks
+its required legacy secret/actor settings, so it fails closed503. Do not restore
+its insecure old source. The replacement source is backed up encrypted.
 
 Webhook accounts must be explicitly enabled/mapped. Update IDs are durably claimed
 before side effects; claimed/ambiguous operations require review instead of blind
@@ -104,8 +113,9 @@ Private: VITE_OBSERVATORY_DATA_SOURCE=supabase, VITE_SUPABASE_URL,
 VITE_SUPABASE_PUBLISHABLE_KEY, VITE_DEPLOYMENT_LABEL=staging.
 Never define VITE_SUPABASE_SERVICE_KEY or any VITE_* Canvas/Telegram token.
 
-After Cloudflare authentication and naming an isolated project:
-`cd dashboard && npx wrangler pages deploy dist --project-name flymind-observatory-staging --branch preview`.
+Actual authenticated Pages project: `flymind-observatory`. To update the preview
+after building with Supabase mode and scanning the bundle:
+`cd dashboard && npx wrangler pages deploy dist --project-name flymind-observatory --branch flymind-preview`.
 Verify login, foreign/anonymous rejection, private artifact failure states, mobile
 layout, browser console and static bundle secret scan. Promote only the tested build
 and project; no billing upgrade is required. See ROLLBACK.md.
@@ -119,17 +129,17 @@ FLYMIND_PRODUCTION_AUTHORIZED=true for the unambiguous authorized production acc
 Keep FLYMIND_MODE=shadow first; only then opt into enrich. Production authorization
 is a deliberate operational switch, not a claim that biology is validated.
 
-## Verified external access blocker
+## Remaining activation gates
 
-A Cloudflare OAuth configuration exists locally, but `wrangler whoami --json` failed
-with expired credentials after a real network retry. No deployment occurred. Run
-`npx wrangler login` interactively or provide a scoped CLOUDFLARE_API_TOKEN and account
-ID; then deploy the isolated preview above. The stored login was not replaced.
+Canvas token rotation and Cloudflare OAuth are complete. Read-only cloud run
+39043798824 passed; controlled two-scan test-chat runs39044400161/39044657067
+passed, including a real cloud neural event/upload. Current preview:
+https://flymind-preview.flymind-observatory.pages.dev
 
-The real read-only Canvas check on 2026-10-14 returned HTTP401 on its first request.
-Replace/renew CANVAS_API_KEY in GitHub Secrets and confirm CANVAS_API_URL, then rerun
-`FlyMind controlled Canvas read`. No pagination or real assignment schema was verified
-beyond that denied request. Do not confuse this with the successful fixture tests.
+Owner Auth provisioning and actual authenticated private browser replay remain
+pending. Use the private terminal command above, then sign in. Next verify reviewed
+main/default-branch manual completion, repeated test /check results, and controlled
+primary-account rollout. Never claim workflow_dispatch acceptance means completion.
 
 The existing scanner workflow is disabled_inactivity. Keep it disabled until migration,
 bootstrap and target gates pass. After owner-reviewed merge, explicitly configure all

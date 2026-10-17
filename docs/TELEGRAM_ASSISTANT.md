@@ -212,3 +212,13 @@ commands, webhook, Telegram messages or hosted migrations were performed.
 Official references: [Telegram Bot API](https://core.telegram.org/bots/api),
 [GitHub workflow dispatch](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event),
 [Canvas assignments](https://developerdocs.instructure.com/services/canvas/resources/assignments).
+
+## Owner-local Auth setup after the hosted test release
+
+Run `PYTHONPATH=. .venv/neural/bin/python -m src.flymind.owner_setup` yourself in
+the repository terminal. Email/password are entered locally (password hidden);
+never paste them into AI chat. It provisions the explicitly supplied owner through
+admin Auth, verifies password sign-in, then binds only the separately verified
+test account. It neither rotates an existing password nor changes production flags.
+The resulting `.env.flymind.owner` contains UUID/email, not the password.
+Open the actual preview and sign in to complete the remaining browser replay gate.

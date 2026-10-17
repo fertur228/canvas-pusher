@@ -125,7 +125,8 @@ telegram-assistant-validation.json. Existing production data have not been chang
 - [x] Supabase-mode Cloudflare preview deployed;HTTPS/auth gate verified in Chrome.
 - [x] Real read-only cloud Canvas run39043798824 succeeded.
 - [x] Full Python154 baseline plus new guard regression;Deno15;Vitest28.
-- [ ] Controlled two-scan cloud worker result pending new feature push.
+- [x] Two successful real cloud two-scan workers; repeated scans have zero duplicate sends.
+- [x] Cloud Linux synthetic event delivered, simulated and uploaded privately; three artifacts decode losslessly.
 - [ ] Explicit owner email/Auth password setup, owner mapping and actual private browser replay.
 - [ ] Review/merge gates and real default-branch /check completion.
 - [ ] Scheduled primary-chat production rollout (intentionally disabled).

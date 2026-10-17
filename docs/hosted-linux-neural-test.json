@@ -1,0 +1,35 @@
+{
+  "scope": "real GitHub Linux worker, synthetic labeled event, real test Telegram and private Storage",
+  "profile": "weak",
+  "readout": {
+    "version": "experimental-urgency/v1",
+    "gf_spikes": [
+      2,
+      2
+    ],
+    "limitation": "Not calibrated urgency or escape behavior; generic LIF and uncalibrated recruitment; suprathreshold peaks depend on reset",
+    "thresholds": "ENGINEERING: elevated iff GF total >=6 and active cells >=400; moderate iff GF>=1 or active>=100; otherwise minimal",
+    "active_neurons": 282,
+    "classification": "moderate",
+    "population_spikes": 344,
+    "gf_first_latency_ms": [
+      751.1,
+      750.0
+    ],
+    "biological_response_validated": false,
+    "gf_peak_model_depolarization_mv": [
+      7.0398444265493225,
+      7.119108279948492
+    ]
+  },
+  "measurements": {
+    "sampled_peak_rss_mib": 178.08984375,
+    "rss_sample_interval_ms": 5,
+    "process_lifetime_peak_rss_mib": 189.87890625,
+    "cpu_seconds_load_import_simulation_export": 4.466969077,
+    "wall_seconds_load_import_simulation_export": 5.236537895000026
+  },
+  "telemetry_bytes": 162418,
+  "telemetry_hash_verified": true,
+  "run_url": "https://github.com/fertur228/canvas-pusher/actions/runs/39044657067"
+}
