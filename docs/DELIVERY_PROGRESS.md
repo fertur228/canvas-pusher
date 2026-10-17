@@ -16,8 +16,11 @@ owner Auth/sign-in и manual completion на main ещё не проверены
 - [x] Current-band coalescing, submitted/changed/expired queued reminder suppression.
 - [x] Emoji presentation without internal IDs/scientific debug in ordinary messages.
 - [x] Real Canvas read/rate-budget evidence; five-minute source cron with gates OFF.
-- [x] Local Python194 passed before final staging-scenario regression; Deno15,
+- [x] Local Python195 passed, including finite staging-scenario regression; Deno15,
       Vitest28, TypeScript/build, browser4local+2private-mocked passed.
+- [x] Local PostgreSQL17: all8 migrations, RPC/RLS/Storage/manual lifecycle and
+      suppressed-job health regression passed; original7 migration files unchanged.
+- [x] Backup authenticated decrypt verified; linked dry-run shows only health correction0007.
 - [ ] Final CI and hosted finite deadline exercise (record results below when complete).
 - [ ] Production remains disabled; no merge authorized by this notification task.
 

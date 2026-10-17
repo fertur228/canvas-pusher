@@ -87,3 +87,14 @@ DO $$ BEGIN
 END $$;
 ROLLBACK;
 SELECT 'Heartbeat, audit, webhook replay and retention controls passed' AS result;
+
+BEGIN;
+UPDATE public.flymind_health SET last_neural_success='2000-01-01T00:00:00Z',last_telegram_success='2000-01-01T00:00:00Z';
+UPDATE public.flymind_jobs SET state='pending' WHERE stage IN ('send','simulate');
+UPDATE public.flymind_jobs SET state='done',result='{"status":"suppressed","suppressed":"submitted"}' WHERE stage IN ('send','simulate');
+DO $$ BEGIN
+ IF EXISTS(SELECT 1 FROM public.flymind_health WHERE last_neural_success<>'2000-01-01T00:00:00Z' OR last_telegram_success<>'2000-01-01T00:00:00Z') THEN
+ RAISE EXCEPTION 'suppression_fabricated_successful_delivery_or_neural_run'; END IF;
+END $$;
+ROLLBACK;
+SELECT 'Suppressed reminders do not fabricate successful neural or Telegram health' AS result;

@@ -239,7 +239,10 @@ consumption strings plus `deadline-version:v2:` and `reminder-audit:v2:` strings
 Audit reasons: `queued` (outbox, not delivery), `skipped_late`,
 `covered_by_creation`, `covered_by_deadline_change`, `silent_bootstrap`,
 `submitted`, `expired`. Delivery truth stays in jobs/message IDs. This requires
-NO SQL migration and does not rewrite old academic data.
+NO new snapshot columns and does not rewrite old academic data. Separately,
+`202610170007_flymind_suppressed_health.sql` corrects the existing audit trigger
+function: a suppressed auxiliary job must not advance last_neural_success. It
+changes no rows, schemas, policies or grants at migration time.
 
 A scan at4h for a newly discovered assignment sends creation only, consumes24/12/6,
 then3h and1h can fire later. A delayed scan from>24h to2h sends only3h and records
