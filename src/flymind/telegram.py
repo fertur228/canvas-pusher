@@ -27,7 +27,7 @@ class TelegramDelivery:
         edit = message_id is not None
         method = 'editMessageText' if edit else 'sendMessage'
         payload = {'chat_id': self.chat_id, 'text': text, 'parse_mode': 'HTML', 'link_preview_options': {'is_disabled': True}}
-        payload['reply_markup']={'inline_keyboard':[[{'text':'📅 Deadlines','callback_data':'deadlines:upcoming:0'},{'text':'⚙️ System Status','callback_data':'status'}]]}
+        payload['reply_markup']={'inline_keyboard':[[{'text':'📅 Дедлайны','callback_data':'deadlines:upcoming:0'},{'text':'⚙️ Статус системы','callback_data':'status'}]]}
         if edit:
             payload['message_id'] = message_id
         try:

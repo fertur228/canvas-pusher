@@ -63,16 +63,16 @@ export function handler(config: Config, request: typeof fetch = fetch) {
         const recent=(await api(`flymind_manual_requests?account_id=eq.${account.id}&order=created_at.desc&limit=1`))[0];
         const age=health?.last_attempt?Date.now()-Date.parse(health.last_attempt):Infinity;
         const status=age>90*60000?'failed':age>30*60000?'delayed':health?.status??'unknown';
-        await send(`⚙️ Состояние: ${escape(status)}\nУспешная синхронизация снимков: ${localDate(health?.last_snapshot_success)}\nTelegram: ${localDate(health?.last_telegram_success)}\nNeural: ${localDate(health?.last_neural_success)}\nОчередь: ${escape(JSON.stringify(health?.queue??{}).slice(0,600))}\nРучной запрос: ${escape(recent?.state??'нет')}\n${recent?.state==='running'?'Завершение workflow ещё не подтверждено.':''}`,{inline_keyboard:[[{text:'📅 Deadlines',callback_data:'deadlines:upcoming:0'}]]});
+        await send(`⚙️ Состояние: ${escape(status)}\nУспешная синхронизация снимков: ${localDate(health?.last_snapshot_success)}\nTelegram: ${localDate(health?.last_telegram_success)}\nNeural: ${localDate(health?.last_neural_success)}\nОчередь: ${escape(JSON.stringify(health?.queue??{}).slice(0,600))}\nРучной запрос: ${escape(recent?.state??'нет')}\n${recent?.state==='running'?'Завершение workflow ещё не подтверждено.':''}`,{inline_keyboard:[[{text:'📅 Дедлайны',callback_data:'deadlines:upcoming:0'}]]});
       } else if(command==='/stats'||callback==='get_stats') {
         const grades=await api(`course_grades?select=course_name,current_score&user_id=eq.${encodeURIComponent(config.chat)}&limit=100`);
         let points=0,credits=0;const lines=['🎓 <b>Моя успеваемость</b>'];
         for(const row of grades){const name=String(row.course_name??'').slice(0,120),score=Number(row.current_score);if(name.toLowerCase().includes('practic'))continue;
-          if(!Number.isFinite(score)||score===0){lines.push(`${escape(name)}: без оценки`);continue;}
-          const physical=name.toLowerCase().includes('физическая культура'),weight=physical?2:5,gp=physical?4:gradePoint(score);points+=gp*weight;credits+=weight;lines.push(`${escape(name)}: ${score}% (GPA ${gp})`);
+          if(row.current_score===null||row.current_score===undefined||row.current_score===''||!Number.isFinite(score)){lines.push(`${escape(name)}: без оценки`);continue;}
+          const physical=name.toLowerCase().includes('физическая культура'),weight=physical?2:5,gp=gradePoint(score);points+=gp*weight;credits+=weight;lines.push(`${escape(name)}: ${score}% (GPA ${gp})`);
         }
         // Cap each message without cutting an HTML entity or tag.
-        const pages:string[]=[];let page='';for(const line of lines){if(page.length+line.length>3000){pages.push(page);page='';}page+=line+'\n';}pages.push(page+`\nGPA: ${credits?(points/credits).toFixed(2):'—'} / 4.0`);
+        const pages:string[]=[];let page='';for(const line of lines){if(page.length+line.length>3000){pages.push(page);page='';}page+=line+'\n';}pages.push(page+`\nОценочный GPA: ${credits?(points/credits).toFixed(2):'—'} / 4.0\nНе официальный транскрипт: предполагается 5 кредитов на курс, 2 для физкультуры.`);
         for(const text of pages)await send(text,{inline_keyboard:[[{text:'🔄 Обновить сейчас',callback_data:'force_refresh'}],[{text:'🧠 Neural Observatory',callback_data:'brain'}]]});
       } else if(command==='/brain'||callback==='brain') {
         const rows=accounts.length?await api(`flymind_experiments?select=created_at,metadata&account_id=eq.${accounts[0].id}&order=created_at.desc&limit=1`):[];

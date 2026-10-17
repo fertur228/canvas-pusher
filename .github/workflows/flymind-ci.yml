@@ -38,7 +38,7 @@ jobs:
           path: /tmp/flymind-platform-comparison.json
           retention-days: 14
       - run: python -m pytest -q --tb=short --disable-warnings --show-capture=no
-      - run: deno test supabase/functions/telegram-webhook/
+      - run: deno test supabase/functions/telegram-webhook/ supabase/functions/flymind-telegram-webhook/
       - run: npm ci --prefix dashboard
       - run: npm --prefix dashboard test
       - run: npm --prefix dashboard run build

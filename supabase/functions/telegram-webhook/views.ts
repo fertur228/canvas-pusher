@@ -1,9 +1,9 @@
 /** Pure, bounded Telegram views. Stored model data and cached academic data stay distinct. */
 export const escape = (x: unknown) => String(x ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
-export const menu = {keyboard:[[{text:'📅 Deadlines'},{text:'🔄 Check Canvas Now'}],[{text:'📊 My Grades'},{text:'🧠 Fly Brain'}],[{text:'⚙️ System Status'}]],resize_keyboard:true,is_persistent:true};
+export const menu = {keyboard:[[{text:'📅 Дедлайны'},{text:'🔄 Проверить Canvas'}],[{text:'📊 Мои оценки'},{text:'🧠 Мозг мухи'}],[{text:'⚙️ Статус системы'}]],resize_keyboard:true,is_persistent:true};
 export const labels:Record<string,string>={upcoming:'Предстоящие',overdue:'Просроченные',today:'Сегодня',week:'7 дней',month:'30 дней',all:'Все несданные',undated:'Без дедлайна'};
 export function command(text:string):string {
- const aliases:Record<string,string>={'📅 Deadlines':'/deadlines','🔄 Check Canvas Now':'/check','📊 My Grades':'/stats','🧠 Fly Brain':'/brain','⚙️ System Status':'/status'};
+ const aliases:Record<string,string>={'📅 Дедлайны':'/deadlines','🔄 Проверить Canvas':'/check','📊 Мои оценки':'/stats','🧠 Мозг мухи':'/brain','⚙️ Статус системы':'/status','📅 Deadlines':'/deadlines','🔄 Check Canvas Now':'/check','📊 My Grades':'/stats','🧠 Fly Brain':'/brain','⚙️ System Status':'/status'};
  return aliases[text]??text.trim().split(/\s+/)[0].split('@')[0].toLowerCase();
 }
 export function localDate(value:unknown):string {
@@ -34,6 +34,6 @@ export function deadlineView(data:any,view:string,origin:string,now=Date.now()) 
   text+=`\nСтраница ${page+1}/${Math.max(1,Math.ceil(total/3))} · Заданий: ${total}`;
  }
  const nav=[];if(page>0)nav.push({text:'←',callback_data:`deadlines:${view}:${page-1}`});if((page+1)*3<total)nav.push({text:'→',callback_data:`deadlines:${view}:${page+1}`});if(nav.length)keyboard.push(nav);
- keyboard.push([{text:'🔄 Check Canvas Now',callback_data:'check'},{text:'Меню',callback_data:'menu'}]);
+ keyboard.push([{text:'🔄 Проверить Canvas',callback_data:'check'},{text:'Меню',callback_data:'menu'}]);
  return {text,keyboard:{inline_keyboard:keyboard}};
 }

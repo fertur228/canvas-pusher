@@ -38,7 +38,7 @@ Deno.test('academic HTML escaped; acknowledgement persisted',async()=>{
 });
 
 Deno.test('start/menu commands and persistent buttons preserve separate grades action',async()=>{
- const texts=['/start','/start@new_bot','/menu','📊 My Grades','🧠 Fly Brain','⚙️ System Status','📅 Deadlines'];
+ const texts=['/start','/start@new_bot','/menu','📊 My Grades','🧠 Fly Brain','⚙️ System Status','📅 Deadlines','📊 Мои оценки','🧠 Мозг мухи','⚙️ Статус системы','📅 Дедлайны'];
  for(const text of texts){let sent:any,grades=0,neural=0;
   const request=(async(url:string|URL|Request,init?:RequestInit)=>{
    const path=String(url);
@@ -53,8 +53,8 @@ Deno.test('start/menu commands and persistent buttons preserve separate grades a
    throw new Error(path);
   }) as typeof fetch;
   assert((await handler(config,request)(req({...update,message:{...update.message,text}}))).status===200);
-  if(text.startsWith('/start')||text==='/menu'){assert(sent.reply_markup.is_persistent&&grades===0&&neural===0);assert(sent.reply_markup.keyboard[0][0].text==='📅 Deadlines');}
-  if(text==='📅 Deadlines')assert(sent.text.includes('Ещё не синхронизировано')&&neural===0);
+  if(text.startsWith('/start')||text==='/menu'){assert(sent.reply_markup.is_persistent&&grades===0&&neural===0);assert(sent.reply_markup.keyboard[0][0].text==='📅 Дедлайны');}
+  if(text==='📅 Deadlines'||text==='📅 Дедлайны')assert(sent.text.includes('Ещё не синхронизировано')&&neural===0);
  }
 });
 Deno.test('bot update identity and acknowledgement are bot scoped',async()=>{
@@ -134,4 +134,22 @@ Deno.test('Telegram rate-limit or lost acknowledgement never causes blind webhoo
   const h=handler(config,request),body={...update,message:{...update.message,text:'/menu'}};
   assert((await h(req(body))).status===200);await h(req(body));assert(sends===1);
  }
+});
+
+Deno.test('zero is a recorded grade; missing grades excluded; physical grade never fabricated',async()=>{
+ let sent='';
+ const request=(async(url:string|URL|Request,init?:RequestInit)=>{
+  const path=String(url);
+  if(path.includes('webhook_claim'))return Response.json(true);
+  if(path.includes('flymind_accounts'))return Response.json([{id:'account'}]);
+  if(path.includes('course_grades'))return Response.json([
+   {course_name:'zero',current_score:0},{course_name:'unknown',current_score:null},
+   {course_name:'Физическая культура',current_score:50}]);
+  if(path.includes('sendMessage')){sent+=JSON.parse(String(init?.body)).text;return Response.json({ok:true,result:{message_id:12}});}
+  if(path.includes('webhook_updates'))return new Response(null,{status:204});
+  throw new Error('unexpected');
+ }) as typeof fetch;
+ await handler(config,request)(req({...update,message:{...update.message,text:'/stats'}}));
+ assert(sent.includes('zero: 0% (GPA 0)')&&sent.includes('unknown: без оценки'));
+ assert(sent.includes('Физическая культура: 50% (GPA 1)')&&sent.includes('0.29 / 4.0')&&sent.includes('Не официальный'));
 });

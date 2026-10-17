@@ -40,7 +40,7 @@ def completion_text(row,conclusion):
                       f"Изменений дедлайна: {int(counts.get('deadline_changed',0))}",
                       f"Обновлений оценок: {int(counts.get('grade_updated',0))}",
                       f"Ошибок: {max(0 if ok else 1,int(summary.get('errors',0)))}",
-                      'Нажмите 📅 Deadlines, чтобы открыть проверенный список.'])
+                      'Нажмите 📅 Дедлайны, чтобы открыть проверенный список.'])
 
 
 async def execute(s,store,request_id,run_id,ref,runner=run):
