@@ -1,5 +1,6 @@
 """Optional real SQL tests. Dedicated local socket only; never accepts a production URL."""
 import argparse
+import json
 import os
 from pathlib import Path
 import re
@@ -24,6 +25,13 @@ def main():
         for path in [ROOT/'tests/flymind/sql/bootstrap.sql', *sorted((ROOT/'supabase/migrations').glob('*.sql')), ROOT/'tests/flymind/sql/checks.sql', ROOT/'tests/flymind/sql/assistant_checks.sql']:
             command+=['-f',str(path)]
         subprocess.run(command,check=True)
+        # Execute the frontend's actual account query against all real migrations.
+        # A hand-written HTTP fixture previously accepted nonexistent created_at.
+        contract=json.loads((ROOT/'dashboard/src/accountQuery.json').read_text())
+        identifiers=[contract['table'],*contract['columns'],contract['order']]
+        assert all(re.fullmatch(r'[a-z_]+',name) for name in identifiers)
+        query=f"SELECT {','.join(contract['columns'])} FROM public.{contract['table']} ORDER BY {contract['order']} ASC LIMIT 0"
+        subprocess.run(base+['-d',database,'-c','BEGIN; SET LOCAL ROLE authenticated; '+query+'; ROLLBACK;'],check=True)
     finally:
         subprocess.run(base+['-d','postgres','-c',f'DROP DATABASE {database}'],check=True)
 

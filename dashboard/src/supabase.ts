@@ -3,6 +3,7 @@
 import { assertVersion, decodeVoltage, validateExperiment } from './telemetry';
 import type { Experiment, ExperimentId, Graph, LoadedExperiment, Descriptor } from './telemetry';
 import { verifyBytes } from './integrity';
+import {responseError} from './privateErrors';
 
 type EngineTrace = { readout_time_ms: number[]; readout_voltage_mv: Record<string,number[]>; time_ms: number[]; voltage_mv: Record<string,number[]> };
 export type EngineExport = { schema_version: 1; manifest_sha256: string; biological_response_validated: false; activity_sha256: string; created_at_utc: string; neuron_ids: string[]; model: Experiment['model']; simulation: { parameters: Experiment['parameters']; model: Experiment['model']; stimulus: Experiment['stimulus']; stimulus_ids: string[]; spikes: {root_id:string;time_ms:number}[]; activity: Experiment['activity']; readout: Experiment['readout']; traces: EngineTrace } };
@@ -27,12 +28,12 @@ export function fromEngineExport(raw: EngineExport, graph: Graph, graphHash: str
 export class SupabaseExperimentRepository {
   constructor(private access:()=>Promise<UserAccess>,private fetcher:typeof fetch=(...args)=>fetch(...args)){}
   private async credentials(){const a=await this.access();if(!a.accessToken||!a.publishableKey||a.publishableKey.startsWith('sb_secret_')||a.accessToken.startsWith('sb_secret_'))throw new Error('Authenticated user session required');for(const token of [a.accessToken,a.publishableKey]){try{const claims=JSON.parse(atob((token.split('.')[1]||'').replace(/-/g,'+').replace(/_/g,'/')));if(claims.role==='service_role')throw new Error('Service role forbidden in browser');}catch(e){if(e instanceof Error&&e.message.includes('Service role'))throw e;}}if(!/^https:\/\//.test(a.url))throw new Error('HTTPS Supabase origin required');return a;}
-  async list(accountId?:string):Promise<PrivateExperimentRow[]>{const a=await this.credentials();const r=await this.fetcher(`${a.url.replace(/\/$/,'')}/rest/v1/flymind_experiments?select=event_id,account_id,created_at,metadata&order=created_at.desc&limit=50${accountId?'&account_id=eq.'+encodeURIComponent(accountId):''}`,{headers:{apikey:a.publishableKey,Authorization:`Bearer ${a.accessToken}`},cache:'no-store'});if(!r.ok)throw new Error(`Private metadata unavailable: HTTP ${r.status}`);const rows=await r.json();if(!Array.isArray(rows)||accountId&&rows.some(row=>row.account_id!==accountId))throw new Error('Invalid private metadata');return rows;}
+  async list(accountId?:string):Promise<PrivateExperimentRow[]>{const a=await this.credentials();const r=await this.fetcher(`${a.url.replace(/\/$/,'')}/rest/v1/flymind_experiments?select=event_id,account_id,created_at,metadata&order=created_at.desc&limit=50${accountId?'&account_id=eq.'+encodeURIComponent(accountId):''}`,{headers:{apikey:a.publishableKey,Authorization:`Bearer ${a.accessToken}`},cache:'no-store'});if(!r.ok)throw await responseError('Experiments',r);const rows=await r.json();if(!Array.isArray(rows)||accountId&&rows.some(row=>row.account_id!==accountId))throw new Error('Invalid private metadata');return rows;}
   async load(row:PrivateExperimentRow,graph:Graph,graphHash:string):Promise<LoadedExperiment>{
     const a=await this.credentials(),path=row.metadata.telemetry_path;
     if(row.metadata.status!=='complete'||!path||!path.startsWith(`${row.account_id}/`)||!/^[-a-f0-9/]+\.json\.gz$/.test(path))throw new Error('Private telemetry unavailable or invalid path');
     const response=await this.fetcher(`${a.url.replace(/\/$/,'')}/storage/v1/object/authenticated/flymind-private/${path}`,{headers:{apikey:a.publishableKey,Authorization:`Bearer ${a.accessToken}`},cache:'no-store'});
-    if(!response.ok)throw new Error(`Private telemetry unavailable: HTTP ${response.status}`);
+    if(!response.ok)throw await responseError('Telemetry',response);
     const bytes=await boundedBytes(response.body,4*1024*1024);await verifyBytes(bytes,row.metadata.telemetry_sha256);
     const text=new TextDecoder().decode(await boundedBytes(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip')),32*1024*1024));
     return fromEngineExport(JSON.parse(text),graph,graphHash,row);

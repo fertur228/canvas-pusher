@@ -7,6 +7,8 @@ import type {PrivateExperimentRow} from './supabase';
 import App from './App';
 import type {Loaded} from './App';
 import type {ExperimentId,LoadedExperiment} from './telemetry';
+import accountQuery from './accountQuery.json';
+import {PrivateRequestError,privateErrorMessage} from './privateErrors';
 
 type OwnerAccount={id:string;telegram_chat_id:number;enabled:boolean};
 type Health={last_attempt:string|null;last_canvas_success:string|null;last_database_success:string|null;last_neural_success:string|null;last_telegram_success:string|null;status:string;error_code:string|null;queue:Record<string,number>};
@@ -26,16 +28,23 @@ export default function PrivateObservatory(){
 }
 function PrivateWorkspace({client,onSignOut}:{client:SupabaseClient;onSignOut:()=>void}){
   const [rows,setRows]=useState<PrivateExperimentRow[]>([]),[health,setHealth]=useState<Health>(),[errors,setErrors]=useState<{error_code:string;created_at:string}[]>([]),[loaded,setLoaded]=useState<Loaded>(),[selected,setSelected]=useState<PrivateExperimentRow>(),[trigger,setTrigger]=useState<{kind:string;payload:{name?:string;course_name?:string};observed_at:string}>(),[error,setError]=useState(''),[busy,setBusy]=useState(true),[storage,setStorage]=useState('not checked'),[revision,setRevision]=useState(0);
-  const [accounts,setAccounts]=useState<OwnerAccount[]>([]),[accountId,setAccountId]=useState('');
+  const [accounts,setAccounts]=useState<OwnerAccount[]>([]),[accountId,setAccountId]=useState(''),[metadataRevision,setMetadataRevision]=useState(0);
   const cache=useRef(new Map<string,Loaded>()),requestId=useRef(0);
-  const repository=useMemo(()=>new SupabaseExperimentRepository(async()=>{const {data}=await client.auth.getSession();if(!data.session)throw new Error('Session expired');return {url:import.meta.env.VITE_SUPABASE_URL,publishableKey:import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,accessToken:data.session.access_token};}),[client]);
+  const repository=useMemo(()=>new SupabaseExperimentRepository(async()=>{const {data}=await client.auth.getSession();if(!data.session)throw new PrivateRequestError('Experiments',401);return {url:import.meta.env.VITE_SUPABASE_URL,publishableKey:import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,accessToken:data.session.access_token};}),[client]);
   useEffect(()=>{let active=true;void(async()=>{
+    setBusy(true);setError('');
     try {
-      const {data,error}=await client.from('flymind_accounts').select('id,telegram_chat_id,enabled').order('created_at');
-      if(error||!data?.length)throw new Error('No authorized accounts');
-      if(active){setAccounts(data);setAccountId((data.find(a=>Number(a.telegram_chat_id)>0&&a.enabled)||data[0]).id);}
-    }catch{if(active){setError('Private metadata unavailable. Check owner account mapping and session.');setBusy(false);}}
-  })();return()=>{active=false;};},[client]);
+      const {data,error,status}=await client.from(accountQuery.table).select(accountQuery.columns.join(',')).order(accountQuery.order);
+      if(error)throw new PrivateRequestError('Accounts',status,error.code);
+      if(active){
+        const available=(data??[]) as unknown as OwnerAccount[];
+        setAccounts(available);
+        if(!available.length){setAccountId('');setRows([]);setHealth(undefined);setErrors([]);setLoaded(undefined);setSelected(undefined);setTrigger(undefined);cache.current.clear();setStorage('not checked');setError('No FlyMind account is mapped to this signed-in user. Ask the maintainer to verify owner mapping.');setBusy(false);return;}
+        setAccountId(previous=>available.some(a=>a.id===previous)?previous:(available.find(a=>Number(a.telegram_chat_id)>0&&a.enabled)||available[0]).id);
+        setMetadataRevision(x=>x+1);
+      }
+    }catch(cause){if(active){setError(privateErrorMessage(cause));setBusy(false);}}
+  })();return()=>{active=false;};},[client,revision]);
   useEffect(()=>{
     if(!accountId)return;
     let active=true;setBusy(true);setError('');setRows([]);setHealth(undefined);setErrors([]);
@@ -46,13 +55,14 @@ function PrivateWorkspace({client,onSignOut}:{client:SupabaseClient;onSignOut:()
         repository.list(accountId),
         client.from('flymind_health').select('*').eq('account_id',accountId).limit(1),
         client.from('flymind_attempts').select('error_code,created_at').eq('account_id',accountId).not('error_code','is',null).order('created_at',{ascending:false}).limit(8)]);
-      if(h.error||e.error)throw new Error('Private health unavailable; verify ownership and migrations');
+      if(h.error)throw new PrivateRequestError('Health',h.status,h.error.code);
+      if(e.error)throw new PrivateRequestError('Delivery history',e.status,e.error.code);
       if(active){setRows(runs);setHealth(h.data?.[0]);setErrors(e.data??[]);}
-    }catch{if(active)setError('Private metadata unavailable. Check your connection, owner mapping and session.');}
+    }catch(cause){if(active)setError(privateErrorMessage(cause));}
     finally{if(active)setBusy(false);}})();
     return()=>{active=false;requestId.current++;cache.current.clear();};
-  },[repository,client,revision,accountId]);
-  async function load(row:PrivateExperimentRow){if(row.account_id!==accountId)return;const id=++requestId.current;setBusy(true);setError('');setLoaded(undefined);setSelected(row);setTrigger(undefined);try{let result=cache.current.get(row.event_id);if(!result){const catalog=await dataSource.getCatalog(),graph=await dataSource.getGraph(catalog);const references=await Promise.all(catalog.experiments.map(e=>dataSource.getExperiment(e,graph,catalog.graph.sha256)));const experiment=await repository.load(row,graph,catalog.graph.sha256);const entries=catalog.experiments.map(e=>e.id!==experiment.id?e:{...e,spikes:experiment.spikes.length,active_neurons:experiment.activity.filter(n=>n.spike_count>0).length,gf_spikes:experiment.readout.map(r=>r.spike_times_ms.length),duration_ms:experiment.parameters.duration_ms,contrast:experiment.stimulus.parameters.contrast,radius_over_speed_ms:experiment.stimulus.parameters.radius_over_speed_ms});result={catalog:{...catalog,experiments:entries},graph,experiments:{...Object.fromEntries(references.map(e=>[e.id,e])),[experiment.id]:experiment} as Record<ExperimentId,LoadedExperiment>};if(cache.current.size>=3)cache.current.delete(cache.current.keys().next().value!);cache.current.set(row.event_id,result);}const event=await client.from('flymind_events').select('event').eq('event_id',row.event_id).eq('account_id',accountId).single();if(event.error)throw new Error('Trigger unavailable');if(id===requestId.current){setLoaded(result);setTrigger(event.data.event);setStorage('verified private download');}}catch{if(id===requestId.current){setError('Experiment unavailable: expired session, missing/retained artifact, or integrity check failed. Retry after checking System Health.');setStorage('unavailable');}}finally{if(id===requestId.current)setBusy(false);}}
+  },[repository,client,metadataRevision,accountId]);
+  async function load(row:PrivateExperimentRow){if(row.account_id!==accountId)return;const id=++requestId.current;setBusy(true);setError('');setLoaded(undefined);setSelected(row);setTrigger(undefined);try{let result=cache.current.get(row.event_id);if(!result){const catalog=await dataSource.getCatalog(),graph=await dataSource.getGraph(catalog);const references=await Promise.all(catalog.experiments.map(e=>dataSource.getExperiment(e,graph,catalog.graph.sha256)));const experiment=await repository.load(row,graph,catalog.graph.sha256);const entries=catalog.experiments.map(e=>e.id!==experiment.id?e:{...e,spikes:experiment.spikes.length,active_neurons:experiment.activity.filter(n=>n.spike_count>0).length,gf_spikes:experiment.readout.map(r=>r.spike_times_ms.length),duration_ms:experiment.parameters.duration_ms,contrast:experiment.stimulus.parameters.contrast,radius_over_speed_ms:experiment.stimulus.parameters.radius_over_speed_ms});result={catalog:{...catalog,experiments:entries},graph,experiments:{...Object.fromEntries(references.map(e=>[e.id,e])),[experiment.id]:experiment} as Record<ExperimentId,LoadedExperiment>};if(cache.current.size>=3)cache.current.delete(cache.current.keys().next().value!);cache.current.set(row.event_id,result);}const event=await client.from('flymind_events').select('event').eq('event_id',row.event_id).eq('account_id',accountId).single();if(event.error)throw new PrivateRequestError('Trigger',event.status,event.error.code);if(id===requestId.current){setLoaded(result);setTrigger(event.data.event);setStorage('verified private download');}}catch(cause){if(id===requestId.current){setError(privateErrorMessage(cause,'Experiment unavailable: missing/retained artifact or integrity check failed. Retry after checking System Health.'));setStorage('unavailable');}}finally{if(id===requestId.current)setBusy(false);}}
   const stamp=(v:string|null|undefined)=>v?new Date(v).toLocaleString():'unavailable';
   return <><section className="private-panel"><div className="panel-heading"><div><h1>Private Observatory</h1><p>Authenticated owner data · deployment: {import.meta.env.VITE_DEPLOYMENT_LABEL||'local / not deployed'}</p></div><button onClick={onSignOut}>Sign out</button></div><label>Account <select aria-label="Account" value={accountId} onChange={e=>setAccountId(e.target.value)}>{accounts.map(a=><option key={a.id} value={a.id}>{Number(a.telegram_chat_id)<0?'Test group':'Private chat'} · {a.enabled?'enabled':'disabled'}</option>)}</select></label><h2>Overview & system health</h2><dl className="health-grid"><div><dt>State</dt><dd>{healthState(health)}</dd></div><div><dt>Scanner attempt</dt><dd>{stamp(health?.last_attempt)}</dd></div><div><dt>Canvas success</dt><dd>{stamp(health?.last_canvas_success)}</dd></div><div><dt>Database success</dt><dd>{stamp(health?.last_database_success)}</dd></div><div><dt>Neural success</dt><dd>{stamp(health?.last_neural_success)}</dd></div><div><dt>Telegram delivery</dt><dd>{stamp(health?.last_telegram_success)}</dd></div><div><dt>Storage</dt><dd>{storage}</dd></div><div><dt>Model</dt><dd>Fixed LIF · FAFB v783 · experimental</dd></div></dl><p>Queue: {health?Object.entries(health.queue).map(([k,n])=>`${k}: ${n}`).join(' · ')||'empty':'unavailable'}</p><p>Recent errors: {errors.map(e=>`${stamp(e.created_at)} ${e.error_code}`).join(' · ')||'none recorded'}</p><button onClick={()=>setRevision(x=>x+1)} disabled={busy}>Refresh history and health</button><h2>Experiments · latest 50</h2>{busy&&<p role="status">Loading private data…</p>}{error&&<p role="alert">{error}</p>}{!busy&&!rows.length&&!error&&<p>No experiments accessible. Check owner mapping or run the worker.</p>}<div className="run-list">{rows.map(row=><button key={row.event_id} disabled={busy} onClick={()=>void load(row)} aria-pressed={selected?.event_id===row.event_id}>{stamp(row.created_at)} · {row.metadata.encoding?.case||'unavailable'} · {row.metadata.readout?.classification||row.metadata.status}</button>)}</div>{trigger&&<p>Trigger: {trigger.kind} · {trigger.payload.course_name} · {trigger.payload.name} · {stamp(trigger.observed_at)}</p>}{loaded&&selected&&<p><strong>{selected.metadata.encoding.case}</strong> replays this private run. Other profiles are bundled research references, not runs from your Canvas account. All activity is model-recorded and biologically unvalidated.</p>}</section>{loaded&&selected&&<App key={selected.event_id} initialData={loaded} initialExperiment={selected.metadata.encoding.case} sourceLabel="Private run + local references"/>}</>;
 }
