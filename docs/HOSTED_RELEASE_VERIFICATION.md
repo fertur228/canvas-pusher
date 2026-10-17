@@ -1,5 +1,10 @@
 # FlyMind — фактическая hosted-проверка, 17 октября 2026
 
+> Дополнение2026-10-17: обязательные дедлайны24/12/6/3/1h и5-minute source cron
+> проверены в реальном test-chat workflow39049711232; новая миграция0007
+> audit-health применена, исходные7неизменны. Production остаётсяOFF.
+> См.[DEADLINE_NOTIFICATION_VERIFICATION.md](DEADLINE_NOTIFICATION_VERIFICATION.md).
+
 Статус: **STAGING / TEST CHAT VERIFIED**, но это тестовые аккаунт/группа в
 существующем проекте, **не отдельный staging Supabase**. Production выключен.
 Этот отчёт заменяет устаревшие activation blockers в документах от 14 октября.

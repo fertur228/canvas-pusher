@@ -117,3 +117,10 @@ This feature branch is NOT an active production schedule. Official references:
 [GitHub schedules](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule),
 [concurrency](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency),
 [billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
+
+Latest real Linux hosted notification check39049711232: two normal real scans
+took176.825s total, with0events/errors; a separate accelerated14-step synthetic
+deadline exercise took88.236s and sent11test messages. Wholejob294s includes
+setup and both phases, not the cost of one normal poll. Two cached real neural
+profiles served11event associations; one cancelled reminder ran no simulation.
+Evidence:[deadline-hosted-verification.json](deadline-hosted-verification.json).

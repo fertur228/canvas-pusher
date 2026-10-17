@@ -1,0 +1,77 @@
+{
+  "cloud_run_id": 39049711232,
+  "head": "90823403c9f3062ed247f18f3d9da95f86027e10",
+  "cloud_job_seconds": 294,
+  "canvas_two_scans": {
+    "scope": "real cloud Canvas/Supabase/Telegram test group, not production",
+    "first": {
+      "status": "ok",
+      "events": 0,
+      "errors": 0,
+      "jobs": {
+        "edit.done": 3,
+        "send.done": 4,
+        "simulate.done": 3
+      },
+      "event_counts": {},
+      "sync_status": "verified",
+      "last_successful_check": "2026-10-17T16:32:39.508447+00:00"
+    },
+    "second": {
+      "status": "ok",
+      "events": 0,
+      "errors": 0,
+      "jobs": {
+        "edit.done": 3,
+        "send.done": 4,
+        "simulate.done": 3
+      },
+      "event_counts": {},
+      "sync_status": "verified",
+      "last_successful_check": "2026-10-17T16:34:01.350147+00:00"
+    },
+    "wall_seconds": 176.82471927000006,
+    "repeat_created_events": 0,
+    "repeat_send_done_unchanged": true,
+    "passed": true
+  },
+  "deadlines": {
+    "passed": true,
+    "scope": "verified test group only; synthetic assignments and accelerated clock",
+    "real_supabase": true,
+    "real_telegram": true,
+    "real_flywire": true,
+    "production_chat_used": false,
+    "thresholds": [
+      "24h",
+      "12h",
+      "6h",
+      "3h",
+      "1h"
+    ],
+    "events": 12,
+    "delivered_message_ids": 11,
+    "submitted_queued_reminders_suppressed": 1,
+    "late_skipped_thresholds": [
+      "24h",
+      "12h",
+      "6h"
+    ],
+    "duplicate_events": 0,
+    "completed_steps": 14,
+    "wall_seconds": 88.23637677400006
+  },
+  "repeated_completed_plan": {
+    "passed": true,
+    "job_counts_unchanged": true,
+    "additional_deliveries": 0
+  },
+  "private_artifact_hashes_verified": 2,
+  "neural_complete_associations": 11,
+  "suppressed_no_simulation": 1,
+  "all_account_jobs": {
+    "edit.done": 15,
+    "send.done": 16,
+    "simulate.done": 15
+  }
+}

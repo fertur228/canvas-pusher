@@ -53,3 +53,15 @@ into an isolated database, compare original and subsequent writes, then make an
 explicit selective recovery plan. A blanket production restore would discard new
 records. Auth/site configuration and old Edge source are in an additional encrypted
 archive; actual secret values remain in private configuration/platform secret stores.
+
+
+## Reminder v2 rollback — 2026-10-17
+
+Disable delivery/scanning before reverting Python code. The new reminder JSONB
+entries remain strings, so old code can parse them, but old code restores48h and
+can recreate redundant creation/reminder messages. Do not run that old sender on
+an active queue. Keep database migration202610170007: it only prevents suppressed
+jobs from advancing neural-success health and is compatible with older completed
+simulation results. No database restore, row deletion or migration-history reset
+is needed to disable this release. Preserve outbox, message IDs, threshold audit
+and the hosted synthetic-test checkpoint for recovery/deduplication.

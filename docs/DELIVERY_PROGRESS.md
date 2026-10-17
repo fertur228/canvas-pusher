@@ -2,7 +2,7 @@
 
 ## Текущее hosted-состояние — 2026-10-17
 
-Семь миграций реально применены, legacy hashes сохранены; новый защищённый webhook
+Миграции 0000–0006 и audit-health 0007 применены, legacy hashes сохранены; защищённый webhook
 и Cloudflare Supabase-mode preview размещены. Реальные test-chat send/edit и
 FlyWire/Storage проверки прошли. Production и основной scheduler выключены;
 owner Auth/sign-in и manual completion на main ещё не проверены.
@@ -21,7 +21,11 @@ owner Auth/sign-in и manual completion на main ещё не проверены
 - [x] Local PostgreSQL17: all8 migrations, RPC/RLS/Storage/manual lifecycle and
       suppressed-job health regression passed; original7 migration files unchanged.
 - [x] Backup authenticated decrypt verified; linked dry-run shows only health correction0007.
-- [ ] Final CI and hosted finite deadline exercise (record results below when complete).
+- [x] CI39049349780 SUCCESS:189Python+6optional-cache skips, all web/SQL/scientific checks.
+- [x] Hosted39049711232 SUCCESS:11real test-group messages,1suppressed after submission,
+      0duplicates;11neural associations/2verified private artifacts. Temporary test flag OFF.
+- [x] Migration0007 applied with legacy hashes/grants preserved. Detailed evidence:
+      [DEADLINE_NOTIFICATION_VERIFICATION.md](DEADLINE_NOTIFICATION_VERIFICATION.md).
 - [ ] Production remains disabled; no merge authorized by this notification task.
 
 ## Remote preflight update — 2026-10-17

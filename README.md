@@ -69,3 +69,10 @@ Scientific data: FlyWire FAFB v783 / pinned annotations, **CC BY-NC 4.0**, see
 checksums. Retain attribution and the non-commercial restriction. Model assumptions,
 model recordings and synthetic shuffled controls are distinguished from biological
 measurements. No private academic records belong in this public repository.
+
+
+FlyMind notification policy: immediate new-assignment alerts (including undated
+work), silent bootstrap, persisted24/12/6/3/1h reminder crossings with late-run
+coalescing and submission checks. Five-minute source cron is prepared but remains
+disabled pending production gates. [Actual hosted test evidence](docs/DEADLINE_NOTIFICATION_VERIFICATION.md):
+11real test-group sends,0duplicates; no production activation.

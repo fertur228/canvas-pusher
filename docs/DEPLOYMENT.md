@@ -2,7 +2,7 @@
 
 ## Текущее hosted-состояние — 2026-10-17
 
-Семь миграций реально применены, legacy hashes сохранены; новый защищённый webhook
+Миграции 0000–0006 и audit-health 0007 применены, legacy hashes сохранены; защищённый webhook
 и Cloudflare Supabase-mode preview размещены. Реальные test-chat send/edit и
 FlyWire/Storage проверки прошли. Production и основной scheduler выключены;
 owner Auth/sign-in и manual completion на main ещё не проверены.
@@ -29,7 +29,7 @@ actual neural exports and synthetic academic fixtures.
 ## Supabase existing-project rollout
 
 1. Confirm CLI/MCP project ref `irjasmzytjeohwfpdnrl` and migration history. The
-   seven reviewed migrations0000–0006 are already applied. Never reset or replay
+   seven reviewed migrations 0000–0006 plus audit-health correction 0007 are applied. Never reset or replay
    seed/import operations over existing records. Original336/32/14row hashes were
    preserved; six additional test grades remain scoped to the test chat.
 2. Preserve the encrypted verified backup and its separate key. The additional
@@ -69,8 +69,8 @@ NEURAL_TELEMETRY_ENABLED=true; FLYMIND_MAX_NEURAL=5;
 FLYMIND_PRODUCTION_AUTHORIZED=false. The server validates account/chat/origin binding.
 
 The new 5-minute schedule executes only when the workflow is on the default branch.
-Feature-branch CI and manual validation do not activate its cron. The owner has conditionally authorized merge after code/security/integration
-gates; PR1 currently remains open while owner Auth/replay is pending. GitHub schedules can
+Feature-branch CI and manual validation do not activate its cron. This notification task leaves merge and production activation closed;
+PR1 remains open while owner Auth/replay and the remaining release gates are pending. GitHub schedules can
 be late/dropped and public repository schedules can disable after 60 days inactivity.
 
 ## Telegram webhook

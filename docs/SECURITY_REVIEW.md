@@ -2,7 +2,7 @@
 
 ## Текущее hosted-состояние — 2026-10-17
 
-Семь миграций реально применены, legacy hashes сохранены; новый защищённый webhook
+Миграции 0000–0006 и audit-health 0007 применены, legacy hashes сохранены; защищённый webhook
 и Cloudflare Supabase-mode preview размещены. Реальные test-chat send/edit и
 FlyWire/Storage проверки прошли. Production и основной scheduler выключены;
 owner Auth/sign-in и manual completion на main ещё не проверены.

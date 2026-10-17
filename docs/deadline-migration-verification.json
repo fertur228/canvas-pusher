@@ -1,0 +1,25 @@
+{
+  "project_ref": "irjasmzytjeohwfpdnrl",
+  "migration": "202610170007_flymind_suppressed_health.sql",
+  "sha256": "990dfb29ae9ad675af98d7ed129927048d67f2216b7ee4f750889495e452ebd4",
+  "applied": true,
+  "existing_seven_migration_files_unchanged": true,
+  "dry_run_pending_count": 1,
+  "local_postgresql_17_checks": "passed",
+  "ci_postgresql_16_checks": "passed",
+  "backup_authenticated_decryption_verified": true,
+  "legacy_hashes_match": {
+    "canvas_state": 336,
+    "original_course_grades": 32,
+    "health_checks": 14
+  },
+  "course_grades_total_before_after": [
+    38,
+    38
+  ],
+  "rls_or_grants_changed": false,
+  "audit_anon_execute": false,
+  "audit_authenticated_execute": false,
+  "security_definer_search_path": "pg_catalog, public",
+  "migration_time_data_mutations": 0
+}
