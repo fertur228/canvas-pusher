@@ -40,7 +40,7 @@ def run():
     if str(bot.call('getMe')['id']) != test['TELEGRAM_BOT_ID']:
         raise ValueError('wrong_bot')
     db = create_client(hosted['SUPABASE_URL'], hosted['SUPABASE_SERVICE_KEY'])
-    fixture_path = ROOT / 'secret-flymind-release/webhook-probe-menu-v4.json'
+    fixture_path = ROOT / 'secret-flymind-release/webhook-probe-menu-v5-grades.json'
     if not fixture_path.exists():
         # Telegram update IDs are far below this reserved, safe-integer test range.
         fixture = {'first_update': 2**50 + secrets.randbelow(2**40)}
@@ -90,7 +90,7 @@ def run():
     assert not requests
     report = {'transport':'controlled HTTP updates, real deployed function and Telegram Bot API',
               'telegram_client_buttons_tested':False, 'primary_chat_used':False,
-              'commands':results, 'release_ux':'three-inline-buttons-v4', 'negative_identity_and_secret_checks':4,
+              'commands':results, 'release_ux':'three-inline-buttons-account-grades-v5', 'negative_identity_and_secret_checks':4,
               'manual_dispatch_disabled_accurately':True}
     (ROOT / 'docs/release-webhook-test.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps(report,ensure_ascii=False))

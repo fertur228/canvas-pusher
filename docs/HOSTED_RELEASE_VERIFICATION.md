@@ -1,3 +1,8 @@
+> Актуальное решение18октября: личная Chrome-сессия не является release gate.
+> Реальный Auth/RLS/headless replay и независимый Telegram rollout:
+> [AUTOMATED_RELEASE_VERIFICATION.md](AUTOMATED_RELEASE_VERIFICATION.md).
+> Ниже сохранены исторические результаты, где этот gate ещё считался обязательным.
+
 # FlyMind — фактическая hosted-проверка, 17 октября 2026
 
 > Новая проверка2026-10-18: [FINAL_LAUNCH_VERIFICATION.md](FINAL_LAUNCH_VERIFICATION.md).

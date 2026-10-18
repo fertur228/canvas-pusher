@@ -1,0 +1,32 @@
+{
+  "scope": "real hosted isolated Auth users; synthetic academic records; authentic recorded neural artifact",
+  "owner_browser_verified": false,
+  "telegram_messages": 0,
+  "real_password_auth_users": 2,
+  "owner_scope_verified": true,
+  "owner_private_records_hidden": true,
+  "unrelated_and_anonymous_denied": true,
+  "worker_rpc_denied": true,
+  "private_sha256_verified": true,
+  "browser": {
+    "status": "passed",
+    "real_hosted_frontend": true,
+    "isolated_test_identity": true,
+    "owner_browser_verified": false,
+    "http_mocks": false,
+    "auth_http": 200,
+    "private_storage_http": 200,
+    "sha256_verified": true,
+    "account_selector": true,
+    "health": true,
+    "experiment_history": true,
+    "real_engine_decoder": true,
+    "spikes": 834,
+    "timeline_play_pause_scrub": true,
+    "comparison": true,
+    "real_soma": true,
+    "private_data_cleared_on_signout": true,
+    "javascript_errors": 0
+  },
+  "cleanup_verified": true
+}

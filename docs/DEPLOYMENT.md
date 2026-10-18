@@ -1,3 +1,8 @@
+> Актуальное решение18октября: личная Chrome-сессия не является release gate.
+> Реальный Auth/RLS/headless replay и независимый Telegram rollout:
+> [AUTOMATED_RELEASE_VERIFICATION.md](AUTOMATED_RELEASE_VERIFICATION.md).
+> Ниже сохранены исторические результаты, где этот gate ещё считался обязательным.
+
 > Release UX18октября: [актуальная проверка](FINAL_LAUNCH_VERIFICATION.md).
 > Owner Auth уже настроен; пароль повторно создавать не нужно. Требуется вход
 > владельца в preview для настоящего private replay. Production остаётсяOFF.
