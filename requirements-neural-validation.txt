@@ -1,0 +1,3 @@
+-r requirements-neural.txt
+# Optional static scientific plots; no dashboard dependencies.
+matplotlib==3.11.2

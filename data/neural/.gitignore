@@ -1,0 +1,8 @@
+cache/
+runs/*
+!runs/escape-resumed-20261014/
+runs/escape-resumed-20261014/*
+!runs/escape-resumed-20261014/baseline-1.json.gz
+!runs/escape-resumed-20261014/weak-1.json.gz
+!runs/escape-resumed-20261014/strong-1.json.gz
+!runs/escape-resumed-20261014/escape-suite.json

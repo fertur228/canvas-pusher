@@ -1,0 +1,71 @@
+{
+  "annotation_commit": "ebd66db2596fcc39c6950fb54ea3efa00f7fe8a0",
+  "annotation_version": "2.1.0",
+  "citations": [
+    "https://doi.org/10.1038/s41586-024-07558-y",
+    "https://doi.org/10.1038/s41586-024-07686-5",
+    "https://doi.org/10.1016/j.cub.2019.01.079"
+  ],
+  "connectivity_reference": "https://doi.org/10.5281/zenodo.10676866",
+  "counts": {
+    "connection_rows": 25206,
+    "directed_pairs": 17186,
+    "neurons": 1500,
+    "synapses": 276399,
+    "weak_components": 1
+  },
+  "dataset": "FlyWire FAFB",
+  "files": {
+    "connections.csv": {
+      "sha256": "adc00e9d57a77b2047cd8bce8408a575d10c19ef72fc448959114c48f7378ce8"
+    },
+    "neurons.csv": {
+      "sha256": "0a635bbf3d55ccacca45abf7ab74c023cb7312d097063fd89088fba2d35e280d"
+    }
+  },
+  "kind": "biological",
+  "license": "CC-BY-NC-4.0",
+  "license_url": "https://join.flywire.ai/guidelines",
+  "limitations": [
+    "Codex source is already thresholded; this is not the full synapse-level connectome.",
+    "No missing edges reconstructed; all source rows within selected neurons retained.",
+    "Neurotransmitter labels/confidence are predictions unless known_nt_source is given.",
+    "FAFB contains brain, not the downstream ventral nerve cord/muscles; no escape behavior readout.",
+    "Electrical synapses and receptor identities are not provided."
+  ],
+  "organism": "adult female Drosophila melanogaster",
+  "schema_version": 1,
+  "selection": {
+    "added_synapse_threshold": null,
+    "algorithm": "all LC4/LPLC2/DNp01 seeds; BFS paths in seed-incident graph; remaining partners ranked by incident synapse sum; numeric ID ties",
+    "edge_policy": "all source rows induced by selected IDs, unchanged",
+    "require_weakly_connected": true,
+    "seed_count": 316,
+    "seed_types": [
+      "DNp01",
+      "LC4",
+      "LPLC2"
+    ],
+    "target_neurons": 1500
+  },
+  "source_connection_rows": 3869878,
+  "source_discovery": "https://github.com/murthylab/codex/blob/3477b6cfccaf3bf976e6af0d40513ad221311a36/codex/data/local_data_loader.py",
+  "sources": {
+    "annotations.tsv": {
+      "max_bytes": 60000000,
+      "sha256": "30be6c73975a70c56d930e27911f36455d3886e15abf383b78edd2a5d679e0b6",
+      "url": "https://raw.githubusercontent.com/flyconnectome/flywire_annotations/ebd66db2596fcc39c6950fb54ea3efa00f7fe8a0/supplemental_files/Supplemental_file1_neuron_annotations.tsv"
+    },
+    "connections.csv.gz": {
+      "max_bytes": 60000000,
+      "sha256": "d49dd692e59e153aa3c83f5257bfc0eff51247b86d7bb183386c6d1622c70fc9",
+      "url": "https://storage.googleapis.com/flywire-data/codex/data/fafb/783/connections.csv.gz"
+    },
+    "neurons.csv.gz": {
+      "max_bytes": 10000000,
+      "sha256": "6a6b3759e635f0f35a677d169052362131ec61d95f55919298b55c43fce4e719",
+      "url": "https://storage.googleapis.com/flywire-data/codex/data/fafb/783/neurons.csv.gz"
+    }
+  },
+  "version": "783"
+}

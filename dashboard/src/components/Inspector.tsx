@@ -1,0 +1,23 @@
+import { useState } from 'react';
+import { ArrowDownLeft, ArrowUpRight, Search, ExternalLink } from 'lucide-react';
+import { interpretedNT, kind, modelSign, neuronColor } from '../analysis';
+import type { Pair } from '../analysis';
+import type { Graph, LoadedExperiment } from '../telemetry';
+export default function Inspector({graph,experiment,pairs,selected,onSelect}:{graph:Graph;experiment:LoadedExperiment;pairs:Pair[];selected:number;onSelect:(n:number)=>void}) {
+  const [query,setQuery]=useState(''),[direction,setDirection]=useState('incoming');
+  const n=graph.neurons[selected],activity=experiment.activity[selected];
+  const incoming=pairs.filter(p=>p.post===selected),outgoing=pairs.filter(p=>p.pre===selected);
+  const related=direction==='incoming'?incoming:outgoing;
+  const results=query.trim()?graph.neurons.map((neuron,i)=>({neuron,i})).filter(({neuron})=>`${neuron.root_id} ${kind(neuron)} ${neuron.side}`.toLowerCase().includes(query.toLowerCase())).slice(0,12):[];
+  const trace=experiment.signals.get(selected);
+  const readout=experiment.readout.find(r=>r.root_id===n.root_id);
+  return <aside className="panel inspector"><div className="panel-heading"><div><span className="eyebrow">NEURON INSPECTOR</span><h2>Selected cell</h2></div><span className="small-dot" style={{background:neuronColor(n)}}/></div><div className="search"><Search size={15}/><input aria-label="Find neuron by ID or type" placeholder="Find ID, cell type or side…" value={query} onChange={e=>setQuery(e.target.value)}/></div>
+    {query&&<div className="search-results">{results.length?results.map(({neuron,i})=><button key={neuron.root_id} onClick={()=>{onSelect(i);setQuery('');}}><span>{kind(neuron)} · {neuron.side||'unknown side'}</span><code>{neuron.root_id}</code></button>):<p>No matching real neuron.</p>}</div>}
+    <h3>{kind(n)==='GF'?'Giant Fiber / DNp01':kind(n)}<span>{n.side||'unassigned'}</span></h3><code className="root-id" data-testid="selected-root-id">{n.root_id}</code>
+    <div className="cell-stats"><div><strong>{activity.spike_count}</strong><span>recorded spikes</span></div><div><strong>{activity.rate_hz.toFixed(2)}</strong><span>Hz · whole run</span></div></div>
+    <dl><dt>Annotated type</dt><dd>{n.cell_type||n.hemibrain_type||'untyped'}</dd><dt>Known transmitter</dt><dd>{n.known_nt||'not annotated'}</dd><dt>Evidence</dt><dd>{n.known_nt_source||'none'}</dd><dt>Predicted transmitter</dt><dd>{n.predicted_nt||'unknown'} · confidence {n.predicted_nt_confidence||'unavailable'}</dd><dt>Model interpretation</dt><dd>{interpretedNT(n)} · {modelSign(n)>0?'positive':modelSign(n)<0?'negative':'zero'} sign</dd><dt>Voltage trace</dt><dd>{trace?`Recorded · ${trace.descriptor.step_ms} ms · ${trace.descriptor.phase}`:'Not recorded; no reconstruction'}</dd>{readout&&<><dt>GF spike times (ms)</dt><dd>{readout.spike_times_ms.length?readout.spike_times_ms.join(' / '):'none'}</dd><dt>Peak model ΔV</dt><dd>{readout.peak_depolarization_mv.toFixed(3)} mV at {readout.peak_time_ms.toFixed(1)} ms · threshold/reset dependent</dd></>}<dt>Soma (µm, source axes)</dt><dd>{n.soma_voxel?n.soma_voxel.map((x,i)=>(x*graph.spatial.voxel_nm[i]/1000).toFixed(2)).join(' / '):'Unavailable'}</dd></dl>
+    <a className="external" href={`https://codex.flywire.ai/cell_details?root_id=${n.root_id}&data_version=783`} target="_blank" rel="noreferrer">Open source neuron <ExternalLink size={12}/></a>
+    <div className="connections-heading"><h4>Directed connections</h4><span>{incoming.reduce((s,p)=>s+p.count,0)} in / {outgoing.reduce((s,p)=>s+p.count,0)} out</span></div><div className="segmented"><button className={direction==='incoming'?'active':''} onClick={()=>setDirection('incoming')}><ArrowDownLeft size={12}/>Incoming ({incoming.length})</button><button className={direction==='outgoing'?'active':''} onClick={()=>setDirection('outgoing')}><ArrowUpRight size={12}/>Outgoing ({outgoing.length})</button></div>
+    <div className="partner-list">{related.slice(0,8).map(p=>{const i=direction==='incoming'?p.pre:p.post;return <button key={`${p.pre}-${p.post}`} onClick={()=>onSelect(i)} title={graph.neurons[i].root_id}><div><span>{kind(graph.neurons[i])} · {graph.neurons[i].side||'?'}</span><strong>{p.count} <small>syn.</small></strong></div><code>{graph.neurons[i].root_id}</code><small>raw: {Object.entries(p.rawNT).map(([nt,count])=>`${nt} ${count}`).join(' · ')}<br/>{[...p.neuropils].join(', ')}</small></button>;})}{!related.length&&<p>No {direction} connections in this extracted graph.</p>}</div><p className="caption">Largest 8 of {related.length} directed partners; summed measured synapse counts across neuropils. Raw edge predictions can disagree with cell-type evidence.</p>
+  </aside>;
+}

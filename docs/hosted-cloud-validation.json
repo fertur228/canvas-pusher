@@ -1,0 +1,72 @@
+{
+  "39044400161": {
+    "scope": "real cloud Canvas/Supabase/Telegram test group, not production",
+    "first": {
+      "status": "ok",
+      "events": 0,
+      "errors": 0,
+      "jobs": {
+        "edit.done": 2,
+        "send.done": 3,
+        "simulate.done": 2
+      },
+      "event_counts": {
+        "health_report": 1
+      },
+      "sync_status": "verified",
+      "last_successful_check": "2026-10-17T15:18:39.256532+00:00"
+    },
+    "second": {
+      "status": "ok",
+      "events": 0,
+      "errors": 0,
+      "jobs": {
+        "edit.done": 2,
+        "send.done": 3,
+        "simulate.done": 2
+      },
+      "event_counts": {},
+      "sync_status": "verified",
+      "last_successful_check": "2026-10-17T15:19:16.072771+00:00"
+    },
+    "wall_seconds": 73.167033977,
+    "repeat_created_events": 0,
+    "repeat_send_done_unchanged": true,
+    "passed": true,
+    "run_url": "https://github.com/fertur228/canvas-pusher/actions/runs/39044400161"
+  },
+  "39044657067": {
+    "scope": "real cloud Canvas/Supabase/Telegram test group, not production",
+    "first": {
+      "status": "ok",
+      "events": 0,
+      "errors": 0,
+      "jobs": {
+        "edit.done": 3,
+        "send.done": 4,
+        "simulate.done": 3
+      },
+      "event_counts": {},
+      "sync_status": "verified",
+      "last_successful_check": "2026-10-17T15:22:33.937716+00:00"
+    },
+    "second": {
+      "status": "ok",
+      "events": 0,
+      "errors": 0,
+      "jobs": {
+        "edit.done": 3,
+        "send.done": 4,
+        "simulate.done": 3
+      },
+      "event_counts": {},
+      "sync_status": "verified",
+      "last_successful_check": "2026-10-17T15:23:40.814147+00:00"
+    },
+    "wall_seconds": 128.467396634,
+    "repeat_created_events": 0,
+    "repeat_send_done_unchanged": true,
+    "passed": true,
+    "run_url": "https://github.com/fertur228/canvas-pusher/actions/runs/39044657067"
+  }
+}

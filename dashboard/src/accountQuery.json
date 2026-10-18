@@ -1,0 +1,5 @@
+{
+  "table": "flymind_accounts",
+  "columns": ["id", "telegram_chat_id", "enabled"],
+  "order": "id"
+}

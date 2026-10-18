@@ -1,0 +1,15 @@
+.git
+.env
+.env.*
+.venv
+node_modules
+dashboard
+docs
+tests
+supabase
+data/neural/cache
+data/neural/runs
+**/__pycache__
+.pytest_cache
+.codex
+.agents

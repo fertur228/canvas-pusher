@@ -1,0 +1,26 @@
+{
+  "scope": "real isolated LOCAL Supabase APIs; not hosted production",
+  "auth_users": 2,
+  "rls_owner_read": true,
+  "rls_other_owner_denied": true,
+  "anonymous_denied": true,
+  "worker_rpc_denied_to_browser": true,
+  "private_storage_hash_verified": true,
+  "public_and_guessed_storage_denied": true,
+  "shared_artifact_retention_safe": true,
+  "actual_neural_runs": [
+    "weak",
+    "strong"
+  ],
+  "events": 3,
+  "captured_primary": 3,
+  "captured_edits": 3,
+  "duplicate_deliveries": 0,
+  "real_telegram_deliveries": 0,
+  "real_canvas_read": false,
+  "jobs": {
+    "edit.done": 3,
+    "send.done": 3,
+    "simulate.done": 3
+  }
+}
