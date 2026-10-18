@@ -78,8 +78,10 @@ export function handler(config: Config, request: typeof fetch = fetch) {
         const status=age>90*60000?'failed':age>30*60000?'delayed':health?.status??'unknown';
         await send(`⚙️ Состояние: ${escape(status)}\nУспешная синхронизация снимков: ${localDate(health?.last_snapshot_success)}\nTelegram: ${localDate(health?.last_telegram_success)}\nNeural: ${localDate(health?.last_neural_success)}\nОчередь: ${escape(JSON.stringify(health?.queue??{}).slice(0,600))}\nРучной запрос: ${escape(recent?.state??'нет')}\n${recent?.state==='running'?'Завершение workflow ещё не подтверждено.':''}`,{inline_keyboard:[[{text:'📅 Дедлайны',callback_data:'deadlines:upcoming:0'}]]});
       } else if(command==='/stats'||callback==='get_stats') {
-        const grades=await api(`course_grades?select=course_name,current_score&user_id=eq.${encodeURIComponent(config.chat)}&limit=100`);
-        let points=0,credits=0;const lines=['🎓 <b>Моя успеваемость</b>'];
+        const snapshot=(await api(`flymind_snapshots?select=state_data&account_id=eq.${account.id}&kind=eq.report&entity_key=eq.0%3Acourse_grades&limit=1`))[0]?.state_data;
+        const grades=snapshot?.schema_version===1&&Array.isArray(snapshot.rows)?snapshot.rows:[];
+        let points=0,credits=0;const lines=['🎓 <b>Моя успеваемость</b>',snapshot?.synced_at?`Синхронизация: ${localDate(snapshot.synced_at)}`:'Ещё не синхронизировано. Используйте /check.'];
+        if(snapshot?.synced_at&&Date.now()-Date.parse(snapshot.synced_at)>30*60000)lines.push('⚠️ Данные могут быть устаревшими.');
         for(const row of grades){const name=String(row.course_name??'').slice(0,120),score=Number(row.current_score);if(name.toLowerCase().includes('practic'))continue;
           if(row.current_score===null||row.current_score===undefined||row.current_score===''||!Number.isFinite(score)){lines.push(`${escape(name)}: без оценки`);continue;}
           const physical=name.toLowerCase().includes('физическая культура'),weight=physical?2:5,gp=gradePoint(score);points+=gp*weight;credits+=weight;lines.push(`${escape(name)}: ${score}% (GPA ${gp})`);

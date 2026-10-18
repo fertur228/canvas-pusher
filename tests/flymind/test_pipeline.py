@@ -190,3 +190,16 @@ def test_storage_failure_keeps_delivery_and_recovers(tmp_path):
     clock[0]+=61;p.storage=original;p.run_pending()
     assert sum(mid is None for _,mid in d.calls)==1 and store.counts()['simulate.done']==1
     store.close()
+
+
+def test_automatic_grade_report_keeps_real_zero_and_does_not_invent_physical_grade(tmp_path):
+    from src.flymind.reports import queue_reports
+    store,d,r,p,clock=setup(tmp_path)
+    courses=[{'name':name,'enrollments':[{'type':'student','computed_current_score':score}]}
+             for name,score in [('zero',0),('unknown',None),('Физическая культура',50)]]
+    queue_reports(p,courses,auto_report=True,run_id='zero-regression',now=NOW)
+    p.run_pending()
+    text=next(text for text,_ in d.calls if 'Итоговый GPA' in text)
+    assert 'zero: 0% (GPA 0.0)' in text and 'unknown: без оценки' in text
+    assert 'Физическая культура: 50% (GPA 1.0)' in text and '0.29 / 4.0' in text
+    store.close()

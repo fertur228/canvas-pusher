@@ -9,7 +9,7 @@ from tests.flymind.test_events import ACCOUNT,LIVE,NOW
 
 
 class RPCClient:
-    def __init__(self,store):self.store=store;self.grades=[]
+    def __init__(self,store):self.store=store
     def rpc(self,name,p):
         s=self.store
         if name=='flymind_runtime':data={'initialized':True}
@@ -29,9 +29,7 @@ class RPCClient:
         else:raise AssertionError(name)
         return SimpleNamespace(execute=lambda:SimpleNamespace(data=data))
     def table(self,name):
-        assert name=='course_grades'
-        def upsert(rows):self.grades.extend(rows);return SimpleNamespace(execute=lambda:None)
-        return SimpleNamespace(upsert=upsert)
+        raise AssertionError('Worker must not write legacy tables: '+name)
     @property
     def storage(self):
         class Bucket:
@@ -63,7 +61,7 @@ def test_flagged_worker_normal_execution_and_duplicate_poll(tmp_path,monkeypatch
     count=len(delivery.calls)
     second=asyncio.run(worker.run(settings(),client_factory=lambda *a:client,scanner_factory=Scanner))
     assert first['status']=='ok' and second['status']=='ok'
-    assert len(delivery.calls)==count and client.grades
+    assert len(delivery.calls)==count and store.load('report','0:course_grades').state['rows']
     store.close()
 
 
@@ -117,4 +115,36 @@ def test_missing_bootstrap_never_scans_or_sends(tmp_path,monkeypatch):
             return super().rpc(name,p)
     result=asyncio.run(worker.run(settings(),client_factory=lambda *a:FreshClient(store),scanner_factory=lambda *a:pytest.fail('Bootstrap gate bypassed')))
     assert result['status']=='bootstrap_required' and not store.counts()
+    store.close()
+
+
+def test_grade_snapshot_is_account_scoped_preserves_zero_and_clears_stale_courses(tmp_path):
+    from src.flymind.reports import save_grade_snapshot
+    store=SQLiteStore(tmp_path/'grades.sqlite',ACCOUNT)
+    other=SQLiteStore(tmp_path/'grades.sqlite','00000000-0000-0000-0000-000000000002')
+    courses=[{'id':20,'name':'SYNTHETIC','enrollments':[{'type':'student','computed_current_score':0}]},
+             {'id':21,'name':'UNKNOWN','enrollments':[]}]
+    save_grade_snapshot(store,courses,now=NOW)
+    state=store.load('report','0:course_grades').state
+    assert state['rows'][0]['current_score']==0 and state['rows'][1]['current_score'] is None
+    assert state['synced_at']==NOW.isoformat()
+    assert other.load('report','0:course_grades').state is None
+    assert not store.counts() and store.db.execute('SELECT count(*) FROM events').fetchone()[0]==0
+    save_grade_snapshot(store,[],now=NOW)
+    assert store.load('report','0:course_grades').state['rows']==[]
+    store.close();other.close()
+
+
+def test_grade_snapshot_retries_conflict_without_notification(tmp_path):
+    from src.flymind.reports import save_grade_snapshot
+    from src.flymind.store import Conflict
+    store=SQLiteStore(tmp_path/'grades.sqlite',ACCOUNT)
+    original=store.commit;calls=[]
+    def commit(*args):
+        calls.append(args)
+        if len(calls)==1:raise Conflict('overlap')
+        return original(*args)
+    store.commit=commit
+    save_grade_snapshot(store,[],now=NOW)
+    assert len(calls)==2 and calls[-1][-1]==[] and not store.counts()
     store.close()

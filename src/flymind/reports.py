@@ -1,7 +1,28 @@
 """Preserve scheduled health and workflow-dispatched GPA reports through the outbox."""
 from datetime import datetime,timezone
-from src.core.gpa_engine import calculate_gpa,get_grade_point
+import math
+from src.core.gpa_engine import get_grade_point
 from .presentation import escaped
+from .events import Snapshot
+from .store import Conflict
+
+
+def save_grade_snapshot(store, courses, *, now=None):
+    """Account-scoped current grades; no events, no legacy writes, optimistic lock."""
+    now = now or datetime.now(timezone.utc)
+    rows = [{'course_id': c['id'], 'course_name': c.get('name', 'Unknown'),
+             'current_score': next((e.get('computed_current_score') for e in c.get('enrollments', [])
+                                    if e.get('type') == 'student'), None)} for c in courses]
+    state = {'schema_version': 1, 'synced_at': now.isoformat(), 'rows': rows}
+    for _ in range(3):
+        old = store.load('report', '0:course_grades')
+        try:
+            if store.commit('report', '0:course_grades', old.revision,
+                            Snapshot(revision=old.revision + 1, state=state), []):
+                return
+        except Conflict:
+            pass
+    raise Conflict('grade_snapshot_conflict')
 
 
 def queue_reports(pipeline,courses,*,auto_report=False,run_id='',now=None):
@@ -9,8 +30,7 @@ def queue_reports(pipeline,courses,*,auto_report=False,run_id='',now=None):
     period=now.strftime('%G-W%V')
     health_id=f'health:{period}'
     if pipeline.store.load('report','0:'+health_id).state is None:
-        counts=pipeline.store.counts()
-        message='Плановая проверка запущена. Состояния durable outbox:\n'+escaped(', '.join(f'{k}: {v}' for k,v in sorted(counts.items())),700)
+        message='✅ Canvas проверен. Мониторинг заданий работает.\n📅 Актуальные сроки — /deadlines'
         pipeline.ingest('report',{'id':health_id,'name':'Health Check','message':message,'report_type':'health'},now)
     if not auto_report:
         return
@@ -19,17 +39,18 @@ def queue_reports(pipeline,courses,*,auto_report=False,run_id='',now=None):
     key='stats:'+run_id
     if pipeline.store.load('report','0:'+key).state is not None:
         return
-    scores={};lines=[]
+    points=0;credits=0;lines=[]
     for c in courses:
         name=c.get('name','Unknown')
         score=next((e.get('computed_current_score') for e in c.get('enrollments',[]) if e.get('type')=='student'),None)
-        if score is None or float(score)==0:
+        if 'practic' in name.lower():
+            continue
+        if score is None or score=='' or not math.isfinite(float(score)):
             lines.append(escaped(name)+': без оценки')
-        elif 'practic' not in name.lower():
-            scores[name]=float(score)
-            if 'Физическая культура' in name:
-                lines.append(f'{escaped(name)}: Зачет (GPA 4.0)')
-            else:
-                lines.append(f'{escaped(name)}: {escaped(score)}% (GPA {get_grade_point(float(score))})')
-    lines.append(f'<b>Итоговый GPA: {calculate_gpa(scores)} / 4.0</b>')
+        else:
+            weight=2 if 'физическая культура' in name.lower() else 5
+            gp=get_grade_point(float(score));points+=gp*weight;credits+=weight
+            lines.append(f'{escaped(name)}: {escaped(score)}% (GPA {gp})')
+    estimate=f'{points/credits:.2f}' if credits else '—'
+    lines.append(f'<b>Итоговый GPA (оценочный): {estimate} / 4.0</b>\nНе официальный транскрипт: предполагается 5 кредитов на курс, 2 для физкультуры.')
     pipeline.ingest('report',{'id':key,'name':'GPA','message':'\n'.join(lines),'report_type':'stats'},now)

@@ -117,14 +117,12 @@ async def run(settings: Settings, *, client_factory=None, scanner_factory=Reliab
                     events += pipeline.ingest(kind,row,bootstrap=bootstrap)
                 except Exception:
                     errors += 1
-        # The existing webhook's GPA view keeps its source; no legacy notification processing here.
-        grades = []
-        for course in courses:
-            score=next((e.get('computed_current_score') for e in course.get('enrollments',[]) if e.get('type')=='student'),None)
-            grades.append({'user_id':int(settings.chat_id),'course_id':course['id'],'course_name':course.get('name','Unknown'),'current_score':score})
-        if grades:
+        # Current grades belong to this FlyMind account, never to legacy chat rows.
+        # Persist an explicit empty snapshot too, so old courses cannot linger.
+        if not errors:
             try:
-                client.table('course_grades').upsert(grades).execute()
+                from .reports import save_grade_snapshot
+                save_grade_snapshot(store, courses)
             except Exception:
                 errors += 1
     except Exception:

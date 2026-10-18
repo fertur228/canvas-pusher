@@ -28,7 +28,7 @@ Deno.test('academic HTML escaped; acknowledgement persisted',async()=>{
  const path=String(url);
  if(path.includes('webhook_claim'))return Response.json(true);
  if(path.includes('flymind_accounts'))return Response.json([{id:'account'}]);
- if(path.includes('course_grades'))return Response.json([{course_name:'<private&course>',current_score:95}]);
+ if(path.includes('flymind_snapshots')){assert(path.includes('account_id=eq.account')&&path.includes('kind=eq.report')&&path.includes('entity_key=eq.0%3Acourse_grades'));return Response.json([{state_data:{schema_version:1,synced_at:'2026-10-18T00:00:00Z',rows:[{course_name:'<private&course>',current_score:95}]}}]);}
  if(path.includes('sendMessage')){sent=JSON.parse(String(init?.body)).text;return Response.json({ok:true,result:{message_id:12}});}
  if(path.includes('webhook_updates')){ack=true;return new Response(null,{status:204});}
  throw new Error('unexpected');
@@ -44,7 +44,7 @@ Deno.test('start/menu removes the old reply keyboard then sends the three-button
    const path=String(url);
    if(path.includes('webhook_claim'))return Response.json(true);
    if(path.includes('flymind_accounts'))return Response.json([{id:'account',canvas_origin:'https://canvas.invalid'}]);
-   if(path.includes('course_grades')){grades++;return Response.json([]);}
+   if(path.includes('flymind_snapshots')){grades++;return Response.json([]);}
    if(path.includes('flymind_experiments')){neural++;return Response.json([]);}
    if(path.includes('flymind_health')||path.includes('flymind_manual_requests'))return Response.json([]);
    if(path.includes('flymind_deadlines'))return Response.json({synced_at:null,rows:[]});
@@ -144,9 +144,9 @@ Deno.test('zero is a recorded grade; missing grades excluded; physical grade nev
   const path=String(url);
   if(path.includes('webhook_claim'))return Response.json(true);
   if(path.includes('flymind_accounts'))return Response.json([{id:'account'}]);
-  if(path.includes('course_grades'))return Response.json([
+  if(path.includes('flymind_snapshots'))return Response.json([{state_data:{schema_version:1,rows:[
    {course_name:'zero',current_score:0},{course_name:'unknown',current_score:null},
-   {course_name:'Физическая культура',current_score:50}]);
+   {course_name:'Физическая культура',current_score:50}]}}]);
   if(path.includes('sendMessage')){sent+=JSON.parse(String(init?.body)).text;return Response.json({ok:true,result:{message_id:12}});}
   if(path.includes('webhook_updates'))return new Response(null,{status:204});
   throw new Error('unexpected');
@@ -163,7 +163,7 @@ Deno.test('unchanged callback view is acknowledged; menu and grades navigation e
    const path=String(url);
    if(path.includes('webhook_claim'))return Response.json(true);
    if(path.includes('flymind_accounts'))return Response.json([{id:'account',canvas_origin:'https://canvas.invalid'}]);
-   if(path.includes('course_grades'))return Response.json([]);
+   if(path.includes('flymind_snapshots'))return Response.json([]);
    if(path.includes('flymind_deadlines'))return Response.json({rows:[],synced_at:null});
    if(path.includes('answerCallbackQuery'))return Response.json({ok:true});
    if(path.includes('editMessageText')){edits++;return Response.json({ok:false,description:'Bad Request: message is not modified: specified new message content and reply markup are exactly the same'},{status:400});}
