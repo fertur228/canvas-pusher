@@ -52,3 +52,21 @@ Legacy таблицы сохраняются. Пустой успешный сп
 Quick stop: `CANVAS_WORKER_ENABLED=false`. Не переключать `FLYMIND_ENABLED=false`
 при работающем master gate: это может вернуть legacy path. Независимый neural stop:
 `FLYMIND_NEURAL_ENABLED=false`; primary notification outbox продолжает работать.
+
+## Проверки этого изменения
+
+- Python:204passed,172warnings,83.53s, включая scientific regression.
+- Ruff critical checks:E9/F63/F7/F82 passed; secret working-tree/history scan0findings.
+- Deno17passed; Vitest36passed; TypeScript/Vite build passed.
+- Playwright4local+7HTTP-mockprivate passed; отдельно hosted headless без mocks passed.
+- Отдельный PostgreSQL17:8migration/RPC/RLS/manual/schema-contract checks passed.
+- Real test-account Canvas scan:2026-10-18T14:28:23Z,errors0/events0,
+  send.done16/simulate.done15/edit.done15 без роста; новый grade snapshot сохранён.
+- Исправленный isolated webhook реально deployed; /start,/menu,/deadlines,/stats,
+  /status,/brain и3deadlinefilters+pagination проверены реальными send/edit только
+  test-group. Дубли update подавлены,4неверныхsecret/chat/user проверки403.
+  `/check` до merge честно закрыт. [Evidence](release-webhook-test.json).
+- Все исходные336canvas/32grades/14health hashes точно совпали; RLS enabled,
+  private bucket4MiB; hosted SQL owner isolation completed/ROLLED BACK.
+- Known configured secret-value scan247candidate/build paths:0matches.
+- Нефатальный warning:Three.js882.89kBminified/238.57kBgzip.

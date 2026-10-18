@@ -36,7 +36,7 @@
     "deadlines:all:0": "real_edit_completed",
     "deadlines:all:1": "real_edit_completed"
   },
-  "release_ux": "three-inline-buttons-v4",
+  "release_ux": "three-inline-buttons-account-grades-v5",
   "negative_identity_and_secret_checks": 4,
   "manual_dispatch_disabled_accurately": true
 }
