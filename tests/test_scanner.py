@@ -48,3 +48,13 @@ def test_scanner_parallel_results_are_associated_with_courses():
         client.return_value.__aexit__ = AsyncMock(return_value=False)
         result = asyncio.run(scanner.scan_all([{"id": 1}, {"id": 2}]))
     assert result == ([{"id": 11}, {"id": 22}], [{"id": 33}], [{"id": 44}])
+
+
+@pytest.mark.parametrize('score', [93, 0])
+def test_multiple_student_enrollments_skip_missing_scores_but_preserve_zero(score):
+    scanner=AsyncCanvasScanner('test-token','https://canvas.invalid',MagicMock())
+    course={'id':101,'enrollments':[{'type':'teacher','computed_current_score':99},
+        {'type':'student','computed_current_score':None},{'type':'student','computed_current_score':score}]}
+    scanner.pages=AsyncMock(return_value=[{'id':1}])
+    rows=asyncio.run(scanner.fetch_course_assignments(None,course))
+    assert rows[0]['course_score']==score

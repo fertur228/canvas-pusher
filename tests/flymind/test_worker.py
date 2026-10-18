@@ -122,7 +122,7 @@ def test_grade_snapshot_is_account_scoped_preserves_zero_and_clears_stale_course
     from src.flymind.reports import save_grade_snapshot
     store=SQLiteStore(tmp_path/'grades.sqlite',ACCOUNT)
     other=SQLiteStore(tmp_path/'grades.sqlite','00000000-0000-0000-0000-000000000002')
-    courses=[{'id':20,'name':'SYNTHETIC','enrollments':[{'type':'student','computed_current_score':0}]},
+    courses=[{'id':20,'name':'SYNTHETIC','enrollments':[{'type':'student','computed_current_score':None},{'type':'student','computed_current_score':0}]},
              {'id':21,'name':'UNKNOWN','enrollments':[]}]
     save_grade_snapshot(store,courses,now=NOW)
     state=store.load('report','0:course_grades').state

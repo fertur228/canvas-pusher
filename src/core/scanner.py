@@ -11,6 +11,12 @@ class ScanFailure(Exception):
     pass
 
 
+def current_course_score(course):
+    """Canvas can return multiple enrollments; null must not hide a later score."""
+    return next((e.get('computed_current_score') for e in course.get('enrollments', [])
+                 if e.get('type') == 'student' and e.get('computed_current_score') is not None), None)
+
+
 class AsyncCanvasScanner:
     def __init__(self, token, base_url, supabase_client):
         origin = urlparse(base_url)
@@ -100,7 +106,7 @@ class AsyncCanvasScanner:
 
     async def fetch_course_assignments(self,client,course):
         rows = await self.pages(client,self.base_url+f"/courses/{course['id']}/assignments",{'include[]':'submission','per_page':50,'order_by':'due_at','override_assignment_dates':'true'})
-        score = next((e.get('computed_current_score') for e in course.get('enrollments',[]) if e.get('type')=='student'),None)
+        score = current_course_score(course)
         return [{'id':a['id'],'course_id':course['id'],'course_name':course.get('name','Unknown'), 'course_score':score,
                  'name':a.get('name','Unknown'),'due_at':a.get('due_at'),'points_possible':a.get('points_possible'),
                  'html_url':a.get('html_url') if self.safe_assignment_url(a.get('html_url')) else None,

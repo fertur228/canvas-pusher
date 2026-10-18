@@ -2,6 +2,7 @@
 from datetime import datetime,timezone
 import math
 from src.core.gpa_engine import get_grade_point
+from src.core.scanner import current_course_score
 from .presentation import escaped
 from .events import Snapshot
 from .store import Conflict
@@ -11,8 +12,7 @@ def save_grade_snapshot(store, courses, *, now=None):
     """Account-scoped current grades; no events, no legacy writes, optimistic lock."""
     now = now or datetime.now(timezone.utc)
     rows = [{'course_id': c['id'], 'course_name': c.get('name', 'Unknown'),
-             'current_score': next((e.get('computed_current_score') for e in c.get('enrollments', [])
-                                    if e.get('type') == 'student'), None)} for c in courses]
+             'current_score': current_course_score(c)} for c in courses]
     state = {'schema_version': 1, 'synced_at': now.isoformat(), 'rows': rows}
     for _ in range(3):
         old = store.load('report', '0:course_grades')
@@ -42,7 +42,7 @@ def queue_reports(pipeline,courses,*,auto_report=False,run_id='',now=None):
     points=0;credits=0;lines=[]
     for c in courses:
         name=c.get('name','Unknown')
-        score=next((e.get('computed_current_score') for e in c.get('enrollments',[]) if e.get('type')=='student'),None)
+        score=current_course_score(c)
         if 'practic' in name.lower():
             continue
         if score is None or score=='' or not math.isfinite(float(score)):

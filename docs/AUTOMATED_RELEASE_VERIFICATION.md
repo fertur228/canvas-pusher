@@ -70,3 +70,9 @@ Quick stop: `CANVAS_WORKER_ENABLED=false`. Не переключать `FLYMIND_
   private bucket4MiB; hosted SQL owner isolation completed/ROLLED BACK.
 - Known configured secret-value scan247candidate/build paths:0matches.
 - Нефатальный warning:Three.js882.89kBminified/238.57kBgzip.
+
+Финальный review также воспроизвёл прежнее P2-замечание PR: первый student enrollment
+с null скрывал последующий реальный score. Два новых теста сначала упали (93 и0),
+затем исправление общего current_course_score сохранило первый non-null student
+score в assignment notifications, grade snapshots и GPA reports. Сеть и параметры
+нейронной модели не затронуты. CI после этого изменения обязателен перед merge.
