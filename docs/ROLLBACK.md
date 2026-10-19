@@ -78,10 +78,11 @@ simulation results. No database restore, row deletion or migration-history reset
 is needed to disable this release. Preserve outbox, message IDs, threshold audit
 and the hosted synthetic-test checkpoint for recovery/deduplication.
 
-## Timer fallback prepared — 19 October 2026
+## Active timer fallback — 19 October 2026
 
-The `flymind-canvas-timer` job is currently inactive and Edge is dry-run. If activated
-after release gates, stop just this timer with the following non-destructive SQL:
+The `flymind-canvas-timer` job was activated at16:49:53 UTC after release gates;
+two clock-originated worker cycles passed. Edge is now enabled with dry-run false.
+Stop just this timer with the following non-destructive SQL:
 
 ```sql
 SELECT cron.alter_job(jobid, active := false)
@@ -95,3 +96,23 @@ outbox IDs, ambiguous outcomes, timer ledger and migration0008. Never drop pg_cr
 or reset migration history. A timer HTTP202 means dispatch acceptance, not scan
 completion: match its `timer-<uuid>` run title, scanner step and persisted heartbeat.
 Keep native GitHub `schedule` evidence separate from this timer's `workflow_dispatch`.
+
+## Independent heartbeat monitor — 19 October 2026
+
+`flymind-stale-heartbeat` is active every five minutes, scoped only to the verified
+production account. It marks an unchanged heartbeat delayed after 30 minutes and
+failed after 90 minutes. It does not send Telegram messages or change academic or
+outbox records. The hourly GitHub watchdog remains active for failure notifications.
+This describes the installed hosted statement, which includes
+`WHERE account_id = '<verified production UUID>'::uuid AND ...`. The checked-in
+`supabase/optional/watchdog.sql` is a project-wide template and must not be reapplied
+unchanged: it would replace the same named job with an all-account update. The hosted
+statement was read back and matched in full against the scoped statement on
+19 October; see [scope evidence](production-watchdog-verification.json). Keep the
+explicit account predicate when restoring or editing this job.
+Pause the database monitor, if needed, without deleting its history:
+
+```sql
+SELECT cron.alter_job(jobid, active := false)
+FROM cron.job WHERE jobname = 'flymind-stale-heartbeat';
+```

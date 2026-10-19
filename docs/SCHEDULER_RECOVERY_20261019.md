@@ -1,3 +1,5 @@
+> Final update16:57 UTC: PR3 merged; timer active; two actual cloud-clock scans verified. [Final report](FINAL_PRODUCTION_REPORT_20261019.md). Earlier sections are dated rollout evidence.
+
 # Native scheduler recovery — 19 October 2026
 
 Production activation and the scoped server credential are already verified. Do

@@ -1,0 +1,77 @@
+{
+  "verified": true,
+  "checked_at": "2026-10-19T16:57:48.689414+00:00",
+  "clock": "Supabase pg_cron",
+  "github_event": "workflow_dispatch",
+  "native_github_schedule_gate_passed": false,
+  "activation": {
+    "activated_at": "2026-10-19T16:49:53Z",
+    "project_ref": "irjasmzytjeohwfpdnrl",
+    "main_sha": "4577094cbf32b076f71cf00cee7307769b1c9317",
+    "clock": "Supabase pg_cron",
+    "github_event": "workflow_dispatch",
+    "dry_run_verified": true,
+    "existing_bootstrap_reused": true,
+    "cron": "*/5 * * * *",
+    "new_dispatches_by_operator": 0
+  },
+  "runs": [
+    {
+      "id": 39288864521,
+      "event": "workflow_dispatch",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-19T16:50:06Z",
+      "head_sha": "4577094cbf32b076f71cf00cee7307769b1c9317",
+      "html_url": "https://github.com/fertur228/canvas-pusher/actions/runs/39288864521",
+      "tick": "7cccdc34-35dc-4e16-a6e0-c34ec5994b4e",
+      "tick_created_at": "2026-10-19T16:50:04.101531+00:00",
+      "ledger_state": "accepted",
+      "scanner_step_success": true,
+      "scanner_finished_at": "2026-10-19T16:51:56Z",
+      "cron_runid": 1,
+      "cron_start_time": "2026-10-19T16:50:00.24495+00:00"
+    },
+    {
+      "id": 39289622617,
+      "event": "workflow_dispatch",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-19T16:55:05Z",
+      "head_sha": "4577094cbf32b076f71cf00cee7307769b1c9317",
+      "html_url": "https://github.com/fertur228/canvas-pusher/actions/runs/39289622617",
+      "tick": "4cd28fed-38e8-417a-8d56-68de96f8a9c9",
+      "tick_created_at": "2026-10-19T16:55:02.949193+00:00",
+      "ledger_state": "accepted",
+      "scanner_step_success": true,
+      "scanner_finished_at": "2026-10-19T16:56:36Z",
+      "cron_runid": 2,
+      "cron_start_time": "2026-10-19T16:55:00.168185+00:00"
+    }
+  ],
+  "real_cron_runs": [
+    {
+      "end_time": "2026-10-19T16:50:00.354999+00:00",
+      "runid": 1,
+      "start_time": "2026-10-19T16:50:00.24495+00:00",
+      "status": "succeeded"
+    },
+    {
+      "end_time": "2026-10-19T16:55:00.260216+00:00",
+      "runid": 2,
+      "start_time": "2026-10-19T16:55:00.168185+00:00",
+      "status": "succeeded"
+    }
+  ],
+  "health": {
+    "derived": "healthy",
+    "last_snapshot_success": "2026-10-19T16:56:32.508538+00:00",
+    "last_neural_success": null,
+    "last_telegram_success": "2026-10-19T12:39:24.606843+00:00"
+  },
+  "nonterminal_jobs": 0,
+  "durable_sent_jobs": 2,
+  "initial_bootstrap_repeated": false,
+  "original_legacy_hashes_preserved": true,
+  "operator_dispatches_after_timer_activation": 0
+}

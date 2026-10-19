@@ -1,0 +1,48 @@
+{
+  "checked_at": "2026-10-19T17:09:38.140593+00:00",
+  "bot_username": "canvasheimdall_bot",
+  "primary_private_chat_verified": true,
+  "owner_mapping_verified": true,
+  "secure_webhook_target_verified": true,
+  "pending_telegram_updates": 0,
+  "commands": [
+    "brain",
+    "check",
+    "deadlines",
+    "menu",
+    "start",
+    "stats",
+    "status"
+  ],
+  "commands_scope": "authorized_private_chat",
+  "health": {
+    "last_snapshot_success": "2026-10-19T17:06:39.906005+00:00",
+    "last_telegram_success": "2026-10-19T16:59:19.878106+00:00",
+    "last_neural_success": null,
+    "status": "healthy"
+  },
+  "jobs": {
+    "send.done": 3
+  },
+  "sent_with_persisted_id": 3,
+  "deadline_counts": {
+    "week": {
+      "total": 2,
+      "stale": false
+    },
+    "overdue": {
+      "total": 1,
+      "stale": false
+    },
+    "all": {
+      "total": 8,
+      "stale": false
+    },
+    "undated": {
+      "total": 3,
+      "stale": false
+    }
+  },
+  "verified_assignments": 18,
+  "messages_sent_by_this_read_check": 0
+}

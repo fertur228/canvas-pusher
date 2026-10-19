@@ -1,0 +1,16 @@
+{
+  "measurements": [
+    {
+      "run_id": 39288864521,
+      "job_seconds": 105.0
+    },
+    {
+      "run_id": 39289622617,
+      "job_seconds": 87.0
+    }
+  ],
+  "mean_worker_seconds": 96.0,
+  "conditional_288_runs_daily_runner_minutes": 460.8,
+  "conditional_30_day_runner_minutes": 13824.0,
+  "same_timer_input_never_dispatched_manually": true
+}

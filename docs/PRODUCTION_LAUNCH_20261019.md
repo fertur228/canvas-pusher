@@ -1,3 +1,5 @@
+> 19 октября, 16:57 UTC: два Supabase Cron → GitHub scanner цикла success; production работает, health healthy. Native GitHub `schedule` не подтверждён. [Итоговый актуальный отчёт](FINAL_PRODUCTION_REPORT_20261019.md).
+
 # FlyMind: production launch, 19 October 2026
 
 Status: **PRODUCTION DEPLOYED, FINAL VERIFICATION PENDING**.

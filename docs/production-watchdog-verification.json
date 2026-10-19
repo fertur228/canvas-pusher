@@ -1,0 +1,31 @@
+{
+  "activated_at": "2026-10-19T17:08:07.253304+00:00",
+  "project_ref": "irjasmzytjeohwfpdnrl",
+  "jobid": 2,
+  "name": "flymind-stale-heartbeat",
+  "schedule": "*/5 * * * *",
+  "scope": "verified_production_account_only",
+  "source": "supabase/optional/watchdog.sql (adapted with explicit production account predicate)",
+  "delayed_after_minutes": 30,
+  "failed_after_minutes": 90,
+  "sends_messages": false,
+  "academic_or_outbox_changes": false,
+  "first_clock_execution": {
+    "runid": 5,
+    "start_time": "2026-10-19T17:10:00.206667+00:00",
+    "end_time": "2026-10-19T17:10:00.221330+00:00",
+    "status": "succeeded",
+    "result": "UPDATE 0"
+  },
+  "scope_reverified": {
+    "checked_at": "2026-10-19T17:24:53.480338+00:00",
+    "hosted_statement_exact_match": true,
+    "account_id_equals_verified_production_account": true,
+    "no_additional_statements": true,
+    "active": true,
+    "source_template_is_project_wide": true,
+    "hosted_statement_is_explicitly_scoped_variant": true,
+    "messages_sent": 0,
+    "database_mutations": 0
+  }
+}

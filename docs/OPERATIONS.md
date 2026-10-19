@@ -1,3 +1,5 @@
+> Актуально 19 октября 2026: production использует активный Supabase Cron → защищённый Edge → GitHub worker каждые пять минут. Два автоматических цикла проверены; native GitHub `schedule` остаётся отдельным нерешённым ограничением. [Доказательства и итоговый отчёт](FINAL_PRODUCTION_REPORT_20261019.md). Предыдущие инструкции ниже сохраняются как история и общий runbook.
+
 # Operations
 
 The laptop is unnecessary after reviewed default-branch deployment and configuration:
@@ -19,6 +21,12 @@ notifications. Optional Supabase Cron watchdog SQL independently marks stale dat
 state, including when GitHub scheduling stops. The dashboard itself refreshes on user
 request; it is not a background monitoring service. Full platform outages cannot be
 reliably detected by a monitor on that same platform.
+
+The current hosted `flymind-stale-heartbeat` uses an explicit production-account
+predicate. The optional `supabase/optional/watchdog.sql` file is a project-wide
+template; do not execute it unchanged over the hosted job, because its same-name
+schedule would broaden monitoring to test accounts. Preserve the scoped predicate
+and verify the installed command as described in [ROLLBACK.md](ROLLBACK.md).
 
 Recovery commands (server credentials only, never browser):
 

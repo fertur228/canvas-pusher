@@ -1,0 +1,38 @@
+{
+  "request_state": "completed",
+  "summary": {
+    "jobs": {
+      "send.done": 2
+    },
+    "errors": 0,
+    "events": 0,
+    "status": "ok",
+    "sync_status": "verified",
+    "event_counts": {},
+    "last_successful_check": "2026-10-19T16:58:56.257934+00:00"
+  },
+  "finished_at": "2026-10-19T16:59:18.983258+00:00",
+  "run_id": "39289986779",
+  "runs": [
+    {
+      "id": 39289986779,
+      "event": "workflow_dispatch",
+      "conclusion": "success",
+      "status": "completed",
+      "head_sha": "4577094cbf32b076f71cf00cee7307769b1c9317"
+    }
+  ],
+  "completion_jobs": [
+    {
+      "state": "done",
+      "stage": "send",
+      "attempts": 1,
+      "message_id_saved": true
+    }
+  ],
+  "checked_read_only": true,
+  "source": "Fresh authorized hosted /check request at 16:57 UTC; no old Telegram update replayed during verification",
+  "completion_run_id": 39290199906,
+  "scanner_url": "https://github.com/fertur228/canvas-pusher/actions/runs/39289986779",
+  "completion_url": "https://github.com/fertur228/canvas-pusher/actions/runs/39290199906"
+}

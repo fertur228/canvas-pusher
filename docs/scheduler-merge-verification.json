@@ -1,0 +1,7 @@
+{
+  "pr": 3,
+  "main_sha": "4577094cbf32b076f71cf00cee7307769b1c9317",
+  "reviewed_head": "ab9e023aa78a2346b581481eee0a481885aad84b",
+  "production_flags_restored": true,
+  "fallback_cron_still_disabled": true
+}

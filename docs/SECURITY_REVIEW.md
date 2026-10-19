@@ -113,8 +113,9 @@ manual-failure reports use a targeted outbox claim. No production secrets were r
 
 ## 19 October: authenticated fallback timer
 
-A separate HMAC function is deployed in dry-run with Cron inactive; production
-Telegram routing is unchanged. Exact initialized primary identity and all worker
+A separate HMAC function was first deployed in dry-run with Cron inactive. It
+was activated after green CI/guarded merge; two actual clock cycles passed.
+Production Telegram routing is unchanged. Exact initialized primary identity and all worker
 gates are checked before dispatch. Freshness is90s; durable advisory-lock claims
 prevent concurrent/replayed ticks. The single POST is recorded as ambiguous before
 network I/O; loss of acknowledgement cannot cause a blind resend. Browser roles

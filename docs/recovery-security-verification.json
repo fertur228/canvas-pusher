@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-19T17:08:47.612686+00:00",
+  "timer_checks": {
+    "wrong_signature": {
+      "http": 403,
+      "status": "denied"
+    },
+    "expired_signature": {
+      "http": 403,
+      "status": "expired_or_invalid"
+    },
+    "completed_tick_replay": {
+      "http": 200,
+      "status": "duplicate_or_recent"
+    }
+  },
+  "private_objects_verified": 6,
+  "private_object_bytes": 912139,
+  "all_private_sha256_match": true,
+  "new_dispatches": 0,
+  "messages_sent": 0,
+  "no_snapshot_or_outbox_changes": true
+}

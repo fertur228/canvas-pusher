@@ -1,0 +1,12 @@
+{
+  "run_id": 39289986779,
+  "main_sha": "4577094cbf32b076f71cf00cee7307769b1c9317",
+  "request_completed": true,
+  "canvas_verified": true,
+  "errors": 0,
+  "completion_delivered": true,
+  "message_id_persisted": true,
+  "send_attempts": 1,
+  "not_counted_as_timer_cycle": true,
+  "initiated_by_this_observer": false
+}

@@ -1,3 +1,5 @@
+> Актуально 19 октября 2026: production использует активный Supabase Cron → защищённый Edge → GitHub worker каждые пять минут. Два автоматических цикла проверены; native GitHub `schedule` остаётся отдельным нерешённым ограничением. [Доказательства и итоговый отчёт](FINAL_PRODUCTION_REPORT_20261019.md). Предыдущие инструкции ниже сохраняются как история и общий runbook.
+
 > 19 октября: новый серверный PAT проверен настоящим webhook dispatch/completion.
 > Личный production-чат включён в shadow, два controlled cloud scans прошли без дублей.
 > Проверка двух настоящих scheduled success продолжается.

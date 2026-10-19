@@ -1,0 +1,132 @@
+{
+  "verified_at": "2026-10-19T17:13:29.561861+00:00",
+  "clock": "Supabase pg_cron",
+  "github_event": "workflow_dispatch",
+  "two_consecutive_real_clock_cycles": true,
+  "operator_dispatches_in_this_observation": 0,
+  "runs": [
+    {
+      "run_id": 39291086071,
+      "url": "https://github.com/fertur228/canvas-pusher/actions/runs/39291086071",
+      "event": "workflow_dispatch",
+      "main_sha": "4577094cbf32b076f71cf00cee7307769b1c9317",
+      "tick": {
+        "tick": "b702adb6-f6df-48d6-91ca-17e446d0cab7",
+        "state": "accepted",
+        "created_at": "2026-10-19T17:05:03.655096+00:00",
+        "reason": "github_204"
+      },
+      "job_conclusion": "success",
+      "scanner_step": {
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-19T17:05:40Z",
+        "completed_at": "2026-10-19T17:06:41Z"
+      },
+      "summary": {
+        "status": "ok",
+        "events": 0,
+        "errors": 0,
+        "jobs": {
+          "send.done": 3
+        },
+        "event_counts": {},
+        "sync_status": "verified",
+        "last_successful_check": "2026-10-19T17:06:39.906005+00:00"
+      },
+      "health_observed": {
+        "status": "healthy",
+        "last_attempt": "2026-10-19T17:05:42.047963+00:00",
+        "last_canvas_success": "2026-10-19T17:06:18.981867+00:00",
+        "last_snapshot_success": "2026-10-19T17:06:39.906005+00:00",
+        "last_database_success": "2026-10-19T17:06:40.94651+00:00"
+      },
+      "nonterminal_or_failed_jobs": 0,
+      "durable_sends": 3,
+      "known_secret_signatures_in_logs": 0,
+      "cron": {
+        "end_time": "2026-10-19T17:05:00.205341+00:00",
+        "runid": 4,
+        "start_time": "2026-10-19T17:05:00.134788+00:00",
+        "status": "succeeded"
+      },
+      "http": {
+        "created": "2026-10-19T17:05:00.21015+00:00",
+        "id": 5,
+        "result": "accepted",
+        "status": 202,
+        "timed_out": false
+      }
+    },
+    {
+      "run_id": 39291807325,
+      "url": "https://github.com/fertur228/canvas-pusher/actions/runs/39291807325",
+      "event": "workflow_dispatch",
+      "main_sha": "4577094cbf32b076f71cf00cee7307769b1c9317",
+      "tick": {
+        "tick": "d7da5d29-0e36-4225-89dc-06697727ad48",
+        "state": "accepted",
+        "created_at": "2026-10-19T17:10:04.654793+00:00",
+        "reason": "github_204"
+      },
+      "job_conclusion": "success",
+      "scanner_step": {
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-19T17:10:34Z",
+        "completed_at": "2026-10-19T17:11:51Z"
+      },
+      "summary": {
+        "status": "ok",
+        "events": 0,
+        "errors": 0,
+        "jobs": {
+          "send.done": 3
+        },
+        "event_counts": {},
+        "sync_status": "verified",
+        "last_successful_check": "2026-10-19T17:11:49.521492+00:00"
+      },
+      "health_observed": {
+        "status": "healthy",
+        "last_attempt": "2026-10-19T17:10:36.209899+00:00",
+        "last_canvas_success": "2026-10-19T17:11:09.508605+00:00",
+        "last_snapshot_success": "2026-10-19T17:11:49.521492+00:00",
+        "last_database_success": "2026-10-19T17:11:51.069796+00:00"
+      },
+      "nonterminal_or_failed_jobs": 0,
+      "durable_sends": 3,
+      "known_secret_signatures_in_logs": 0,
+      "cron": {
+        "end_time": "2026-10-19T17:10:00.255678+00:00",
+        "runid": 6,
+        "start_time": "2026-10-19T17:10:00.210844+00:00",
+        "status": "succeeded"
+      },
+      "http": {
+        "created": "2026-10-19T17:10:00.258706+00:00",
+        "id": 6,
+        "result": "accepted",
+        "status": 202,
+        "timed_out": false
+      }
+    }
+  ],
+  "timer_job": {
+    "active": true,
+    "jobid": 1,
+    "schedule": "*/5 * * * *"
+  },
+  "health": {
+    "status": "healthy",
+    "last_attempt": "2026-10-19T17:10:36.209899+00:00",
+    "last_canvas_success": "2026-10-19T17:11:09.508605+00:00",
+    "last_snapshot_success": "2026-10-19T17:11:49.521492+00:00",
+    "last_database_success": "2026-10-19T17:11:51.069796+00:00",
+    "last_telegram_success": "2026-10-19T16:59:19.878106+00:00",
+    "last_neural_success": null,
+    "error_code": null
+  },
+  "historical_bootstrap_or_outbox_reset": false,
+  "local_runtime_required": false
+}
