@@ -1,1 +1,38 @@
-{"health": {"status": "healthy", "last_attempt": "2026-10-19T11:17:56.297386+00:00", "last_snapshot_success": "2026-10-19T11:18:53.970988+00:00", "last_telegram_success": "2026-10-19T11:14:15.783542+00:00", "last_neural_success": null, "error_code": null, "queue": {"send.done": 1}}, "jobs": {"send.done": 1}, "delivered_messages": 1, "event_kinds": {"health_report": 1}, "runs_since_activation": [{"id": 39243569052, "event": "workflow_dispatch", "status": "completed", "conclusion": "success", "created_at": "2026-10-19T11:17:26Z", "head_sha": "84026aa74098db8aaf4396086d26aad961e23fd7"}, {"id": 39243302085, "event": "workflow_dispatch", "status": "completed", "conclusion": "success", "created_at": "2026-10-19T11:15:15Z", "head_sha": "84026aa74098db8aaf4396086d26aad961e23fd7"}]}
+{
+  "health": {
+    "status": "healthy",
+    "last_attempt": "2026-10-19T11:17:56.297386+00:00",
+    "last_snapshot_success": "2026-10-19T11:18:53.970988+00:00",
+    "last_telegram_success": "2026-10-19T11:14:15.783542+00:00",
+    "last_neural_success": null,
+    "error_code": null,
+    "queue": {
+      "send.done": 1
+    }
+  },
+  "jobs": {
+    "send.done": 1
+  },
+  "delivered_messages": 1,
+  "event_kinds": {
+    "health_report": 1
+  },
+  "runs_since_activation": [
+    {
+      "id": 39243569052,
+      "event": "workflow_dispatch",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-19T11:17:26Z",
+      "head_sha": "84026aa74098db8aaf4396086d26aad961e23fd7"
+    },
+    {
+      "id": 39243302085,
+      "event": "workflow_dispatch",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-19T11:15:15Z",
+      "head_sha": "84026aa74098db8aaf4396086d26aad961e23fd7"
+    }
+  ]
+}
