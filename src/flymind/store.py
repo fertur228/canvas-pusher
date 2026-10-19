@@ -118,14 +118,23 @@ class SQLiteStore:
 
 
 class SupabaseStore:
-    def __init__(self, client, account_id: str, chat_id: int, origin: str | None = None):
+    def __init__(self, client, account_id: str, chat_id: int, origin: str | None = None, *, run_id=None):
         self.client,self.account_id = client,account_id
+        self.run_id = run_id
         ok = self._rpc('flymind_check_account', {'p_chat_id':chat_id,'p_origin':origin})
         if ok is not True:
             raise ValueError('account_chat_binding_invalid')
 
     def _rpc(self, name, values):
-        return self.client.rpc(name, {'p_account':self.account_id, **values}).execute().data
+        from time import perf_counter
+        from src.core.diagnostics import log_failure
+        started = perf_counter()
+        try:
+            return self.client.rpc(name, {'p_account':self.account_id, **values}).execute().data
+        except Exception as error:
+            # RPC names are code constants; never log arguments or the response body.
+            log_failure('supabase.'+name, error, started, run_id=self.run_id)
+            raise
 
     def load(self, entity_type, key):
         data = self._rpc('flymind_snapshot', {'p_kind':entity_type,'p_key':key})

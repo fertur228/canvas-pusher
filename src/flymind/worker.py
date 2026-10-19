@@ -4,8 +4,10 @@ import asyncio
 from dataclasses import dataclass
 import logging
 import os
+from time import perf_counter
 from urllib.parse import urlparse
 import uuid
+from src.core.diagnostics import correlation_id, log_failure
 from .neural import NeuralRunner
 from .pipeline import Pipeline
 from .scanner import ReliableCanvasScanner
@@ -89,7 +91,7 @@ async def run(settings: Settings, *, client_factory=None, scanner_factory=Reliab
     client = client_factory(settings.supabase_url,settings.supabase_key)
     parsed=urlparse(settings.canvas_url)
     origin=f'{parsed.scheme}://{parsed.netloc}' if settings.canvas_url else None
-    store = SupabaseStore(client,str(uuid.UUID(settings.account_id)),int(settings.chat_id),origin)
+    store = SupabaseStore(client,str(uuid.UUID(settings.account_id)),int(settings.chat_id),origin,run_id=settings.run_id)
     store.heartbeat('attempt')
     if not bootstrap and not store.runtime()['initialized']:
         store.heartbeat('finish','degraded','bootstrap_required')
@@ -102,40 +104,64 @@ async def run(settings: Settings, *, client_factory=None, scanner_factory=Reliab
         store.heartbeat('finish','failed','missing_canvas_credentials')
         return {'status':'missing_canvas_credentials','jobs':store.counts()}
     scanner = scanner_factory(settings.canvas_token,settings.canvas_url,client)
+    scanner.run_id = settings.run_id
     errors,events = 0,0
     courses = []
     sync_stamp = None
+    failure_code = None
+    scan_started = perf_counter()
+    stage, started = 'canvas.courses', perf_counter()
+
+    def failed(stage, error, started):
+        nonlocal errors, failure_code
+        errors += 1
+        record = log_failure(stage, error, started, run_id=settings.run_id)
+        failure_code = failure_code or stage+':'+record['category']
+
     try:
         courses = await scanner.get_active_courses()
+        stage, started = 'canvas.scan', perf_counter()
         assignments,files,announcements = await scanner.scan_all(courses)
         errors += getattr(scanner,'failures',0)
+        if errors:
+            failure_code = 'canvas.scan:scope_failed'
         if not errors:
+            stage, started = 'heartbeat.canvas', perf_counter()
             store.heartbeat('canvas')
         for kind,rows in (('assignment',assignments),('file',files),('announcement',announcements)):
             for row in rows:
+                stage, started = 'snapshot.'+kind, perf_counter()
                 try:
                     events += pipeline.ingest(kind,row,bootstrap=bootstrap)
-                except Exception:
-                    errors += 1
+                except Exception as error:
+                    failed(stage, error, started)
         # Current grades belong to this FlyMind account, never to legacy chat rows.
         # Persist an explicit empty snapshot too, so old courses cannot linger.
         if not errors:
+            stage, started = 'snapshot.grades', perf_counter()
             try:
                 from .reports import save_grade_snapshot
                 save_grade_snapshot(store, courses)
-            except Exception:
-                errors += 1
-    except Exception:
-        errors += 1  # Sanitized: no API URL/token/title/grade in logs.
+            except Exception as error:
+                failed(stage, error, started)
+    except Exception as error:
+        failed(stage, error, started)
     if not errors:
+        stage, started = 'snapshot.verify', perf_counter()
         try:
             sync_stamp=store._rpc('flymind_sync_verified',{'p_keys':[entity_key(a,'assignment') for a in assignments]})
-        except Exception:
-            errors+=1
+        except Exception as error:
+            failed(stage, error, started)
+    logger.info('FlyMind scanner: %s', {'run_id':correlation_id(settings.run_id),
+                'duration_ms':max(0,round((perf_counter()-scan_started)*1000)),
+                'requests':getattr(scanner,'request_count',0),
+                'http_status_counts':dict(getattr(scanner,'http_statuses',{})),
+                'failed_scopes':getattr(scanner,'failures',0), 'errors':errors,
+                'rate_remaining_min':getattr(scanner,'rate_remaining_min',None)})
     if bootstrap:
         if not errors:
             store.runtime(initialize=True)
-        store.heartbeat('finish','bootstrapped' if not errors else 'degraded','scan_or_persistence_failed' if errors else None)
+        store.heartbeat('finish','bootstrapped' if not errors else 'degraded',failure_code if errors else None)
         return {'status':'bootstrapped' if not errors else 'needs_attention','events':events,'errors':errors,'jobs':store.counts()}
     if any(getattr(scanner,'http_statuses',{}).get(code,0) for code in (401,403)):
         store.heartbeat('finish','failed','canvas_authentication_failed')
@@ -147,14 +173,16 @@ async def run(settings: Settings, *, client_factory=None, scanner_factory=Reliab
     delivery_problem = any(n for k,n in jobs.items() if k.startswith(('send.','edit.')) and not k.endswith('.done'))
     neural_problem = settings.neural_enabled and any(n for k,n in jobs.items() if k.startswith('simulate.') and k.endswith(('dead','pending')))
     healthy = not errors and delivery.ready and not delivery_problem and not neural_problem
-    store.heartbeat('finish','healthy' if healthy else 'degraded',None if healthy else 'scan_delivery_or_neural_pending')
+    store.heartbeat('finish','healthy' if healthy else 'degraded',None if healthy else failure_code or 'scan_delivery_or_neural_pending')
     return {'status':'ok' if healthy else 'needs_attention','events':events,'errors':errors,'jobs':jobs,'event_counts':dict(pipeline.event_counts),'sync_status':'verified' if sync_stamp else 'failed','last_successful_check':sync_stamp}
 
 
 async def run_environment():
+    started = perf_counter()
     try:
         result=await run(Settings.from_env())
-    except Exception:
+    except Exception as error:
+        log_failure('worker.setup_or_delivery', error, started)
         logger.error('FlyMind worker failed; configuration/storage unavailable. Secrets and Canvas payload omitted.')
         return 2
     logger.info('FlyMind worker: %s',result)  # Summary contains only counts/status, no private payloads.
