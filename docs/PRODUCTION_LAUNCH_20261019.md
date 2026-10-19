@@ -4,6 +4,13 @@ Status: **PRODUCTION DEPLOYED, FINAL VERIFICATION PENDING**.
 Primary Telegram is enabled in shadow mode. Two actual scheduled successes are
 still under observation; manual runs below do not satisfy that gate.
 
+At 16:12 UTC the scanner had still emitted no native schedule events after
+activation. Its last verified snapshot was 12:38 UTC; derived health is failed
+because that snapshot is stale. The independent watchdog correctly failed at
+14:37 UTC. A guarded disable/enable of the existing scanner workflow was completed;
+no historical jobs or manual requests were replayed. Autonomous scheduled operation
+is **not yet accepted**. See [scheduler diagnosis and recovery](SCHEDULER_RECOVERY_20261019.md).
+
 ## Credential and real manual synchronization
 
 The owner installed a repository-scoped fine-grained token through the hidden-input

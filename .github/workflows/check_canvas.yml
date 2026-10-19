@@ -1,11 +1,15 @@
 name: Canvas State Tracker
-run-name: FlyMind sync ${{ inputs.manual_request_id || github.run_id }}
+run-name: FlyMind sync ${{ inputs.manual_request_id || (inputs.scheduler_tick && format('timer-{0}', inputs.scheduler_tick)) || github.run_id }}
 
 on:
   schedule:
     - cron: '3/5 * * * *' # Best-effort five minutes; refresh cron registration, preserve activation gates below
   workflow_dispatch: # Allows manual trigger
     inputs:
+      scheduler_tick:
+        description: 'Authenticated cloud timer correlation UUID; never a manual request'
+        type: string
+        required: false
       read_only:
         description: 'Validate Canvas reads only; no database writes or Telegram'
         type: boolean

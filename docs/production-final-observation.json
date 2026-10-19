@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-10-19T16:21:37.268541+00:00",
+  "project_ref": "irjasmzytjeohwfpdnrl",
+  "main_sha": "590b1c46fc5eb5885d0cdffa9e5b295f8b052c2a",
+  "production_flags": {
+    "CANVAS_WORKER_ENABLED": "true",
+    "FLYMIND_ENABLED": "true",
+    "DELIVERY_MODE": "production",
+    "FLYMIND_PRODUCTION_AUTHORIZED": "true",
+    "FLYMIND_MODE": "shadow",
+    "FLYMIND_NEURAL_ENABLED": "true",
+    "NEURAL_TELEMETRY_ENABLED": "true",
+    "FLYMIND_MAX_NEURAL": "2",
+    "FLYMIND_TEST_CHAT_VALIDATION": "false",
+    "FLYMIND_RETENTION_ENABLED": "false"
+  },
+  "workflow_state": "active",
+  "original_bootstrap_preserved": true,
+  "verified_primary_owner_binding": true,
+  "private_check_webhook_status": "done",
+  "primary_check_duplicate_suppressed": true,
+  "activation_at": "2026-10-19T11:14:48.503767+00:00",
+  "cron_refresh_restored_at": "2026-10-19T12:09:24.619337+00:00",
+  "native_schedule_runs_since_activation": [],
+  "two_consecutive_native_scanner_successes": false,
+  "last_pre_activation_schedule": {
+    "id": 39239293015,
+    "created_at": "2026-10-19T10:41:51Z",
+    "conclusion": "skipped"
+  },
+  "primary_health": {
+    "derived_status": "failed",
+    "last_attempt": "2026-10-19T12:37:58.330622+00:00",
+    "last_snapshot_success": "2026-10-19T12:38:59.63328+00:00",
+    "last_telegram_success": "2026-10-19T12:39:24.606843+00:00",
+    "last_neural_success": null,
+    "error_code": null
+  },
+  "outbox": {
+    "send.done": 2
+  },
+  "durable_sent_messages_with_saved_id": 2,
+  "nonterminal_or_failed_jobs": 0,
+  "legacy_336_32_14_row_hashes_unchanged": true,
+  "eight_migrations_and_rls_verified": true,
+  "new_academic_test_events_in_production": false,
+  "paid_services_activated": false,
+  "personal_chrome_used": false
+}

@@ -36,3 +36,10 @@ def test_manual_workflow_cannot_fall_back_to_legacy_and_finalizer_is_trusted():
     assert 'ref: ${{ github.event.repository.default_branch }}' in finalizer
     assert 'head_repository.full_name == github.repository' in finalizer
     assert 'download-artifact' not in finalizer and 'CANVAS_API_KEY' not in finalizer
+
+
+def test_cloud_timer_cannot_impersonate_manual_completion():
+    source = Path('.github/workflows/check_canvas.yml').read_text()
+    assert "format('timer-{0}', inputs.scheduler_tick)" in source
+    assert 'inputs.manual_request_id || (inputs.scheduler_tick' in source
+    assert 'MANUAL_REQUEST_ID: ${{ inputs.manual_request_id }}' in source
