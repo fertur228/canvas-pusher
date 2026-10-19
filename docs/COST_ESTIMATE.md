@@ -1,4 +1,30 @@
-# Operating cost estimate — updated 2026-10-17
+# Operating cost estimate — updated 2026-10-19
+
+## Production measurements — 2026-10-19
+
+The private production bot is enabled; native scheduled execution is still being
+verified. Two real production `workflow_dispatch` runs took approximately 99 and
+92 seconds from creation to completion, including queue/setup. At a fully served
+five-minute schedule, 288 runs/day would imply about 458 runner minutes/day or
+13,752 minutes per 30 days at this two-run average. This is a projection from
+unchanged snapshots, not measured monthly usage or a guaranteed schedule rate.
+The public repository uses standard Ubuntu runners; no paid runner or billing
+upgrade was activated. A private-repository conversion requires a fresh quota
+review before keeping this frequency.
+
+The read-only hosted inventory is 13,782,163 database bytes and six private
+telemetry objects totaling 912,139 bytes. Retention remains disabled during
+rollout; no old academic records or artifacts were deleted. Canvas uses roughly
+14 requests per ordinary poll for this account: about 4,032/day at five minutes,
+before retries and additional pagination. Real API reads returned HTTP200, but
+this is not evidence of an unlimited university-specific quota.
+
+The platform has not yet emitted native schedule events after initial activation;
+therefore the earlier 1–7 minute detection estimate below is only conditional on
+an on-time run. Current cron delays can be substantially longer. Forecasts must
+not be presented as an achieved delivery SLA.
+
+The dated sections below preserve earlier measurements and assumptions.
 
 Target $0/month, not an uptime guarantee. Current official references:
 [Supabase billing](https://supabase.com/docs/guides/platform/billing-on-supabase),
