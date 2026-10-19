@@ -46,10 +46,12 @@ Run each export into a new path to preserve reproducible originals.
 
 ## Telegram assistant
 
-Persistent menu: /start, /menu, /deadlines, /check, /stats, /brain, /status.
+Inline menu: deadlines, grades and refresh. Commands: /start, /menu, /deadlines,
+/check, /stats, /brain, /status. There is no persistent reply keyboard.
 Deadlines use the last fully verified snapshot; manual refresh is tracked through
 actual GitHub workflow completion. Secure new-bot/token setup and hosted activation:
-[Telegram assistant guide](docs/TELEGRAM_ASSISTANT.md). Hosted activation is pending.
+[Telegram assistant guide](docs/TELEGRAM_ASSISTANT.md). Production shadow mode is
+enabled; native scheduled-run verification is still pending.
 
 ## Activation and evidence
 
@@ -75,6 +77,7 @@ measurements. No private academic records belong in this public repository.
 
 FlyMind notification policy: immediate new-assignment alerts (including undated
 work), silent bootstrap, persisted24/12/6/3/1h reminder crossings with late-run
-coalescing and submission checks. Five-minute source cron is prepared but remains
-disabled pending production gates. [Actual hosted test evidence](docs/DEADLINE_NOTIFICATION_VERIFICATION.md):
-11real test-group sends,0duplicates; no production activation.
+coalescing and submission checks. Five-minute cron is enabled; see the
+[current production verification](docs/PRODUCTION_LAUNCH_20261019.md) for actual run evidence.
+[Historical deadline test evidence](docs/DEADLINE_NOTIFICATION_VERIFICATION.md):
+11 real test-group sends, 0 duplicates, before production activation.

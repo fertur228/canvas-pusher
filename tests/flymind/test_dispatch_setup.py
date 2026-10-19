@@ -22,7 +22,8 @@ def test_dispatch_token_preflight_is_read_only_and_rejects_expired_or_broad_toke
     assert len(calls)==1
 
 
-def test_secret_upload_does_not_put_token_in_arguments_and_cleans_temporary_file(tmp_path,monkeypatch):
+@pytest.mark.parametrize('envelope',[False,True])
+def test_secret_upload_does_not_put_token_in_arguments_and_cleans_temporary_file(tmp_path,monkeypatch,envelope):
     monkeypatch.setattr(dispatch_setup,'ROOT',tmp_path)
     token='github_pat_synthetic';calls=[]
     def run(args,**kwargs):
@@ -32,7 +33,9 @@ def test_secret_upload_does_not_put_token_in_arguments_and_cleans_temporary_file
             p=tmp_path/'secret-flymind-release/.env.dispatch-upload'
             assert p.stat().st_mode & 0o777==0o600 and p.read_text()=='FLYMIND_GITHUB_PAT='+token+'\n'
             return SimpleNamespace(returncode=0,stdout='')
-        return SimpleNamespace(returncode=0,stdout=json.dumps({'secrets':[{'name':'FLYMIND_GITHUB_PAT','value':hashlib.sha256(token.encode()).hexdigest()}]}))
+        assert args[-2:]==['--output','json']
+        rows=[{'name':'FLYMIND_GITHUB_PAT','value':hashlib.sha256(token.encode()).hexdigest()}]
+        return SimpleNamespace(returncode=0,stdout=json.dumps({'secrets':rows} if envelope else rows))
     dispatch_setup.publish(token,run)
     assert len(calls)==2 and not (tmp_path/'secret-flymind-release/.env.dispatch-upload').exists()
 

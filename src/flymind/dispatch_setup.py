@@ -44,11 +44,14 @@ def publish(token, run=subprocess.run):
                      cwd=ROOT, text=True, capture_output=True, timeout=120)
         if result.returncode:
             raise ValueError('supabase_secret_update_failed')
-        result = run(['npx','supabase','secrets','list','--project-ref',PROJECT],
+        result = run(['npx','supabase','secrets','list','--project-ref',PROJECT,'--output','json'],
                      cwd=ROOT, text=True, capture_output=True, timeout=120)
         if result.returncode:
             raise ValueError('supabase_secret_verification_failed')
-        rows = json.loads(result.stdout)['secrets']
+        payload = json.loads(result.stdout)
+        rows = payload.get('secrets') if isinstance(payload,dict) else payload
+        if not isinstance(rows,list):
+            raise ValueError('supabase_secret_verification_failed')
         if not any(r['name']=='FLYMIND_GITHUB_PAT' and r['value']==hashlib.sha256(token.encode()).hexdigest() for r in rows):
             raise ValueError('supabase_secret_digest_mismatch')
     finally:
