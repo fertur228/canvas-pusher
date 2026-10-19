@@ -103,6 +103,13 @@ Keep native GitHub `schedule` evidence separate from this timer's `workflow_disp
 production account. It marks an unchanged heartbeat delayed after 30 minutes and
 failed after 90 minutes. It does not send Telegram messages or change academic or
 outbox records. The hourly GitHub watchdog remains active for failure notifications.
+This describes the installed hosted statement, which includes
+`WHERE account_id = '<verified production UUID>'::uuid AND ...`. The checked-in
+`supabase/optional/watchdog.sql` is a project-wide template and must not be reapplied
+unchanged: it would replace the same named job with an all-account update. The hosted
+statement was read back and matched in full against the scoped statement on
+19 October; see [scope evidence](production-watchdog-verification.json). Keep the
+explicit account predicate when restoring or editing this job.
 Pause the database monitor, if needed, without deleting its history:
 
 ```sql

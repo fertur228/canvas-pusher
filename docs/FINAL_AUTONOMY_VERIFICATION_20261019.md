@@ -86,6 +86,11 @@ Master gate false проверен regression test, без остановки р
 Отдельный hourly GitHub watchdog остаётся active; прошлый stale scanner им был обнаружен.
 [Monitoring evidence](production-watchdog-verification.json).
 
+Hosted SQL повторно прочитан и целиком сопоставлен с production-scoped statement
+в 17:24 UTC. Он отличается от общего project-wide шаблона
+`supabase/optional/watchdog.sql`: содержит явный `account_id` predicate. Шаблон
+нельзя повторно применять без этой адаптации; [runbook](ROLLBACK.md) уточнён.
+
 Текущие GitHub flags:
 
 ```text

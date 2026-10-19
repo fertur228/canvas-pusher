@@ -22,6 +22,12 @@ state, including when GitHub scheduling stops. The dashboard itself refreshes on
 request; it is not a background monitoring service. Full platform outages cannot be
 reliably detected by a monitor on that same platform.
 
+The current hosted `flymind-stale-heartbeat` uses an explicit production-account
+predicate. The optional `supabase/optional/watchdog.sql` file is a project-wide
+template; do not execute it unchanged over the hosted job, because its same-name
+schedule would broaden monitoring to test accounts. Preserve the scoped predicate
+and verify the installed command as described in [ROLLBACK.md](ROLLBACK.md).
+
 Recovery commands (server credentials only, never browser):
 
 - `python -m src.flymind.maintenance reconcile --job EVENT:send --message-id 123`
