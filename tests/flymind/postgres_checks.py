@@ -22,7 +22,7 @@ def main():
     subprocess.run(base+['-d','postgres','-c',f'CREATE DATABASE {database}'],check=True)
     try:
         command=base+['-d',database]
-        for path in [ROOT/'tests/flymind/sql/bootstrap.sql', *sorted((ROOT/'supabase/migrations').glob('*.sql')), ROOT/'tests/flymind/sql/checks.sql', ROOT/'tests/flymind/sql/assistant_checks.sql']:
+        for path in [ROOT/'tests/flymind/sql/bootstrap.sql', *sorted((ROOT/'supabase/migrations').glob('*.sql')), ROOT/'tests/flymind/sql/checks.sql', ROOT/'tests/flymind/sql/assistant_checks.sql', ROOT/'tests/flymind/sql/scheduler_checks.sql']:
             command+=['-f',str(path)]
         subprocess.run(command,check=True)
         # Execute the frontend's actual account query against all real migrations.

@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-10-19T16:30:36Z",
+  "wrong_signature": {
+    "http": 403,
+    "status": "denied"
+  },
+  "expired_signature": {
+    "http": 403,
+    "status": "expired_or_invalid"
+  },
+  "signed_preflight": {
+    "http": 503,
+    "status": "workflow_not_upgraded"
+  },
+  "dry_run": true,
+  "dispatches": 0
+}

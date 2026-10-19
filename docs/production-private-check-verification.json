@@ -1,0 +1,31 @@
+{
+  "verified_at": "2026-10-19T12:48:46.260333+00:00",
+  "transport": "real_hosted_webhook_HTTP_update",
+  "telegram_client_button_pressed": false,
+  "scope": "verified_primary_private_chat",
+  "mode": "production_shadow",
+  "scanner": {
+    "id": 39253501947,
+    "event": "workflow_dispatch",
+    "conclusion": "success",
+    "status": "completed",
+    "head_sha": "590b1c46fc5eb5885d0cdffa9e5b295f8b052c2a"
+  },
+  "completion_workflow": {
+    "id": 39253717268,
+    "conclusion": "success",
+    "event": "workflow_run",
+    "head_sha": "590b1c46fc5eb5885d0cdffa9e5b295f8b052c2a"
+  },
+  "request_state": "completed",
+  "last_successful_canvas_check": "2026-10-19T12:38:59.63328+00:00",
+  "academic_events": 0,
+  "errors": 0,
+  "finished_at": "2026-10-19T12:39:23.338444+00:00",
+  "completion_delivery_attempts": 1,
+  "completion_message_id_persisted": true,
+  "duplicate_update_suppressed": true,
+  "matching_scanner_runs": 1,
+  "not_scheduled_run": true,
+  "historical_creation_notifications": 0
+}

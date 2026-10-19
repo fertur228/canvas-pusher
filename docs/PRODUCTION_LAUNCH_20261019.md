@@ -4,6 +4,13 @@ Status: **PRODUCTION DEPLOYED, FINAL VERIFICATION PENDING**.
 Primary Telegram is enabled in shadow mode. Two actual scheduled successes are
 still under observation; manual runs below do not satisfy that gate.
 
+At 16:12 UTC the scanner had still emitted no native schedule events after
+activation. Its last verified snapshot was 12:38 UTC; derived health is failed
+because that snapshot is stale. The independent watchdog correctly failed at
+14:37 UTC. A guarded disable/enable of the existing scanner workflow was completed;
+no historical jobs or manual requests were replayed. Autonomous scheduled operation
+is **not yet accepted**. See [scheduler diagnosis and recovery](SCHEDULER_RECOVERY_20261019.md).
+
 ## Credential and real manual synchronization
 
 The owner installed a repository-scoped fine-grained token through the hidden-input
@@ -22,6 +29,22 @@ credential, the existing verified test group and main branch:
 - This was real hosted HTTP/Bot API testing, not a claim of pressing the Telegram client button.
 
 [Sanitized evidence](release-server-dispatch-verification.json).
+
+The same end-to-end path was subsequently tested against the **primary private
+chat**, after PR2 merged, without another bootstrap or activation change:
+
+- Scanner [39253501947](https://github.com/fertur228/canvas-pusher/actions/runs/39253501947): success on main `590b1c4`.
+- Trusted completion [39253717268](https://github.com/fertur228/canvas-pusher/actions/runs/39253717268): success.
+- Real Canvas snapshot verified at **12:38:59.633280 UTC**, errors 0, academic events 0.
+- Request persisted as completed at 12:39:23.338444 UTC.
+- One completion delivery attempt, message ID saved; the immediate acknowledgement
+  is a separate ordinary webhook reply.
+- Replaying the identical update was suppressed; only one scanner run matched the request.
+- This is a controlled real hosted HTTP update for the authorized owner, not a
+  claim of pressing a Telegram client button, and not a scheduled run.
+
+No synthetic university assignment was created or notified in the private chat.
+[Sanitized primary-check evidence](production-private-check-verification.json).
 
 ## Primary activation
 
@@ -65,23 +88,42 @@ verified private owner chat. No identity values or credentials are included here
 
 ## Production cloud evidence
 
-Runtime main remains the reviewed PR1 merge `84026aa74098db8aaf4396086d26aad961e23fd7`.
-No application code, neural parameters or scientific artifacts changed during rollout.
+The two controlled scans below ran the reviewed PR1 merge
+`84026aa74098db8aaf4396086d26aad961e23fd7`. Current main is
+`590b1c46fc5eb5885d0cdffa9e5b295f8b052c2a` after the guarded merge of PR2.
+The only runtime change is a five-minute cron phase refresh; scanner, worker,
+neural parameters and scientific artifacts are unchanged.
 
 - Controlled production scan [39243302085](https://github.com/fertur228/canvas-pusher/actions/runs/39243302085): success.
 - Repeat production scan [39243569052](https://github.com/fertur228/canvas-pusher/actions/runs/39243569052): success.
 - Both are `workflow_dispatch`, not scheduled runs.
-- Health healthy; pending/ambiguous jobs 0; only the one launch smoke message.
+- Health was healthy after these scans; pending/ambiguous jobs 0; only the one launch smoke message.
 - No historical assignment creation events or duplicate messages.
 - Existing Canvas baseline: 6 courses, 20 assignments, 91 files, 2 announcements.
 - Current deadline views: 4 upcoming, 3 overdue, 10 total pending (including 3 undated).
 
 [Initial production evidence](production-initial-verification.json).
 
-The scanner workflow is active on main with cron `2-59/5 * * * *`; concurrency is
+The scanner workflow is active on main with cron `3/5 * * * *`; concurrency is
 preserved. GitHub scheduling is best effort, not a five-minute delivery guarantee.
 An independent hourly health workflow is also active; retention remains off.
 Two successful actual `event=schedule` runs must be verified separately.
+
+No new native cron event arrived between initial activation and 12:09 UTC.
+At that point the last successful snapshot was 11:18:53 UTC, so the derived
+freshness state was delayed despite the stored last-run status being healthy.
+PR2 refreshed the minute offset without changing polling frequency or gates.
+New manual requests were briefly closed, active work was checked, the master
+flag was disabled during merge, and both gates were restored at
+**2026-10-19T12:09:24.619337Z**. The merged tree exactly matched reviewed head
+`800cdbc7a63e379f665d9b3b01a55131efe68b73`. This is a registration-recovery
+attempt, not evidence that GitHub scheduling has recovered.
+
+CI on that head passed: 205 Python tests (6 optional upstream-cache tests skipped,
+172 dependency warnings), 17 Deno tests, 36 frontend unit tests, 4 local and
+7 private browser tests, TypeScript/build, PostgreSQL RPC/RLS/Storage checks.
+Both push and PR verification workflows passed. A read-only post-merge check
+again confirmed the original 336/32/14 row hashes, eight migrations and RLS.
 
 ## Neural engine and Observatory
 

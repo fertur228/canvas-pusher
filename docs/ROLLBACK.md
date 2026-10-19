@@ -77,3 +77,21 @@ jobs from advancing neural-success health and is compatible with older completed
 simulation results. No database restore, row deletion or migration-history reset
 is needed to disable this release. Preserve outbox, message IDs, threshold audit
 and the hosted synthetic-test checkpoint for recovery/deduplication.
+
+## Timer fallback prepared — 19 October 2026
+
+The `flymind-canvas-timer` job is currently inactive and Edge is dry-run. If activated
+after release gates, stop just this timer with the following non-destructive SQL:
+
+```sql
+SELECT cron.alter_job(jobid, active := false)
+FROM cron.job WHERE jobname = 'flymind-canvas-timer';
+```
+
+`CANVAS_WORKER_ENABLED=false` remains the single master gate for native and fallback
+scans; it does not cancel an already-running job. Also close manual dispatch with
+`FLYMIND_MANUAL_SYNC_ENABLED=false` for planned maintenance. Preserve all snapshots,
+outbox IDs, ambiguous outcomes, timer ledger and migration0008. Never drop pg_cron
+or reset migration history. A timer HTTP202 means dispatch acceptance, not scan
+completion: match its `timer-<uuid>` run title, scanner step and persisted heartbeat.
+Keep native GitHub `schedule` evidence separate from this timer's `workflow_dispatch`.

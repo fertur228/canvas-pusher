@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-10-19T16:12:32.007856+00:00",
+  "operation": "disable_enable_existing_native_schedule",
+  "workflow_state": "active",
+  "cron": "3/5 * * * *",
+  "new_dispatches": 0,
+  "database_writes": 0,
+  "server_credential_unchanged": true,
+  "reason": "No native scanner event for over five hours; no active scanner or manual requests",
+  "server_pat_updated_at": "2026-10-19T11:06:28.040Z",
+  "primary_check_scanner_verified_success": 39253501947,
+  "primary_check_completion_verified_success": 39253717268,
+  "watchdog_failed_run": 39270675298,
+  "provider_incident": {
+    "url": "https://www.githubstatus.com/incidents/8tzbpcnl75jp",
+    "opened_at": "2026-10-19T15:49:25.828Z",
+    "observed_status": "investigating",
+    "earlier_schedule_failure_cause_established": false
+  },
+  "old_queued_run": {
+    "id": 39137536308,
+    "read_status": "queued",
+    "job_count": 0,
+    "cancel_response": "already completed",
+    "rerun_requested": false
+  },
+  "observation_finished_at": "2026-10-19T16:23:54.146757+00:00",
+  "native_schedule_runs_after_activation": 0,
+  "two_native_successes_verified": false,
+  "cloud_workflow_left_active": true,
+  "local_observer_stopped": true
+}
