@@ -7,6 +7,7 @@ import subprocess
 
 RULES={
  'github_token':rb'gh[pousr]_[A-Za-z0-9]{30,}',
+ 'github_fine_grained_token':rb'github_pat_[A-Za-z0-9_]{50,}',
  'telegram_token':rb'(?<![0-9])[0-9]{8,12}:[A-Za-z0-9_-]{30,}',
  'private_key':rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----',
  'supabase_secret':rb'sb_secret_[A-Za-z0-9_-]{25,}',

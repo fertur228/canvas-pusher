@@ -1,3 +1,9 @@
+> 19 октября: новый серверный PAT проверен настоящим webhook dispatch/completion.
+> Личный production-чат включён в shadow, два controlled cloud scans прошли без дублей.
+> Проверка двух настоящих scheduled success продолжается.
+> [Текущее состояние и доказательства](PRODUCTION_LAUNCH_20261019.md).
+> Ниже сохранена история прежних deployment gates; она не является текущим статусом.
+
 > Актуальное решение18октября: личная Chrome-сессия не является release gate.
 > Реальный Auth/RLS/headless replay и независимый Telegram rollout:
 > [AUTOMATED_RELEASE_VERIFICATION.md](AUTOMATED_RELEASE_VERIFICATION.md).

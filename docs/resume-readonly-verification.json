@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-10-19T10:54:49.370454+00:00",
+  "telegram_primary_identity_verified": true,
+  "telegram_messages": 0,
+  "accounts": {
+    "production": {
+      "enabled": false,
+      "initialized_at": "2026-10-18T14:50:27.872238+00:00",
+      "snapshots": {
+        "announcement": 2,
+        "assignment": 20,
+        "file": 91,
+        "report": 1
+      },
+      "jobs": {},
+      "health": [
+        {
+          "status": "bootstrapped",
+          "last_snapshot_success": "2026-10-18T14:50:27.518521+00:00",
+          "last_canvas_success": "2026-10-18T14:49:02.186279+00:00",
+          "last_telegram_success": null,
+          "last_neural_success": null,
+          "error_code": null
+        }
+      ]
+    },
+    "test": {
+      "enabled": true,
+      "initialized_at": "2026-10-17T14:47:06.072202+00:00",
+      "snapshots": {
+        "announcement": 2,
+        "assignment": 27,
+        "file": 91,
+        "report": 3
+      },
+      "jobs": {
+        "send.done": 18,
+        "simulate.done": 16,
+        "edit.done": 16
+      },
+      "health": [
+        {
+          "status": "healthy",
+          "last_snapshot_success": "2026-10-18T15:06:00.649195+00:00",
+          "last_canvas_success": "2026-10-18T15:05:39.727616+00:00",
+          "last_telegram_success": "2026-10-18T15:06:25.177932+00:00",
+          "last_neural_success": "2026-10-18T15:02:07.188808+00:00",
+          "error_code": null
+        }
+      ]
+    }
+  },
+  "canvas": {
+    "status": "verified",
+    "real_canvas_read": true,
+    "courses": 6,
+    "assignments": 20,
+    "files": 91,
+    "announcements": 2,
+    "rate_cost_total": 57.29796031971448,
+    "rate_remaining_min": 551.393719682388,
+    "failed_scopes": 0,
+    "requests": 14,
+    "pagination_hops": 0,
+    "http_status_counts": {
+      "200": 14
+    },
+    "timezone_and_submission_schema_checked": true,
+    "mutations": 0,
+    "telegram_messages": 0
+  },
+  "database_writes": 0
+}

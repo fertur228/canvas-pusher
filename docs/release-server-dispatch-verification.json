@@ -1,0 +1,35 @@
+{
+  "request_state": "completed",
+  "run_id": "39242627674",
+  "summary": {
+    "jobs": {
+      "edit.done": 16,
+      "send.done": 19,
+      "simulate.done": 16
+    },
+    "errors": 0,
+    "events": 0,
+    "status": "ok",
+    "sync_status": "verified",
+    "event_counts": {
+      "health_report": 1
+    },
+    "last_successful_check": "2026-10-19T11:11:24.956581+00:00"
+  },
+  "finished_at": "2026-10-19T11:11:51.179107+00:00",
+  "completion_jobs": [
+    {
+      "state": "done",
+      "stage": "send",
+      "attempts": 1,
+      "message_id_saved": true
+    }
+  ],
+  "matched_runs": [],
+  "duplicate_update_suppressed": true,
+  "completion_workflow_run": 39242845141,
+  "server_credential": "FLYMIND_GITHUB_PAT",
+  "transport": "real hosted HTTP webhook, GitHub Actions and Telegram Bot API",
+  "telegram_client_button_pressed_by_agent": false,
+  "primary_chat_used": false
+}

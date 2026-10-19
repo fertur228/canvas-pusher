@@ -1,3 +1,7 @@
+> 19 октября: PAT заменён, реальный /check завершён, production Telegram включён в shadow.
+> Два controlled scans — success без дублей; scheduled verification ещё наблюдается.
+> [Актуальный release report](PRODUCTION_LAUNCH_20261019.md). Нижние разделы — история.
+
 # FlyMind — итоговый технический отчёт, 14 октября 2026
 
 ## Текущее hosted-состояние — 2026-10-17

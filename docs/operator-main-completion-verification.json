@@ -1,0 +1,25 @@
+{
+  "operator_request_state": "completed",
+  "run_id": "39138826508",
+  "summary": {
+    "jobs": {
+      "edit.done": 16,
+      "send.done": 17,
+      "simulate.done": 16
+    },
+    "errors": 0,
+    "events": 0,
+    "status": "ok",
+    "sync_status": "verified",
+    "event_counts": {},
+    "last_successful_check": "2026-10-18T15:06:00.649195+00:00"
+  },
+  "finished_at": "2026-10-18T15:06:23.866759+00:00",
+  "webhook_pat_still_unverified": true,
+  "completion_notification_delivered": true,
+  "completion_workflow": "39138951739",
+  "completion_attempts_verified": 2,
+  "telegram_send_attempts": 1,
+  "late_original_run_rejected": true,
+  "duplicate_completion_messages": 0
+}

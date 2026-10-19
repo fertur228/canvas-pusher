@@ -1,3 +1,42 @@
+## Production rollout — 2026-10-19
+
+- [x] New namespaced PAT installed by owner; real hosted `/check` dispatch/completion passed.
+- [x] Duplicate webhook update suppressed; one completion send with persisted message ID.
+- [x] Existing production baseline reused without bootstrap/reset or historic new-assignment alerts.
+- [x] Private recipient configured; one authorized smoke delivered through outbox.
+- [x] Production shadow mode and five-minute main-branch scheduler enabled.
+- [x] Two controlled production scans succeeded with no duplicate sends; cloud watchdog succeeded.
+- [ ] Two actual `event=schedule` scanner runs with job and scanner step success.
+
+[Current release evidence](PRODUCTION_LAUNCH_20261019.md). The sections below record earlier states.
+
+## Earlier resume check — 2026-10-19
+
+- [x] Remote read access restored after the owner explicitly lifted the pause.
+- [x] Selected Edge credential is legacy `GITHUB_PAT`; its digest is unchanged since the HTTP 401 probe. `FLYMIND_GITHUB_PAT` is absent.
+- [x] Primary Bot API identity and separate production binding match private owner evidence.
+- [x] Existing production baseline is preserved: 20 assignments, zero outbox jobs. No repeat bootstrap.
+- [x] Fresh Canvas GET check: 14 HTTP 200 responses, 6 courses, 20 assignments, no failures.
+- [x] Original 336/32/14 row hashes still match; eight migrations and private Storage intact.
+- [ ] Owner must privately install a repository-scoped credential using [dispatch setup](DISPATCH_CREDENTIAL_SETUP.md), then real webhook dispatch and production rollout can continue.
+
+[Sanitized read-only evidence](resume-readonly-verification.json). No messages or database writes in this check.
+
+## Verified milestone — 2026-10-18
+
+- [x] Personal Chrome gate removed; real isolated Auth/API/headless replay and cleanup passed.
+- [x] PR1 merged to main84026aa after green CI and backup/data/RLS gates.
+- [x] Legacy grades protected; multiple-enrollment null-score regression fixed.
+- [x] Separate production binding and silent bootstrap:0events/0messages; disabled after preparation.
+- [x] Real main cloud Canvas/FlyWire/Storage test, real operator manual lifecycle and duplicate completion passed.
+- [ ] New scoped GitHub dispatch credential: legacy server token returns401; owner helper prepared.
+- [ ] Actual hosted /check with new credential, primary smoke, activation and2scheduled cycles.
+- [x] Test window closed; production/scanner/delivery gates OFF; all data retained.
+
+> Актуальный release18октября: PR1 merged, real Auth/headless и main cloud E2E passed.
+> Production выключен: серверный GitHub PAT возвращает401. Личная Chrome-сессия не нужна.
+> [Фактический отчёт и единственный внешний credential шаг](PRODUCTION_RELEASE_20261018.md).
+
 > Актуальное решение18октября: личная Chrome-сессия не является release gate.
 > Реальный Auth/RLS/headless replay и независимый Telegram rollout:
 > [AUTOMATED_RELEASE_VERIFICATION.md](AUTOMATED_RELEASE_VERIFICATION.md).

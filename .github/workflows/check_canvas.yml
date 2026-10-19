@@ -3,7 +3,7 @@ run-name: FlyMind sync ${{ inputs.manual_request_id || github.run_id }}
 
 on:
   schedule:
-    - cron: '2-59/5 * * * *' # Best-effort 5 minutes, away from :00; activation gate remains closed
+    - cron: '3/5 * * * *' # Best-effort five minutes; refresh cron registration, preserve activation gates below
   workflow_dispatch: # Allows manual trigger
     inputs:
       read_only:

@@ -13,7 +13,7 @@ def test_workflows_pin_actions_and_do_not_publish_private_artifacts():
     assert 'SUPABASE_SERVICE_KEY' not in read and 'TELEGRAM_BOT_TOKEN' not in read
     scanner=Path('.github/workflows/check_canvas.yml').read_text()
     assert 'cancel-in-progress: false' in scanner
-    assert "cron: '2-59/5 * * * *'" in scanner
+    assert "cron: '3/5 * * * *'" in scanner
     assert 'group: canvas-state-tracker' in scanner
     assert "FLYMIND_ENABLED || 'false'" in scanner and "DELIVERY_MODE || 'disabled'" in scanner
     assert "inputs.read_only == true || vars.CANVAS_WORKER_ENABLED == 'true'" in scanner
