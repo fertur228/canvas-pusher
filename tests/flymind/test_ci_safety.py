@@ -43,3 +43,6 @@ def test_cloud_timer_cannot_impersonate_manual_completion():
     assert "format('timer-{0}', inputs.scheduler_tick)" in source
     assert 'inputs.manual_request_id || (inputs.scheduler_tick' in source
     assert 'MANUAL_REQUEST_ID: ${{ inputs.manual_request_id }}' in source
+    import tomllib
+    config = tomllib.loads(Path('supabase/config.toml').read_text())
+    assert config['functions']['flymind-scheduled-dispatch']['verify_jwt'] is False

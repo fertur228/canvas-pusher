@@ -104,7 +104,11 @@ data. See [Supabase scheduled functions](https://supabase.com/docs/guides/functi
   stay ambiguous and are never blindly resent.
 - `supabase/optional/scheduler_bridge.sql` provisions a five-minute job **disabled**.
   Vault stores its key; the cron command contains no credential. The Edge function
-  starts disabled/dry-run. Browser roles cannot access the ledger/RPC/cron/net.
+  starts disabled/dry-run. Browser roles cannot access the ledger/RPC/cron. Provider-owned `pg_net`
+  retains its SQL grants, but is not an exposed API schema: real anonymous
+  PostgREST access returned HTTP406/PGRST106. The queue contains no secret key,
+  PAT, bot credential or academic payload; signed tick replay is time-bounded
+  and claimed durably. Do not expose `net` via API configuration.
 - A timer run title has a `timer-` prefix, so the trusted manual completion handler
   cannot mistake it for an owner `/check` request. Existing worker concurrency,
   snapshots, reminders and notification outbox are unchanged.

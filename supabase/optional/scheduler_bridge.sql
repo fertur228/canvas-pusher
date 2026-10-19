@@ -4,7 +4,10 @@
 BEGIN;
 CREATE EXTENSION IF NOT EXISTS pg_cron;
 CREATE EXTENSION IF NOT EXISTS pg_net;
-REVOKE USAGE ON SCHEMA net,cron FROM PUBLIC,anon,authenticated;
+REVOKE USAGE ON SCHEMA cron FROM PUBLIC,anon,authenticated;
+-- Hosted pg_net is provider-owned and retains provider-managed SQL grants.
+-- Do NOT expose schema net through PostgREST. Its queue holds only short-lived
+-- signed ticks, never the HMAC key, GitHub PAT, Canvas or Telegram credentials.
 DO $$ BEGIN
  IF NOT EXISTS(SELECT 1 FROM vault.secrets WHERE name='flymind_schedule_hmac') THEN RAISE EXCEPTION 'missing_scheduler_secret'; END IF;
  IF EXISTS(SELECT 1 FROM cron.job WHERE jobname='flymind-canvas-timer') THEN RAISE EXCEPTION 'timer_already_exists_do_not_overwrite'; END IF;

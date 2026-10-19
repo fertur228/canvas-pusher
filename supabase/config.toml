@@ -4,6 +4,11 @@
 # working directory name when running `supabase init`.
 project_id = "canvas-pusher"
 
+# Only the dedicated clock bridge uses timestamped HMAC instead of a browser JWT.
+# Telegram and other deployed functions keep their existing individual settings.
+[functions.flymind-scheduled-dispatch]
+verify_jwt = false
+
 [api]
 enabled = true
 # Port to use for the API URL.
