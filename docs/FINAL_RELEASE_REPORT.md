@@ -1,3 +1,7 @@
+> Актуальный release18октября: PR1 merged, real Auth/headless и main cloud E2E passed.
+> Production выключен: серверный GitHub PAT возвращает401. Личная Chrome-сессия не нужна.
+> [Фактический отчёт и единственный внешний credential шаг](PRODUCTION_RELEASE_20261018.md).
+
 # FlyMind — итоговый технический отчёт, 14 октября 2026
 
 ## Текущее hosted-состояние — 2026-10-17

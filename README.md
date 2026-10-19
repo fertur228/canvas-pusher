@@ -1,8 +1,10 @@
 # FlyMind
 
 Hosted preview: https://flymind-preview.flymind-observatory.pages.dev — private
-Supabase mode. Production notifications remain disabled pending owner Auth and
-rollout gates. [Verified hosted status](docs/HOSTED_RELEASE_VERIFICATION.md).
+Supabase mode. PR1 is merged; real isolated Auth/headless replay and main cloud
+Canvas/neural/completion tests passed. Production remains disabled pending rotation
+of an invalid server GitHub dispatch credential (HTTP 401). Personal Chrome is not required.
+[Actual release status](docs/PRODUCTION_RELEASE_20261018.md).
 
 Canvas LMS monitoring and durable Telegram notifications, with an experimental neural
 enrichment layer using the real adult Drosophila FlyWire connectome. The Neural
