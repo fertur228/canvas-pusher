@@ -1,6 +1,22 @@
 # Operating cost estimate — updated 2026-10-19
 
-## Production measurements — 2026-10-19
+## Verified cloud timer cycles — 2026-10-19
+
+Two automatic Supabase Cron → GitHub worker jobs took105/87seconds (mean96s):
+460.8runner minutes/day,13824per30days at288cycles/day. Timer adds8640Edge
+invocations/month plus small ledger rows; no paid service enabled. This is now the
+active polling source. Native GitHub scheduled emitter remains unverified. The independent database
+heartbeat monitor also runs every five minutes and sends no external messages.
+Current measured database: 14,175,379 bytes; private telemetry: 912,139 bytes.
+Estimated infrastructure cost remains $0/month within existing free limits.
+Standard runners for this public repository are free under the current
+[GitHub billing policy](https://docs.github.com/en/billing/concepts/product-billing/github-actions);
+[Supabase Free](https://supabase.com/pricing) and
+[Cloudflare static Pages](https://developers.cloudflare.com/pages/functions/pricing/)
+cover the current scale. No paid services were activated.
+[Exact runtime evidence](scheduler-runtime-measurement.json).
+
+## Earlier production measurements — 2026-10-19
 
 The private production bot is enabled; native scheduled execution is still being
 verified. Two real production `workflow_dispatch` runs took approximately 99 and

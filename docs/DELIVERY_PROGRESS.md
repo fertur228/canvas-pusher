@@ -1,3 +1,5 @@
+> 19 октября, 16:57 UTC: два Supabase Cron → GitHub scanner цикла success; production работает, health healthy. Native GitHub `schedule` не подтверждён. [Итоговый актуальный отчёт](FINAL_PRODUCTION_REPORT_20261019.md).
+
 ## Production rollout — 2026-10-19
 
 - [x] New namespaced PAT installed by owner; real hosted `/check` dispatch/completion passed.

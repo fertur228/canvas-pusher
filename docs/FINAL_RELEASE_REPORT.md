@@ -1,3 +1,5 @@
+> 19 октября, 16:57 UTC: два Supabase Cron → GitHub scanner цикла success; production работает, health healthy. Native GitHub `schedule` не подтверждён. [Итоговый актуальный отчёт](FINAL_PRODUCTION_REPORT_20261019.md).
+
 > 19 октября: PAT заменён, реальный /check завершён, production Telegram включён в shadow.
 > Два controlled scans — success без дублей; scheduled verification ещё наблюдается.
 > [Актуальный release report](PRODUCTION_LAUNCH_20261019.md). Нижние разделы — история.

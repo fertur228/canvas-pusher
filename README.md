@@ -3,8 +3,10 @@
 Hosted preview: https://flymind-preview.flymind-observatory.pages.dev — private
 Supabase mode. PR1 is merged. The owner Telegram bot is enabled in production with
 neural shadow mode; real webhook dispatch/completion and two controlled cloud scans
-passed. Verification of two actual scheduled runs is in progress. Personal Chrome
-is not required. [Current release evidence](docs/PRODUCTION_LAUNCH_20261019.md).
+passed. Two automatic Supabase Cron → GitHub worker cycles are now verified.
+Native GitHub `schedule` remains unverified; the active five-minute fallback uses
+`workflow_dispatch`. Personal Chrome is not required.
+[Current release evidence](docs/FINAL_PRODUCTION_REPORT_20261019.md).
 
 Canvas LMS monitoring and durable Telegram notifications, with an experimental neural
 enrichment layer using the real adult Drosophila FlyWire connectome. The Neural
@@ -51,7 +53,8 @@ Inline menu: deadlines, grades and refresh. Commands: /start, /menu, /deadlines,
 Deadlines use the last fully verified snapshot; manual refresh is tracked through
 actual GitHub workflow completion. Secure new-bot/token setup and hosted activation:
 [Telegram assistant guide](docs/TELEGRAM_ASSISTANT.md). Production shadow mode is
-enabled; native scheduled-run verification is still pending.
+enabled; Supabase Cron drives verified automatic scans. Native GitHub scheduled-run
+verification remains a separate unresolved limitation.
 
 ## Activation and evidence
 

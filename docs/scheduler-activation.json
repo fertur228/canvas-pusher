@@ -1,0 +1,11 @@
+{
+  "activated_at": "2026-10-19T16:49:53Z",
+  "project_ref": "irjasmzytjeohwfpdnrl",
+  "main_sha": "4577094cbf32b076f71cf00cee7307769b1c9317",
+  "clock": "Supabase pg_cron",
+  "github_event": "workflow_dispatch",
+  "dry_run_verified": true,
+  "existing_bootstrap_reused": true,
+  "cron": "*/5 * * * *",
+  "new_dispatches_by_operator": 0
+}

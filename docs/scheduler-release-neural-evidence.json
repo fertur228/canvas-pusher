@@ -1,0 +1,118 @@
+{
+  "ci_run": 39287097237,
+  "biological_response_validated": false,
+  "repeatability": {
+    "weak/real": true,
+    "weak/zero": true,
+    "strong/real": true,
+    "strong/zero": true
+  },
+  "evaluation_conclusion": "No predictive advantage established: neural response is downstream of a two-profile engineered encoder. Preserve deterministic operational urgency; neural readout is experimental enrichment.",
+  "runs": [
+    {
+      "case": "weak",
+      "gf_spikes": [
+        2,
+        2
+      ],
+      "population_spikes": 344,
+      "active_neurons": 282,
+      "measurements": {
+        "dataset_load_seconds": 0.15215760999998906,
+        "import_and_control_seconds": 0.703236062000002,
+        "simulation_wall_seconds": 1.7867163390000087,
+        "simulation_cpu_seconds": 1.7966350770000001,
+        "total_cpu_seconds": 2.743639485,
+        "total_wall_seconds": 2.7351058360000025,
+        "compressed_result_bytes": 151515,
+        "sampled_peak_rss_mib": 185.15234375,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 197.125
+      }
+    },
+    {
+      "case": "strong",
+      "gf_spikes": [
+        3,
+        4
+      ],
+      "population_spikes": 834,
+      "active_neurons": 418,
+      "measurements": {
+        "dataset_load_seconds": 0.15242122799998015,
+        "import_and_control_seconds": 0.6923084870000196,
+        "simulation_wall_seconds": 1.7967979619999994,
+        "simulation_cpu_seconds": 1.8070820209999998,
+        "total_cpu_seconds": 2.747815678,
+        "total_wall_seconds": 2.738909196999998,
+        "compressed_result_bytes": 121377,
+        "sampled_peak_rss_mib": 185.3828125,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 197.3046875
+      }
+    },
+    {
+      "case": "baseline",
+      "gf_spikes": [
+        0,
+        0
+      ],
+      "population_spikes": 0,
+      "active_neurons": 0,
+      "measurements": {
+        "dataset_load_seconds": 0.15627861499999085,
+        "import_and_control_seconds": 0.7102244399999904,
+        "simulation_wall_seconds": 1.7982307190000029,
+        "simulation_cpu_seconds": 1.809575005,
+        "total_cpu_seconds": 2.757993729,
+        "total_wall_seconds": 2.7479406049999966,
+        "compressed_result_bytes": 45533,
+        "sampled_peak_rss_mib": 184.8671875,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 197.0390625
+      }
+    },
+    {
+      "case": "weak_fast",
+      "gf_spikes": [
+        0,
+        0
+      ],
+      "population_spikes": 0,
+      "active_neurons": 0,
+      "measurements": {
+        "dataset_load_seconds": 0.15575308999999038,
+        "import_and_control_seconds": 0.697789379999989,
+        "simulation_wall_seconds": 1.7724764870000058,
+        "simulation_cpu_seconds": 1.78389316,
+        "total_cpu_seconds": 2.720128891,
+        "total_wall_seconds": 2.709944020999984,
+        "compressed_result_bytes": 72884,
+        "sampled_peak_rss_mib": 184.1328125,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 196.203125
+      }
+    },
+    {
+      "case": "strong_slow",
+      "gf_spikes": [
+        9,
+        13
+      ],
+      "population_spikes": 2032,
+      "active_neurons": 296,
+      "measurements": {
+        "dataset_load_seconds": 0.15549141699997904,
+        "import_and_control_seconds": 0.7066252930000019,
+        "simulation_wall_seconds": 1.813265647999998,
+        "simulation_cpu_seconds": 1.823984415,
+        "total_cpu_seconds": 2.7906488169999997,
+        "total_wall_seconds": 2.7811272779999854,
+        "compressed_result_bytes": 156615,
+        "sampled_peak_rss_mib": 187.421875,
+        "rss_sample_interval_ms": 5,
+        "process_lifetime_peak_rss_mib": 197.625
+      }
+    }
+  ]
+}
