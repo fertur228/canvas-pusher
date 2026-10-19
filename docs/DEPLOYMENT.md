@@ -1,6 +1,8 @@
-> Актуальный release18октября: PR1 merged, real Auth/headless и main cloud E2E passed.
-> Production выключен: серверный GitHub PAT возвращает401. Личная Chrome-сессия не нужна.
-> [Фактический отчёт и единственный внешний credential шаг](PRODUCTION_RELEASE_20261018.md).
+> 19 октября: новый серверный PAT проверен настоящим webhook dispatch/completion.
+> Личный production-чат включён в shadow, два controlled cloud scans прошли без дублей.
+> Проверка двух настоящих scheduled success продолжается.
+> [Текущее состояние и доказательства](PRODUCTION_LAUNCH_20261019.md).
+> Ниже сохранена история прежних deployment gates; она не является текущим статусом.
 
 > Актуальное решение18октября: личная Chrome-сессия не является release gate.
 > Реальный Auth/RLS/headless replay и независимый Telegram rollout:

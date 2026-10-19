@@ -1,10 +1,10 @@
 # FlyMind
 
 Hosted preview: https://flymind-preview.flymind-observatory.pages.dev — private
-Supabase mode. PR1 is merged; real isolated Auth/headless replay and main cloud
-Canvas/neural/completion tests passed. Production remains disabled pending rotation
-of an invalid server GitHub dispatch credential (HTTP 401). Personal Chrome is not required.
-[Actual release status](docs/PRODUCTION_RELEASE_20261018.md).
+Supabase mode. PR1 is merged. The owner Telegram bot is enabled in production with
+neural shadow mode; real webhook dispatch/completion and two controlled cloud scans
+passed. Verification of two actual scheduled runs is in progress. Personal Chrome
+is not required. [Current release evidence](docs/PRODUCTION_LAUNCH_20261019.md).
 
 Canvas LMS monitoring and durable Telegram notifications, with an experimental neural
 enrichment layer using the real adult Drosophila FlyWire connectome. The Neural

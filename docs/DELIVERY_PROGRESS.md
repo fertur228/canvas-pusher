@@ -1,4 +1,16 @@
-## Resume check — 2026-10-19
+## Production rollout — 2026-10-19
+
+- [x] New namespaced PAT installed by owner; real hosted `/check` dispatch/completion passed.
+- [x] Duplicate webhook update suppressed; one completion send with persisted message ID.
+- [x] Existing production baseline reused without bootstrap/reset or historic new-assignment alerts.
+- [x] Private recipient configured; one authorized smoke delivered through outbox.
+- [x] Production shadow mode and five-minute main-branch scheduler enabled.
+- [x] Two controlled production scans succeeded with no duplicate sends; cloud watchdog succeeded.
+- [ ] Two actual `event=schedule` scanner runs with job and scanner step success.
+
+[Current release evidence](PRODUCTION_LAUNCH_20261019.md). The sections below record earlier states.
+
+## Earlier resume check — 2026-10-19
 
 - [x] Remote read access restored after the owner explicitly lifted the pause.
 - [x] Selected Edge credential is legacy `GITHUB_PAT`; its digest is unchanged since the HTTP 401 probe. `FLYMIND_GITHUB_PAT` is absent.

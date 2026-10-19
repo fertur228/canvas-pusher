@@ -1,6 +1,6 @@
-> Актуальный release18октября: PR1 merged, real Auth/headless и main cloud E2E passed.
-> Production выключен: серверный GitHub PAT возвращает401. Личная Chrome-сессия не нужна.
-> [Фактический отчёт и единственный внешний credential шаг](PRODUCTION_RELEASE_20261018.md).
+> 19 октября: PAT заменён, реальный /check завершён, production Telegram включён в shadow.
+> Два controlled scans — success без дублей; scheduled verification ещё наблюдается.
+> [Актуальный release report](PRODUCTION_LAUNCH_20261019.md). Нижние разделы — история.
 
 # FlyMind — итоговый технический отчёт, 14 октября 2026
 

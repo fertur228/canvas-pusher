@@ -1,5 +1,17 @@
 # Rollback
 
+Production was enabled on 2026-10-19; see [current rollout](PRODUCTION_LAUNCH_20261019.md).
+Quick stop for **new** scanner jobs:
+
+```sh
+gh variable set CANVAS_WORKER_ENABLED --repo fertur228/canvas-pusher --body false
+```
+
+A job already running retains its captured environment. Inspect/cancel that job for
+an immediate emergency stop, then reconcile any ambiguous Telegram outcome. Never
+clear snapshots, reminder markers, jobs or message IDs. The dated sections below
+describe earlier test states, not current production flags.
+
 0. Set repository variable CANVAS_WORKER_ENABLED=false to stop the whole scheduled
    scanner, including legacy mode. Disable retention separately if needed.
 1. Set FLYMIND_MODE=shadow to stop enrichment edits while preserving durable primary
