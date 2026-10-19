@@ -1,3 +1,5 @@
+> Финальная независимая проверка 17:13 UTC: ещё два последовательных clock cycles (17:05/17:10), fresh snapshots и healthy outbox. [Итоговая проверка и rollback](FINAL_AUTONOMY_VERIFICATION_20261019.md).
+
 # FlyMind — подтверждённая автономная работа, 19 октября 2026
 
 **Production Telegram работает автономно через Supabase Cron → GitHub Actions.**

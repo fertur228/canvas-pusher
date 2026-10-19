@@ -1,0 +1,122 @@
+{
+  "checked_at": "2026-10-19T17:07:20.422224+00:00",
+  "main_sha": "4577094cbf32b076f71cf00cee7307769b1c9317",
+  "pr3": {
+    "merged": true,
+    "merged_at": "2026-10-19T16:48:52Z",
+    "merge_commit_sha": "4577094cbf32b076f71cf00cee7307769b1c9317"
+  },
+  "production_flags": {
+    "CANVAS_WORKER_ENABLED": "true",
+    "FLYMIND_ENABLED": "true",
+    "DELIVERY_MODE": "production",
+    "FLYMIND_PRODUCTION_AUTHORIZED": "true",
+    "FLYMIND_MODE": "shadow",
+    "FLYMIND_NEURAL_ENABLED": "true",
+    "FLYMIND_MAX_NEURAL": "2",
+    "FLYMIND_RETENTION_ENABLED": "false"
+  },
+  "owner_binding_verified": true,
+  "original_bootstrap_at": "2026-10-18T14:50:27.872238+00:00",
+  "timer_enabled": true,
+  "timer_dry_run": false,
+  "timer_secret_digests_match": true,
+  "clock_triggered_runs": [
+    {
+      "run_id": 39288864521,
+      "url": "https://github.com/fertur228/canvas-pusher/actions/runs/39288864521",
+      "github_event": "workflow_dispatch",
+      "main_sha": "4577094cbf32b076f71cf00cee7307769b1c9317",
+      "tick": {
+        "tick": "7cccdc34-35dc-4e16-a6e0-c34ec5994b4e",
+        "created_at": "2026-10-19T16:50:04.101531+00:00",
+        "state": "accepted",
+        "reason": "github_204"
+      },
+      "created_at": "2026-10-19T16:50:06Z",
+      "completed_at": "2026-10-19T16:51:56Z",
+      "scanner_step": {
+        "name": "Run Canvas Scanner or tracked manual request",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-19T16:50:41Z",
+        "completed_at": "2026-10-19T16:51:55Z"
+      },
+      "worker_summary": {
+        "status": "ok",
+        "events": 0,
+        "errors": 0,
+        "jobs": {
+          "send.done": 2
+        },
+        "event_counts": {},
+        "sync_status": "verified",
+        "last_successful_check": "2026-10-19T16:51:53.804662+00:00"
+      },
+      "known_credential_signatures_in_logs": false
+    },
+    {
+      "run_id": 39289622617,
+      "url": "https://github.com/fertur228/canvas-pusher/actions/runs/39289622617",
+      "github_event": "workflow_dispatch",
+      "main_sha": "4577094cbf32b076f71cf00cee7307769b1c9317",
+      "tick": {
+        "tick": "4cd28fed-38e8-417a-8d56-68de96f8a9c9",
+        "created_at": "2026-10-19T16:55:02.949193+00:00",
+        "state": "accepted",
+        "reason": "github_204"
+      },
+      "created_at": "2026-10-19T16:55:05Z",
+      "completed_at": "2026-10-19T16:56:36Z",
+      "scanner_step": {
+        "name": "Run Canvas Scanner or tracked manual request",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-19T16:55:26Z",
+        "completed_at": "2026-10-19T16:56:34Z"
+      },
+      "worker_summary": {
+        "status": "ok",
+        "events": 0,
+        "errors": 0,
+        "jobs": {
+          "send.done": 2
+        },
+        "event_counts": {},
+        "sync_status": "verified",
+        "last_successful_check": "2026-10-19T16:56:32.508538+00:00"
+      },
+      "known_credential_signatures_in_logs": false
+    }
+  ],
+  "health": {
+    "derived_status": "healthy",
+    "status": "healthy",
+    "last_attempt": "2026-10-19T17:05:42.047963+00:00",
+    "last_canvas_success": "2026-10-19T17:06:18.981867+00:00",
+    "last_snapshot_success": "2026-10-19T17:06:39.906005+00:00",
+    "last_database_success": "2026-10-19T17:06:40.94651+00:00",
+    "last_telegram_success": "2026-10-19T16:59:19.878106+00:00",
+    "last_neural_success": null,
+    "error_code": null
+  },
+  "outbox": {
+    "send.done": 3
+  },
+  "nonterminal_or_failed_jobs": 0,
+  "completed_sends_with_message_id": 3,
+  "snapshots": {
+    "announcement": 2,
+    "assignment": 20,
+    "file": 91,
+    "report": 2
+  },
+  "active_manual_requests": [],
+  "encrypted_backup_authenticated_and_hash_verified": true,
+  "observatory_http_status": 200,
+  "observatory_public_assets_secret_scan_passed": true,
+  "local_mac_required": false,
+  "academic_events_synthesized": false
+}

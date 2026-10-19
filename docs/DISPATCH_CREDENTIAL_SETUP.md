@@ -3,8 +3,10 @@
 Resolved on 2026-10-19: the owner installed `FLYMIND_GITHUB_PAT` through this helper.
 Real server-side dispatch run 39242627674 and completion 39242845141 passed.
 Do not regenerate the credential merely because the historical failure below exists.
-The scheduled scanner uses GitHub's own scheduler and is independent of this PAT;
-future PAT expiration affects `/check`, not normal scheduled Canvas delivery.
+The active Supabase Cron fallback and `/check` both use this scoped PAT.
+Its expiration can stop both dispatch paths; the independent stale-heartbeat check
+will expose the loss of freshness. Native GitHub `schedule` is independent of the
+PAT, but its recovery has not been verified. Do not rely on it as an active backup.
 
 On2026-10-18 the legacy server-side `GITHUB_PAT` returned HTTP401 for every
 required GitHub API. This is an actual credential failure, not a Chrome or
