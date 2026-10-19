@@ -110,3 +110,19 @@ responses deliberately are not automatically replayed after claim: a lost respon
 or rate limit requires a new user command/reconciliation, not a potentially duplicate
 send. Canvas401/403 prevents releasing academic notification backlog. Operational
 manual-failure reports use a targeted outbox claim. No production secrets were rotated.
+
+## 19 October: authenticated fallback timer
+
+A separate HMAC function is deployed in dry-run with Cron inactive; production
+Telegram routing is unchanged. Exact initialized primary identity and all worker
+gates are checked before dispatch. Freshness is90s; durable advisory-lock claims
+prevent concurrent/replayed ticks. The single POST is recorded as ambiguous before
+network I/O; loss of acknowledgement cannot cause a blind resend. Browser roles
+have neither new ledger access nor RPC execution. Gateway JWT is disabled only for
+this independently authenticated function, explicitly in config.toml.
+
+Hosted `pg_net` is provider-owned: its SQL role grants remain, while its schema is
+not exposed by PostgREST (verified406/PGRST106). Its queue contains only short-lived
+signed tick metadata, never secret keys/PAT/academic records. Do not expose `net`.
+Vault/Edge keep the signing key; no key is embedded in scheduled SQL. All original
+legacy data hashes, RLS and private Storage checks remain intact.

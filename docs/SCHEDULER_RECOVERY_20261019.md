@@ -125,3 +125,40 @@ Timer ledger history is currently preserved; review its growth after 30 days.
 
 No fallback deployment or activation is claimed by this implementation section.
 The operational verification section will record actual outcomes separately.
+
+## Hosted preparation verified at 16:36 UTC
+
+Migration `202610190008_scheduler_bridge.sql` was the only dry-run pending file
+and was applied normally. Nine migrations are now recorded. Authenticated backup
+decryption and every original 336/32/14 legacy row checksum passed again; protected
+public tables still have RLS. Nothing was bootstrapped again.
+
+The dedicated Edge function is deployed with explicit HMAC authentication,
+`FLYMIND_SCHEDULE_ENABLED=true`, `FLYMIND_SCHEDULE_DRY_RUN=true`; the actual Cron
+job remains **inactive**. Its HMAC key is in Vault/Edge and a private ignored local
+file. No key is in the cron command or repository.
+
+Real checks: wrong signature403, expired signature403; valid signed request passed
+the new server PAT preflight and stopped at `workflow_not_upgraded` because main
+has not merged this timer input. A real database `pg_net` POST using Vault produced
+the same503 result without timeout. No scanner was dispatched. Real anonymous
+RPC/table reads were denied; service-only test-account claim succeeded, then
+repeat and overlapping claims were denied. One explicitly labeled dry-run audit
+row was added to the isolated test account; no production event or message was made.
+
+The hosted provider retains SQL role grants on its `net` schema/tables. The CLI
+role cannot revoke grants made by the provider owner. This is recorded rather than
+hidden: `net` is not exposed through PostgREST (real anonymous request406/PGRST106),
+and this queue carries no credential or academic payload. Do not expose `net`.
+The new public ledger/RPC are independently denied to anon/authenticated roles.
+
+GitHub officially reported degraded Actions/Pages/Webhooks from15:49 UTC:
+https://www.githubstatus.com/incidents/8tzbpcnl75jp. Current PR3 CI jobs are queued
+with zero steps executed. This corroborates the current runtime blocker, but is
+not proof of the cause of all missing native cron events earlier in the day.
+PR3 is unmerged; its gateway-configuration review finding is fixed and resolved.
+
+The fallback still requires green current-head CI, guarded merge, signed dry-run
+against upgraded main, then activation and two correlated real cloud cycles. It
+does not bypass GitHub runner outages. Native `event=schedule` successes remain0.
+Neither scheduled autonomy nor a completed fallback scan is claimed.
